@@ -36,4 +36,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // Funzione che collega 1 user a molti flat
+    public function flats() {
+        return $this->hasMany("App\Flat");
+    };
+
 }

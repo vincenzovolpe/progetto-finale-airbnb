@@ -10,4 +10,8 @@ class Sponsor extends Model
         'hours', 'price',
     ];
 
+    // Funzione che collega molti sponsor a molti flat
+    public function flats() {
+        return $this->belongsToMany("App\Flat");
+    }
 }

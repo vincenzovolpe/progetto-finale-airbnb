@@ -10,4 +10,8 @@ class Service extends Model
         'name',
     ];
 
+    // Funzione che collega molti flat a molti service
+    public function flats() {
+        return $this->belongsToMany("App\Flat");
+    }
 }
