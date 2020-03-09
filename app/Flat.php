@@ -13,12 +13,12 @@ class Flat extends Model
     // Funzione che collega 1 user a molti flat
     public function user() {
         return $this->belongsTo("App\User");
-    };
+    }
 
     // Funzione che collega 1 flat a molti message
     public function messages() {
         return $this->hasMany("App\Message");
-    };
+    }
 
     // Funzione che collega molti flat a molti service
     public function services() {

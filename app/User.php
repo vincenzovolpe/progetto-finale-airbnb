@@ -40,6 +40,6 @@ class User extends Authenticatable
     // Funzione che collega 1 user a molti flat
     public function flats() {
         return $this->hasMany("App\Flat");
-    };
+    }
 
 }

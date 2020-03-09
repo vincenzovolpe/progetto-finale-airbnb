@@ -13,6 +13,6 @@ class Message extends Model
     // Funzione che collega 1 flat a molti message
     public function flat() {
         return $this->belongsTo("App\Flat");
-    };
+    }
 
 }
