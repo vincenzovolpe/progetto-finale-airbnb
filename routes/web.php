@@ -23,4 +23,5 @@ Auth::routes();
 // Specifichiamo un gruppo di route che condividono una serie di comandi,  come per esempio il fatto che possono essere visualizzati solo sesi è loggati
 Route::middleware('auth')->prefix('upr')->namespace('Upr')->name('upr.')->group(function() {
     Route::get('/', 'HomeController@index')->name('home');
+    Route::resource("/flats" , "FlatController");
 });
