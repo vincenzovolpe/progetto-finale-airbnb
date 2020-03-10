@@ -13,10 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index')->name('home');
 
+// Genera tutte le rotte per la gestione dell'autenticazione
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+
+// Specifichiamo un gruppo di route che condividono una serie di comandi,  come per esempio il fatto che possono essere visualizzati solo sesi è loggati
+Route::middleware('auth')->prefix('upr')->namespace('Upr')->name('upr.')->group(function() {
+    Route::get('/', 'HomeController@index')->name('home');
+});
