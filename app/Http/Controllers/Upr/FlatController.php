@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Upr;
 use App\Flat;
 use App\Http\Controllers\Controller; // Devo aggiungere questo namespace per dirgli di usare il controller
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FlatController extends Controller
 {
@@ -37,6 +38,7 @@ class FlatController extends Controller
     {
         $data = $request->all();
         $flat = new Flat();
+        $flat->user_id = Auth::user()->id;
         $flat->fill($data);
         $flat->save();
         return redirect()->route("upr.home");
