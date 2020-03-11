@@ -5,6 +5,7 @@ use App\Flat;
 use App\Http\Controllers\Controller; // Devo aggiungere questo namespace per dirgli di usare il controller
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class FlatController extends Controller
 {
@@ -27,11 +28,16 @@ class FlatController extends Controller
     {
         // Metto il flat nel DB:
         $data = $request->all();
+        // recupero l'oggeto del file upload
+        $uploaded_file = $data['img_uri'];
+        // salvo il file nel mio spazio di storage e recupero il suo percorso
+        $file_path = Storage::put('images', $uploaded_file);
         $flat = new Flat();
         $flat->user_id = Auth::user()->id;
         $flat->fill($data);
+        $flat->img_uri = $file_path;
         $flat->save();
-        return redirect()->route("upr.home");
+        return redirect()->route("upr.flats.index");
     }
 
     public function show($id)
