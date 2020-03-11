@@ -8,34 +8,24 @@ use Illuminate\Support\Facades\Auth;
 
 class FlatController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        return view("upr.flats.index");
+        // Seleziono tutti i Flat dell'utente:
+        $utente = Auth::user();
+        $flats = $utente->flats()->get();
+        return view("upr.flats.index", compact("flats"));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
+        // Consento la creazione di un nuovo flat:
         return view("upr.flats.create");
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
+        // Metto il flat nel DB:
         $data = $request->all();
         $flat = new Flat();
         $flat->user_id = Auth::user()->id;
@@ -44,26 +34,17 @@ class FlatController extends Controller
         return redirect()->route("upr.home");
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Flat  $flat
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Flat $flat)
+    public function show($id)
     {
-        //
+        // Visualizzo la pagina di dettaglio del singolo appartamento:
+        $flat = Flat::find($id);
+        return view("upr.flats.show", ["flat" => $flat]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Flat  $flat
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Flat $flat)
     {
-        //
+        // Visualizzo la pagina di modifica del singolo appartamento:
+        return view("upr.flats.edit", ["flat" => $flat]);
     }
 
     /**

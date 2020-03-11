@@ -36,7 +36,7 @@
                             <a class="dropdown-item" href="{{ route('home') }}">
                                 {{ __('Home Page') }}
                             </a>
-                            <a class="dropdown-item" href="{{ route('upr.home') }}">
+                            <a class="dropdown-item" href="{{ route('upr.flats.index') }}">
                                 {{ __('Dashboard') }}
                             </a>
                             <a class="dropdown-item" href="{{ route('logout') }}"
