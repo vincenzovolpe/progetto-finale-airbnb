@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    
+
     public function index()
     {
-        return view('upr.home');
+        return view('upr.flats.index');
     }
 }

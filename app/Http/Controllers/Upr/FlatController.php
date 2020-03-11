@@ -5,87 +5,66 @@ use App\Flat;
 use App\Http\Controllers\Controller; // Devo aggiungere questo namespace per dirgli di usare il controller
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class FlatController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        return view("upr.flats.index");
+        // Seleziono tutti i Flat dell'utente:
+        $utente = Auth::user();
+        $flats = $utente->flats()->get();
+        return view("upr.flats.index", compact("flats"));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
+        // Consento la creazione di un nuovo flat:
         return view("upr.flats.create");
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
+        // Metto il flat nel DB:
         $data = $request->all();
+        // recupero l'oggeto del file upload
+        $uploaded_file = $data['img_uri'];
+        // salvo il file nel mio spazio di storage e recupero il suo percorso
+        $file_path = Storage::put('images', $uploaded_file);
         $flat = new Flat();
         $flat->user_id = Auth::user()->id;
         $flat->fill($data);
+        $flat->img_uri = $file_path;
         $flat->save();
-        return redirect()->route("upr.home");
+        return redirect()->route("upr.flats.index");
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Flat  $flat
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Flat $flat)
+    public function show($id)
     {
-        //
+        // Visualizzo la pagina di dettaglio del singolo appartamento:
+        $flat = Flat::find($id);
+        return view("upr.flats.show", ["flat" => $flat]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Flat  $flat
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Flat $flat)
     {
-        //
+        // Visualizzo la pagina di modifica del singolo appartamento:
+        return view("upr.flats.edit", ["flat" => $flat]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Flat  $flat
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Flat $flat)
     {
-        //
+        // Apporto le modifiche al flat nel DB:
+        $form_data = $request->all();
+        $flat->update($form_data);
+        return redirect()->route('upr.flats.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Flat  $flat
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Flat $flat)
     {
-        //
+        // Elimino il singolo appartamento (per ora, direttamente e senza messaggio di conferma):
+        $flat->delete();
+        return redirect()->route('upr.flats.index');
     }
 }
