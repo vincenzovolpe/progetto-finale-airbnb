@@ -58,13 +58,13 @@ class FlatController extends Controller
         // Apporto le modifiche al flat nel DB:
         $form_data = $request->all();
         $flat->update($form_data);
-        return redirect()->route('upr.home');
+        return redirect()->route('upr.flats.index');
     }
 
     public function destroy(Flat $flat)
     {
         // Elimino il singolo appartamento (per ora, direttamente e senza messaggio di conferma):
         $flat->delete();
-        return redirect()->route('upr.home');
+        return redirect()->route('upr.flats.index');
     }
 }

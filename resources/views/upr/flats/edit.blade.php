@@ -39,6 +39,8 @@
                 <label for="active" class="col-md-8 col-form-label text-md-right">{{ __('active') }}</label>
                 <input id="active" type="number" name="active" value="{{ $flat->active }}" required>
 
+                <!-- In questa sezione, mettiamo una checkbox con tutti i servizi che possiamo inserire per il nostro appartamento: -->
+
                 <!-- Invio modulo -->
                 <button type="submit" class="btn btn-primary">Submit changes!</button>
             </form>
