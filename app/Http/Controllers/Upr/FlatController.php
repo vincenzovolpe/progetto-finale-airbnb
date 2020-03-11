@@ -47,26 +47,18 @@ class FlatController extends Controller
         return view("upr.flats.edit", ["flat" => $flat]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Flat  $flat
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Flat $flat)
     {
-        //
+        // Apporto le modifiche al flat nel DB:
+        $form_data = $request->all();
+        $flat->update($form_data);
+        return redirect()->route('upr.home');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Flat  $flat
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Flat $flat)
     {
-        //
+        // Elimino il singolo appartamento (per ora, direttamente e senza messaggio di conferma):
+        $flat->delete();
+        return redirect()->route('upr.home');
     }
 }
