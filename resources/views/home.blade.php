@@ -45,7 +45,7 @@
                         <div class="views">{{ $flat->updated_at }}
                         </div>
                         <div class="stats">
-
+                            {{$flat->view}}
                         </div>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                         <div class="views">{{ $flat->updated_at }}
                         </div>
                         <div class="stats">
-
+                            {{$flat->view}}
                         </div>
                     </div>
                 </div>
