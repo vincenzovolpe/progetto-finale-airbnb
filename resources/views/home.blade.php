@@ -39,7 +39,7 @@
                     <div class="card-body">
                         <h4 class="card-title">{{ $flat->title }}</h4>
                         {{-- <p class="card-text">Propietario: {{$flat->user->name}}</p> --}}
-                        <a class="btn btn-danger stretched-link" style="position: relative;" href="">Vedi Dettagli</a>
+                        <a class="btn btn-danger stretched-link" style="position: relative;" href="{{ route('flat.details', $flat->id)}}">Vedi Dettagli</a>
                     </div>
                     <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
                         <div class="views">{{ $flat->updated_at }}
@@ -67,7 +67,7 @@
                     <div class="card-body">
                         <h4 class="card-title">{{ $flat->title }}</h4>
                         {{-- <p class="card-text">Propietario: {{$flat->user->name}}</p> --}}
-                        <a class="btn btn-danger stretched-link" style="position: relative;" href="">Vedi Dettagli</a>
+                        <a class="btn btn-danger stretched-link" style="position: relative;" href="{{ route('flat.details', $flat->id)}}">Vedi Dettagli</a>
                     </div>
                     <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
                         <div class="views">{{ $flat->updated_at }}

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Flat;
 use App\Sponsor;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -24,7 +25,7 @@ class HomeController extends Controller
                 ->where('flat_sponsor.created_at', '>=', DB::raw('DATE_SUB(NOW(), INTERVAL '.$sponsor['hours'].' HOUR)'))
                 ->orderBy('flat_sponsor.created_at', 'desc')
                 ->get();
-                
+
             }
         }
 
@@ -33,5 +34,30 @@ class HomeController extends Controller
         } else  {
             return view('home', ['flats' => $flats]);
         }
+    }
+
+    public function detailsFlat(Request $request, $id)
+    {
+        $flat = Flat::find($id);
+        //dd(Auth::user()->flats->count());
+
+        // Se è un utente ospite oppure un utente loggato senza appartamenti
+        if(!Auth::user() OR (Auth::user() && Auth::user()->flats->count() == 0)) {
+            $flat->increment('view');
+        // Se è un utente loggato con appartamenti
+        } elseif (Auth::user() && Auth::user()->flats->count() > 0) {
+            // Cerco gli appartamenti appartenenti all'utente
+            $user_flats  = Auth::user()->flats->toArray();
+            // Ricavo lo user_id degli appartamenti dell'utente
+            foreach ($user_flats as $user_flat) {
+                $user_id_flats = $user_flat['user_id'];
+            }
+            // Controllo se la casa appartiene all'utente loggato che ha appartamenti
+            if($user_id_flats != $flat['user_id']) {
+                $flat->increment('view');
+            }
+        }
+
+        return view('details_flat', ['flat' => $flat]);
     }
 }
