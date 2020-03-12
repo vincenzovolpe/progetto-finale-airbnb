@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Flat;
 
 class FlatsTableSeeder extends Seeder
 {
@@ -10,13 +9,15 @@ class FlatsTableSeeder extends Seeder
      *
      * @return void
      */
-     public function run()
-     {
-         $flats = config('flats.flat_db');
-         foreach ($flats as $flat) {
-             $nuovo_flat = new Flat();
-             $nuovo_flat->fill($flat);
-             $nuovo_flat->save();
-         }
-     }
+    public function run()
+    {
+        // creo per ogni cliente (in questo caso due) un collegamento con un appartamento
+        factory(App\User::class, 5)->create()->each(function ($user) {
+            // Seed the relation with 1 flats
+            $flats = factory(App\Flat::class, 1)->make();
+            $user->flats()->saveMany($flats);
+        });
+
+
+    }
 }
