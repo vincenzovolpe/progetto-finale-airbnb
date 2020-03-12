@@ -27,7 +27,7 @@ class Flat extends Model
 
     // Funzione che collega molti flat a molti sponsor
     public function sponsors() {
-        return $this->belongsToMany("App\Sponsor");
+        return $this->belongsToMany("App\Sponsor")->withTimestamps();
     }
 
 

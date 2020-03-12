@@ -14,7 +14,12 @@ class FlatController extends Controller
      */
     public function index()
     {
-        // return view()
+        
+    }
+
+    public function find(Request $request)
+    {
+        return view('find_flat');
     }
     //
     // /**
