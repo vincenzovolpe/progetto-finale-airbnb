@@ -52,7 +52,7 @@
                                             <textarea rows="6" name="message2" id="message2" class="form-control" required=""></textarea>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-danger btn-lg float-right">Invia messaggio</button>
+                                    <button type="submit" class="btn btn-danger btn-lg float-left">Invia messaggio</button>
                                 </fieldset>
                             </form>
                         </div>
