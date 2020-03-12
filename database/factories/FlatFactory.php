@@ -17,7 +17,7 @@ $factory->define(Flat::class, function (Faker $faker) {
         'address' => $faker->streetAddress,
         'lat' => $faker->latitude($min = -90, $max = 90),
         'lon' => $faker->longitude($min = -180, $max = 180),
-        'img_uri' => $faker->imageUrl($width = 640, $height = 480),
+        'img_uri' => ' ',
         'active' => '1',
     ];
 });
