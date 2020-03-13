@@ -24,6 +24,12 @@ Route::post('/flats/find', 'FlatController@find')->name('flat.find');
 // Rotta pagina di dettaglio di un Appartamento
 Route::get('/flats/details/{id}', 'HomeController@detailsFlat')->name('flat.details');
 
+// Rotta per invio messaggio
+Route::post('/flats/send/message', 'MessageController@sendMail')->name('send.mail');
+
+// Rotta per visualizzare i messaggi
+Route::resource("upr/flats/messages" , "MessageController");
+
 // Specifichiamo un gruppo di route che condividono una serie di comandi,  come per esempio il fatto che possono essere visualizzati solo sesi è loggati
 Route::middleware('auth')->prefix('upr')->namespace('Upr')->name('upr.')->group(function() {
     Route::get('/', 'HomeController@index')->name('home');

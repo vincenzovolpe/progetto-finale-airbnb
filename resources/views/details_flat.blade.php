@@ -32,26 +32,22 @@
                             <h3 class="mb-0">Contatta il propietario</h3>
                         </div>
                         <div class="card-body">
-                            <form class="form" role="form" autocomplete="off">
+                            <form class="form" action="{{route('send.mail')}}" method="post" role="form" autocomplete="on">
+                            @csrf
                                 <fieldset>
-                                    <label for="name2" class="mb-0">Name</label>
+                                    <label for="email" class="mb-0">Email</label>
                                     <div class="row mb-1">
                                         <div class="col-lg-12">
-                                            <input type="text" name="name2" id="name2" class="form-control" required="">
+                                            <input type="text" name="msg_email" id="msg_email" class="form-control" required="">
                                         </div>
                                     </div>
-                                    <label for="email2" class="mb-0">Email</label>
+                                    <label for="message" class="mb-0">Messaggio</label>
                                     <div class="row mb-1">
                                         <div class="col-lg-12">
-                                            <input type="text" name="email2" id="email2" class="form-control" required="">
+                                            <textarea rows="6" name="text_msg" id="text_msg" class="form-control" required=""></textarea>
                                         </div>
                                     </div>
-                                    <label for="message2" class="mb-0">Message</label>
-                                    <div class="row mb-1">
-                                        <div class="col-lg-12">
-                                            <textarea rows="6" name="message2" id="message2" class="form-control" required=""></textarea>
-                                        </div>
-                                    </div>
+                                    <input type="text" name="flat_id" value="{{$flat->id}}" hidden>
                                     <button type="submit" class="btn btn-danger btn-lg float-left">Invia messaggio</button>
                                 </fieldset>
                             </form>

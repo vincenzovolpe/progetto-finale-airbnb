@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Message extends Model
 {
     protected $fillable = [
-        'msg_email', 'text_msg',
+        'msg_email', 'text_msg', 'flat_id'
     ];
 
     // Funzione che collega 1 flat a molti message
