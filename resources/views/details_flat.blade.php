@@ -34,11 +34,21 @@
                         <div class="card-body">
                             <form class="form" action="{{route('send.mail')}}" method="post" role="form" autocomplete="on">
                             @csrf
-                                <fieldset>
+                                <fieldset
+                                    @if (Auth::user() && Auth::user()->id == $flat->user->id)
+                                        disabled>
+                                    @else
+                                        >
+                                    @endif
                                     <label for="email" class="mb-0">Email</label>
                                     <div class="row mb-1">
                                         <div class="col-lg-12">
-                                            <input type="text" name="msg_email" id="msg_email" class="form-control" required="">
+                                                <input type="text" name="msg_email" id="msg_email" class="form-control"
+                                                @if (Auth::user() && Auth::user()->id != $flat->user->id)
+                                                    value="{{Auth::user()->email}}" required="">
+                                                @else
+                                                    >
+                                                @endif
                                         </div>
                                     </div>
                                     <label for="message" class="mb-0">Messaggio</label>
@@ -48,8 +58,12 @@
                                         </div>
                                     </div>
                                     <input type="text" name="flat_id" value="{{$flat->id}}" hidden>
+                                    <input type="text" name="email_owner" value="{{$flat->user->email}}" hidden>
+                                    <input type="text" name="name_owner" value="{{$flat->user->name}}" hidden>
+                                    <input type="text" name="flat_title" value="{{$flat->title}}" hidden>
                                     <button type="submit" class="btn btn-danger btn-lg float-left">Invia messaggio</button>
                                 </fieldset>
+
                             </form>
                         </div>
                     </div>
