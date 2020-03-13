@@ -42,6 +42,20 @@
                     UPDATED: {{ $flat->updated_at }}
                 </li>
             </ul>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <strong>SERVIZI ATTIVI:</strong>
+                </li>
+                @forelse($service as $single_service)
+                <li class="list-group-item">
+                    {{ $single_service }}
+                </li>
+                @empty
+                <li class="list-group-item">
+                    Nessun servizio attivo al momento! :(
+                </li>
+                @endforelse
+            </ul>
         </div>
         <div class="col">
             <h4>TITLE = {{ $flat->title }}</h4>

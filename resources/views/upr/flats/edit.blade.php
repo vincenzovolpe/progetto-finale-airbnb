@@ -43,7 +43,19 @@
                 <label for="active" class="col-md-8 col-form-label text-md-right">{{ __('active') }}</label>
                 <input id="active" type="number" name="active" value="{{ $flat->active }}" required>
 
-                <!-- In questa sezione, mettiamo una checkbox con tutti i servizi che possiamo inserire per il nostro appartamento: -->
+                <!-- PARTE DEI SERVIZI: -->
+                <h3>Aggiungi servizi al tuo appartamento:</h3>
+                {{-- Questo ciclo stampa tutti i servizi, se esiste relazione con appartamento, metti l'attributo checked --}}
+                @forelse ($servizi as $service)
+                    @if(in_array($service->name, $servizi_su_appartamento_array))
+                    <input type="checkbox" id="{{ $service -> id }}" name="{{ $service -> name }}" value="{{ $service -> id }}" checked>
+                    @else
+                    <input type="checkbox" id="{{ $service -> id }}" name="{{ $service -> name }}" value="{{ $service -> id }}">
+                    @endif
+                    <label for="{{ $service -> id }}">{{ $service -> name }}</label><br>
+                @empty
+                    <p>Non abbiamo nessun servizio attivo al momento! :(</p>
+                @endforelse
 
                 <!-- Invio modulo -->
                 <button type="submit" class="btn btn-primary">Submit changes!</button>
