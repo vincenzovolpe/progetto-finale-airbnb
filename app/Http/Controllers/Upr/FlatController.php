@@ -61,19 +61,32 @@ class FlatController extends Controller
 
     public function show($id)
     {
+        // Ritrovo l'utente loggato
+        $logged_user = Auth::user()->id;
+
+
         // Visualizzo la pagina di dettaglio del singolo appartamento:
         $flat = Flat::find($id);
-        // Cerco nella tabella flat_service tutti i servizi offerti dal mio appartamento:
-        $service_on_flat = DB::table("services")
-        ->join("flat_service", "services.id", "=", "flat_service.service_id")
-        ->where("flat_service.flat_id",$id)
-        ->get();
-        // Ottengo in uscita una collection, la preparo come un array:
-        $service_array = [];
-        foreach ($service_on_flat as $single) {
-            array_push($service_array,$single->name);
+
+        // Ritrovo l'utente propietario dell'appartamento
+        $flat_user = $flat->user->id;
+        // Controllo se l'utente loggato è uguale all'utente dell'appartamento (evito così che )
+        if($logged_user == $flat_user) {
+            // Cerco nella tabella flat_service tutti i servizi offerti dal mio appartamento:
+            $service_on_flat = DB::table("services")
+            ->join("flat_service", "services.id", "=", "flat_service.service_id")
+            ->where("flat_service.flat_id",$id)
+            ->get();
+            // Ottengo in uscita una collection, la preparo come un array:
+            $service_array = [];
+            foreach ($service_on_flat as $single) {
+                array_push($service_array,$single->name);
+            }
+            return view("upr.flats.show", ["flat" => $flat, "service" => $service_array]);
+        } else {
+            return redirect()->back();
         }
-        return view("upr.flats.show", ["flat" => $flat, "service" => $service_array]);
+
     }
 
     public function edit(Flat $flat)
@@ -116,7 +129,7 @@ class FlatController extends Controller
 
         // Apporto le modifiche al flat nel DB:
         $flat->update($form_data);
-        
+
         // Creo un vettore da active in poi(serve solo per i servizi):
         $service_array_edit = array_slice($form_data,11);
         // Prima elimino le righe della tabella flat_service che ci interessano:
