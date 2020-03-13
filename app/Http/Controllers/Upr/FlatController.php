@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Upr;
 use App\Flat;
+use App\Service;
 use App\Http\Controllers\Controller; // Devo aggiungere questo namespace per dirgli di usare il controller
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class FlatController extends Controller
 {
@@ -21,7 +23,9 @@ class FlatController extends Controller
     public function create()
     {
         // Consento la creazione di un nuovo flat:
-        return view("upr.flats.create");
+        // Passo anche tutti i servizi:
+        $servizi = Service::all();
+        return view("upr.flats.create", compact("servizi"));
     }
 
     public function store(Request $request)
@@ -44,7 +48,13 @@ class FlatController extends Controller
             $flat->img_uri = $file_path;
         }
         // salvo l'oggetto
-        $flat->save();
+        $flat->push();
+        // Creo un vettore da active in poi(serve solo per i servizi):
+        $service_array_uncut = array_slice($data,10);
+        // Questo passaggio serve per eliminare l'image url dall'array di servizi:
+        $service_array_cut = array_slice(array_reverse($service_array_uncut),1);
+        // Prendo questo vettore e lo inserisco nella tabella pivot appropriata (DA AGGIUNGERE I TIMESTAMPS):
+        $flat->services()->attach($service_array_cut);
         // torno alla view index
         return redirect()->route("upr.flats.index");
     }
@@ -53,13 +63,35 @@ class FlatController extends Controller
     {
         // Visualizzo la pagina di dettaglio del singolo appartamento:
         $flat = Flat::find($id);
-        return view("upr.flats.show", ["flat" => $flat]);
+        // Cerco nella tabella flat_service tutti i servizi offerti dal mio appartamento:
+        $service_on_flat = DB::table("services")
+        ->join("flat_service", "services.id", "=", "flat_service.service_id")
+        ->where("flat_service.flat_id",$id)
+        ->get();
+        // Ottengo in uscita una collection, la preparo come un array:
+        $service_array = [];
+        foreach ($service_on_flat as $single) {
+            array_push($service_array,$single->name);
+        }
+        return view("upr.flats.show", ["flat" => $flat, "service" => $service_array]);
     }
 
     public function edit(Flat $flat)
     {
         // Visualizzo la pagina di modifica del singolo appartamento:
-        return view("upr.flats.edit", ["flat" => $flat]);
+        $servizi = Service::all();
+        // Cerco nella tabella flat_service tutti i servizi offerti dal mio appartamento:
+        $servizi_su_appartamento = DB::table("services")
+        ->join("flat_service", "services.id", "=", "flat_service.service_id")
+        ->where("flat_service.flat_id",$flat->id)
+        ->get();
+        // Ottengo in uscita una collection, la preparo come un array:
+        $servizi_su_appartamento_array = [];
+        foreach ($servizi_su_appartamento as $single) {
+            array_push($servizi_su_appartamento_array,$single->name);
+        }
+        // Passo alla mia view tutti gli array:
+        return view("upr.flats.edit", ["flat" => $flat, "servizi" => $servizi, "servizi_su_appartamento_array" => $servizi_su_appartamento_array]);
     }
 
     public function update(Request $request, Flat $flat)
@@ -84,6 +116,14 @@ class FlatController extends Controller
 
         // Apporto le modifiche al flat nel DB:
         $flat->update($form_data);
+        
+        // Creo un vettore da active in poi(serve solo per i servizi):
+        $service_array_edit = array_slice($form_data,11);
+        // Prima elimino le righe della tabella flat_service che ci interessano:
+        DB::table('flat_service')->where('flat_id', $flat["id"])->delete();
+        // Poi aggiungo i servizi inseriti:
+        $flat->services()->attach($service_array_edit);
+        // torno alla view index
         return redirect()->route('upr.flats.index');
     }
 
