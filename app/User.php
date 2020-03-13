@@ -41,5 +41,9 @@ class User extends Authenticatable
     public function flats() {
         return $this->hasMany("App\Flat");
     }
-
+    // Funzione che mi consente di arrivare da User a Messaggi attraverso le rispettive relazioni
+    public function messages()
+    {
+        return $this->hasManyThrough('App\Message', 'App\Flat');
+    }
 }

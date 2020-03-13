@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NewLeadFromUser;
 
 class MessageController extends Controller
 {
@@ -22,17 +24,29 @@ class MessageController extends Controller
      */
     public function index()
     {
+        // Seleziono l'utente corrente
+        $utente = Auth::user();
+        // Chiamo la funzione che mi restituisce i messaggi associati agli appartamenti dell'utente corrente
+        $messages = $utente->messages()->get();
 
-        return view('upr.flats.message');
+        return view('upr.flats.message', ['messages'=> $messages]);
     }
 
     public function sendMail(Request $request)
     {
         $data_form_message = $request->all();
-        
+
         $message = new Message();
         $message->fill($data_form_message);
         $message->save();
+
+        // Memorizzo l'email e il nome del proprietario dell'appartamento visitato
+        $email_owner = $data_form_message['email_owner'];
+        $name_owner = $data_form_message['name_owner'];
+        $name_flat = $data_form_message['flat_title'];
+
+        // Invio email al propietario dell'Appartamento
+        Mail::to($email_owner)->send(new NewLeadFromUser($message, $email_owner, $name_owner, $name_flat));
 
         return redirect()->back();
     }
