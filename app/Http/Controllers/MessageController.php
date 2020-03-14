@@ -25,9 +25,12 @@ class MessageController extends Controller
     public function index()
     {
         // Seleziono l'utente corrente
-        $utente = Auth::user();
+        $user = Auth::user();
         // Chiamo la funzione che mi restituisce i messaggi associati agli appartamenti dell'utente corrente
-        $messages = $utente->messages()->get();
+        $messages = $user->messages()
+        ->orderBy('messages.created_at', 'desc')
+        ->get();
+        //dd($messages);
 
         return view('upr.flats.message', ['messages'=> $messages]);
     }

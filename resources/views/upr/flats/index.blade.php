@@ -44,6 +44,14 @@
                             </div>
                         {{-- Fine modale per la delete. --}}
                     </form>
+                    <!-- Messaggi ricevuti -->
+                    <div class="col-12">
+                        @if ($flat->messages()->count() > 0)
+                                <p><strong>Messaggi ricevuti: </strong> {{$flat->messages()->count()}}</p>
+                        @else
+                            <p>Non sono presenti messaggi per questo appartamento</p>
+                        @endif
+                    </div>
                 </div>
             </div>
         </li>
