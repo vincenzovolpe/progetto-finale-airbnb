@@ -1,3 +1,10 @@
+@php
+    // Creo un array nella session per memorizzare le pagine visitate dagli utenti e memorizzo all'interno l'url della pagina corrente visitata
+    //session()->push('clicked_url', url()->current());
+    //session(['pages_details_visited' => url()->current()]);
+
+@endphp
+
 @extends('layouts.app')
 
 @section('content')

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Session;
 use App\Flat;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class FlatController extends Controller
      */
     public function index()
     {
-        
+
     }
 
     public function find(Request $request)

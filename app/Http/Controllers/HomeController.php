@@ -39,25 +39,37 @@ class HomeController extends Controller
     public function detailsFlat(Request $request, $id)
     {
         $flat = Flat::find($id);
-        //dd(Auth::user()->flats->count());
 
-        // Se è un utente ospite oppure un utente loggato senza appartamenti
-        if(!Auth::user() OR (Auth::user() && Auth::user()->flats->count() == 0)) {
-            $flat->increment('view');
-        // Se è un utente loggato con appartamenti
-        } elseif (Auth::user() && Auth::user()->flats->count() > 0) {
-            // Cerco gli appartamenti appartenenti all'utente
-            $user_flats  = Auth::user()->flats->toArray();
-            // Ricavo lo user_id degli appartamenti dell'utente
-            foreach ($user_flats as $user_flat) {
-                $user_id_flats = $user_flat['user_id'];
-            }
-            // Controllo se la casa appartiene all'utente loggato che ha appartamenti
-            if($user_id_flats != $flat['user_id']) {
+        session()->push('clicked_url', $request->fullUrl());
+        $session_data = $request->session()->all();
+        //dd($session_data);
+        // Memorizzo l'url della pagina di dettaglio attuale
+        $actual_url = url()->current();
+        //dd($actual_url);
+        //dd($session_data);
+        // Memorizzo in una variabile tutti gli url visitati dall'utente memorizzati nella sessione
+        $session_url_visited = session()->get('clicked_url');
+        //dd($session_url_visited);
+        // Controlliamo se nell'array degli url presi dalla sessione esiste il link della pagina di dettaglio che l'utente sta attualmente visitando in modo da non conteggiare di nuovo la visita dell'appartamento
+        if ((!in_array($actual_url, $session_url_visited))) {
+            // Se è un utente ospite oppure un utente loggato senza appartamenti
+            if(!Auth::user() OR (Auth::user() && Auth::user()->flats->count() == 0)) {
+                // Incremento la visita di questo apparatmento
                 $flat->increment('view');
+            // Se è un utente loggato con appartamenti
+            } elseif (Auth::user() && Auth::user()->flats->count() > 0) {
+                // Cerco gli appartamenti appartenenti all'utente
+                $user_flats  = Auth::user()->flats->toArray();
+                // Ricavo lo user_id degli appartamenti dell'utente
+                foreach ($user_flats as $user_flat) {
+                    $user_id_flats = $user_flat['user_id'];
+                }
+                // Controllo se la casa appartiene all'utente loggato che ha appartamenti
+                if($user_id_flats != $flat['user_id']) {
+                    $flat->increment('view');
+                }
             }
         }
-
         return view('details_flat', ['flat' => $flat]);
     }
 }

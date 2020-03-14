@@ -64,13 +64,12 @@ class FlatController extends Controller
         // Ritrovo l'utente loggato
         $logged_user = Auth::user()->id;
 
-
         // Visualizzo la pagina di dettaglio del singolo appartamento:
         $flat = Flat::find($id);
 
         // Ritrovo l'utente propietario dell'appartamento
         $flat_user = $flat->user->id;
-        // Controllo se l'utente loggato è uguale all'utente dell'appartamento (evito così che )
+        // Controllo se l'utente loggato è uguale all'utente dell'appartamento (evito così che chiunque mettendo un id possa vedere i dettagli di un altro appartamento non suo)
         if($logged_user == $flat_user) {
             // Cerco nella tabella flat_service tutti i servizi offerti dal mio appartamento:
             $service_on_flat = DB::table("services")
