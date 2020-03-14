@@ -35,27 +35,27 @@
                 <label for="lon" class="col-md-8 col-form-label text-md-right">{{ __('Longitude') }}</label>
                 <input id="lon" type="number" name="lon" value="{{ $flat->lon }}" required>
 
-                <!-- Inserimento uri immagine -->
-                <label for="img_uri">carica una nuova immagine per sostituire quella attuale...</label>
-                <input id="img_uri" type="file" class="form-control-file" name="img_uri">
 
                 <!-- Inserimento active (per ora) -->
                 <label for="active" class="col-md-8 col-form-label text-md-right">{{ __('active') }}</label>
                 <input id="active" type="number" name="active" value="{{ $flat->active }}" required>
+                <!-- Inserimento uri immagine -->
+                <input id="img_uri" type="file" class="form-control-file" name="img_uri">
+                <label for="img_uri">carica una nuova immagine per sostituire quella attuale...</label>
 
                 <!-- PARTE DEI SERVIZI: -->
                 <h3>Aggiungi servizi al tuo appartamento:</h3>
-                {{-- Questo ciclo stampa tutti i servizi, se esiste relazione con appartamento, metti l'attributo checked --}}
                 @forelse ($servizi as $service)
                     @if(in_array($service->name, $servizi_su_appartamento_array))
-                    <input type="checkbox" id="{{ $service -> id }}" name="{{ $service -> name }}" value="{{ $service -> id }}" checked>
+                    <input type="checkbox" id="{{ $service->id }}" name="{{ $service->name }}" value="{{ $service->id }}" checked>
                     @else
-                    <input type="checkbox" id="{{ $service -> id }}" name="{{ $service -> name }}" value="{{ $service -> id }}">
+                    <input type="checkbox" id="{{ $service->id }}" name="{{ $service->name }}" value="{{ $service->id }}">
                     @endif
-                    <label for="{{ $service -> id }}">{{ $service -> name }}</label><br>
+                    <label for="{{ $service->id }}">{{ $service->name }}</label><br>
                 @empty
                     <p>Non abbiamo nessun servizio attivo al momento! :(</p>
                 @endforelse
+
 
                 <!-- Invio modulo -->
                 <button type="submit" class="btn btn-primary">Submit changes!</button>
