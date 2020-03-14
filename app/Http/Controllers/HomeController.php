@@ -40,18 +40,17 @@ class HomeController extends Controller
     {
         $flat = Flat::find($id);
 
-        session()->push('clicked_url', $request->fullUrl());
-        $session_data = $request->session()->all();
-        //dd($session_data);
+        //$total_session  = session()->all();
+        //dd($total_session);
         // Memorizzo l'url della pagina di dettaglio attuale
         $actual_url = url()->current();
         //dd($actual_url);
-        //dd($session_data);
+
         // Memorizzo in una variabile tutti gli url visitati dall'utente memorizzati nella sessione
-        $session_url_visited = session()->get('clicked_url');
+        $session_url_visited = session('clicked_url');
         //dd($session_url_visited);
         // Controlliamo se nell'array degli url presi dalla sessione esiste il link della pagina di dettaglio che l'utente sta attualmente visitando in modo da non conteggiare di nuovo la visita dell'appartamento
-        if ((!in_array($actual_url, $session_url_visited))) {
+        if (!in_array(url()->current(), session('clicked_url'))) {
             // Se è un utente ospite oppure un utente loggato senza appartamenti
             if(!Auth::user() OR (Auth::user() && Auth::user()->flats->count() == 0)) {
                 // Incremento la visita di questo apparatmento
