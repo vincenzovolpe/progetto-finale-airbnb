@@ -110,7 +110,7 @@ class FlatController extends Controller
     {
         // recupero i dati dal form
         $form_data = $request->all();
-
+        // dd($form_data);
         // verifico se è stato caricato una nuova immagine
         if(!empty($form_data['img_uri'])) {
             // se già c'era un'immagine mi recupero il percorso e elimino il file dallo storage
@@ -125,16 +125,23 @@ class FlatController extends Controller
             // imposto il percorso nel db
             $flat->img_uri = $file_path;
         }
-
         // Apporto le modifiche al flat nel DB:
         $flat->update($form_data);
 
         // Creo un vettore da active in poi(serve solo per i servizi):
         $service_array_edit = array_slice($form_data,11);
-        // Prima elimino le righe della tabella flat_service che ci interessano:
-        DB::table('flat_service')->where('flat_id', $flat["id"])->delete();
-        // Poi aggiungo i servizi inseriti:
-        $flat->services()->attach($service_array_edit);
+        // Se in questo array ho img_uri, andrà eliminato.
+        if (!empty($form_data["img_uri"])) {
+            // Visto che img_uri sarà l'ultimo elemento dell'array, dovrò eliminarlo così:
+            $service_array_edit = array_slice(array_reverse($service_array_edit),1);
+        }
+        // Se non ho aggiunto o modificato servizi, non dovrò fare nulla. Quindi:
+        if ($service_array_edit) {
+            // Prima elimino le righe della tabella flat_service che ci interessano:
+            DB::table('flat_service')->where('flat_id', $flat["id"])->delete();
+            // Poi aggiungo i servizi inseriti:
+            $flat->services()->attach($service_array_edit);
+        }
         // torno alla view index
         return redirect()->route('upr.flats.index');
     }
