@@ -10,9 +10,9 @@
                     <img class="card-img" src="{{asset('storage/' .$flat->img_uri)}}" alt="">
                 </div>
                 <div class="col">
+
                     <p><strong>TITLE:</strong> {{ $flat->title }}</p>
                     <p><strong>ADDRESS:</strong> {{ $flat->address }}</p>
-
                     <!-- Vado alla view per vedere i dettagli: -->
                     <a class="btn btn-info" href="{{ route('upr.flats.show' , ['flat' => $flat->id]) }}">SHOW DETAILS</a>
                     <!-- Vado alla view di modifica: -->
@@ -44,6 +44,13 @@
                             </div>
                         {{-- Fine modale per la delete. --}}
                     </form>
+                    <!-- Vado alla view per la sponsorizzazione: -->
+                    @if (array_key_exists($flat->id,$flat_sponsored))
+                        <h5>Appartamento sponsorizzato!</h5>
+                        <p>Sponsorizzazione creata il: {{ $flat_sponsored[$flat->id]->created_at }}, scade entro: {{ $flat_sponsored[$flat->id]->hours }} ore.</p>
+                    @else
+                        <a class="btn btn-success" href="{{ route('upr.flats.sponsor', ['flat' => $flat->id])}}">Sponsorizza questo appartamento!</a>
+                    @endif
                     <!-- Messaggi ricevuti -->
                     <div class="col-12">
                         @if ($flat->messages()->count() > 0)

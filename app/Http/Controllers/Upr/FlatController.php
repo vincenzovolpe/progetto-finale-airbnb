@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Upr;
 use App\Flat;
 use App\Service;
+use App\Sponsor;
 use App\Http\Controllers\Controller; // Devo aggiungere questo namespace per dirgli di usare il controller
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +18,20 @@ class FlatController extends Controller
         // Seleziono tutti i Flat dell'utente:
         $utente = Auth::user();
         $flats = $utente->flats()->get();
-        return view("upr.flats.index", compact("flats"));
+        // Passo a index delle informazioni riguardo alla sponsorizzazione dell'appartamento:
+        $flat_sponsored = DB::table('flats')
+        ->join('flat_sponsor', 'flats.id', '=', 'flat_sponsor.flat_id')
+        ->join("sponsors", "flat_sponsor.sponsor_id", "=", "sponsors.id")
+        ->where("flats.user_id", $utente["id"])
+        ->select("flat_id","sponsor_id","hours","flat_sponsor.created_at")
+        ->get();
+        // Con questo passaggio, customizzo la key della collection!
+        $flat_sponsored = $flat_sponsored->keyBy("flat_id")->toArray();
+        // Questo restituisce un array di oggetti.
+        return view("upr.flats.index", ["flats" => $flats, "flat_sponsored" => $flat_sponsored]);
+
+        // Se un appartamento di questi è già sponsorizzato, non mostro bottone!
+        // dd($flat_sponsored->count());
     }
 
     public function create()
@@ -90,27 +104,33 @@ class FlatController extends Controller
 
     public function edit(Flat $flat)
     {
-        // Visualizzo la pagina di modifica del singolo appartamento:
-        $servizi = Service::all();
-        // Cerco nella tabella flat_service tutti i servizi offerti dal mio appartamento:
-        $servizi_su_appartamento = DB::table("services")
-        ->join("flat_service", "services.id", "=", "flat_service.service_id")
-        ->where("flat_service.flat_id",$flat->id)
-        ->get();
-        // Ottengo in uscita una collection, la preparo come un array:
-        $servizi_su_appartamento_array = [];
-        foreach ($servizi_su_appartamento as $single) {
-            array_push($servizi_su_appartamento_array,$single->name);
+        // LOGICA DI VERIFICA UTENTE (vedi show() per commenti):
+        $logged_user = Auth::user()->id;
+        $flat_user = $flat->user->id;
+        if($logged_user == $flat_user) {
+            // Visualizzo la pagina di modifica del singolo appartamento:
+            $servizi = Service::all();
+            // Cerco nella tabella flat_service tutti i servizi offerti dal mio appartamento:
+            $servizi_su_appartamento = DB::table("services")
+            ->join("flat_service", "services.id", "=", "flat_service.service_id")
+            ->where("flat_service.flat_id",$flat->id)
+            ->get();
+            // Ottengo in uscita una collection, la preparo come un array:
+            $servizi_su_appartamento_array = [];
+            foreach ($servizi_su_appartamento as $single) {
+                array_push($servizi_su_appartamento_array,$single->name);
+            }
+            // Passo alla mia view tutti gli array:
+            return view("upr.flats.edit", ["flat" => $flat, "servizi" => $servizi, "servizi_su_appartamento_array" => $servizi_su_appartamento_array]);
+        } else {
+            return redirect()->back();
         }
-        // Passo alla mia view tutti gli array:
-        return view("upr.flats.edit", ["flat" => $flat, "servizi" => $servizi, "servizi_su_appartamento_array" => $servizi_su_appartamento_array]);
     }
 
     public function update(Request $request, Flat $flat)
     {
         // recupero i dati dal form
         $form_data = $request->all();
-        // dd($form_data);
         // verifico se è stato caricato una nuova immagine
         if(!empty($form_data['img_uri'])) {
             // se già c'era un'immagine mi recupero il percorso e elimino il file dallo storage
@@ -158,4 +178,39 @@ class FlatController extends Controller
         $flat->delete();
         return redirect()->route('upr.flats.index');
     }
+
+    // Funzione per andare alla pagina di sponsorizzazione del singolo appartamento!
+    public function sponsor(Flat $flat)
+    {
+        // LOGICA DI VERIFICA UTENTE (vedi show() per commenti):
+        $logged_user = Auth::user()->id;
+        $flat_user = $flat->user->id;
+        if($logged_user == $flat_user) {
+            $sponsor = Sponsor::all();
+            // Per evitare che l'utente acceda direttamente alla pagina di sponsorizzazione tramite la scrittura diretta nell'url, controllo se esistono già delle sponsorizzazioni presenti nel DB per questo appartamento:
+            $flat_sponsored = DB::table('flat_sponsor')->select("flat_id")->where("flat_id",$flat->id)->get();
+            if (!$flat_sponsored->count()) {
+                return view('upr.flats.sponsor', ["flat" => $flat, "sponsor" => $sponsor]);
+            } else {
+                // Se ho già delle sponsorizzazioni attive, non devo attivarne altre!
+                return redirect()->route('upr.flats.index');
+            }
+        } else {
+            return redirect()->back();
+        }
+    }
+
+    // Funzione per
+    public function submitSponsor(Request $request, Flat $flat)
+    {
+        $data = $request->all();
+        // Ho inserimento diretto nel DB, controllo di avere valori numerici:
+        if (is_numeric($data["flat_id"]) && is_numeric($data["sponsor_id"])) {
+            DB::insert('insert into flat_sponsor (flat_id, sponsor_id) values (?, ?)', [$data["flat_id"], $data["sponsor_id"]]);
+            return redirect()->route('upr.flats.index');
+        } else {
+            return redirect()->back();
+        }
+    }
+
 }

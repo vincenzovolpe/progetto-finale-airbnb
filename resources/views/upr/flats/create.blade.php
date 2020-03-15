@@ -50,6 +50,7 @@
                         <input type="submit" class="btn btn-primary" value="Crea">
                     </div>
                 </form>
+                <a class="btn btn-info" href="{{ route('upr.flats.index') }}">Back to index!</a>
             </div>
         </div>
     </div>

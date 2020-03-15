@@ -34,4 +34,8 @@ Route::resource("upr/flats/messages" , "MessageController");
 Route::middleware('auth')->prefix('upr')->namespace('Upr')->name('upr.')->group(function() {
     Route::get('/', 'HomeController@index')->name('home');
     Route::resource("/flats" , "FlatController");
+    // Rotta per la sponsorizzazione:
+    Route::get('flats/{flat}/sponsor', 'FlatController@sponsor')->name('flats.sponsor');
+    // Rotta per gestire il form della sponsorizzazione:
+    Route::post('/flats/submit/sponsor', 'FlatController@submitSponsor')->name('flats.submit');
 });
