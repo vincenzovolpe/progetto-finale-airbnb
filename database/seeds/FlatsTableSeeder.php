@@ -15,7 +15,9 @@ class FlatsTableSeeder extends Seeder
         factory(App\User::class, 5)->create()->each(function ($user) {
             // Seed the relation with 1 flats
             $flats = factory(App\Flat::class, 1)->make();
+
             $user->flats()->saveMany($flats);
+
         });
 
 

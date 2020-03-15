@@ -26,6 +26,20 @@ class FlatController extends Controller
 
     public function store(Request $request)
     {
+        // Umberto:Creo le validation per la creazione di un nuovo FLAT
+        $request->validate([
+            'title' => 'required|min:10|max:255',
+            'room_qty' => 'required|numeric|min:1',
+            'bed_qty' => 'required|numeric|min:1',
+            'bath_qty' => 'required|numeric|min:1',
+            'sq_meters' => 'required|numeric|max:500',
+            'address' => 'required|min:10|alpha_num',
+            'lat' => '',
+            'lon' => '',
+            'active' => 'required|boolean',
+            'img_uri' => 'image',
+
+        ]);
         // Metto il flat nel DB:
         $data = $request->all();
         // recupero l'oggeto del file upload
@@ -38,6 +52,8 @@ class FlatController extends Controller
         $flat->img_uri = $file_path;
         $flat->save();
         return redirect()->route("upr.flats.index");
+
+
     }
 
     public function show($id)

@@ -32,7 +32,7 @@
         <div id="sponsored" class="card-columns">
             @forelse ($flat_sponsored as $flat)
                 <div class="card">
-                    <img class="card-img" src="{{asset('storage/' .$flat->img_uri)}}" alt="">
+                    <img class="card-img" src="{{asset('storage/' . $flat->img_uri)}}" alt="">
                     <div class="card-img-overlay">
                         <a href="#" class="btn btn-light btn-sm"></a>
                     </div>
@@ -45,7 +45,7 @@
                         <div class="views">{{ $flat->updated_at }}
                         </div>
                         <div class="stats">
-                            {{$flat->view}}
+                            {{ $flat->view }}
                         </div>
                     </div>
                 </div>
