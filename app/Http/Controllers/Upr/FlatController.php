@@ -33,7 +33,7 @@ class FlatController extends Controller
             'bed_qty' => 'required|numeric|min:1',
             'bath_qty' => 'required|numeric|min:1',
             'sq_meters' => 'required|numeric|max:500',
-            'address' => 'required|min:10|alpha_num',
+            'address' => 'required|min:10',
             'lat' => '',
             'lon' => '',
             'active' => 'required|boolean',
@@ -71,6 +71,20 @@ class FlatController extends Controller
 
     public function update(Request $request, Flat $flat)
     {
+        // Umberto:Creo le validation per la modifica di un nuovo FLAT
+        $request->validate([
+            'title' => 'required|min:10|max:255',
+            'room_qty' => 'required|numeric|min:1',
+            'bed_qty' => 'required|numeric|min:1',
+            'bath_qty' => 'required|numeric|min:1',
+            'sq_meters' => 'required|numeric|max:500',
+            'address' => 'required|min:10',
+            'lat' => '',
+            'lon' => '',
+            'active' => 'required|boolean',
+
+        ]);
+
         // Apporto le modifiche al flat nel DB:
         $form_data = $request->all();
         $flat->update($form_data);
