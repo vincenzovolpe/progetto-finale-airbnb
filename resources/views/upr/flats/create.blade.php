@@ -47,13 +47,26 @@
                     <input id="active" type="number" name="active" value="{{ old('active')}}" required>
                     <!-- Inserimento uri immagine -->
                     <label for="img_uri">Upload your best picture for this flat...</label>
+<<<<<<< HEAD
                     <input id="img_uri" type="file" class="form-control-file" name="img_uri" >
 
+=======
+                    <input id="img_uri" type="file" class="form-control-file" name="img_uri">
+                    <!-- PARTE DEI SERVIZI: -->
+                    <strong>Seleziona un qualunque numero di servizi per il tuo appartamento:</strong><br>
+                    @forelse ($servizi as $service)
+                        <input type="checkbox" id="{{ $service -> id }}" name="{{ $service -> name }}" value="{{ $service -> id }}">
+                        <label for="{{ $service -> id }}">{{ $service -> name }}</label><br>
+                    @empty
+                        <p>Non abbiamo nessun servizio attivo al momento! :(</p>
+                    @endforelse
+>>>>>>> origin/master
                     <!-- Invio modulo -->
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary" value="Crea">
                     </div>
                 </form>
+                <a class="btn btn-info" href="{{ route('upr.flats.index') }}">Back to index!</a>
             </div>
         </div>
     </div>

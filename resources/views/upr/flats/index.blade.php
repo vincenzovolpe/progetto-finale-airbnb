@@ -1,36 +1,70 @@
 @extends("layouts.upr")
 @section("content")
-<h1>INDEX (LIST OF FLATS)</h1>
-<ul class="list-group">
-    @forelse($flats as $flat)
+<div class="container">
+    <h1>INDEX (LIST OF FLATS)</h1>
+    <ul class="list-group">
+        @forelse($flats as $flat)
         <li class="list-group-item list-group-item-dark">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                    </div>
-                    <div class="col">
-                        <p><strong>TITLE:</strong> {{ $flat->title }}</p>
-                        <p><strong>ADDRESS:</strong> {{ $flat->address }}</p>
-                        <!-- Vado alla view per vedere i dettagli: -->
-                        <a class="btn btn-info" href="{{ route('upr.flats.show' , ['flat' => $flat->id]) }}">SHOW DETAILS</a>
-                        <!-- Vado alla view di modifica: -->
-                        <a class="btn btn-warning" href="{{ route('upr.flats.edit', ['flat' => $flat->id]) }}">EDIT DETAILS</a>
-                        <!--Form per la destroy: -->
-                        <form class="form-inline" action="{{ route('upr.flats.destroy', ['flat' => $flat->id]) }}" method="post" style='display:inline-block'>
+            <div class="row">
+                <div class="col-3">
+                    <img class="card-img" src="{{asset('storage/' .$flat->img_uri)}}" alt="">
+                </div>
+                <div class="col">
 
-                            <!-- WARNING: QUESTO FORM HA UNA ISTRUZIONE DI STILE IN LINEA! BISOGNA TOGLIERLA IN SEGUITO!!! -->
-                            
-                            @csrf
-                            @method('DELETE')
-                            <input type="submit" class="btn btn-danger" value="Delete this flat!">
-                        </form>
+                    <p><strong>TITLE:</strong> {{ $flat->title }}</p>
+                    <p><strong>ADDRESS:</strong> {{ $flat->address }}</p>
+                    <!-- Vado alla view per vedere i dettagli: -->
+                    <a class="btn btn-info" href="{{ route('upr.flats.show' , ['flat' => $flat->id]) }}">SHOW DETAILS</a>
+                    <!-- Vado alla view di modifica: -->
+                    <a class="btn btn-warning" href="{{ route('upr.flats.edit', ['flat' => $flat->id]) }}" >EDIT DETAILS</a>
+                    <!--Form per la destroy: -->
+                    <form class="form-inline" action="{{ route('upr.flats.destroy', ['flat' => $flat->id]) }}" method="post" style='display:inline-block'>
+
+                        <!-- WARNING: QUESTO FORM HA UNA ISTRUZIONE DI STILE IN LINEA! BISOGNA TOGLIERLA IN SEGUITO!!! -->
+
+                        @csrf
+                        @method('DELETE')
+                        <a href="#" data-toggle="modal" data-target="#warningModal" class="btn btn-danger">Cancella questo appartamento!</a>
+                        {{-- Inizio modale per la delete: --}}
+                            <div id="warningModal" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Attenzione!</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Se prosegui con questa azione, non sarà possibile recuperare i dati del tuo appartamento! Desideri davvero continuare?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancella</button>
+                                            <input type="submit" class="btn btn-danger" value="Continua">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {{-- Fine modale per la delete. --}}
+                    </form>
+                    <!-- Vado alla view per la sponsorizzazione: -->
+                    @if (array_key_exists($flat->id,$flat_sponsored))
+                        <h5>Appartamento sponsorizzato!</h5>
+                        <p>Sponsorizzazione creata il: {{ $flat_sponsored[$flat->id]->created_at }}, scade entro: {{ $flat_sponsored[$flat->id]->hours }} ore.</p>
+                    @else
+                        <a class="btn btn-success" href="{{ route('upr.flats.sponsor', ['flat' => $flat->id])}}">Sponsorizza questo appartamento!</a>
+                    @endif
+                    <!-- Messaggi ricevuti -->
+                    <div class="col-12">
+                        @if ($flat->messages()->count() > 0)
+                                <p><strong>Messaggi ricevuti: </strong> {{$flat->messages()->count()}}</p>
+                        @else
+                            <p>Non sono presenti messaggi per questo appartamento</p>
+                        @endif
                     </div>
                 </div>
             </div>
         </li>
-    @empty
-        <li class="list-group-item list-group-item-warning"> Nessun appartamento! </li>
-    @endforelse
+        @empty
+            <li class="list-group-item list-group-item-warning"> Nessun appartamento! </li>
+        @endforelse
     </ul>
 </div>
 @endsection

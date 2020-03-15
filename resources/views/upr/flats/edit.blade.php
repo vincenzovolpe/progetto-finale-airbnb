@@ -1,9 +1,8 @@
 @extends("layouts.upr")
 @section("content")
-<h1>EDIT FLAT DETAILS</h1>
-<a class="btn btn-info" href="{{ route('upr.flats.index') }}">Back to index!</a>
 <div class="container">
     <div class="row">
+<<<<<<< HEAD
         <div class="col-md-8">
             {{-- Umberto:Imposto un ciclo per mostare gli errori avvenuti in fase di compilazione del form --}}
             @if ($errors->any())
@@ -17,6 +16,14 @@
             @endif
 
             <form method="POST" action="{{ route('upr.flats.update', ['flat' => $flat->id]) }}">
+=======
+        <h1>EDIT FLAT DETAILS</h1>
+        <a class="btn btn-info" href="{{ route('upr.flats.index') }}">Back to index!</a>
+    </div>
+    <div class="row">
+        <div class="col">
+            <form method="POST" action="{{ route('upr.flats.update', ['flat' => $flat->id]) }}" enctype="multipart/form-data">
+>>>>>>> origin/master
                 @csrf
                 @method('PUT')
                 <!-- Inserimento titolo(descrizione) -->
@@ -43,18 +50,36 @@
                 <!-- Inserimento lon -->
                 <label for="lon" class="col-md-8 col-form-label text-md-right">{{ __('Longitude') }}</label>
                 <input id="lon" type="number" name="lon" value="{{ $flat->lon }}" required>
-                <!-- Inserimento uri immagine -->
-                <label for="img_uri" class="col-md-8 col-form-label text-md-right">{{ __('Image URI') }}</label>
-                <input id="img_uri" type="text" name="img_uri" value="{{ $flat->img_uri }}" required>
+
+
                 <!-- Inserimento active (per ora) -->
                 <label for="active" class="col-md-8 col-form-label text-md-right">{{ __('active') }}</label>
                 <input id="active" type="number" name="active" value="{{ $flat->active }}" required>
+                <!-- Inserimento uri immagine -->
+                <input id="img_uri" type="file" class="form-control-file" name="img_uri">
+                <label for="img_uri">carica una nuova immagine per sostituire quella attuale...</label>
 
-                <!-- In questa sezione, mettiamo una checkbox con tutti i servizi che possiamo inserire per il nostro appartamento: -->
+                <!-- PARTE DEI SERVIZI: -->
+                <h3>Aggiungi servizi al tuo appartamento:</h3>
+                @forelse ($servizi as $service)
+                    @if(in_array($service->name, $servizi_su_appartamento_array))
+                    <input type="checkbox" id="{{ $service->id }}" name="{{ $service->name }}" value="{{ $service->id }}" checked>
+                    @else
+                    <input type="checkbox" id="{{ $service->id }}" name="{{ $service->name }}" value="{{ $service->id }}">
+                    @endif
+                    <label for="{{ $service->id }}">{{ $service->name }}</label><br>
+                @empty
+                    <p>Non abbiamo nessun servizio attivo al momento! :(</p>
+                @endforelse
+
 
                 <!-- Invio modulo -->
                 <button type="submit" class="btn btn-primary">Submit changes!</button>
             </form>
+        </div>
+        <div class="col">
+            <h4>{{ $flat->title }}</h4>
+            <img class="card-img" src="{{asset('storage/' .$flat->img_uri)}}" alt="">
         </div>
     </div>
 </div>
