@@ -30,7 +30,7 @@ Route::post('/flats/send/message', 'MessageController@sendMail')->name('send.mai
 // Rotta per visualizzare i messaggi
 Route::resource("upr/flats/messages" , "MessageController");
 
-// Specifichiamo un gruppo di route che condividono una serie di comandi,  come per esempio il fatto che possono essere visualizzati solo sesi è loggati
+// Specifichiamo un gruppo di route che condividono una serie di comandi,  come per esempio il fatto che possono essere visualizzati solo se si è loggati
 Route::middleware('auth')->prefix('upr')->namespace('Upr')->name('upr.')->group(function() {
     Route::get('/', 'HomeController@index')->name('home');
     Route::resource("/flats" , "FlatController");
