@@ -49,18 +49,30 @@
                                     <label for="email" class="mb-0">Email</label>
                                     <div class="row mb-1">
                                         <div class="col-lg-12">
-                                                <input type="text" name="msg_email" id="msg_email" class="form-control"
+                                                <input type="text" name="msg_email" id="msg_email" class="form-control @error('msg_email') is-invalid @enderror"
                                                 @if (Auth::user() && Auth::user()->id != $flat->user->id)
                                                     value="{{Auth::user()->email}}" required="">
                                                 @else
                                                     >
                                                 @endif
+
+                                                @error('msg_email')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                         </div>
                                     </div>
                                     <label for="message" class="mb-0">Messaggio</label>
                                     <div class="row mb-1">
                                         <div class="col-lg-12">
-                                            <textarea rows="6" name="text_msg" id="text_msg" class="form-control" required=""></textarea>
+                                            <textarea rows="6" name="text_msg" id="text_msg" class="form-control @error('text_msg') is-invalid @enderror" required="">{{ old('text_msg') }}</textarea>
+
+                                                @error('text_msg')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                         </div>
                                     </div>
                                     <input type="text" name="flat_id" value="{{$flat->id}}" hidden>
