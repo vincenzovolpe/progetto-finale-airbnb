@@ -2,7 +2,6 @@
 @section("content")
 <div class="container">
     <div class="row">
-
         <h1>EDIT FLAT DETAILS</h1>
         <a class="btn btn-info" href="{{ route('upr.flats.index') }}">Back to index!</a>
     </div>
