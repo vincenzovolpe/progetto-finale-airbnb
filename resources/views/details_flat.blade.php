@@ -76,5 +76,8 @@
                     <!-- /form user info -->
             </div>
         </div>
+        <div id='map' class='full-map'>
+
+        </div>
     </div>
 @endsection
