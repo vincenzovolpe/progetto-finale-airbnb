@@ -54,8 +54,7 @@ class FlatController extends Controller
             'lat' => '',
             'lon' => '',
             'active' => 'required|boolean',
-            'img_uri' => 'image',
-
+            'img_uri' => 'image|size:5000',
         ]);
 
         $data = $request->all();
@@ -155,7 +154,7 @@ class FlatController extends Controller
             'lat' => '',
             'lon' => '',
             'active' => 'required|boolean',
-            'img_uri' => 'image',
+            'img_uri' => 'image|size:5000',
         ]);
 
 
