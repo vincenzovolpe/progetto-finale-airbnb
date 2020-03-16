@@ -2,17 +2,25 @@
 @section("content")
 <div class="container">
     <div class="row">
-<<<<<<< HEAD
-        <div class="col-md-8">
-            <form method="POST" action="{{ route('upr.flats.update', ['flat' => $flat->id]) }}">
-=======
+
         <h1>EDIT FLAT DETAILS</h1>
         <a class="btn btn-info" href="{{ route('upr.flats.index') }}">Back to index!</a>
     </div>
     <div class="row">
         <div class="col">
+            {{-- Copiato dalla create Umberto:Imposto un ciclo per mostare gli errori avvenuti in fase di compilazione del form --}}
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <form method="POST" action="{{ route('upr.flats.update', ['flat' => $flat->id]) }}" enctype="multipart/form-data">
->>>>>>> origin/master
+
                 @csrf
                 @method('PUT')
                 <!-- Inserimento titolo(descrizione) -->
