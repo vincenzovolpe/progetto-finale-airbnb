@@ -4,17 +4,6 @@
     <div class="row">
 <<<<<<< HEAD
         <div class="col-md-8">
-            {{-- Umberto:Imposto un ciclo per mostare gli errori avvenuti in fase di compilazione del form --}}
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
             <form method="POST" action="{{ route('upr.flats.update', ['flat' => $flat->id]) }}">
 =======
         <h1>EDIT FLAT DETAILS</h1>

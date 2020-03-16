@@ -43,11 +43,12 @@ class HomeController extends Controller
         //$total_session  = session()->all();
         //dd($total_session);
         // Memorizzo l'url della pagina di dettaglio attuale
-        $actual_url = url()->current();
+        //$actual_url = url()->current();
         //dd($actual_url);
 
         // Memorizzo in una variabile tutti gli url visitati dall'utente memorizzati nella sessione
         $session_url_visited = session('clicked_url');
+        //dd($session_url_visited);
         //dd($session_url_visited);
         // Controlliamo se nell'array degli url presi dalla sessione esiste il link della pagina di dettaglio che l'utente sta attualmente visitando in modo da non conteggiare di nuovo la visita dell'appartamento
         if (!in_array(url()->current(), session('clicked_url'))) {

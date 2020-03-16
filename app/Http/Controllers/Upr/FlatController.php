@@ -44,25 +44,20 @@ class FlatController extends Controller
 
     public function store(Request $request)
     {
-<<<<<<< HEAD
-        // Umberto:Creo le validation per la creazione di un nuovo FLAT
         $request->validate([
             'title' => 'required|min:10|max:255',
             'room_qty' => 'required|numeric|min:1',
             'bed_qty' => 'required|numeric|min:1',
             'bath_qty' => 'required|numeric|min:1',
             'sq_meters' => 'required|numeric|max:500',
-            'address' => 'required|min:10',
+            'address' => 'required|min:10|alpha_num',
             'lat' => '',
             'lon' => '',
             'active' => 'required|boolean',
             'img_uri' => 'image',
 
         ]);
-        // Metto il flat nel DB:
-=======
-        // recupero i dati dal form
->>>>>>> origin/master
+
         $data = $request->all();
         // creo un nuovo oggetto Flat da valorizzare
         $flat = new Flat();
@@ -149,8 +144,7 @@ class FlatController extends Controller
 
     public function update(Request $request, Flat $flat)
     {
-<<<<<<< HEAD
-        // Umberto:Creo le validation per la modifica di un nuovo FLAT
+
         $request->validate([
             'title' => 'required|min:10|max:255',
             'room_qty' => 'required|numeric|min:1',
@@ -164,10 +158,10 @@ class FlatController extends Controller
 
         ]);
 
-        // Apporto le modifiche al flat nel DB:
-=======
+        
+
         // recupero i dati dal form
->>>>>>> origin/master
+
         $form_data = $request->all();
         // verifico se è stato caricato una nuova immagine
         if(!empty($form_data['img_uri'])) {

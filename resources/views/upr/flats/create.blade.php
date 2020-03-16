@@ -34,23 +34,21 @@
                     <label for="sq_meters" class="col-md-8 col-form-label text-md-right">{{ __('Square meters') }}</label>
                     <input id="sq_meters" type="number" name="sq_meters" value="{{ old('sq_meters')}}" required>
                     <!-- Inserimento indirizzo -->
-                    <label for="address" class="col-md-8 col-form-label text-md-right">{{ __('Address') }}</label>
+                    <label for="address" class="col-md-8 col-form-label text-md-right">{{ __('Adress') }}</label>
                     <input id="address" type="text" name="address" value="{{ old('address')}}" required>
                     <!-- Inserimento lat -->
                     <label for="lat" class="col-md-8 col-form-label text-md-right">{{ __('Latitude') }}</label>
-                    <input id="lat" type="number" name="lat" required value="{{ old('lat')}}">
+                    <input id="lat" type="number" name="lat" required>
                     <!-- Inserimento lon -->
                     <label for="lon" class="col-md-8 col-form-label text-md-right">{{ __('Longitude') }}</label>
-                    <input id="lon" type="number" name="lon" required value="{{ old('lon')}}">
+                    <input id="lon" type="number" name="lon" required>
                     <!-- Inserimento active (per ora) -->
                     <label for="active" class="col-md-8 col-form-label text-md-right">{{ __('active') }}</label>
                     <input id="active" type="number" name="active" value="{{ old('active')}}" required>
                     <!-- Inserimento uri immagine -->
                     <label for="img_uri">Upload your best picture for this flat...</label>
-<<<<<<< HEAD
-                    <input id="img_uri" type="file" class="form-control-file" name="img_uri" >
 
-=======
+
                     <input id="img_uri" type="file" class="form-control-file" name="img_uri">
                     <!-- PARTE DEI SERVIZI: -->
                     <strong>Seleziona un qualunque numero di servizi per il tuo appartamento:</strong><br>
@@ -60,7 +58,6 @@
                     @empty
                         <p>Non abbiamo nessun servizio attivo al momento! :(</p>
                     @endforelse
->>>>>>> origin/master
                     <!-- Invio modulo -->
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary" value="Crea">
