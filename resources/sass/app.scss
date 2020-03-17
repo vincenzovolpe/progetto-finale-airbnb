@@ -1,3 +1,7 @@
+// Tom Tom
+@import "@tomtom-international/web-sdk-maps";
+@import "@tomtom-international/web-sdk-plugin-searchbox";
+
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
@@ -8,5 +12,9 @@
 @import '~bootstrap/scss/bootstrap';
 
 #sponsored {
-    background-color:  #cccccc; 
+    background-color:  #cccccc;
+}
+
+#map {
+    height: 300px;
 }

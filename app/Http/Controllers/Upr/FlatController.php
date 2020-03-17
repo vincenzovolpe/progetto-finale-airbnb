@@ -56,8 +56,8 @@ class FlatController extends Controller
             //'address' => 'required|min:10|alpha_num',
             'lat' => '',
             'lon' => '',
-            // 'active' => 'required|boolean',
-            // 'img_uri' => 'image|size:5000',
+            'active' => 'required|boolean',
+            'img_uri' => 'image|max:5000',
         ]);
 
         $data = $request->all();
@@ -160,7 +160,7 @@ class FlatController extends Controller
             'lat' => '',
             'lon' => '',
             'active' => 'required|boolean',
-            // 'img_uri' => 'image|size:5000',
+            'img_uri' => 'image|max:5000',
         ]);
         // recupero i dati dal form
 
@@ -272,17 +272,4 @@ class FlatController extends Controller
             return redirect()->back();
         }
     }
-
-// //
-// $result=DB::table('users')->where(array(
-//
-// 'column1' => value1,
-//
-// 'column2' => value2,
-//
-// 'column3' => value3))
-//
-// ->get();
-// //
-
 }

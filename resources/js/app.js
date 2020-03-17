@@ -1,3 +1,8 @@
+// Importazione riferimenti mappe Tom Tom, dei services e del plugin di Ricerca con autocompletamento
+import tt from '@tomtom-international/web-sdk-maps';
+import { services } from '@tomtom-international/web-sdk-services';
+import SearchBox from '@tomtom-international/web-sdk-plugin-searchbox';
+
 // per avere jQuery
 var $ = require('jquery');
 
@@ -33,4 +38,44 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
+});
+
+
+// var map = tt.map({
+//     key: 'Y2cMr97XoBZZKKVXgUS844gofkPiZFnA',
+//     container: 'map',
+//     center: [15.547122, 41.463743],
+//     zoom: 18,
+//     style: 'tomtom://vector/1/basic-main',
+//     //dragPan: !isMobileOrTablet()
+// });
+
+// map.addControl(new tt.FullscreenControl());
+// map.addControl(new tt.NavigationControl());
+
+// Options for the fuzzySearch service
+var searchOptions = {
+    key: 'Y2cMr97XoBZZKKVXgUS844gofkPiZFnA',
+    language: 'it-IT',
+    // idxSet: 'Str',
+    extendedPostalCodesFor: "None",
+    limit: 5
+};
+
+// Options for the autocomplete service
+var autocompleteOptions = {
+    key: 'Y2cMr97XoBZZKKVXgUS844gofkPiZFnA',
+    language: 'it-IT' };
+var searchBoxOptions = {
+    minNumberOfCharacters: 0,
+    searchOptions: searchOptions,
+    autocompleteOptions: autocompleteOptions
+};
+
+var ttSearchBox = new SearchBox(services, searchBoxOptions);
+
+document.querySelector('.fuzzy').appendChild(ttSearchBox.getSearchBoxHTML());
+
+$(document).ready(function(){
+    $(".tt-search-box-input").attr("placeholder", "Ovunque");
 });
