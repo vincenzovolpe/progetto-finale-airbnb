@@ -33,15 +33,19 @@
                     <!-- Inserimento metri quadri -->
                     <label for="sq_meters" class="col-md-8 col-form-label text-md-right">{{ __('Square meters') }}</label>
                     <input id="sq_meters" type="number" name="sq_meters" value="{{ old('sq_meters')}}" required>
-                    <!-- Inserimento indirizzo -->
-                    <label for="address" class="col-md-8 col-form-label text-md-right">{{ __('Adress') }}</label>
-                    <input id="address" type="text" name="address" value="{{ old('address')}}" required>
-                    <!-- Inserimento lat -->
-                    <label for="lat" class="col-md-8 col-form-label text-md-right">{{ __('Latitude') }}</label>
-                    <input id="lat" type="number" name="lat" required>
-                    <!-- Inserimento lon -->
-                    <label for="lon" class="col-md-8 col-form-label text-md-right">{{ __('Longitude') }}</label>
-                    <input id="lon" type="number" name="lon" required>
+
+                    <!-- searchbox indirizzo collegato a tomtom -->
+                    <div class="fuzzy-create">
+                        {{-- <label for="">Dove</label> --}}
+                        {{-- <input type="text" class="form-control" id="inputName" placeholder="Ovunque" required=""> --}}
+                    </div>
+                    {{-- <label for="address" class="col-md-8 col-form-label text-md-right">{{ __('Adress') }}</label>
+                    <input id="address" type="text" name="address" value="{{ old('address')}}" required> --}}
+
+                    <!-- Inserimento latitudine recuperato da API tomtom -->
+                    <input id="lat" type="text" name="lat" hidden>
+                    <!-- Inserimento longitudine recuperato da API tomtom -->
+                    <input id="lon" type="text" name="lon" hidden>
                     <!-- Inserimento active (per ora) -->
                     <label for="active" class="col-md-8 col-form-label text-md-right">{{ __('active') }}</label>
                     <input id="active" type="number" name="active" value="{{ old('active')}}" required>
