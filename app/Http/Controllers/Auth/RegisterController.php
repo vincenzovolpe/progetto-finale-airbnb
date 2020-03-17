@@ -49,10 +49,16 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        // Controlliamo se l'utente che si registra è maggiorenne
+        $date = date('Y-m-j');
+        $newdate = strtotime ('-18 year' , strtotime($date));
+        $newdate = date('Y-m-j', $newdate);
+
+        //if (NOW() - )
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
-            //'date_of_birth' => ['required', 'after:2002'],
+            'date_of_birth' => ['required', 'before_or_equal:'.$newdate],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);

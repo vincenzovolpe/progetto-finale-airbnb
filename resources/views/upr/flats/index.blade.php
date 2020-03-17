@@ -19,37 +19,38 @@
                     <a class="btn btn-warning" href="{{ route('upr.flats.edit', ['flat' => $flat->id]) }}" >EDIT DETAILS</a>
                     <!--Form per la destroy: -->
                     <form class="form-inline" action="{{ route('upr.flats.destroy', ['flat' => $flat->id]) }}" method="post" style='display:inline-block'>
-
-                        <!-- WARNING: QUESTO FORM HA UNA ISTRUZIONE DI STILE IN LINEA! BISOGNA TOGLIERLA IN SEGUITO!!! -->
-
+                    <input type="submit" class="btn btn-danger" value="Cancella questo appartamento!">
                         @csrf
                         @method('DELETE')
-                        <a href="#" data-toggle="modal" data-target="#warningModal" class="btn btn-danger">Cancella questo appartamento!</a>
-                        {{-- Inizio modale per la delete: --}}
-                            <div id="warningModal" class="modal fade" role="dialog">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Attenzione!</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p>Se prosegui con questa azione, non sarà possibile recuperare i dati del tuo appartamento! Desideri davvero continuare?</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancella</button>
-                                            <input type="submit" class="btn btn-danger" value="Continua">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        {{-- Fine modale per la delete. --}}
                     </form>
                     <!-- Vado alla view per la sponsorizzazione: -->
+                    {{-- Occorrono un insieme di condizioni: esiste? Oppure è scaduta? --}}
                     @if (array_key_exists($flat->id,$flat_sponsored))
-                        <h5>Appartamento sponsorizzato!</h5>
-                        <p>Sponsorizzazione creata il: {{ $flat_sponsored[$flat->id]->created_at }}, scade entro: {{ $flat_sponsored[$flat->id]->hours }} ore.</p>
+                        {{-- Dichiaro alcune variabili per semplificarci la vita con le date: --}}
+                        @php
+                            $sponsor_hours = $flat_sponsored[$flat->id]->hours;
+                            $start_date = $flat_sponsored[$flat->id]->created_at;
+                            $hour_diff = now()->diffInHours($start_date);
+                        @endphp
+                        {{-- Qui esiste, vediamo se è ancora valida: --}}
+                        @if( $hour_diff <= $sponsor_hours )
+                            {{-- Qui esiste ed è ancora valida: vediamo quanto dura ancora! --}}
+                            <p>
+                                Sponsorizzazione creata il: {{ $start_date }}, ne hai utilizzato: {{ $hour_diff }} ore su {{ $sponsor_hours }}.
+                            </p>
+                        @else
+                            {{-- Qui esiste, ma è scaduta: consentiamo di rinnovare la sponsorizzazione. --}}
+                            <p>
+                                Sponsorizzazione scaduta!
+                            </p>
+                            <a class="btn btn-success" href="{{ route('upr.flats.sponsor', ['flat' => $flat->id])}}">Rinnova la sponsorizzazione!</a>
+                        @endif
                     @else
-                        <a class="btn btn-success" href="{{ route('upr.flats.sponsor', ['flat' => $flat->id])}}">Sponsorizza questo appartamento!</a>
+                        {{-- Qui non esiste, quindi si può sponsorizzare! --}}
+                        <p>
+                            Nessuna sponsorizzazione attiva!
+                        </p>
+                        <a class="btn btn-success" href="{{ route('upr.flats.sponsor', ['flat' => $flat->id])}}">Sponsorizza il tuo appartamento!</a>
                     @endif
                     <!-- Messaggi ricevuti -->
                     <div class="col-12">

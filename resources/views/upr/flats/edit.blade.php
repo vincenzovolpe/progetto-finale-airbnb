@@ -49,10 +49,15 @@
                 <!-- Inserimento lon recuperato da API tomtom se viene modificato l'indirizzo  -->
                 {{-- <label for="lon" class="col-md-8 col-form-label text-md-right">{{ __('Longitude') }}</label> --}}
                 <input id="lon" type="text" name="lon" value="{{ $flat->lon }}" >
+                <!-- Inserimento active -->
+                <br>
+                <input type="radio" id="active" name="active" value="1" required>
+                <label for="active" class="col-form-label text-md-right">{{ __('Visualizza su sito!') }}</label>
+                <br>
+                <input type="radio" id="active" name="active" value="0" checked required>
+                <label for="active" class="col-form-label text-md-right">{{ __('Non visualizzare su sito!') }}</label>
+                <br>
 
-                <!-- Inserimento active (per ora) -->
-                <label for="active" class="col-md-8 col-form-label text-md-right">{{ __('active') }}</label>
-                <input id="active" type="number" name="active" value="{{ $flat->active }}" required>
                 <!-- Inserimento uri immagine -->
                 <input id="img_uri" type="file" class="form-control-file" name="img_uri">
                 <label for="img_uri">carica una nuova immagine per sostituire quella attuale...</label>
