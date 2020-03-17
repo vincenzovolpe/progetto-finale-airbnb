@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Upr;
 use App\Flat;
+use App\Message;
 use App\Service;
 use App\Sponsor;
 use App\Http\Controllers\Controller; // Devo aggiungere questo namespace per dirgli di usare il controller
@@ -9,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+// use Illuminate\Support\Carbon;
+use Carbon\Carbon;
 
 class FlatController extends Controller
 {
@@ -53,8 +56,8 @@ class FlatController extends Controller
             //'address' => 'required|min:10|alpha_num',
             'lat' => '',
             'lon' => '',
-            'active' => 'required|boolean',
-            'img_uri' => 'image|size:5000',
+            // 'active' => 'required|boolean',
+            // 'img_uri' => 'image|size:5000',
         ]);
 
         $data = $request->all();
@@ -83,7 +86,6 @@ class FlatController extends Controller
         $flat->services()->attach($service_array_cut);
         // torno alla view index
         return redirect()->route("upr.flats.index");
-
 
     }
 
@@ -134,6 +136,10 @@ class FlatController extends Controller
             foreach ($servizi_su_appartamento as $single) {
                 array_push($servizi_su_appartamento_array,$single->name);
             }
+            // Setto a 0 l'active del flat:
+            DB::table('flats')
+            ->where('id', $flat->id)
+            ->update(['active' => 0]);
             // Passo alla mia view tutti gli array:
             return view("upr.flats.edit", ["flat" => $flat, "servizi" => $servizi, "servizi_su_appartamento_array" => $servizi_su_appartamento_array]);
         } else {
@@ -154,11 +160,8 @@ class FlatController extends Controller
             'lat' => '',
             'lon' => '',
             'active' => 'required|boolean',
-            'img_uri' => 'image|size:5000',
+            // 'img_uri' => 'image|size:5000',
         ]);
-
-
-
         // recupero i dati dal form
 
         $form_data = $request->all();
@@ -178,29 +181,29 @@ class FlatController extends Controller
         }
         // Apporto le modifiche al flat nel DB:
         $flat->update($form_data);
-
         // Creo un vettore da active in poi(serve solo per i servizi):
-        $service_array_edit = array_slice($form_data,11);
+        $index_active = array_search("active",array_keys($form_data));
+        $service_array_edit = array_slice($form_data,($index_active+1));
         // Se in questo array ho img_uri, andrà eliminato.
         if (!empty($form_data["img_uri"])) {
             // Visto che img_uri sarà l'ultimo elemento dell'array, dovrò eliminarlo così:
             $service_array_edit = array_slice(array_reverse($service_array_edit),1);
         }
-        // Se non ho aggiunto o modificato servizi, non dovrò fare nulla. Quindi:
-        if ($service_array_edit) {
-            // Prima elimino le righe della tabella flat_service che ci interessano:
-            DB::table('flat_service')->where('flat_id', $flat["id"])->delete();
-            // Poi aggiungo i servizi inseriti:
-            $flat->services()->attach($service_array_edit);
-        }
+        // Prima elimino le righe della tabella flat_service che ci interessano:
+        DB::table('flat_service')->where('flat_id', $flat["id"])->delete();
+        // Poi aggiungo i servizi inseriti:
+        $flat->services()->attach($service_array_edit);
         // torno alla view index
         return redirect()->route('upr.flats.index');
     }
 
-    public function destroy(Flat $flat)
+    public function destroy(Flat $flat, Message $message)
     {
-        // Elimino il singolo appartamento (per ora, direttamente e senza messaggio di conferma):
-
+        // Se l'appartamento ha dei messaggi, bisogna prima cancellarli:
+        $messages_on_flat = Message::where("flat_id", $flat->id)->get();
+        if ($messages_on_flat->count()) {
+            Message::where("flat_id", $flat->id)->delete();
+        }
         // se l'appartamento ha l'immagine mi recupero il percorso e elimino il file dallo storage
         if (!empty($flat['img_uri'])) {
             $img_to_delete = $flat['img_uri'];
@@ -218,30 +221,68 @@ class FlatController extends Controller
         $flat_user = $flat->user->id;
         if($logged_user == $flat_user) {
             $sponsor = Sponsor::all();
-            // Per evitare che l'utente acceda direttamente alla pagina di sponsorizzazione tramite la scrittura diretta nell'url, controllo se esistono già delle sponsorizzazioni presenti nel DB per questo appartamento:
-            $flat_sponsored = DB::table('flat_sponsor')->select("flat_id")->where("flat_id",$flat->id)->get();
-            if (!$flat_sponsored->count()) {
+            // Per evitare che l'utente acceda direttamente alla pagina di sponsorizzazione tramite la scrittura diretta nell'url, controllo se esistono già delle sponsorizzazioni (VALIDE, non scadute) presenti nel DB per questo appartamento:
+            // Prendo l'id della sponsorizzazione, valuto se esiste:
+            $is_flat_sponsored = DB::table('flat_sponsor')->select("sponsor_id")->where("flat_id",$flat->id)->get();
+            if (!$is_flat_sponsored->count()) {
                 return view('upr.flats.sponsor', ["flat" => $flat, "sponsor" => $sponsor]);
             } else {
-                // Se ho già delle sponsorizzazioni attive, non devo attivarne altre!
-                return redirect()->route('upr.flats.index');
+                // Ottengo una collection di un solo elemento, quindi:
+                $is_flat_sponsored = $is_flat_sponsored->first()->sponsor_id;
+                // Se ho già delle sponsorizzazioni attive, devo attivarne altre solo se sono scadute.
+                // Controllo le ore per la sponsorizzazione corrente:
+                $sponsor_hours = ($sponsor->where("id",$is_flat_sponsored))->first()->hours;
+                // Prendo la data in cui è stata creata la sponsorizzazione:
+                $start_date = DB::table('flat_sponsor')->select("created_at")->where("flat_id",$flat->id)->get();
+                // Ottengo una collection di un elemento, quindi:
+                $start_date = $start_date->first()->created_at;
+                // Prendo la differenza oraria:
+                $hour_diff = now()->diffInHours($start_date);
+                // ora valuto: se la differenza è maggiore delle ore di sponsorizzazione, significa che è scaduta. Quindi faccio entrare nella schermata di sponsorizzazione:
+                if ( $hour_diff > $sponsor_hours ) {
+                    // SCADUTA:
+                    return view('upr.flats.sponsor', ["flat" => $flat, "sponsor" => $sponsor]);
+                } else {
+                    // ATTIVA:
+                    return redirect()->route('upr.flats.index');
+                }
             }
         } else {
             return redirect()->back();
         }
     }
 
-    // Funzione per
+    // Funzione per il salvataggio a DB della sponsorizzazione:
     public function submitSponsor(Request $request, Flat $flat)
     {
         $data = $request->all();
         // Ho inserimento diretto nel DB, controllo di avere valori numerici:
         if (is_numeric($data["flat_id"]) && is_numeric($data["sponsor_id"])) {
-            DB::insert('insert into flat_sponsor (flat_id, sponsor_id) values (?, ?)', [$data["flat_id"], $data["sponsor_id"]]);
+            // Visto che posso rinnovare sponsorizzazioni, valutiamo se esiste già una colonna a DB: ne tengo solo una!
+            $is_flat_sponsored = DB::table('flat_sponsor')->select("sponsor_id")->where("flat_id", $data["flat_id"])->get();
+            // Questa è una collection, di cui posso valutare il count():
+            if ($is_flat_sponsored->count()) {
+                // Se avevo già degli sponsor, ripulisco il tutto.
+                DB::table('flat_sponsor')->where('flat_id', $data["flat_id"])->delete();
+            }
+            // Inserisco un nuovo sponsor:
+            DB::insert('insert into flat_sponsor (flat_id, sponsor_id, created_at, updated_at) values (?, ?, ?, ?)', [$data["flat_id"], $data["sponsor_id"], now()->toDateTimeString(), now()->toDateTimeString()]);
             return redirect()->route('upr.flats.index');
         } else {
             return redirect()->back();
         }
     }
+
+// //
+// $result=DB::table('users')->where(array(
+//
+// 'column1' => value1,
+//
+// 'column2' => value2,
+//
+// 'column3' => value3))
+//
+// ->get();
+// //
 
 }
