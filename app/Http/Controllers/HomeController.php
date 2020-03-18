@@ -17,12 +17,14 @@ class HomeController extends Controller
         $flats = Flat::where('active', 1)->orderBy('created_at', 'desc')->get();
         foreach ($flats as $flat) {
             $flat_sponsor = $flat->sponsors->toArray();
-
+            //dd($flat_sponsor);
             foreach ($flat_sponsor as $sponsor) {
 
                 $flat_sponsored = DB::table('flats')
                 ->join('flat_sponsor', 'flats.id', '=', 'flat_sponsor.flat_id')
-                ->where('flat_sponsor.created_at', '>=', DB::raw('DATE_SUB(NOW(), INTERVAL '.$sponsor['hours'].' HOUR)'))
+                ->where([
+                    ['flat_sponsor.created_at', '>=', DB::raw('DATE_SUB(NOW(), INTERVAL '.$sponsor['hours'].' HOUR)')],
+                    ['active', 1]])
                 ->orderBy('flat_sponsor.created_at', 'desc')
                 ->get();
 
