@@ -11,6 +11,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script type='text/javascript' src={{ asset('assets/js/mobile-or-tablet.js')}}></script>
+    <script type='text/javascript' src={{ asset('assets/js/formatters.js')}}></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -18,6 +20,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel='stylesheet' type='text/css' href="{{asset('assets/ui-library/index.css')}}"/>
 </head>
 <body>
         <main>
