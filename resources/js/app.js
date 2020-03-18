@@ -36,9 +36,9 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: '#app',
-});
+// const app = new Vue({
+//     el: '#app',
+// });
 
 
 // Options for the fuzzySearch service
@@ -60,18 +60,15 @@ var searchBoxOptions = {
     autocompleteOptions: autocompleteOptions
 };
 
-
+// creazione dell'oggetto searchBox generico
 const ttSearchBox = new SearchBox(services, searchBoxOptions);
 
 // document.querySelector('.fuzzy').appendChild(ttSearchBox.getSearchBoxHTML());
 
-$(document).ready(function(){
-    $(".tt-search-box-input").attr("placeholder", "Ovunque");
-    var address = $('#address').val();
-    console.log(address);
 
-    $("#address-edit").find(".tt-search-box-input").val(address);
-    $(".tt-search-box-input").attr('name', 'address');
+$(document).ready(function(){
+    // inserisco il placeholder in tutte le searchbox
+    $(".tt-search-box-input").attr("placeholder", "Ovunque");
 
     // Variabili da passare a createMap
     var lonNumber = $('#lonNumber').val();
@@ -79,8 +76,19 @@ $(document).ready(function(){
     var title = $('#title').text();
     var address = $('#address').text();
 
+    // nella searchbox della edit valorizzo il campo col valore precedente
+    $("#address-edit").find(".tt-search-box-input").val(address);
+    $(".tt-search-box-input").attr('name', 'address');
+
     // Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
-    createMap(lonNumber, latNumber, title, address);
+    var href = window.location.href;
+    console.log(href);
+
+    if(href.indexOf('/flats/details') > -1)
+        {
+            createMap(lonNumber, latNumber, title, address);
+    }
+
 
     // Funzione di validazione del nome e cognome in fase di registrazione
     function validation(parametro,valido,invalido){
@@ -104,25 +112,6 @@ $(document).ready(function(){
     validation('#surname','.surname.valid-feedback','.surname.invalid-feedback');
 });
 
-//-----FORM VALIDATION BOOTSTRAP-----------//
-// Example starter JavaScript for disabling form submissions if there are invalid fields
-(function() {
-  'use strict';
-  window.addEventListener('load', function() {
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.getElementsByClassName('needs-validation');
-    // Loop over them and prevent submission
-    var validation = Array.prototype.filter.call(forms, function(form) {
-      form.addEventListener('submit', function(event) {
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-      }, false);
-    });
-  }, false);
-})();
 
 
 // searchbox per la pag create
@@ -136,6 +125,10 @@ $('.fuzzy-home').append(searchBoxHome);
 // searchbox per la pag edit
 const searchBoxEdit = ttSearchBox.getSearchBoxHTML();
 $('.fuzzy-edit').append(searchBoxEdit);
+
+// searchbox per la pag edit
+const searchBoxFind = ttSearchBox.getSearchBoxHTML();
+$('.fuzzy-find').append(searchBoxFind);
 
 
 // ttSearchBox.on('tomtom.searchbox.resultscleared', handleResultsCleared);
@@ -189,3 +182,26 @@ function createMap(longitudine, latitudine, title, address) {
     marker.setPopup(popup);
     //marker.togglePopup();
 }
+
+
+
+
+//-----FORM VALIDATION BOOTSTRAP-----------//
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function() {
+    'use strict';
+    window.addEventListener('load', function() {
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.getElementsByClassName('needs-validation');
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();

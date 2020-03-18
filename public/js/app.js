@@ -49575,10 +49575,10 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
-var app = new Vue({
-  el: '#app'
-}); // Options for the fuzzySearch service
+// const app = new Vue({
+//     el: '#app',
+// });
+// Options for the fuzzySearch service
 
 var searchOptions = {
   key: 'Y2cMr97XoBZZKKVXgUS844gofkPiZFnA',
@@ -49594,22 +49594,29 @@ var searchBoxOptions = {
   minNumberOfCharacters: 0,
   searchOptions: searchOptions,
   autocompleteOptions: autocompleteOptions
-};
+}; // creazione dell'oggetto searchBox generico
+
 var ttSearchBox = new _tomtom_international_web_sdk_plugin_searchbox__WEBPACK_IMPORTED_MODULE_2___default.a(_tomtom_international_web_sdk_services__WEBPACK_IMPORTED_MODULE_1__["services"], searchBoxOptions); // document.querySelector('.fuzzy').appendChild(ttSearchBox.getSearchBoxHTML());
 
 $(document).ready(function () {
-  $(".tt-search-box-input").attr("placeholder", "Ovunque");
-  var address = $('#address').val();
-  console.log(address);
-  $("#address-edit").find(".tt-search-box-input").val(address);
-  $(".tt-search-box-input").attr('name', 'address'); // Variabili da passare a createMap
+  // inserisco il placeholder in tutte le searchbox
+  $(".tt-search-box-input").attr("placeholder", "Ovunque"); // Variabili da passare a createMap
 
   var lonNumber = $('#lonNumber').val();
   var latNumber = $('#latNumber').val();
   var title = $('#title').text();
-  var address = $('#address').text(); // Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
+  var address = $('#address').text(); // nella searchbox della edit valorizzo il campo col valore precedente
 
-  createMap(lonNumber, latNumber, title, address); // Funzione di validazione del nome e cognome in fase di registrazione
+  $("#address-edit").find(".tt-search-box-input").val(address);
+  $(".tt-search-box-input").attr('name', 'address'); // Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
+
+  var href = window.location.href;
+  console.log(href);
+
+  if (href.indexOf('/flats/details') > -1) {
+    createMap(lonNumber, latNumber, title, address);
+  } // Funzione di validazione del nome e cognome in fase di registrazione
+
 
   function validation(parametro, valido, invalido) {
     $(parametro).keyup(function () {
@@ -49631,29 +49638,7 @@ $(document).ready(function () {
 
   validation('#name', '.name.valid-feedback', '.name.invalid-feedback');
   validation('#surname', '.surname.valid-feedback', '.surname.invalid-feedback');
-}); //-----FORM VALIDATION BOOTSTRAP-----------//
-// Example starter JavaScript for disabling form submissions if there are invalid fields
-
-(function () {
-  'use strict';
-
-  window.addEventListener('load', function () {
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.getElementsByClassName('needs-validation'); // Loop over them and prevent submission
-
-    var validation = Array.prototype.filter.call(forms, function (form) {
-      form.addEventListener('submit', function (event) {
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-
-        form.classList.add('was-validated');
-      }, false);
-    });
-  }, false);
-})(); // searchbox per la pag create
-
+}); // searchbox per la pag create
 
 var searchBoxCreate = ttSearchBox.getSearchBoxHTML();
 $('.fuzzy-create').append(searchBoxCreate); // searchbox per la pag home
@@ -49662,7 +49647,10 @@ var searchBoxHome = ttSearchBox.getSearchBoxHTML();
 $('.fuzzy-home').append(searchBoxHome); // searchbox per la pag edit
 
 var searchBoxEdit = ttSearchBox.getSearchBoxHTML();
-$('.fuzzy-edit').append(searchBoxEdit); // ttSearchBox.on('tomtom.searchbox.resultscleared', handleResultsCleared);
+$('.fuzzy-edit').append(searchBoxEdit); // searchbox per la pag edit
+
+var searchBoxFind = ttSearchBox.getSearchBoxHTML();
+$('.fuzzy-find').append(searchBoxFind); // ttSearchBox.on('tomtom.searchbox.resultscleared', handleResultsCleared);
 // ttSearchBox.on('tomtom.searchbox.resultsfound', handleResultsFound);
 //ttSearchBox.on('tomtom.searchbox.resultfocused', handleResultSelection);
 
@@ -49704,7 +49692,29 @@ function createMap(longitudine, latitudine, title, address) {
   var marker = new _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_0___default.a.Marker({}).setLngLat(center).addTo(map);
   popup.setHTML(title + "<br>" + address + "<br>" + latitudine + " " + longitudine);
   marker.setPopup(popup); //marker.togglePopup();
-}
+} //-----FORM VALIDATION BOOTSTRAP-----------//
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+
+
+(function () {
+  'use strict';
+
+  window.addEventListener('load', function () {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation'); // Loop over them and prevent submission
+
+    var validation = Array.prototype.filter.call(forms, function (form) {
+      form.addEventListener('submit', function (event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
 
 /***/ }),
 
@@ -49840,8 +49850,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\MAMP\htdocs\progetto-finale-airbnb\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\MAMP\htdocs\progetto-finale-airbnb\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Applications/MAMP/htdocs/boolean-code/progetto-finale-airbnb/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/boolean-code/progetto-finale-airbnb/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

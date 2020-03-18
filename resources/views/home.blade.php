@@ -24,6 +24,9 @@
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-danger btn-lg float-right">Cerca</button>
                                 </div>
+                                <input id="latNumberHome" type="text" name="lon" hidden>
+                                <input id="lonNumberHome" type="text" name="lat" hidden>
+
                             </form>
                         </div>
                     </div>
