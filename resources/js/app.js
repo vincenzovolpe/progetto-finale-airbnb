@@ -40,6 +40,7 @@ const app = new Vue({
     el: '#app',
 });
 
+
 // Options for the fuzzySearch service
 var searchOptions = {
     key: 'Y2cMr97XoBZZKKVXgUS844gofkPiZFnA',
@@ -80,7 +81,48 @@ $(document).ready(function(){
 
     // Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
     createMap(lonNumber, latNumber, title, address);
+
+    // Funzione di validazione del nome e cognome in fase di registrazione
+    function validation(parametro,valido,invalido){
+        $(parametro).keyup(function(){
+            var value = ($(parametro).val());
+            console.log(value);
+            if (value.length >= 3 && value.length <= 20) {
+                $(valido).show();
+                $(invalido).hide();
+                // $('.needs-validation').addClass('was-validated');
+            }else{
+                $(valido).hide();
+                $(invalido).show();
+            }
+            return parametro,valido,invalido;
+        })
+
+    }
+    // Validazione Nome e cognome in fase di registrazione
+    validation('#name','.name.valid-feedback','.name.invalid-feedback');
+    validation('#surname','.surname.valid-feedback','.surname.invalid-feedback');
 });
+
+//-----FORM VALIDATION BOOTSTRAP-----------//
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
 
 
 // searchbox per la pag create
