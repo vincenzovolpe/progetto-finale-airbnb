@@ -66,7 +66,7 @@ const ttSearchBox = new SearchBox(services, searchBoxOptions);
 // document.querySelector('.fuzzy').appendChild(ttSearchBox.getSearchBoxHTML());
 
 $(document).ready(function(){
-    $(".tt-search-box-input").attr("placeholder", "inserisci l'indirizzo completo");
+    $(".tt-search-box-input").attr("placeholder", "Ovunque");
     var address = $('#address').val();
     console.log(address);
 

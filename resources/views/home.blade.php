@@ -17,7 +17,7 @@
                         <div class="card-body">
                             <form class="form" action="{{ route('flat.find') }}" method="POST" role="form" autocomplete="off">
                                 @csrf
-                                <div class="form-group fuzzy">
+                                <div class="fuzzy-home">
                                     <label for="">Dove</label>
                                     {{-- <input type="text" class="form-control" id="inputName" placeholder="Ovunque" required=""> --}}
                                 </div>

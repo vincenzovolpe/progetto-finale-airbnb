@@ -49598,7 +49598,7 @@ var searchBoxOptions = {
 var ttSearchBox = new _tomtom_international_web_sdk_plugin_searchbox__WEBPACK_IMPORTED_MODULE_2___default.a(_tomtom_international_web_sdk_services__WEBPACK_IMPORTED_MODULE_1__["services"], searchBoxOptions); // document.querySelector('.fuzzy').appendChild(ttSearchBox.getSearchBoxHTML());
 
 $(document).ready(function () {
-  $(".tt-search-box-input").attr("placeholder", "inserisci l'indirizzo completo");
+  $(".tt-search-box-input").attr("placeholder", "Ovunque");
   var address = $('#address').val();
   console.log(address);
   $("#address-edit").find(".tt-search-box-input").val(address);
