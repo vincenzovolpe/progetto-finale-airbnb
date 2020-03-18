@@ -144,8 +144,16 @@ function handleResultSelection(event) {
         //console.log(result);
         var longitudine = result.position.lng;
         var latitudine = result.position.lat;
+
+        // per la pagina details
         $('#lat').val(latitudine);
         $('#lon').val(longitudine);
+
+        // per la home
+        $('#latNumberHome').val(latitudine);
+        $('#lonNumberHome').val(longitudine);
+        console.log(latitudine + '    ' + longitudine);
+
     }
 }
 

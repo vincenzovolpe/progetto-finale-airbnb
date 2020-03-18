@@ -49662,9 +49662,14 @@ function handleResultSelection(event) {
     var result = event.data.result; //console.log(result);
 
     var longitudine = result.position.lng;
-    var latitudine = result.position.lat;
+    var latitudine = result.position.lat; // per la pagina details
+
     $('#lat').val(latitudine);
-    $('#lon').val(longitudine);
+    $('#lon').val(longitudine); // per la home
+
+    $('#latNumberHome').val(latitudine);
+    $('#lonNumberHome').val(longitudine);
+    console.log(latitudine + '    ' + longitudine);
   }
 }
 

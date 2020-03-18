@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Session;
 use App\Flat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class FlatController extends Controller
 {
@@ -20,6 +22,28 @@ class FlatController extends Controller
 
     public function find(Request $request)
     {
+        $lati = $request['lat'];
+        $long = $request['lon'];
+
+        // $flats20km = DB::select(DB::raw("
+        // SELECT *,
+        // ( 6371 * acos( cos( radians('$lati') ) * cos( radians( lat ) ) * cos( radians( lon )
+        // - radians('$long') ) + sin( radians('$lati') ) * sin( radians( lat ) ) ) )
+        // AS distance FROM flats HAVING distance < 20 ORDER BY distance LIMIT 0 , 20;
+
+
+        // "));
+        dd($request['lat']);
+
+        $flatsKm = DB::select( DB::raw("
+        SELECT *, ( 6371 * acos( cos( radians($request['lat']) ) * cos( radians( lat ) ) *
+cos( radians( lon ) - radians($request['lon']) ) + sin( radians($request['lat']) ) *
+sin( radians( lat ) ) ) ) AS distance FROM flats HAVING
+distance < 20 ORDER BY distance LIMIT 0 , 20
+        ")); 
+
+
+
         return view('find_flat');
     }
     //
