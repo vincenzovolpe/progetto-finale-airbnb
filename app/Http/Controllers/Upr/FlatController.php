@@ -136,10 +136,6 @@ class FlatController extends Controller
             foreach ($servizi_su_appartamento as $single) {
                 array_push($servizi_su_appartamento_array,$single->name);
             }
-            // Setto a 0 l'active del flat:
-            DB::table('flats')
-            ->where('id', $flat->id)
-            ->update(['active' => 0]);
             // Passo alla mia view tutti gli array:
             return view("upr.flats.edit", ["flat" => $flat, "servizi" => $servizi, "servizi_su_appartamento_array" => $servizi_su_appartamento_array]);
         } else {

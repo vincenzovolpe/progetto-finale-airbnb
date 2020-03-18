@@ -50,14 +50,23 @@
                 {{-- <label for="lon" class="col-md-8 col-form-label text-md-right">{{ __('Longitude') }}</label> --}}
                 <input id="lon" type="text" name="lon" value="{{ $flat->lon }}" >
                 <!-- Inserimento active -->
-                <br>
-                <input type="radio" id="active" name="active" value="1" required>
-                <label for="active" class="col-form-label text-md-right">{{ __('Visualizza su sito!') }}</label>
-                <br>
-                <input type="radio" id="active" name="active" value="0" checked required>
-                <label for="active" class="col-form-label text-md-right">{{ __('Non visualizzare su sito!') }}</label>
-                <br>
-
+                @if($flat->active)
+                    <br>
+                    <input type="radio" id="active" name="active" value="1" required checked>
+                    <label for="active" class="col-form-label text-md-right">{{ __('Visualizza su sito!') }}</label>
+                    <br>
+                    <input type="radio" id="active" name="active" value="0" required>
+                    <label for="active" class="col-form-label text-md-right">{{ __('Non visualizzare su sito!') }}</label>
+                    <br>
+                @else
+                    <br>
+                    <input type="radio" id="active" name="active" value="1" required>
+                    <label for="active" class="col-form-label text-md-right">{{ __('Visualizza su sito!') }}</label>
+                    <br>
+                    <input type="radio" id="active" name="active" value="0" required checked>
+                    <label for="active" class="col-form-label text-md-right">{{ __('Non visualizzare su sito!') }}</label>
+                    <br>
+                @endif
                 <!-- Inserimento uri immagine -->
                 <input id="img_uri" type="file" class="form-control-file" name="img_uri">
                 <label for="img_uri">carica una nuova immagine per sostituire quella attuale...</label>
