@@ -38,19 +38,26 @@
                 <label for="sq_meters" class="col-md-8 col-form-label text-md-right">{{ __('Square meters') }}</label>
                 <input id="sq_meters" type="number" name="sq_meters" value="{{ $flat->sq_meters }}" required>
                 <!-- Inserimento indirizzo -->
-                <label for="address" class="col-md-8 col-form-label text-md-right">{{ __('Adress') }}</label>
-                <input id="address" type="text" name="address" value="{{ $flat->address }}" required>
-                <!-- Inserimento lat -->
-                <label for="lat" class="col-md-8 col-form-label text-md-right">{{ __('Latitude') }}</label>
-                <input id="lat" type="number" name="lat" value="{{ $flat->lat }}" required>
-                <!-- Inserimento lon -->
-                <label for="lon" class="col-md-8 col-form-label text-md-right">{{ __('Longitude') }}</label>
-                <input id="lon" type="number" name="lon" value="{{ $flat->lon }}" required>
+                <input id="address" type="text" name="address" value="{{ $flat->address }}" required hidden>
+                <div id="address-edit" class="fuzzy-edit">
+                </div>
+                {{-- <label for="address" class="col-md-8 col-form-label text-md-right">{{ __('Adress') }}</label> --}}
 
+                <!-- Inserimento lat recuperato da API tomtom se viene modificato l'indirizzo -->
+                {{-- <label for="lat" class="col-md-8 col-form-label text-md-right">{{ __('Latitude') }}</label> --}}
+                <input id="lat" type="text" name="lat" value="{{ $flat->lat }}" >
+                <!-- Inserimento lon recuperato da API tomtom se viene modificato l'indirizzo  -->
+                {{-- <label for="lon" class="col-md-8 col-form-label text-md-right">{{ __('Longitude') }}</label> --}}
+                <input id="lon" type="text" name="lon" value="{{ $flat->lon }}" >
+                <!-- Inserimento active -->
+                <br>
+                <input type="radio" id="active" name="active" value="1" required>
+                <label for="active" class="col-form-label text-md-right">{{ __('Visualizza su sito!') }}</label>
+                <br>
+                <input type="radio" id="active" name="active" value="0" checked required>
+                <label for="active" class="col-form-label text-md-right">{{ __('Non visualizzare su sito!') }}</label>
+                <br>
 
-                <!-- Inserimento active (per ora) -->
-                <label for="active" class="col-md-8 col-form-label text-md-right">{{ __('active') }}</label>
-                <input id="active" type="number" name="active" value="{{ $flat->active }}" required>
                 <!-- Inserimento uri immagine -->
                 <input id="img_uri" type="file" class="form-control-file" name="img_uri">
                 <label for="img_uri">carica una nuova immagine per sostituire quella attuale...</label>

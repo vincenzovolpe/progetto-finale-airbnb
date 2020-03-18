@@ -79,6 +79,8 @@
                                     <input type="text" name="email_owner" value="{{$flat->user->email}}" hidden>
                                     <input type="text" name="name_owner" value="{{$flat->user->name}}" hidden>
                                     <input type="text" name="flat_title" value="{{$flat->title}}" hidden>
+                                    <input id="latNumber" type="text" name="lon" value="{{$flat->lon}}" hidden>
+                                    <input id="lonNumber" type="text" name="lat" value="{{$flat->lat}}" hidden>
                                     <button type="submit" class="btn btn-danger btn-lg float-left">Invia messaggio</button>
                                 </fieldset>
 

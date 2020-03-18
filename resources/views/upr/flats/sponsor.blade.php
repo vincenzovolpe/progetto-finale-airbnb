@@ -20,7 +20,7 @@
                 @forelse($sponsor as $single_sponsor)
                     <input type="hidden" id="{{ $flat->id }}" name="flat_id" value="{{ $flat->id }}" required>
                     <input type="radio" id="{{ $single_sponsor->id }}" name="sponsor_id" value="{{ $single_sponsor->id }}" required>
-                    <label for="{{ $single_sponsor->hours }}">Sponsorizza per <strong>{{ $single_sponsor->hours }}</strong> ore, alla modica cifra di:<strong>{{ $single_sponsor->price }}</strong></label><br>
+                    <label for="{{ $single_sponsor->id }}">Sponsorizza per <strong>{{ $single_sponsor->hours }}</strong> ore, alla modica cifra di:<strong>{{ $single_sponsor->price }}€</strong></label>!<br>
                 @empty
                     <p>Non abbiamo nessun servizio di sponsorizzazione attivo al momento! :(</p>
                 @endforelse

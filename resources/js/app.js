@@ -39,66 +39,69 @@ require('./bootstrap');
 // const app = new Vue({
 //     el: '#app',
 // });
-//
-//
-// // var map = tt.map({
-// //     key: 'Y2cMr97XoBZZKKVXgUS844gofkPiZFnA',
-// //     container: 'map',
-// //     center: [15.547122, 41.463743],
-// //     zoom: 18,
-// //     style: 'tomtom://vector/1/basic-main',
-// //     //dragPan: !isMobileOrTablet()
-// // });
-//
-// // map.addControl(new tt.FullscreenControl());
-// // map.addControl(new tt.NavigationControl());
-//
-// // Options for the fuzzySearch service
-// var searchOptions = {
-//     key: 'Y2cMr97XoBZZKKVXgUS844gofkPiZFnA',
-//     language: 'it-IT',
-//     // idxSet: 'Str',
-//     extendedPostalCodesFor: "None",
-//     limit: 5
-// };
-//
-// // Options for the autocomplete service
-// var autocompleteOptions = {
-//     key: 'Y2cMr97XoBZZKKVXgUS844gofkPiZFnA',
-//     language: 'it-IT' };
-// var searchBoxOptions = {
-//     minNumberOfCharacters: 0,
-//     searchOptions: searchOptions,
-//     autocompleteOptions: autocompleteOptions
-// };
-//
-// var ttSearchBox = new SearchBox(services, searchBoxOptions);
-//
+
+
+
+// Options for the fuzzySearch service
+var searchOptions = {
+    key: 'Y2cMr97XoBZZKKVXgUS844gofkPiZFnA',
+    language: 'it-IT',
+    // idxSet: 'Str',
+    extendedPostalCodesFor: "None",
+    limit: 5
+};
+
+
+// Options for the autocomplete service
+var autocompleteOptions = {
+    key: 'Y2cMr97XoBZZKKVXgUS844gofkPiZFnA',
+    language: 'it-IT' };
+var searchBoxOptions = {
+    minNumberOfCharacters: 0,
+    searchOptions: searchOptions,
+    autocompleteOptions: autocompleteOptions
+};
+
+
+const ttSearchBox = new SearchBox(services, searchBoxOptions);
+
 // document.querySelector('.fuzzy').appendChild(ttSearchBox.getSearchBoxHTML());
 
 $(document).ready(function(){
-    $(".tt-search-box-input").attr("placeholder", "Ovunque");
-// Funzione di validazione del nome e cognome in fase di registrazione 
-function validation(parametro,valido,invalido){
-    $(parametro).keyup(function(){
-        var value = ($(parametro).val());
-        console.log(value);
-        if (value.length >= 3 && value.length <= 20) {
-            $(valido).show();
-            $(invalido).hide();
-            // $('.needs-validation').addClass('was-validated');
-        }else{
-            $(valido).hide();
-            $(invalido).show();
-        }
-        return parametro,valido,invalido;
-    })
+    $(".tt-search-box-input").attr("placeholder", "inserisci l'indirizzo completo");
+    var address = $('#address').val();
+    console.log(address);
 
-}
-// Validazione Nome e cognome in fase di registrazione
-validation('#name','.name.valid-feedback','.name.invalid-feedback');
-validation('#surname','.surname.valid-feedback','.surname.invalid-feedback');
+    $("#address-edit").find(".tt-search-box-input").val(address);
+    $(".tt-search-box-input").attr('name', 'address');
 
+    // chiamata alla funzione di creazione mappa per pag dettaglio appartamento
+    var lonNumber = $('#lonNumber').val();
+    var latNumber = $('#latNumber').val();
+    console.log(latNumber + lonNumber);
+
+    createMap(lonNumber, latNumber);
+
+    // Funzione di validazione del nome e cognome in fase di registrazione
+    function validation(parametro,valido,invalido){
+        $(parametro).keyup(function(){
+            var value = ($(parametro).val());
+            console.log(value);
+            if (value.length >= 3 && value.length <= 20) {
+                $(valido).show();
+                $(invalido).hide();
+                // $('.needs-validation').addClass('was-validated');
+            }else{
+                $(valido).hide();
+                $(invalido).show();
+            }
+            return parametro,valido,invalido;
+        })
+
+    }
+    // Validazione Nome e cognome in fase di registrazione
+    validation('#name','.name.valid-feedback','.name.invalid-feedback');
+    validation('#surname','.surname.valid-feedback','.surname.invalid-feedback');
 
 });
 
@@ -121,3 +124,70 @@ validation('#surname','.surname.valid-feedback','.surname.invalid-feedback');
     });
   }, false);
 })();
+
+
+// searchbox per la pag create
+const searchBoxCreate = ttSearchBox.getSearchBoxHTML();
+$('.fuzzy-create').append(searchBoxCreate);
+
+// searchbox per la pag home
+const searchBoxHome = ttSearchBox.getSearchBoxHTML();
+$('.fuzzy-home').append(searchBoxHome);
+
+// searchbox per la pag edit
+const searchBoxEdit = ttSearchBox.getSearchBoxHTML();
+$('.fuzzy-edit').append(searchBoxEdit);
+
+
+
+
+
+
+
+// ttSearchBox.on('tomtom.searchbox.resultscleared', handleResultsCleared);
+// ttSearchBox.on('tomtom.searchbox.resultsfound', handleResultsFound);
+//ttSearchBox.on('tomtom.searchbox.resultfocused', handleResultSelection);
+ttSearchBox.on('tomtom.searchbox.resultselected', handleResultSelection);
+
+
+
+
+function handleResultSelection(event) {
+    if (isFuzzySearchResult(event)) {
+        // Display selected result on the map
+        var result = event.data.result;
+        //console.log(result);
+        var longitudine = result.position.lng;
+        var latitudine = result.position.lat;
+        $('#lat').val(latitudine);
+        $('#lon').val(longitudine);
+        // alert('Longitudine:' + longitudine + ' e latitudine: ' + latitudine);
+        console.log($('#lat').val());
+        console.log($('#lon').val());
+
+        // createMap(longitudine, latitudine);
+    }
+}
+
+function isFuzzySearchResult(event) {
+    return !('matches' in event.data.result);
+}
+
+
+
+function createMap(longitudine, latitudine) {
+    //console.log(longitudine);
+    //var v1 = new tt.LngLat(longitudine, latitudine);
+    //console.log(v1);
+    var map = tt.map({
+        key: 'Y2cMr97XoBZZKKVXgUS844gofkPiZFnA',
+        container: 'map',
+        center:[latitudine, longitudine],
+        zoom: 15,
+        style: 'tomtom://vector/1/basic-main',
+        //dragPan: !isMobileOrTablet()
+    });
+
+    map.addControl(new tt.FullscreenControl());
+    map.addControl(new tt.NavigationControl());
+}
