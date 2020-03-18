@@ -41,26 +41,10 @@ const app = new Vue({
 });
 
 
-// var map = tt.map({
-//     key: 'Y2cMr97XoBZZKKVXgUS844gofkPiZFnA',
-//     container: 'map',
-//     center: [15.547122, 41.463743],
-//     zoom: 18,
-//     style: 'tomtom://vector/1/basic-main',
-//     //dragPan: !isMobileOrTablet()
-// });
-
-// map.addControl(new tt.FullscreenControl());
-// map.addControl(new tt.NavigationControl());
-
-
-
 // Options for the fuzzySearch service
 var searchOptions = {
     key: 'Y2cMr97XoBZZKKVXgUS844gofkPiZFnA',
     language: 'it-IT',
-    // idxSet: 'Str',
-    extendedPostalCodesFor: "None",
     limit: 5
 };
 
@@ -69,6 +53,7 @@ var searchOptions = {
 var autocompleteOptions = {
     key: 'Y2cMr97XoBZZKKVXgUS844gofkPiZFnA',
     language: 'it-IT' };
+
 var searchBoxOptions = {
     minNumberOfCharacters: 0,
     searchOptions: searchOptions,
@@ -88,13 +73,56 @@ $(document).ready(function(){
     $("#address-edit").find(".tt-search-box-input").val(address);
     $(".tt-search-box-input").attr('name', 'address');
 
-    // chiamata alla funzione di creazione mappa per pag dettaglio appartamento
+    // Variabili da passare a createMap
     var lonNumber = $('#lonNumber').val();
     var latNumber = $('#latNumber').val();
-    console.log(latNumber + lonNumber);
+    var title = $('#title').text();
+    var address = $('#address').text();
 
-    createMap(lonNumber, latNumber);
+    // Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
+    createMap(lonNumber, latNumber, title, address);
+
+    // Funzione di validazione del nome e cognome in fase di registrazione
+    function validation(parametro,valido,invalido){
+        $(parametro).keyup(function(){
+            var value = ($(parametro).val());
+            console.log(value);
+            if (value.length >= 3 && value.length <= 20) {
+                $(valido).show();
+                $(invalido).hide();
+                // $('.needs-validation').addClass('was-validated');
+            }else{
+                $(valido).hide();
+                $(invalido).show();
+            }
+            return parametro,valido,invalido;
+        })
+
+    }
+    // Validazione Nome e cognome in fase di registrazione
+    validation('#name','.name.valid-feedback','.name.invalid-feedback');
+    validation('#surname','.surname.valid-feedback','.surname.invalid-feedback');
 });
+
+//-----FORM VALIDATION BOOTSTRAP-----------//
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
 
 
 // searchbox per la pag create
@@ -110,17 +138,10 @@ const searchBoxEdit = ttSearchBox.getSearchBoxHTML();
 $('.fuzzy-edit').append(searchBoxEdit);
 
 
-
-
-
-
-
 // ttSearchBox.on('tomtom.searchbox.resultscleared', handleResultsCleared);
 // ttSearchBox.on('tomtom.searchbox.resultsfound', handleResultsFound);
 //ttSearchBox.on('tomtom.searchbox.resultfocused', handleResultSelection);
 ttSearchBox.on('tomtom.searchbox.resultselected', handleResultSelection);
-
-
 
 
 function handleResultSelection(event) {
@@ -132,11 +153,6 @@ function handleResultSelection(event) {
         var latitudine = result.position.lat;
         $('#lat').val(latitudine);
         $('#lon').val(longitudine);
-        // alert('Longitudine:' + longitudine + ' e latitudine: ' + latitudine);
-        console.log($('#lat').val());
-        console.log($('#lon').val());
-
-        // createMap(longitudine, latitudine);
     }
 }
 
@@ -145,20 +161,31 @@ function isFuzzySearchResult(event) {
 }
 
 
+function createMap(longitudine, latitudine, title, address) {
 
-function createMap(longitudine, latitudine) {
-    //console.log(longitudine);
-    //var v1 = new tt.LngLat(longitudine, latitudine);
-    //console.log(v1);
+    //var roundLatLng = Formatters.roundLatLng;
+    var center = [latitudine, longitudine];
+    var popup = new tt.Popup({
+             offset: 35
+    });
+
     var map = tt.map({
         key: 'Y2cMr97XoBZZKKVXgUS844gofkPiZFnA',
         container: 'map',
-        center:[latitudine, longitudine],
+        center: center,
         zoom: 15,
         style: 'tomtom://vector/1/basic-main',
-        //dragPan: !isMobileOrTablet()
+        dragPan: !isMobileOrTablet()
     });
 
     map.addControl(new tt.FullscreenControl());
     map.addControl(new tt.NavigationControl());
+
+    //Creazione del marker all'indirizzo dell'Appartamento
+    var marker = new tt.Marker({
+    }).setLngLat(center).addTo(map);
+
+    popup.setHTML(title + "<br>" + address + "<br>" + latitudine + " " + longitudine);
+    marker.setPopup(popup);
+    //marker.togglePopup();
 }

@@ -49578,23 +49578,11 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 
 var app = new Vue({
   el: '#app'
-}); // var map = tt.map({
-//     key: 'Y2cMr97XoBZZKKVXgUS844gofkPiZFnA',
-//     container: 'map',
-//     center: [15.547122, 41.463743],
-//     zoom: 18,
-//     style: 'tomtom://vector/1/basic-main',
-//     //dragPan: !isMobileOrTablet()
-// });
-// map.addControl(new tt.FullscreenControl());
-// map.addControl(new tt.NavigationControl());
-// Options for the fuzzySearch service
+}); // Options for the fuzzySearch service
 
 var searchOptions = {
   key: 'Y2cMr97XoBZZKKVXgUS844gofkPiZFnA',
   language: 'it-IT',
-  // idxSet: 'Str',
-  extendedPostalCodesFor: "None",
   limit: 5
 }; // Options for the autocomplete service
 
@@ -49614,13 +49602,58 @@ $(document).ready(function () {
   var address = $('#address').val();
   console.log(address);
   $("#address-edit").find(".tt-search-box-input").val(address);
-  $(".tt-search-box-input").attr('name', 'address'); // chiamata alla funzione di creazione mappa per pag dettaglio appartamento
+  $(".tt-search-box-input").attr('name', 'address'); // Variabili da passare a createMap
 
   var lonNumber = $('#lonNumber').val();
   var latNumber = $('#latNumber').val();
-  console.log(latNumber + lonNumber);
-  createMap(lonNumber, latNumber);
-}); // searchbox per la pag create
+  var title = $('#title').text();
+  var address = $('#address').text(); // Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
+
+  createMap(lonNumber, latNumber, title, address); // Funzione di validazione del nome e cognome in fase di registrazione
+
+  function validation(parametro, valido, invalido) {
+    $(parametro).keyup(function () {
+      var value = $(parametro).val();
+      console.log(value);
+
+      if (value.length >= 3 && value.length <= 20) {
+        $(valido).show();
+        $(invalido).hide(); // $('.needs-validation').addClass('was-validated');
+      } else {
+        $(valido).hide();
+        $(invalido).show();
+      }
+
+      return parametro, valido, invalido;
+    });
+  } // Validazione Nome e cognome in fase di registrazione
+
+
+  validation('#name', '.name.valid-feedback', '.name.invalid-feedback');
+  validation('#surname', '.surname.valid-feedback', '.surname.invalid-feedback');
+}); //-----FORM VALIDATION BOOTSTRAP-----------//
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+
+(function () {
+  'use strict';
+
+  window.addEventListener('load', function () {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation'); // Loop over them and prevent submission
+
+    var validation = Array.prototype.filter.call(forms, function (form) {
+      form.addEventListener('submit', function (event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})(); // searchbox per la pag create
+
 
 var searchBoxCreate = ttSearchBox.getSearchBoxHTML();
 $('.fuzzy-create').append(searchBoxCreate); // searchbox per la pag home
@@ -49643,10 +49676,7 @@ function handleResultSelection(event) {
     var longitudine = result.position.lng;
     var latitudine = result.position.lat;
     $('#lat').val(latitudine);
-    $('#lon').val(longitudine); // alert('Longitudine:' + longitudine + ' e latitudine: ' + latitudine);
-
-    console.log($('#lat').val());
-    console.log($('#lon').val()); // createMap(longitudine, latitudine);
+    $('#lon').val(longitudine);
   }
 }
 
@@ -49654,20 +49684,26 @@ function isFuzzySearchResult(event) {
   return !('matches' in event.data.result);
 }
 
-function createMap(longitudine, latitudine) {
-  //console.log(longitudine);
-  //var v1 = new tt.LngLat(longitudine, latitudine);
-  //console.log(v1);
+function createMap(longitudine, latitudine, title, address) {
+  //var roundLatLng = Formatters.roundLatLng;
+  var center = [latitudine, longitudine];
+  var popup = new _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_0___default.a.Popup({
+    offset: 35
+  });
   var map = _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_0___default.a.map({
     key: 'Y2cMr97XoBZZKKVXgUS844gofkPiZFnA',
     container: 'map',
-    center: [latitudine, longitudine],
+    center: center,
     zoom: 15,
-    style: 'tomtom://vector/1/basic-main' //dragPan: !isMobileOrTablet()
-
+    style: 'tomtom://vector/1/basic-main',
+    dragPan: !isMobileOrTablet()
   });
   map.addControl(new _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_0___default.a.FullscreenControl());
-  map.addControl(new _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_0___default.a.NavigationControl());
+  map.addControl(new _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_0___default.a.NavigationControl()); //Creazione del marker all'indirizzo dell'Appartamento
+
+  var marker = new _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_0___default.a.Marker({}).setLngLat(center).addTo(map);
+  popup.setHTML(title + "<br>" + address + "<br>" + latitudine + " " + longitudine);
+  marker.setPopup(popup); //marker.togglePopup();
 }
 
 /***/ }),
@@ -49804,8 +49840,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/boolean-code/progetto-finale-airbnb/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/boolean-code/progetto-finale-airbnb/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\MAMP\htdocs\progetto-finale-airbnb\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\progetto-finale-airbnb\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

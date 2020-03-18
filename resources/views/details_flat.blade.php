@@ -23,8 +23,8 @@
     </br>
         <div class="row">
             <div class="col-6">
-                <h2>{{$flat->title}}</h2>
-                <p>{{$flat->address}}</p>
+                <h2 id="title">{{$flat->title}}</h2>
+                <p id="address">{{$flat->address}}</p>
             </br>
             </br>
                 <h4>{{$flat->room_qty}} stanze {{$flat->bed_qty}} letti {{$flat->bath_qty}} bagni</h4>
@@ -90,6 +90,8 @@
                     <!-- /form user info -->
             </div>
         </div>
+        <br>
+        <h5>Mappa dislocazione appartamento</h5>
         <div id='map' class='full-map'>
 
         </div>
