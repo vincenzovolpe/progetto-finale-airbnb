@@ -55,6 +55,12 @@
                                                 @else
                                                     >
                                                 @endif
+                                                <div class="msg_mail valid-feedback">
+                                                    Inserimento corretto!
+                                                </div>
+                                                <div class="msg_mail invalid-feedback">
+                                                    Inserisci una mail corretta
+                                                </div>
 
                                                 @error('msg_email')
                                                     <span class="invalid-feedback" role="alert">
