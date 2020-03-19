@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Session;
 use App\Flat;
+use App\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class FlatController extends Controller
 {
@@ -20,7 +23,21 @@ class FlatController extends Controller
 
     public function find(Request $request)
     {
-        return view('find_flat');
+        $lat = $request['lat'];
+        $lon = $request['lon'];
+        $address = $request['address_home'];
+        //dd($address);
+        $services = Service::all();
+
+        $flats = DB::select( DB::raw("
+        SELECT *, ( 6371 * acos( cos( radians('$lon') ) * cos( radians( lat ) ) *
+cos( radians( lon ) - radians('$lat') ) + sin( radians('$lon') ) *
+sin( radians( lat ) ) ) ) AS distance FROM flats HAVING
+distance < 20 ORDER BY distance LIMIT 0 , 20
+        "));
+        return view('find_flat', ['flats' => $flats, "address" => $address]);
+
+        //return view('find_flat', ['lat' => $lat, "lon" => $lon,  'address'=> $address, 'services' => $services]);
     }
     //
     // /**

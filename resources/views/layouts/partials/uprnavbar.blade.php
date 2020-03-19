@@ -1,7 +1,8 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
-            {{ config('app.name', 'Laravel') }}
+            {{-- {{ config('app.name', 'Laravel') }} --}}
+            <img src="/assets/images/boolbnb-logo-text.png" width="160" height="49" alt="bool-bnb-logo">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
@@ -26,25 +27,19 @@
                         </li>
                     @endif
                 @else
-                    <a class="nav-link" href="{{ route('upr.flats.create') }}">{{ __('Offri un appartamento') }}</a>
+                    <a class="nav-link" href="{{ route('upr.flats.index') }}">{{ __('Dashboard') }}</a>
                     @if (Auth::user()->flats->count())
-                        <a class="nav-link" href="{{ route('messages.index') }}">{{ __('Messaggi') }}</a>
+                    <a class="nav-link" href="{{ route('messages.index') }}">{{ __('Messaggi') }}</a>
                     @endif
+                    <a class="nav-link" href="{{ route('upr.flats.create') }}">{{ __('Offri un appartamento') }}</a>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
-
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('home') }}">
-                                {{ __('Home Page') }}
-                            </a>
-                            <a class="dropdown-item" href="{{ route('upr.flats.index') }}">
-                                {{ __('Dashboard') }}
-                            </a>
                             <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
+                                onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
                             </a>
 
