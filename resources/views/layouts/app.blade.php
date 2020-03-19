@@ -13,6 +13,8 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script type='text/javascript' src={{ asset('assets/js/mobile-or-tablet.js')}}></script>
     <script type='text/javascript' src={{ asset('assets/js/formatters.js')}}></script>
+    <!-- Include Handlebars from a CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

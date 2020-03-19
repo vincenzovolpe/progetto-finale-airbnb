@@ -82,10 +82,9 @@ $(document).ready(function(){
 
     // Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
     var href = window.location.href;
-    console.log(href);
-
+    // Creo la mappa solo quando mi trovo  all'interno della pagina di dettaglio dell'appartamento
     if(href.indexOf('/flats/details') > -1)
-        {
+    {
             createMap(lonNumber, latNumber, title, address);
     }
 
@@ -110,8 +109,14 @@ $(document).ready(function(){
     // Validazione Nome e cognome in fase di registrazione
     validation('#name','.name.valid-feedback','.name.invalid-feedback');
     validation('#surname','.surname.valid-feedback','.surname.invalid-feedback');
-});
 
+    // Istruzioni per caricare risultati di ricerca dalla home nella pagina di ricerca
+    if(href.indexOf('/flats/find') > -1)
+    {
+        var address_search = $('#searchFind').val();
+        $(".fuzzy-find").find(".tt-search-box-input").val(address_search);
+    }
+});
 
 
 // searchbox per la pag create
@@ -141,19 +146,19 @@ function handleResultSelection(event) {
     if (isFuzzySearchResult(event)) {
         // Display selected result on the map
         var result = event.data.result;
-        //console.log(result);
         var longitudine = result.position.lng;
         var latitudine = result.position.lat;
 
-        // per la pagina details
+        // coordinate per la pagina details
         $('#lat').val(latitudine);
         $('#lon').val(longitudine);
 
-        // per la home
+        // coordinate per la home
         $('#latNumberHome').val(latitudine);
         $('#lonNumberHome').val(longitudine);
-        console.log(latitudine + '    ' + longitudine);
-
+        // indirizzo inserito nella searchbar in home (lo assegno al campo nascosto dell'indirizzo in home)
+        $('#searchHome').val($('.tt-search-box-input').val());
+        //console.log($('#searchHome').val());
     }
 }
 

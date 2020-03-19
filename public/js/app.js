@@ -49610,8 +49610,7 @@ $(document).ready(function () {
   $("#address-edit").find(".tt-search-box-input").val(address);
   $(".tt-search-box-input").attr('name', 'address'); // Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
 
-  var href = window.location.href;
-  console.log(href);
+  var href = window.location.href; // Creo la mappa solo quando mi trovo  all'interno della pagina di dettaglio dell'appartamento
 
   if (href.indexOf('/flats/details') > -1) {
     createMap(lonNumber, latNumber, title, address);
@@ -49637,7 +49636,12 @@ $(document).ready(function () {
 
 
   validation('#name', '.name.valid-feedback', '.name.invalid-feedback');
-  validation('#surname', '.surname.valid-feedback', '.surname.invalid-feedback');
+  validation('#surname', '.surname.valid-feedback', '.surname.invalid-feedback'); // Istruzioni per caricare risultati di ricerca dalla home nella pagina di ricerca
+
+  if (href.indexOf('/flats/find') > -1) {
+    var address_search = $('#searchFind').val();
+    $(".fuzzy-find").find(".tt-search-box-input").val(address_search);
+  }
 }); // searchbox per la pag create
 
 var searchBoxCreate = ttSearchBox.getSearchBoxHTML();
@@ -49659,17 +49663,17 @@ ttSearchBox.on('tomtom.searchbox.resultselected', handleResultSelection);
 function handleResultSelection(event) {
   if (isFuzzySearchResult(event)) {
     // Display selected result on the map
-    var result = event.data.result; //console.log(result);
-
+    var result = event.data.result;
     var longitudine = result.position.lng;
-    var latitudine = result.position.lat; // per la pagina details
+    var latitudine = result.position.lat; // coordinate per la pagina details
 
     $('#lat').val(latitudine);
-    $('#lon').val(longitudine); // per la home
+    $('#lon').val(longitudine); // coordinate per la home
 
     $('#latNumberHome').val(latitudine);
-    $('#lonNumberHome').val(longitudine);
-    console.log(latitudine + '    ' + longitudine);
+    $('#lonNumberHome').val(longitudine); // indirizzo inserito nella searchbar in home (lo assegno al campo nascosto dell'indirizzo in home)
+
+    $('#searchHome').val($('.tt-search-box-input').val()); //console.log($('#searchHome').val());
   }
 }
 
