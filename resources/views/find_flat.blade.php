@@ -12,7 +12,7 @@
                     <input id="searchFind" type="text" name="address_search" value="{{ $address }}" hidden>
                     <input id="latNumberFind" type="text" name="lat" value="{{ $lat }}" hidden>
                     <input id="lonNumberFind" type="text" name="lon" value="{{ $lon }}" hidden>
-                    {{-- <input id="distanceFind" type="text" name="distance" value="{{ $distance }}" hidden>
+                    {{--<input id="distanceFind" type="text" name="distance" value="{{ $distance }}" hidden>
                     <input id="roomsFind" type="text" name="rooms" value="{{ $rooms }}" hidden>
                     <input id="bedsFind" type="text" name="beds" value="{{ $beds }}" hidden> --}}
 

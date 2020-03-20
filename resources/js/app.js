@@ -149,7 +149,7 @@ $(document).ready(function(){
         var lat = $('#latNumberFind').val();
         var lon = $('#lonNumberFind').val();
         var distance = 20;
-
+        console.log(distance);
         $.ajax({
             url: 'http://localhost:8000/api/flats',
             method: 'GET',
@@ -161,7 +161,7 @@ $(document).ready(function(){
             },
 
             success: function(data) {
-
+                    console.log(data.result);
                     $('#card_container').empty();
 
                     for (var i = 0; i < data.result.length; i++) {
@@ -201,7 +201,7 @@ $(document).ready(function(){
             var beds = $('#bed_qty').val();
 
 
-            // prendo tutte le checkbox dei Servizi
+            // Prendo tutte le checkbox dei Servizi
             var checkbox_value = "";
             var checkbox_count = 0;
             $("input[name=check_services]").each(function () {
@@ -211,14 +211,13 @@ $(document).ready(function(){
                     checkbox_value += $(this).val() + ",";
                 }
             });
-            // Tolgo l'ultima virgola nella'array delle checkbox
+
+            // Tolgo l'ultima virgola nell' array delle checkbox
             var index = checkbox_value.lastIndexOf(",");
             var checkbox_selected = checkbox_value.substring(0, index) + checkbox_value.substring(index + 1);
-            //var wifi = $('#1').val();
-            // var ischecked = $('#1').is(":checked");
-            // if (ischecked) {
-            //     var wifi = $('#1').val();
-            // }
+            if (!checkbox_selected) {
+                checkbox_selected = 'empty';
+            }
             console.log(checkbox_selected);
             console.log(checkbox_count);
             //var xhr = new XMLHttpRequest();
@@ -227,9 +226,8 @@ $(document).ready(function(){
                 url: 'http://localhost:8000/api/flats',
                 method: 'GET',
                 // xhr: function() {
-                //     return xhr;
-                // },
-
+                //      return xhr;
+                //     },
                 data:  {
                     'lat': lat,
                     'lon': lon,
@@ -237,10 +235,9 @@ $(document).ready(function(){
                     'rooms': rooms,
                     'beds': beds,
                     'services': checkbox_selected,
-                    'checkbox_count': checkbox_count
+                    'checkbox_count': checkbox_count,
                     //'url': xhr.responseURL
                 },
-
 
                 success: function(data) {
                         //console.log(xhr.responseURL);
