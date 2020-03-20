@@ -26,18 +26,28 @@ class FlatController extends Controller
         $lat = $request['lat'];
         $lon = $request['lon'];
         $address = $request['address_home'];
-        //dd($address);
+        //$rooms = $request['room_qty'];
+        //$beds = $request['bed_qty'];
+        //$distance = $request['km_radius'];
         $services = Service::all();
 
-        $flats = DB::select( DB::raw("
-        SELECT *, ( 6371 * acos( cos( radians('$lon') ) * cos( radians( lat ) ) *
-cos( radians( lon ) - radians('$lat') ) + sin( radians('$lon') ) *
-sin( radians( lat ) ) ) ) AS distance FROM flats HAVING
-distance < 20 ORDER BY distance LIMIT 0 , 20
-        "));
-        return view('find_flat', ['flats' => $flats, "address" => $address]);
+//         $flats = DB::select( DB::raw("
+//         SELECT *, ( 6371 * acos( cos( radians('$lon') ) * cos( radians( lat ) ) *
+// cos( radians( lon ) - radians('$lat') ) + sin( radians('$lon') ) *
+// sin( radians( lat ) ) ) ) AS distance FROM flats HAVING
+// distance < 20 ORDER BY distance LIMIT 0 , 20
+//         "));
+        //return view('find_flat', ['flats' => $flats, "address" => $address, 'lat' => $lat, 'lon' => $lon]);
 
-        //return view('find_flat', ['lat' => $lat, "lon" => $lon,  'address'=> $address, 'services' => $services]);
+        return view('find_flat', [
+            'lat' => $lat,
+            "lon" => $lon,
+            'address'=> $address,
+            'services' => $services,
+            // 'rooms' => $rooms,
+            // 'beds' => $beds,
+            // 'distance' => $distance
+        ]);
     }
     //
     // /**

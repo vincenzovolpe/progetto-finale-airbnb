@@ -12,19 +12,81 @@ class SearchFlatController extends Controller
 {
     public function index() {
 
-        
-        $flats = DB::select( DB::raw("
-            SELECT *, ( 6371 * acos( cos( radians('$lon') ) * cos( radians( lat ) ) *
-            cos( radians( lon ) - radians('$lat') ) + sin( radians('$lon') ) *
-            sin( radians( lat ) ) ) ) AS distance FROM flats HAVING
-            distance < 20 ORDER BY distance LIMIT 0 , 20
-        "));
+        $services = $_GET['services'];
 
-        return response()->json(
-            [
-                'success' => true,
-                'result' => $flats
-            ]
-        );
+        $checkbox_count = $_GET['checkbox_count'];
+
+        $lat = $_GET['lat'];
+        $lon = $_GET['lon'];
+        $rooms = $_GET['rooms'];
+        $beds = $_GET['beds'];
+        $distance = $_GET['distance'];
+
+
+        if($services) {
+            $flats_services = DB::table('flats')
+            ->join('flat_service', 'flat_service.flat_id', '=', 'flats.id')
+            ->selectRaw('id, title, address, img_uri, ( 6371 * acos( cos( radians(?) ) * cos( radians( lat ) ) *
+                           cos( radians( lon ) - radians(?) ) + sin( radians(?) ) *
+                    sin( radians( lat ) ) ) ) AS distance, COUNT(flats.id) AS number_services', [$lat, $lon, $lat])
+            ->whereIn('service_id', [$services])
+            ->where('active', 1)
+            ->groupBy('flats.id')
+            //->havingRaw('number_services > ? AND distance <= ?', [$checkbox_count, $distance])
+            ->having('distance', '<=', $distance)
+            ->orderBy('distance')
+            ->get();
+
+
+            // $flats_services = DB::select( DB::raw("
+            //         SELECT *, ( 6371 * acos( cos( radians('$lat') ) * cos( radians( lat ) ) *
+            //                cos( radians( lon ) - radians('$lon') ) + sin( radians('$lat') ) *
+            //         sin( radians( lat ) ) ) ) AS distance FROM flats
+            //         INNER JOIN flat_service ON flats.id = flat_service.flat_id
+            //         WHERE service_id IN ('$services') AND room_qty >= '$rooms' AND bed_qty >= '$beds'
+            //         GROUP BY id
+            //         HAVING distance <= '$distance'
+            //         ORDER BY distance LIMIT 0 , 20
+            //     "));
+            return response()->json(
+                [
+                    'success' => true,
+                    'result' => $flats_services
+                ]
+            );
+        }
+
+        // if (array_key_exists("rooms", $_GET) AND array_key_exists("beds", $_GET)) {
+        //     $lat = $_GET['lat'];
+        //     $lon = $_GET['lon'];
+        //     $rooms = $_GET['rooms'];
+        //     $beds = $_GET['beds'];
+        //     $distance = $_GET['distance'];
+        //
+        //     $flats = DB::select( DB::raw("
+        //         SELECT *, ( 6371 * acos( cos( radians('$lat') ) * cos( radians( lat ) ) *
+        //         cos( radians( lon ) - radians('$lon') ) + sin( radians('$lat') ) *
+        //         sin( radians( lat ) ) ) ) AS distance FROM flats HAVING
+        //         distance < '$distance' AND room_qty >= '$rooms' AND bed_qty >= '$beds' ORDER BY distance LIMIT 0 , 20
+        //     "));
+        // } else {
+        //     $lat = $_GET['lat'];
+        //     $lon = $_GET['lon'];
+        //     $distance = $_GET['distance'];
+        //
+        //     $flats = DB::select( DB::raw("
+        //         SELECT *, ( 6371 * acos( cos( radians('$lat') ) * cos( radians( lat ) ) *
+        //         cos( radians( lon ) - radians('$lon') ) + sin( radians('$lat') ) *
+        //         sin( radians( lat ) ) ) ) AS distance FROM flats HAVING
+        //         distance < '$distance' ORDER BY distance LIMIT 0 , 20
+        //     "));
+        // }
+        //
+        // return response()->json(
+        //     [
+        //         'success' => true,
+        //         'result' => $flats
+        //     ]
+        // );
     }
 }

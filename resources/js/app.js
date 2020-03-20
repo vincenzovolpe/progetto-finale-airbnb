@@ -111,11 +111,140 @@ $(document).ready(function(){
     validation('#surname','.surname.valid-feedback','.surname.invalid-feedback');
 
     // Istruzioni per caricare risultati di ricerca dalla home nella pagina di ricerca
+    // if(href.indexOf('/flats/find') > -1)
+        //alert('Ho cliccato il bottone');
+        var address_search = $('#searchFind').val();
+        var address_edit = $('#address').val();
+        $(".fuzzy-find").find(".tt-search-box-input").val(address_search);
+        $(".fuzzy-edit").find(".tt-search-box-input").val(address_edit);
+
+    // Chiamata ajax con i dati della searchbar della HomePage
     if(href.indexOf('/flats/find') > -1)
     {
-        var address_search = $('#searchFind').val();
-        $(".fuzzy-find").find(".tt-search-box-input").val(address_search);
+        var lat = $('#latNumberFind').val();
+        var lon = $('#lonNumberFind').val();
+        var distance = 20;
+
+        $.ajax({
+            url: 'http://localhost:8000/api/flats',
+            method: 'GET',
+
+            data:  {
+                'lat': lat,
+                'lon': lon,
+                'distance': distance
+            },
+
+            success: function(data) {
+
+                    $('#card_container').empty();
+
+                    for (var i = 0; i < data.result.length; i++) {
+
+                        var template_html = $('#card_template').html();
+
+                        var template_function = Handlebars.compile(template_html);
+
+                        var variables = {
+                            'img_uri': data.result[i].img_uri,
+                            'title': data.result[i].title,
+                            'flat_details': data.result[i].id
+                        }
+
+                        var html = template_function(variables);
+
+                        $('.card-columns').append(html);
+                    }
+            }
+        })
     }
+
+    // Chiamata Ajax nella pagina Find con eventuali filtri di Ricerca
+    $('#btn_find').click(function(){
+        //$('#flat_search').on('click', '#btn_find', function(e) {
+
+            //e.preventDefault();
+
+            var lat = $('#latNumberFind').val();
+
+            var lon = $('#lonNumberFind').val();
+
+            var distance = $('#km_radius').val();
+
+            var rooms = $('#room_qty').val();
+
+            var beds = $('#bed_qty').val();
+
+
+            // prendo tutte le checkbox dei Servizi
+            var checkbox_value = "";
+            var checkbox_count = 0;
+            $("input[name=check_services]").each(function () {
+                var ischecked = $(this).is(":checked");
+                if (ischecked) {
+                    checkbox_count++;
+                    checkbox_value += $(this).val() + ",";
+                }
+            });
+            // Tolgo l'ultima virgola nella'array delle checkbox
+            var index = checkbox_value.lastIndexOf(",");
+            var checkbox_selected = checkbox_value.substring(0, index) + checkbox_value.substring(index + 1);
+            //var wifi = $('#1').val();
+            // var ischecked = $('#1').is(":checked");
+            // if (ischecked) {
+            //     var wifi = $('#1').val();
+            // }
+            console.log(checkbox_selected);
+            console.log(checkbox_count);
+            //var xhr = new XMLHttpRequest();
+
+            $.ajax({
+                url: 'http://localhost:8000/api/flats',
+                method: 'GET',
+                // xhr: function() {
+                //     return xhr;
+                // },
+
+                data:  {
+                    'lat': lat,
+                    'lon': lon,
+                    'distance': distance,
+                    'rooms': rooms,
+                    'beds': beds,
+                    'services': checkbox_selected,
+                    'checkbox_count': checkbox_count
+                    //'url': xhr.responseURL
+                },
+
+
+                success: function(data) {
+                        //console.log(xhr.responseURL);
+                        console.log(data.result);
+                        $('#card_container').empty();
+
+                        for (var i = 0; i < data.result.length; i++) {
+
+                            var template_html = $('#card_template').html();
+
+                            var template_function = Handlebars.compile(template_html);
+
+                            var variables = {
+                                'img_uri': data.result[i].img_uri,
+                                'title': data.result[i].title,
+                                'flat_details': data.result[i].id
+                            }
+
+                            var html = template_function(variables);
+
+                            $('.card-columns').append(html);
+                        }
+                }
+            })
+
+        });
+
+    //});
+
 });
 
 
@@ -135,10 +264,7 @@ $('.fuzzy-edit').append(searchBoxEdit);
 const searchBoxFind = ttSearchBox.getSearchBoxHTML();
 $('.fuzzy-find').append(searchBoxFind);
 
-
-// ttSearchBox.on('tomtom.searchbox.resultscleared', handleResultsCleared);
-// ttSearchBox.on('tomtom.searchbox.resultsfound', handleResultsFound);
-//ttSearchBox.on('tomtom.searchbox.resultfocused', handleResultSelection);
+// Evento che si verifica quando seleziono una voce dalla lista dell'autocompletamento nella searchbox
 ttSearchBox.on('tomtom.searchbox.resultselected', handleResultSelection);
 
 
@@ -156,9 +282,15 @@ function handleResultSelection(event) {
         // coordinate per la home
         $('#latNumberHome').val(latitudine);
         $('#lonNumberHome').val(longitudine);
+
+        // coordinate per la find
+        $('#latNumberFind').val(latitudine);
+        $('#lonNumberFind').val(longitudine);
+        //console.log($('#latNumberFind').val());
         // indirizzo inserito nella searchbar in home (lo assegno al campo nascosto dell'indirizzo in home)
         $('#searchHome').val($('.tt-search-box-input').val());
         //console.log($('#searchHome').val());
+
     }
 }
 

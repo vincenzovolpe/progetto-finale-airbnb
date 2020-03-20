@@ -22,11 +22,11 @@
                                     {{-- <input type="text" class="form-control" id="inputName" placeholder="Ovunque" required=""> --}}
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-danger btn-lg float-right">Cerca</button>
+                                    <button id="btn_home" type="submit" class="btn btn-danger btn-lg float-right">Cerca</button>
                                 </div>
                                 <input id="searchHome" type="text" name="address_home" hidden>
-                                <input id="latNumberHome" type="text" name="lon" hidden>
-                                <input id="lonNumberHome" type="text" name="lat" hidden>
+                                <input id="latNumberHome" type="text" name="lat" hidden>
+                                <input id="lonNumberHome" type="text" name="lon" hidden>
                             </form>
                         </div>
                     </div>
