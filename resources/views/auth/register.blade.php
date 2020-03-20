@@ -16,7 +16,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" minlength="3" maxlength="20" class="form-control" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus style="text-transform:capitalize">
+                                <input id="name" type="text" minlength="3" maxlength="20" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus style="text-transform:capitalize">
                                 <div class="name valid-feedback">
                                     Inserimento corretto!
                                 </div>
@@ -31,7 +31,7 @@
                             <label for="surname" class="col-md-4 col-form-label text-md-right">{{ __('Surname') }}</label>
 
                             <div class="col-md-6">
-                                <input id="surname" type="text" minlength="3" maxlength="20" class="form-control" name="surname" value="{{ old('surname') }}" required autocomplete="surname" autofocus style="text-transform: capitalize">
+                                <input id="surname" type="text" minlength="3" maxlength="20" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{ old('surname') }}" required autocomplete="surname" autofocus style="text-transform: capitalize">
                                 <div class="surname valid-feedback">
                                     Inserimento corretto!
                                 </div>
@@ -47,11 +47,11 @@
                             <label for="date_of_birth" class="col-md-4 col-form-label text-md-right">{{ __('Date of birth') }}</label>
 
                             <div class="col-md-6">
-                                <input id="date_of_birth" type="date" class="form-control" name="date_of_birth" value="{{ old('date_of_birth') }}" required autocomplete="date_of_birth" autofocus>
-                                <div class="valid-feedback">
+                                <input id="date_of_birth" type="date" class="form-control @error('date_of_birth') is-invalid @enderror" name="date_of_birth" value="{{ old('date_of_birth') }}" required autocomplete="date_of_birth" autofocus>
+                                <div class="date valid-feedback">
                                     Inserimento corretto!
                                 </div>
-                                <div class="invalid-feedback">
+                                <div class="date invalid-feedback">
                                     Devi avere almeno 18 anni
                                 </div>
                             </div>
@@ -61,11 +61,11 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autocomplete="email"  onclick='ValidateEmail('#email')' >
-                                <div class="valid-feedback">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email"  {{-- onclick="validateEmail('#email')"--}} > 
+                                <div class="mail valid-feedback">
                                     Inserimento corretto!
                                 </div>
-                                <div class="invalid-feedback">
+                                <div class="mail invalid-feedback">
                                     Inserisci una mail corretta
                                 </div>
                             </div>
@@ -75,7 +75,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" minlength="8" class="form-control" name="password" required autocomplete="new-password">
+                                <input id="password" type="password" minlength="8" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
                                 <div class="valid-feedback">
                                     Inserimento corretto!
                                 </div>
@@ -89,8 +89,8 @@
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                                
+                                <input id="password-confirm" type="password" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" required autocomplete="new-password">
+
                             </div>
                         </div>
 

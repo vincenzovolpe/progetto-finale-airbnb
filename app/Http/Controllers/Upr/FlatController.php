@@ -48,16 +48,14 @@ class FlatController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|min:10|max:255',
-            'room_qty' => 'required|numeric|min:1|max:200',
+            'title' => 'required|min:5|max:255',
+            'room_qty' => 'required|numeric|min:1|max:50',
             'bed_qty' => 'required|numeric|min:1|max:50',
             'bath_qty' => 'required|numeric|min:1|max:50',
-            'sq_meters' => 'required|numeric|max:500',
-            //'address' => 'required|min:10|alpha_num',
-            'lat' => '',
-            'lon' => '',
+            'sq_meters' => 'required|numeric|min:10|max:500',
+            'address' => 'required',
             'active' => 'required|boolean',
-            'img_uri' => 'image|max:5000',
+            'img_uri' => 'required|image|max:5000',
         ]);
 
         $data = $request->all();

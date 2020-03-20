@@ -6,6 +6,8 @@ import SearchBox from '@tomtom-international/web-sdk-plugin-searchbox';
 // per avere jQuery
 var $ = require('jquery');
 
+// per avere Moment.js
+var moment = require('moment');
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -88,19 +90,42 @@ $(document).ready(function(){
             createMap(lonNumber, latNumber, title, address);
     }
 
+    //-----FORM VALIDATION BOOTSTRAP-----------//
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+          // Fetch all the forms we want to apply custom Bootstrap validation styles to
+          var forms = document.getElementsByClassName('needs-validation');
+          // Loop over them and prevent submission
+          var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+              if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+              form.classList.add('was-validated');
+            }, false);
+          });
+        }, false);
+      })();
 
     // Funzione di validazione del nome e cognome in fase di registrazione
     function validation(parametro,valido,invalido){
         $(parametro).keyup(function(){
             var value = ($(parametro).val());
-            console.log(value);
+            // console.log(value);
             if (value.length >= 3 && value.length <= 20) {
                 $(valido).show();
                 $(invalido).hide();
+                $(parametro).addClass('is-valid');
+                $(parametro).removeClass('is-invalid');
                 // $('.needs-validation').addClass('was-validated');
             }else{
                 $(valido).hide();
                 $(invalido).show();
+                $(parametro).addClass('is-invalid');
+                $(parametro).removeClass('is-valid');
             }
             return parametro,valido,invalido;
         })
@@ -243,9 +268,162 @@ $(document).ready(function(){
 
         });
 
+        // validation delle date in fase di registrazione
+
+        $('#date_of_birth').keyup(function(){
+          var date_of_birth = $('#date_of_birth').val();
+          var dataUtente = moment(date_of_birth);
+          // console.log(dataUtente);
+          var date = moment().subtract(18, 'years');
+          // console.log(date_of_birth);
+          if (dataUtente < date) {
+              // console.log('ok');
+              $('.date.valid-feedback').show();
+              $('.date.invalid-feedback').hide();
+              $('#date_of_birth').addClass('is-valid');
+              $('#date_of_birth').removeClass('is-invalid');
+          }else{
+              // console.log('no');
+              $('.date.invalid-feedback').show();
+              $('.date.valid-feedback').hide();
+              $('#date_of_birth').addClass('is-invalid');
+              $('#date_of_birth').removeClass('is-valid');
+          }
+      });
+    // validazioni email
+        function validationEmail(mail,valido,invalido){
+            $(mail).keyup(function(){
+                var email = $(mail).val();
+                var chioccia = (email.indexOf('@')+ 1);
+                var point = (email.indexOf('.')+1);
+                var point2 = (email.indexOf('.',point)+1);
+                // console.log(chioccia);
+                // console.log(point);
+                // console.log(point2);
+                if ( chioccia > point && point2 > chioccia) {
+                    // console.log('ok');
+                    $(valido).show();
+                    $(invalido).hide();
+                    $(mail).addClass('is-valid');
+                    $(mail).removeClass('is-invalid');
+                }else if(chioccia >= 1 && chioccia < point){
+                    // console.log('ok');
+                    $(valido).show();
+                    $(invalido).hide();
+                    $(mail).addClass('is-valid');
+                    $(mail).removeClass('is-invalid');
+                }else{
+                    // console.log('no');
+                    $(invalido).show();
+                    $(valido).hide();
+                    $(mail).addClass('is-invalid');
+                    $(mail).removeClass('is-valid');
+                }
+
+                return mail,valido,invalido;
+            })
+        };
+        // Validazione mail in fase di registrazione e invio messaggio
+        validationEmail('#email','.mail.valid-feedback','.mail.invalid-feedback');
+        validationEmail('#msg_email','.msg_mail.valid-feedback','.msg_mail.invalid-feedback');
+
+    //validation nella pagina del Create.blade della descrizione
+        $('#title').keyup(function(){
+            var titolo = $('#title').val();
+            if (titolo.length >= 5) {
+                $('.title.valid-feedback').show();
+                $('.title.invalid-feedback').hide();
+                $('#title').addClass('is-valid');
+                $('#title').removeClass('is-invalid');
+            }else{
+                // console.log('no');
+                $('.title.invalid-feedback').show();
+                $('.title.valid-feedback').hide();
+                $('#title').addClass('is-invalid');
+                $('#title').removeClass('is-valid');
+            }
+        });
+
+    //Funzione di validation nella pagina del Create.blade dei numeri di bagni,letti e camere
+    function validationNumber(parametro,valido,invalido,){
+        $(parametro).keyup(function(){
+            var value = ($(parametro).val());
+            // console.log(value);
+            if (value >= 1 && value <= 50) {
+                $(valido).show();
+                $(invalido).hide();
+                $(parametro).addClass('is-valid');
+                $(parametro).removeClass('is-invalid');
+                // $('.needs-validation').addClass('was-validated');
+            }else{
+                $(valido).hide();
+                $(invalido).show();
+                $(parametro).addClass('is-invalid');
+                $(parametro).removeClass('is-valid');
+            }
+
+            return parametro,valido,invalido;
+        })
+
+    }
+        //validation nella pagina del Create.blade dei numeri di bagni,letti e camere
+        validationNumber('#room_qty','.room_qty.valid-feedback','.room_qty.invalid-feedback');
+        validationNumber('#bed_qty','.bed_qnty.valid-feedback','.bed_qnty.invalid-feedback');
+        validationNumber('#bath_qty','.bath_qty.valid-feedback','.bath_qty.invalid-feedback');
+
+        //Funzione di validation nella pagina del Create.blade dei mq
+        function validationMq(parametro,valido,invalido,){
+            $(parametro).keyup(function(){
+                var value = ($(parametro).val());
+                // console.log(value);
+                if (value >= 10 && value <= 500) {
+                    $(valido).show();
+                    $(invalido).hide();
+                    $(parametro).addClass('is-valid');
+                    $(parametro).removeClass('is-invalid');
+                    // $('.needs-validation').addClass('was-validated');
+                }else{
+                    $(valido).hide();
+                    $(invalido).show();
+                    $(parametro).addClass('is-invalid');
+                    $(parametro).removeClass('is-valid');
+                }
+
+                return parametro,valido,invalido;
+            })
+
+        }
+            //validation nella pagina del Create.blade dei numeri dei Mq
+            validationMq('#sq_meters','.sq_meters.valid-feedback','.sq_meters.invalid-feedback');
+
+        // validazione grandezza immagine in create.blade
+        $('#img_uri').bind('change', function() {
+            var a=(this.files[0].size);
+            if(a < 5000000) {
+                // alert("L'immagine selezionata supera i 5MB!!!");
+                $('#crea').removeClass('disabled');
+                $('.img_uri.invalid-feedback').hide();
+                $('.img_uri.valid-feedback').show();
+                $('#crea').show();
+            }else{
+                $('#crea').hide();
+                $('.img_uri.valid-feedback').hide();
+                $('.img_uri.invalid-feedback').show();
+            };
+        });
     //});
 
 });
+
+    // Istruzioni per caricare risultati di ricerca dalla home nella pagina di ricerca
+//     if(href.indexOf('/flats/find') > -1)
+//     {
+//         var address_search = $('#searchFind').val();
+//         $(".fuzzy-find").find(".tt-search-box-input").val(address_search);
+//     }
+// });
+
+
 
 
 // searchbox per la pag create
@@ -327,26 +505,3 @@ function createMap(longitudine, latitudine, title, address) {
     marker.setPopup(popup);
     //marker.togglePopup();
 }
-
-
-
-
-//-----FORM VALIDATION BOOTSTRAP-----------//
-// Example starter JavaScript for disabling form submissions if there are invalid fields
-(function() {
-    'use strict';
-    window.addEventListener('load', function() {
-      // Fetch all the forms we want to apply custom Bootstrap validation styles to
-      var forms = document.getElementsByClassName('needs-validation');
-      // Loop over them and prevent submission
-      var validation = Array.prototype.filter.call(forms, function(form) {
-        form.addEventListener('submit', function(event) {
-          if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-          form.classList.add('was-validated');
-        }, false);
-      });
-    }, false);
-  })();
