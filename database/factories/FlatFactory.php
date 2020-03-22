@@ -9,7 +9,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Flat::class, function (Faker $faker) {
     return [
-        'title' =>('Appartamento in ').$faker->country,
+        'title' =>('Appartamento in ').$faker->randomElement(['Roma','Parigi','Madrid','Barcellona','Berlino','Milano','Napoli','Torino','Venezia','New York','Los Angeles','Amsterdam']),
         'room_qty' => $faker->numberBetween($min = 1, $max = 5) ,
         'bed_qty' => $faker->numberBetween($min = 1, $max = 10) ,
         'bath_qty' => $faker->numberBetween($min = 1, $max = 5) ,
