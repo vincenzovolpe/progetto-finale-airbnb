@@ -14,7 +14,6 @@ class SearchFlatController extends Controller
 
         $lat = $_GET['lat'];
         $lon = $_GET['lon'];
-
         $distance = $_GET['distance'];
 
 
@@ -27,10 +26,8 @@ class SearchFlatController extends Controller
 
                 $checkbox_count = $_GET['checkbox_count'];
 
-                $rooms = $_GET['rooms'];
-                $beds = $_GET['beds'];
-
                 $services_array = explode(',', $services);
+
                 $flats_services = DB::table('flats')
                 ->join('flat_service', 'flat_service.flat_id', '=', 'flats.id')
                 ->selectRaw('id, title, address, img_uri, ( 6371 * acos( cos( radians(?) ) * cos( radians( lat ) ) *

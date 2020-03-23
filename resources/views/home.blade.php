@@ -19,10 +19,9 @@
                                 @csrf
                                 <div class="fuzzy-home">
                                     <label for="">Dove</label>
-                                    {{-- <input type="text" class="form-control" id="inputName" placeholder="Ovunque" required=""> --}}
                                 </div>
                                 <div class="form-group">
-                                    <button id="btn_home" type="submit" class="btn btn-danger btn-lg float-right">Cerca</button>
+                                    <button id="btn_home" type="submit" class="btn btn-danger btn-lg float-right" >Cerca</button>
                                 </div>
                                 <input id="searchHome" type="text" name="address_home" hidden>
                                 <input id="latNumberHome" type="text" name="lat" hidden>
@@ -47,7 +46,6 @@
                         </div>
                         <div class="card-body">
                             <h4 class="card-title">{{ $flat->title }}</h4>
-                            {{-- <p class="card-text">Propietario: {{$flat->user->name}}</p> --}}
                             <a class="btn btn-danger stretched-link" style="position: relative;" href="{{ route('flat.details', $flat->id)}}">Vedi Dettagli</a>
                         </div>
                         <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
