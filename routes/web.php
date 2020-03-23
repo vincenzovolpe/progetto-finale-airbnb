@@ -38,4 +38,8 @@ Route::middleware('auth')->prefix('upr')->namespace('Upr')->name('upr.')->group(
     Route::get('flats/{flat}/sponsor', 'FlatController@sponsor')->name('flats.sponsor');
     // Rotta per gestire il form della sponsorizzazione:
     Route::post('/flats/submit/sponsor', 'FlatController@submitSponsor')->name('flats.submit');
+
+    Route::get('/payment', 'PaymentsController@index')->name('payment.index');
+    Route::get('/payment/process/flat/{id}/sponsor/{sponsor_id}', 'PaymentsController@process')->name('payment.process');
+
 });
