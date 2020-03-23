@@ -12,9 +12,38 @@
 @import '~bootstrap/scss/bootstrap';
 
 #sponsored {
-    background-color:  #cccccc;
+    // background-color:  #cccccc;
 }
 
 #map {
     height: 500px;
+}
+
+#homepicture {
+    height: 100vh;
+    background-image: url('/assets/images/boolbnb-home-hd.jpg');
+    background-size: cover;
+}
+
+#homeLeftBox {
+    padding-top: 10%;
+    .card {
+        padding: 30px;
+    }
+    h6 {
+        margin-top: 20px;
+    }
+}
+
+#home-sponsored {
+    margin: 4em auto;
+}
+
+#home-not-sponsored {
+    margin: 4em auto;
+}
+
+.card-img {
+    object-fit: cover;
+    height: 180px;
 }

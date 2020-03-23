@@ -964,7 +964,7 @@ a.mapboxgl-ctrl-logo.mapboxgl-compact {
   --breakpoint-md: 768px;
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1200px;
-  --font-family-sans-serif: "Nunito", sans-serif;
+  --font-family-sans-serif: "Istok Web", sans-serif;
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
@@ -996,13 +996,13 @@ section {
 
 body {
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: "Istok Web", sans-serif;
   font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.6;
   color: #212529;
   text-align: left;
-  background-color: #f8fafc;
+  background-color: #ffffff;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -1442,7 +1442,7 @@ mark,
 
 .img-thumbnail {
   padding: 0.25rem;
-  background-color: #f8fafc;
+  background-color: #ffffff;
   border: 1px solid #dee2e6;
   border-radius: 0.25rem;
   max-width: 100%;
@@ -5195,15 +5195,15 @@ input[type=button].btn-block {
 }
 
 .custom-range:focus::-webkit-slider-thumb {
-  box-shadow: 0 0 0 1px #f8fafc, 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
+  box-shadow: 0 0 0 1px #ffffff, 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
 }
 
 .custom-range:focus::-moz-range-thumb {
-  box-shadow: 0 0 0 1px #f8fafc, 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
+  box-shadow: 0 0 0 1px #ffffff, 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
 }
 
 .custom-range:focus::-ms-thumb {
-  box-shadow: 0 0 0 1px #f8fafc, 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
+  box-shadow: 0 0 0 1px #ffffff, 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
 }
 
 .custom-range::-moz-focus-outer {
@@ -5409,8 +5409,8 @@ input[type=button].btn-block {
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
   color: #495057;
-  background-color: #f8fafc;
-  border-color: #dee2e6 #dee2e6 #f8fafc;
+  background-color: #ffffff;
+  border-color: #dee2e6 #dee2e6 #ffffff;
 }
 
 .nav-tabs .dropdown-menu {
@@ -7306,7 +7306,7 @@ a.close.disabled {
   z-index: 1070;
   display: block;
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: "Istok Web", sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.6;
@@ -7431,7 +7431,7 @@ a.close.disabled {
   z-index: 1060;
   display: block;
   max-width: 276px;
-  font-family: "Nunito", sans-serif;
+  font-family: "Istok Web", sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.6;
@@ -11812,11 +11812,39 @@ a.text-dark:focus {
   }
 }
 
-#sponsored {
-  background-color: #cccccc;
-}
-
 #map {
   height: 500px;
+}
+
+#homepicture {
+  height: 100vh;
+  background-image: url("/assets/images/boolbnb-home-hd.jpg");
+  background-size: cover;
+}
+
+#homeLeftBox {
+  padding-top: 10%;
+}
+
+#homeLeftBox .card {
+  padding: 30px;
+}
+
+#homeLeftBox h6 {
+  margin-top: 20px;
+}
+
+#home-sponsored {
+  margin: 4em auto;
+}
+
+#home-not-sponsored {
+  margin: 4em auto;
+}
+
+.card-img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 180px;
 }
 

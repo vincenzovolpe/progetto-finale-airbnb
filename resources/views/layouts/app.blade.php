@@ -18,7 +18,8 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Istok+Web:400,700&display=swap" rel="stylesheet">
+
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -31,7 +32,11 @@
 </head>
 <body>
         <main>
-            @include('layouts.partials.publicnavbar')
+            <div id="homepicture" class="container-fluid">
+                @include('layouts.partials.publicnavbar')
+                @yield('searchbox')
+                @yield('login-content')
+            </div>
             @yield('content')
         </main>
     </div>
