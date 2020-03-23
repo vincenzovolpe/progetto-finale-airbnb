@@ -12,9 +12,6 @@
                     <input id="searchFind" type="text" name="address_search" value="{{ $address }}" hidden>
                     <input id="latNumberFind" type="text" name="lat" value="{{ $lat }}" hidden>
                     <input id="lonNumberFind" type="text" name="lon" value="{{ $lon }}" hidden>
-                    {{--<input id="distanceFind" type="text" name="distance" value="{{ $distance }}" hidden>
-                    <input id="roomsFind" type="text" name="rooms" value="{{ $rooms }}" hidden>
-                    <input id="bedsFind" type="text" name="beds" value="{{ $beds }}" hidden> --}}
 
                     <h2 class="text-center">Filtri di ricerca</h2>
                     <!-- Inserimento numero di stanze -->
@@ -37,7 +34,7 @@
                         <label for="{{$service->name}}"></label>{{$service->name}}<br>
                     @endforeach
 
-                    <button id="btn_find" class="btn btn-danger btn-lg float-right" type="button">Cerca</button>
+                    <button id="btn_find" class="btn btn-danger btn-lg float-right" name="btn_find" type="submit">Cerca</button>
                 </div>
             </div>
         </div>

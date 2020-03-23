@@ -47,30 +47,25 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 var searchOptions = {
     key: 'Y2cMr97XoBZZKKVXgUS844gofkPiZFnA',
     language: 'it-IT',
-    limit: 5
+    limit: 5,
 };
-
-
-// Options for the autocomplete service
-var autocompleteOptions = {
-    key: 'Y2cMr97XoBZZKKVXgUS844gofkPiZFnA',
-    language: 'it-IT' };
 
 var searchBoxOptions = {
     minNumberOfCharacters: 0,
     searchOptions: searchOptions,
-    autocompleteOptions: autocompleteOptions
+    placeholder: 'Ovunque',
+    noResultsMessage: 'Nessun risultato trovato'
 };
 
 // creazione dell'oggetto searchBox generico
 const ttSearchBox = new SearchBox(services, searchBoxOptions);
 
-// document.querySelector('.fuzzy').appendChild(ttSearchBox.getSearchBoxHTML());
 
 
 $(document).ready(function(){
-    // inserisco il placeholder in tutte le searchbox
-    $(".tt-search-box-input").attr("placeholder", "Ovunque");
+
+    // Imposto l'input della searchbox a required
+    $('.tt-search-box-input').prop('required',true);
 
     // Variabili da passare a createMap
     var lonNumber = $('#lonNumber').val();
@@ -82,70 +77,40 @@ $(document).ready(function(){
     $("#address-edit").find(".tt-search-box-input").val(address);
     $(".tt-search-box-input").attr('name', 'address');
 
-    // Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
-    var href = window.location.href;
     // Creo la mappa solo quando mi trovo  all'interno della pagina di dettaglio dell'appartamento
+    var href = window.location.href;
     if(href.indexOf('/flats/details') > -1)
     {
-            createMap(lonNumber, latNumber, title, address);
+        // Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
+        createMap(lonNumber, latNumber, title, address);
     }
-
-    //-----FORM VALIDATION BOOTSTRAP-----------//
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function() {
-        'use strict';
-        window.addEventListener('load', function() {
-          // Fetch all the forms we want to apply custom Bootstrap validation styles to
-          var forms = document.getElementsByClassName('needs-validation');
-          // Loop over them and prevent submission
-          var validation = Array.prototype.filter.call(forms, function(form) {
-            form.addEventListener('submit', function(event) {
-              if (form.checkValidity() === false) {
-                event.preventDefault();
-                event.stopPropagation();
-              }
-              form.classList.add('was-validated');
-            }, false);
-          });
-        }, false);
-      })();
-
-    // Funzione di validazione del nome e cognome in fase di registrazione
-    function validation(parametro,valido,invalido){
-        $(parametro).keyup(function(){
-            var value = ($(parametro).val());
-            // console.log(value);
-            if (value.length >= 3 && value.length <= 20) {
-                $(valido).show();
-                $(invalido).hide();
-                $(parametro).addClass('is-valid');
-                $(parametro).removeClass('is-invalid');
-                // $('.needs-validation').addClass('was-validated');
-            }else{
-                $(valido).hide();
-                $(invalido).show();
-                $(parametro).addClass('is-invalid');
-                $(parametro).removeClass('is-valid');
-            }
-            return parametro,valido,invalido;
-        })
-
-    }
-    // Validazione Nome e cognome in fase di registrazione
-    validation('#name','.name.valid-feedback','.name.invalid-feedback');
-    validation('#surname','.surname.valid-feedback','.surname.invalid-feedback');
 
     // Istruzioni per caricare risultati di ricerca dalla home nella pagina di ricerca
-    // if(href.indexOf('/flats/find') > -1)
-        //alert('Ho cliccato il bottone');
-        var address_search = $('#searchFind').val();
-        var address_edit = $('#address').val();
-        $(".fuzzy-find").find(".tt-search-box-input").val(address_search);
-        $(".fuzzy-edit").find(".tt-search-box-input").val(address_edit);
+    var address_search = $('#searchFind').val();
+    var address_edit = $('#address').val();
+    $(".fuzzy-find").find(".tt-search-box-input").val(address_search);
+    $(".fuzzy-edit").find(".tt-search-box-input").val(address_edit);
 
-    // Chiamata ajax con i dati della searchbar della HomePage
+    // // Se digito all'interno delle searchbox in home o in find il bottone si abilita
+    // $(".tt-search-box-input").on('keyup', function (e) {
+    //     if (e.keyCode === 13 || $(this).val().length) {
+    //         $('#btn_home').attr('disabled', false);
+    //         $('#btn_find').attr('disabled', false);
+    //     } else {
+    //         //Disattivo i bottoni di ricerca nel caso in cui ho cancellato l'input anche dopo aver selezionato una voce dall'autocmpletamento
+    //         $('#btn_home').attr('disabled', 'disabled');
+    //         $('#btn_find').attr('disabled', 'disabled');
+    //     }
+    // });
+
+    // Chiamata Ajax con i dati della Searchbar della HomePage
     if(href.indexOf('/flats/find') > -1)
     {
+        // if($('.tt-search-box-input').val().length){
+        //     console.log($('.tt-search-box-input').val().length);
+        //     $('#btn_find').attr('disabled', false);
+        // }
+
         var lat = $('#latNumberFind').val();
         var lon = $('#lonNumberFind').val();
         var distance = 20;
@@ -184,20 +149,14 @@ $(document).ready(function(){
         })
     }
 
+
     // Chiamata Ajax nella pagina Find con eventuali filtri di Ricerca
-    $('#btn_find').click(function(){
-        //$('#flat_search').on('click', '#btn_find', function(e) {
-
-            //e.preventDefault();
-
+    $('#btn_find').click(function(event){
+            
             var lat = $('#latNumberFind').val();
-
             var lon = $('#lonNumberFind').val();
-
             var distance = $('#km_radius').val();
-
             var rooms = $('#room_qty').val();
-
             var beds = $('#bed_qty').val();
 
 
@@ -220,14 +179,10 @@ $(document).ready(function(){
             }
             console.log(checkbox_selected);
             console.log(checkbox_count);
-            //var xhr = new XMLHttpRequest();
 
             $.ajax({
                 url: 'http://localhost:8000/api/flats',
                 method: 'GET',
-                // xhr: function() {
-                //      return xhr;
-                //     },
                 data:  {
                     'lat': lat,
                     'lon': lon,
@@ -236,11 +191,9 @@ $(document).ready(function(){
                     'beds': beds,
                     'services': checkbox_selected,
                     'checkbox_count': checkbox_count,
-                    //'url': xhr.responseURL
                 },
 
                 success: function(data) {
-                        //console.log(xhr.responseURL);
                         console.log(data.result);
                         $('#card_container').empty();
 
@@ -264,6 +217,53 @@ $(document).ready(function(){
             })
 
         });
+
+
+            //-----FORM VALIDATION BOOTSTRAP-----------//
+            // Example starter JavaScript for disabling form submissions if there are invalid fields
+            (function() {
+                'use strict';
+                window.addEventListener('load', function() {
+                  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                  var forms = document.getElementsByClassName('needs-validation');
+                  // Loop over them and prevent submission
+                  var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                      if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                      }
+                      form.classList.add('was-validated');
+                    }, false);
+                  });
+                }, false);
+              })();
+
+            // Funzione di validazione del nome e cognome in fase di registrazione
+            function validation(parametro,valido,invalido){
+                $(parametro).keyup(function(){
+                    var value = ($(parametro).val());
+                    // console.log(value);
+                    if (value.length >= 3 && value.length <= 20) {
+                        $(valido).show();
+                        $(invalido).hide();
+                        $(parametro).addClass('is-valid');
+                        $(parametro).removeClass('is-invalid');
+                        // $('.needs-validation').addClass('was-validated');
+                    }else{
+                        $(valido).hide();
+                        $(invalido).show();
+                        $(parametro).addClass('is-invalid');
+                        $(parametro).removeClass('is-valid');
+                    }
+                    return parametro,valido,invalido;
+                })
+
+            }
+            // Validazione Nome e cognome in fase di registrazione
+            validation('#name','.name.valid-feedback','.name.invalid-feedback');
+            validation('#surname','.surname.valid-feedback','.surname.invalid-feedback');
+
 
         // validation delle date in fase di registrazione
 
@@ -412,17 +412,6 @@ $(document).ready(function(){
 
 });
 
-    // Istruzioni per caricare risultati di ricerca dalla home nella pagina di ricerca
-//     if(href.indexOf('/flats/find') > -1)
-//     {
-//         var address_search = $('#searchFind').val();
-//         $(".fuzzy-find").find(".tt-search-box-input").val(address_search);
-//     }
-// });
-
-
-
-
 // searchbox per la pag create
 const searchBoxCreate = ttSearchBox.getSearchBoxHTML();
 $('.fuzzy-create').append(searchBoxCreate);
@@ -441,12 +430,58 @@ $('.fuzzy-find').append(searchBoxFind);
 
 // Evento che si verifica quando seleziono una voce dalla lista dell'autocompletamento nella searchbox
 ttSearchBox.on('tomtom.searchbox.resultselected', handleResultSelection);
+ttSearchBox.on('tomtom.searchbox.resultscleared', handleResultsCleared);
+ttSearchBox.on('tomtom.searchbox.resultsfound', handleResultsFound);
 
+
+function handleResultsCleared() {
+    // Disattivo i bottoni di ricerca al click sulla x anche dopo aver selezionato una voce dall'autocmpletamento
+    // if ($('.tt-search-box-input').val().length == 0) {
+    //     $('#btn_home').attr('disabled', 'disabled');
+    //     $('#btn_find').attr('disabled', 'disabled');
+    // }
+}
+
+function handleResultsFound(event) {
+            // Display fuzzySearch results if request was triggered by pressing enter
+            //if (event.data.results.fuzzySearch && event.data.metadata.triggeredBy === 'submit') {
+            if (event.data.results.fuzzySearch) {
+                var results = event.data.results.fuzzySearch.results;
+                console.log(results[0]);
+                if (results.length === 0) {
+                    //$('.tt-search-box-input').val('');
+                    // $('#btn_home').attr('disabled', 'disabled');
+                    // $('#btn_find').attr('disabled', 'disabled');
+                }
+
+                    var longitudine = results[0].position.lng;
+                    var latitudine = results[0].position.lat;
+
+                    // coordinate per la pagina details
+                    $('#lat').val(latitudine);
+                    $('#lon').val(longitudine);
+
+                    // coordinate per la home
+                    $('#latNumberHome').val(latitudine);
+                    $('#lonNumberHome').val(longitudine);
+
+                    // coordinate per la find
+                    $('#latNumberFind').val(latitudine);
+                    $('#lonNumberFind').val(longitudine);
+
+                    // indirizzo inserito nella searchbar in home (lo assegno al campo nascosto dell'indirizzo in home)
+                    $('#searchHome').val($('.tt-search-box-input').val());
+            }
+        }
 
 function handleResultSelection(event) {
     if (isFuzzySearchResult(event)) {
-        // Display selected result on the map
+        // //Rendo cliccabili i bottoni Cerca della Home e della Find solo se le searchbox sono valorizzate
+        // $('#btn_home').attr('disabled', false);
+        // $('#btn_find').attr('disabled', false);
+
         var result = event.data.result;
+        console.log(result);
         var longitudine = result.position.lng;
         var latitudine = result.position.lat;
 
@@ -461,10 +496,9 @@ function handleResultSelection(event) {
         // coordinate per la find
         $('#latNumberFind').val(latitudine);
         $('#lonNumberFind').val(longitudine);
-        //console.log($('#latNumberFind').val());
+
         // indirizzo inserito nella searchbar in home (lo assegno al campo nascosto dell'indirizzo in home)
         $('#searchHome').val($('.tt-search-box-input').val());
-        //console.log($('#searchHome').val());
 
     }
 }
