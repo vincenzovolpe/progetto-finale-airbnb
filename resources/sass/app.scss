@@ -47,3 +47,26 @@
     object-fit: cover;
     height: 180px;
 }
+
+.card-img-overlay {
+    .fa-star {
+        font-size: 1.4em;
+        color: $yellow;
+    }
+}
+
+.card-columns {
+    @include media-breakpoint-only(sm) {
+        column-count: 2;
+    }
+    @include media-breakpoint-only(md) {
+        column-count: 2;
+    }
+    @include media-breakpoint-only(lg) {
+        column-count: 3;
+    }
+}
+
+#flat-det h3 {
+    margin-top: 30px;
+}

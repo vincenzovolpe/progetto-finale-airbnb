@@ -34,7 +34,7 @@
 </head>
 <body>
         <main>
-            <div id="homepicture" class="container-fluid">
+            <div id="short-head" class="container-fluid">
                 @include('layouts.partials.publicnavbar')
                 @yield('searchbox')
                 @yield('login-content')
