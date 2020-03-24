@@ -67274,7 +67274,45 @@ $(document).ready(function () {
         }
       }
     });
-  } // Chiamata Ajax nella pagina Find con eventuali filtri di Ricerca
+  }
+
+  (function ($) {
+    var isValid = null;
+    var form = $('#form_find');
+    var submitButton = form.find('button[type="submit"]');
+    var findButton = submitButton.filter('[name="btn_find"]'); // //submit form behavior
+    // var submitForm = function(e){
+    //     console.log('form submit');
+    //     //prevent form from submitting valid or invalid
+    //     e.preventDefault();
+    //     //user clicked and the form was not valid
+    //     if(isValid === false){
+    //         isValid = null;
+    //         return false;
+    //     }
+    //     //user pressed enter, process as if they clicked save instead
+    //     findButton.trigger('click');
+    // };
+    //override submit button behavior
+
+    var submitClick = function submitClick(e) {
+      //Test form validitiy (HTML5) and store it in a global variable so both functions can use it
+      isValid = form[0].checkValidity();
+
+      if (false === isValid) {
+        //allow the browser's default submit event behavior
+        return true;
+      } //prevent default behavior
+
+
+      e.preventDefault();
+    }; //override submit form event
+
+
+    form.submit(submitForm); //override submit button click event
+
+    submitButton.click(submitClick);
+  })(jQuery); // Chiamata Ajax nella pagina Find con eventuali filtri di Ricerca
 
 
   $('#btn_find').click(function (event) {
@@ -67762,8 +67800,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/boolean-code/progetto-finale-airbnb/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/boolean-code/progetto-finale-airbnb/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\MAMP\htdocs\progetto-finale-airbnb\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\progetto-finale-airbnb\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
