@@ -46,7 +46,7 @@
                         <input id="latNumberFind" type="text" name="lat" value="{{ $lat }}" hidden>
                         <input id="lonNumberFind" type="text" name="lon" value="{{ $lon }}" hidden>
                         <div class="form-group col-md-6">
-                            <button id="btn_find" class="btn btn-primary float-right" name="btn_find">Cerca</button>
+                            <button  type="button" name="btn_find"><a id="btn_find" href="#">Cerca</a></button>
                             <br>
                         </div>
                     </form>
