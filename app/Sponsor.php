@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Sponsor extends Model
 {
     protected $fillable = [
-        'hours', 'price',
+        'hours', 'price'
     ];
 
     // Funzione che collega molti sponsor a molti flat

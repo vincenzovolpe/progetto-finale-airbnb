@@ -6,7 +6,7 @@
             <div class="col-12">
                 <div id="flat_search">
                     <h2 class="text-left">Ricerca avanzata</h2>
-                    <form>
+                    <form id="form_find">
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <div class="fuzzy-find form-group">
@@ -46,7 +46,7 @@
                         <input id="latNumberFind" type="text" name="lat" value="{{ $lat }}" hidden>
                         <input id="lonNumberFind" type="text" name="lon" value="{{ $lon }}" hidden>
                         <div class="form-group col-md-6">
-                            <button  type="button" name="btn_find"><a id="btn_find" href="#">Cerca</a></button>
+                            <button id="btn_find" class="btn btn-success btn-lg float-right" type="submit" name="btn_find">Cerca</button>
                             <br>
                         </div>
                     </form>
