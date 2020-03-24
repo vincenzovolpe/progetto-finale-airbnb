@@ -47,9 +47,14 @@
             <!-- form user info -->
                 <div class="card card-outline-secondary">
                     <div class="card-header">
+                        {{-- @if (Auth::user() && Auth::user()->id == $flat->user->id)
+                            <h3 class="mb-0">Sei il propietario di questo appartamento</h3>
+                    </div> --}}
+                        {{-- @else --}}
                         <h3 class="mb-0">Contatta il propietario</h3>
                     </div>
                     <div class="card-body">
+
                         <form class="form" action="{{route('send.mail')}}" method="post" role="form" autocomplete="on">
                         @csrf
                             <fieldset
@@ -101,8 +106,8 @@
                                 <input id="lonNumber" type="text" name="lat" value="{{$flat->lat}}" hidden>
                                 <button type="submit" class="btn btn-danger btn-lg float-left">Invia messaggio</button>
                             </fieldset>
-
                         </form>
+                    {{-- @endif --}}
                     </div>
                 </div>
                 <!-- /form user info -->

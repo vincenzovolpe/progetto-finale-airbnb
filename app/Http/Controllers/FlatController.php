@@ -26,12 +26,14 @@ class FlatController extends Controller
         $lat = $request['lat'];
         $lon = $request['lon'];
         $address = $request['address_home'];
+        $title = $request['title'];
         $services = Service::all();
 
         return view('find_flat', [
             'lat' => $lat,
             "lon" => $lon,
             'address'=> $address,
+            'title' => $title,
             'services' => $services,
         ]);
     }

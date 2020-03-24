@@ -28,7 +28,7 @@ class SearchFlatController extends Controller
 
                 $services_array = explode(',', $services);
 
-                $flats_services = DB::table('flats')
+                $flats = DB::table('flats')
                 ->join('flat_service', 'flat_service.flat_id', '=', 'flats.id')
                 ->selectRaw('id, title, address, img_uri, ( 6371 * acos( cos( radians(?) ) * cos( radians( lat ) ) *
                                cos( radians( lon ) - radians(?) ) + sin( radians(?) ) *
@@ -44,12 +44,12 @@ class SearchFlatController extends Controller
                 ->orderBy('distance')
                 ->get();
 
-                return response()->json(
-                    [
-                        'success' => true,
-                        'result' => $flats_services
-                    ]
-                );
+                // return response()->json(
+                //     [
+                //         'success' => true,
+                //         'result' => $flats_services
+                //     ]
+                // );
             } else {
 
                 $flats = DB::select( DB::raw("
@@ -69,11 +69,20 @@ class SearchFlatController extends Controller
             "));
         }
 
-        return response()->json(
-            [
-                'success' => true,
-                'result' => $flats
-            ]
-        );
+        if (count($flats) > 0) {
+            return response()->json(
+                [
+                    'success' => true,
+                    'result' => $flats
+                ]
+            );
+        } else {
+            return response()->json(
+                [
+                    'success' => false,
+                    'result' => 'La ricerca non ha prodotti risultati!'
+                ]
+            );
+        }
     }
 }

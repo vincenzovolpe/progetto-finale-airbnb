@@ -59,6 +59,7 @@
                         @else
                             <p>Non sono presenti messaggi per questo appartamento</p>
                         @endif
+                        <p><strong>Visite ricevute: </strong> {{$flat->view}}</p>
                     </div>
                 </div>
             </div>

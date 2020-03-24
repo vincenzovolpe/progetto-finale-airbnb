@@ -67255,19 +67255,22 @@ $(document).ready(function () {
         'distance': distance
       },
       success: function success(data) {
-        console.log(data.result);
-        $('#card_container').empty();
+        if (data.success) {
+          $('#card_container').empty();
 
-        for (var i = 0; i < data.result.length; i++) {
-          var template_html = $('#card_template').html();
-          var template_function = Handlebars.compile(template_html);
-          var variables = {
-            'img_uri': data.result[i].img_uri,
-            'title': data.result[i].title,
-            'flat_details': data.result[i].id
-          };
-          var html = template_function(variables);
-          $('.card-columns').append(html);
+          for (var i = 0; i < data.result.length; i++) {
+            var template_html = $('#card_template').html();
+            var template_function = Handlebars.compile(template_html);
+            var variables = {
+              'img_uri': data.result[i].img_uri,
+              'title': data.result[i].title,
+              'flat_details': data.result[i].id
+            };
+            var html = template_function(variables);
+            $('.card-columns').append(html);
+          }
+        } else {
+          $('.card-columns').append('La ricerca non ha trovato nessun appartamento!');
         }
       }
     });
@@ -67314,19 +67317,23 @@ $(document).ready(function () {
         'checkbox_count': checkbox_count
       },
       success: function success(data) {
-        console.log(data.result);
-        $('#card_container').empty();
+        if (data.success) {
+          $('#card_container').empty();
 
-        for (var i = 0; i < data.result.length; i++) {
-          var template_html = $('#card_template').html();
-          var template_function = Handlebars.compile(template_html);
-          var variables = {
-            'img_uri': data.result[i].img_uri,
-            'title': data.result[i].title,
-            'flat_details': data.result[i].id
-          };
-          var html = template_function(variables);
-          $('.card-columns').append(html);
+          for (var i = 0; i < data.result.length; i++) {
+            var template_html = $('#card_template').html();
+            var template_function = Handlebars.compile(template_html);
+            var variables = {
+              'img_uri': data.result[i].img_uri,
+              'title': data.result[i].title,
+              'flat_details': data.result[i].id
+            };
+            var html = template_function(variables);
+            $('.card-columns').append(html);
+          }
+        } else {
+          $('#card_container').empty();
+          $('.card-columns').append('<p>La ricerca non ha trovato nessun appartamento!<p>');
         }
       }
     });
@@ -67755,8 +67762,13 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 __webpack_require__(/*! /Users/umbertown/Desktop/Atom - Boolean/GIT/progetto-finale-airbnb/resources/js/app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! /Users/umbertown/Desktop/Atom - Boolean/GIT/progetto-finale-airbnb/resources/sass/app.scss */"./resources/sass/app.scss");
+=======
+__webpack_require__(/*! C:\MAMP\htdocs\progetto-finale-airbnb\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\progetto-finale-airbnb\resources\sass\app.scss */"./resources/sass/app.scss");
+>>>>>>> origin/master
 
 
 /***/ })
