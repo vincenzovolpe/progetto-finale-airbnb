@@ -8,7 +8,7 @@
 
 @section('content')
     <div id="flat-det" class="container">
-        <h2 class="text-center">{{$flat->title}}</h2>
+        <h2 id="title" class="text-center">{{$flat->title}}</h2>
         <div class="row">
             <div class="col-12">
                 <img class="d-block w-100" src="{{asset('storage/' .$flat->img_uri)}}" alt="flat picture">
@@ -22,7 +22,7 @@
                         <tr>
                             <td><i class="fas fa-map-marker-alt"></i></td>
                             <td>Indirizzo</td>
-                            <td>{{$flat->address}}</td>
+                            <td id="address">{{$flat->address}}</td>
                         </tr>
                         <tr>
                             <td><i class="fas fa-door-open"></i></td>
@@ -41,20 +41,28 @@
                         </tr>
                     </tbody>
                   </table>
-                <h3>Elenco servizi</h3>
+                @if(($flat->services)->isNotEmpty())
+                    <h3>Elenco servizi</h3>
+                        @foreach ($flat->services as $service)
+                            <i class="{{ $service->fa_icon }}"></i>  {{$service->name}} </br>
+                        @endforeach
+                @endif
             </div>
             <div class="col-6">
             <!-- form user info -->
                 <div class="card card-outline-secondary">
                     <div class="card-header">
-                        {{-- @if (Auth::user() && Auth::user()->id == $flat->user->id)
+                    @if (Auth::user() && Auth::user()->id == $flat->user->id)
                             <h3 class="mb-0">Sei il propietario di questo appartamento</h3>
-                    </div> --}}
-                        {{-- @else --}}
-                        <h3 class="mb-0">Contatta il propietario</h3>
+                    @else
+                            <h3 class="mb-0">Contatta il propietario</h3>
+                    @endif
                     </div>
+                    @if (Auth::user() && Auth::user()->id == $flat->user->id)
+                            <div class="card-body not_visible">
+                    @else
                     <div class="card-body">
-
+                    @endif
                         <form class="form" action="{{route('send.mail')}}" method="post" role="form" autocomplete="on">
                         @csrf
                             <fieldset
