@@ -158,19 +158,19 @@ $(document).ready(function(){
     var submitButton = form.find('button[type="submit"]')
     var findButton = submitButton.filter('[name="btn_find"]');
 
-    // //submit form behavior
-    // var submitForm = function(e){
-    //     console.log('form submit');
-    //     //prevent form from submitting valid or invalid
-    //     e.preventDefault();
-    //     //user clicked and the form was not valid
-    //     if(isValid === false){
-    //         isValid = null;
-    //         return false;
-    //     }
-    //     //user pressed enter, process as if they clicked save instead
-    //     findButton.trigger('click');
-    // };
+    //submit form behavior
+    var submitForm = function(e){
+        console.log('form submit');
+        //prevent form from submitting valid or invalid
+        e.preventDefault();
+        //user clicked and the form was not valid
+        if(isValid === false){
+            isValid = null;
+            return false;
+        }
+        //user pressed enter, process as if they clicked save instead
+        findButton.trigger('click');
+    };
 
     //override submit button behavior
     var submitClick = function(e){
