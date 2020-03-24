@@ -1,48 +1,58 @@
-@extends('layouts.app')
+@extends('layouts.short')
 
 @section('content')
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <div id="flat_search">
-                    <h1 class="text-center">Ricerca avanzata appartamenti</h1>
-                    <div class="fuzzy-find">
+                    <h2 class="text-left">Ricerca avanzata</h2>
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <div class="fuzzy-find form-group">
+                                </div>
+                            </div>
+                        </div>
+                        <h4 class="text-left">Filtra i risultati</h4>
+                        <div class="form-row">
+                            <div class="form-group col-md-2">
+                                <!-- Inserimento numero di stanze -->
+                                <label for="room_qty" class="text-md-right">Numero stanze</label>
+                                <input id="room_qty" type="number" name="room_qty" class="form-control">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <!-- Inserimento numero di letti -->
+                                <label for="bed_qty" class="text-md-right">Numero Letti</label>
+                                <input id="bed_qty" type="number" name="bed_qty" class="form-control">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <!-- Inserimento distanza in km -->
+                                <label for="km_radius" class="text-md-right">Raggio di ricerca</label>
+                                <input id="km_radius" type="range" name="km_radius" min="20" max="100" value="20" onchange="distance.value = this.value" class="form-control">
+                                <output id="distance"></output>Km<br>
+                            </div>
+                        </div>
 
-                    </div>
-                    <input id="searchFind" type="text" name="address_search" value="{{ $address }}" hidden>
-                    <input id="latNumberFind" type="text" name="lat" value="{{ $lat }}" hidden>
-                    <input id="lonNumberFind" type="text" name="lon" value="{{ $lon }}" hidden>
-
-                    <h2 class="text-center">Filtri di ricerca</h2>
-                    <!-- Inserimento numero di stanze -->
-                    <label for="room_qty" class="col-form-label text-md-right">Numero stanze</label>
-                    <input id="room_qty" type="number" name="room_qty">
-                    <!-- Inserimento numero di letti -->
-                    <label for="bed_qty" class="col-form-label text-md-right">Numero Letti</label>
-                    <input id="bed_qty" type="number" name="bed_qty">
-                    <br>
-                    <!-- Inserimento distanza in km -->
-                    <label for="km_radius" class="col-form-label text-md-right">Raggio di ricerca in km</label>
-                    <input id="km_radius" type="range" name="km_radius" min="20" max="100" value="20" onchange="distance.value = this.value">
-                    <output id="distance"></output>Km
-                    <br>
-                    <!-- Servizi Aggiuntivi -->
-                    <label for="">Servizi opzionali</label>
-                    <br>
-                    @foreach ($services as $service)
-                        <input type="checkbox" id="{{$service->id}}" name="check_services" value="{{$service->id}}">
-                        <label for="{{$service->name}}"></label>{{$service->name}}<br>
-                    @endforeach
-
-                    <button id="btn_find" class="btn btn-danger btn-lg float-right" name="btn_find" type="submit">Cerca</button>
+                        <div class="form-group form-check col-md-6">
+                            <!-- Servizi Aggiuntivi -->
+                            <label>Servizi disponibili</label> <br>
+                            @foreach ($services as $service)
+                            <input type="checkbox" id="{{$service->id}}" class="form-check-input" name="check_services" value="{{$service->id}}">
+                            <label class="form-check-label" for="{{$service->name}}"></label>{{$service->name}}<br>
+                            @endforeach
+                        </div>
+                        <!-- campi nascosti necessari -->
+                        <input id="searchFind" type="text" name="address_search" value="{{ $address }}" hidden>
+                        <input id="latNumberFind" type="text" name="lat" value="{{ $lat }}" hidden>
+                        <input id="lonNumberFind" type="text" name="lon" value="{{ $lon }}" hidden>
+                        <div class="form-group col-md-6">
+                            <button id="btn_find" class="btn btn-primary float-right" name="btn_find">Cerca</button>
+                            <br>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-        {{-- <div class="row">
-            <div class="col-12">
-
-            </div>
-        </div> --}}
         <div class="row">
             <!-- Card package -->
             <div id="card_container" class="card-columns">
