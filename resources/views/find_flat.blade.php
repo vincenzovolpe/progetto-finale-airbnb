@@ -12,6 +12,8 @@
                     <input id="searchFind" type="text" name="address_search" value="{{ $address }}" hidden>
                     <input id="latNumberFind" type="text" name="lat" value="{{ $lat }}" hidden>
                     <input id="lonNumberFind" type="text" name="lon" value="{{ $lon }}" hidden>
+                    <input id="title" type="text" name="title" value="{{ $title }}" hidden>
+                    <input id="address" type="text" name="address" value="{{ $address }}" hidden>
 
                     <h2 class="text-center">Filtri di ricerca</h2>
                     <!-- Inserimento numero di stanze -->
@@ -63,7 +65,6 @@
                 <h4 class="card-title">@{{ title }}</h4>
                 {{-- <p class="card-text">Propietario: {{$flat->user->name}}</p> --}}
                 <a class="btn btn-danger stretched-link" style="position: relative;" href="{{ url('flats/details/')}}/@{{ flat_details }}">Vedi Dettagli</a>
-
             </div>
         </div>
     </script>

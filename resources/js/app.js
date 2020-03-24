@@ -126,25 +126,29 @@ $(document).ready(function(){
             },
 
             success: function(data) {
-                    console.log(data.result);
-                    $('#card_container').empty();
+                    if (data.success) {
+                        $('#card_container').empty();
 
-                    for (var i = 0; i < data.result.length; i++) {
+                        for (var i = 0; i < data.result.length; i++) {
 
-                        var template_html = $('#card_template').html();
+                            var template_html = $('#card_template').html();
 
-                        var template_function = Handlebars.compile(template_html);
+                            var template_function = Handlebars.compile(template_html);
 
-                        var variables = {
-                            'img_uri': data.result[i].img_uri,
-                            'title': data.result[i].title,
-                            'flat_details': data.result[i].id
+                            var variables = {
+                                'img_uri': data.result[i].img_uri,
+                                'title': data.result[i].title,
+                                'flat_details': data.result[i].id
+                            }
+
+                            var html = template_function(variables);
+
+                            $('.card-columns').append(html);
                         }
-
-                        var html = template_function(variables);
-
-                        $('.card-columns').append(html);
+                    } else {
+                        $('.card-columns').append('La ricerca non ha trovato nessun appartamento!');
                     }
+
             }
         })
     }
@@ -152,7 +156,7 @@ $(document).ready(function(){
 
     // Chiamata Ajax nella pagina Find con eventuali filtri di Ricerca
     $('#btn_find').click(function(event){
-            
+
             var lat = $('#latNumberFind').val();
             var lon = $('#lonNumberFind').val();
             var distance = $('#km_radius').val();
@@ -194,24 +198,30 @@ $(document).ready(function(){
                 },
 
                 success: function(data) {
-                        console.log(data.result);
-                        $('#card_container').empty();
+                        if (data.success) {
+                            $('#card_container').empty();
 
-                        for (var i = 0; i < data.result.length; i++) {
+                            for (var i = 0; i < data.result.length; i++) {
 
-                            var template_html = $('#card_template').html();
+                                var template_html = $('#card_template').html();
 
-                            var template_function = Handlebars.compile(template_html);
+                                var template_function = Handlebars.compile(template_html);
 
-                            var variables = {
-                                'img_uri': data.result[i].img_uri,
-                                'title': data.result[i].title,
-                                'flat_details': data.result[i].id
+                                var variables = {
+                                    'img_uri': data.result[i].img_uri,
+                                    'title': data.result[i].title,
+                                    'flat_details': data.result[i].id
+                                }
+
+                                var html = template_function(variables);
+
+                                $('.card-columns').append(html);
                             }
+                        } else {
 
-                            var html = template_function(variables);
+                            $('#card_container').empty();
 
-                            $('.card-columns').append(html);
+                            $('.card-columns').append('<p>La ricerca non ha trovato nessun appartamento!<p>');
                         }
                 }
             })
