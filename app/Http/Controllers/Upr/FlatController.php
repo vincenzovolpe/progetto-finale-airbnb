@@ -204,7 +204,9 @@ class FlatController extends Controller
             Storage::delete($img_to_delete);
         }
         $flat->delete();
-        return redirect()->route('upr.flats.index');
+        return redirect()->route('upr.flats.index')
+                         //->with('success','Appartamento cancellato correttamente');
+        //return back();
     }
 
     // Funzione per andare alla pagina di sponsorizzazione del singolo appartamento!

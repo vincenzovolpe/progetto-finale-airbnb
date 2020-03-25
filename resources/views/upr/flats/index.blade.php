@@ -19,9 +19,10 @@
                     <a class="btn btn-warning" href="{{ route('upr.flats.edit', ['flat' => $flat->id]) }}" >EDIT DETAILS</a>
                     <!--Form per la destroy: -->
                     <form class="form-inline" action="{{ route('upr.flats.destroy', ['flat' => $flat->id]) }}" method="post" style='display:inline-block'>
-                    <input type="submit" class="btn btn-danger" value="Cancella questo appartamento!">
-                        @csrf
                         @method('DELETE')
+                        @csrf
+                    <input id="delete_flat" type="submit" class="btn btn-danger" data-id="{{$flat->id}}" value="Cancella questo appartamento!">
+
                     </form>
                     <!-- Vado alla view per la sponsorizzazione: -->
                     {{-- Occorrono un insieme di condizioni: esiste? Oppure è scaduta? --}}
