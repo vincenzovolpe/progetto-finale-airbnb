@@ -38,7 +38,7 @@
                             </form>
                             <!-- Messaggi ricevuti -->
                             @if ($flat->messages()->count() > 0)
-                                    <p class="mt-3"><i class="far fa-envelope mr-2"></i> Messaggi ricevuti: {{$flat->messages()->count()}}</p>
+                                    <p class="mt-3"><i class="far fa-envelope mr-2"></i> Messaggi ricevuti: <a href="{{ route('messages.index') }}">{{$flat->messages()->count()}}</a></p>
                             @else
                                 <p class="mt-3"><i class="far fa-envelope mr-2"></i> Non sono presenti messaggi.</p>
                             @endif
