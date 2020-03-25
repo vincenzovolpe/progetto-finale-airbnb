@@ -11814,6 +11814,7 @@ a.text-dark:focus {
 
 #map {
   height: 500px;
+  margin-bottom: 100px;
 }
 
 #homepicture {
@@ -11835,11 +11836,19 @@ a.text-dark:focus {
 }
 
 #home-sponsored {
-  margin: 4em auto;
+  margin: 6em auto;
+}
+
+#home-sponsored h2 {
+  margin-bottom: 2em;
 }
 
 #home-not-sponsored {
-  margin: 4em auto;
+  margin: 6em auto;
+}
+
+#home-not-sponsored h2 {
+  margin-bottom: 2em;
 }
 
 .card-img {
@@ -11876,5 +11885,18 @@ a.text-dark:focus {
 
 #flat-det h3 {
   margin-top: 30px;
+}
+
+#flat_search {
+  margin-top: 100px;
+  background-color: #f3f3f3;
+}
+
+#find-results {
+  margin: 70px auto;
+}
+
+#dashboard-index .card {
+  background-color: #f3f3f3;
 }
 
