@@ -5,6 +5,7 @@
     {{-- <ul class="list-group"> --}}
         @forelse($flats as $flat)
 <<<<<<< HEAD
+<<<<<<< HEAD
         <li class="list-group-item list-group-item-dark">
             <div class="row">
                 <div class="col-3">
@@ -63,6 +64,8 @@
                         @endif
                         <p><strong>Visite ricevute: </strong> {{$flat->view}}</p>
 =======
+=======
+>>>>>>> origin/master
             <div class="card mb-3">
                 <div class="row no-gutters">
                     <div class="col-md-4">
@@ -119,6 +122,9 @@
                             @endif
                             <p>Visite ricevute: {{$flat->view}}</p>
                         </div>
+<<<<<<< HEAD
+>>>>>>> origin/master
+=======
 >>>>>>> origin/master
                     </div>
                 </div>
