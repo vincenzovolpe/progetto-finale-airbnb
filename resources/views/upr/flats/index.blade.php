@@ -21,7 +21,7 @@
                             <a class="btn btn-warning m-2" href="{{ route('upr.flats.edit', ['flat' => $flat->id]) }}" >modifica dettagli</a>
                             <!--Form per la destroy: -->
                             <form class="form-inline" action="{{ route('upr.flats.destroy', ['flat' => $flat->id]) }}" method="post" style='display:inline-block'>
-                            <input type="submit" class="btn btn-danger m-2" value="ELIMINA!">
+                            <input id="delete_flat" type="submit" class="btn btn-danger m-2" data-id="{{$flat->id}}" value="ELIMINA!">
                                 @csrf
                                 @method('DELETE')
                             </form>

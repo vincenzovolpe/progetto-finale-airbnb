@@ -59,7 +59,7 @@
                     @endif
                     </div>
                     @if (Auth::user() && Auth::user()->id == $flat->user->id)
-                            <div class="card-body not_visible">
+                            <div class="card-body invisible">
                     @else
                     <div class="card-body">
                     @endif
