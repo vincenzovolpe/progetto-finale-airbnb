@@ -7,6 +7,16 @@
 @extends('layouts.short')
 
 @section('content')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+        @if (session('status'))
+            <script>
+            Swal.fire(
+                'Inviato!',
+                'Messaggio inviato correttamente',
+                'success'
+            )
+            </script>
+        @endif
     <div id="flat-det" class="container">
         <h2 id="title" class="text-center">{{$flat->title}}</h2>
         <div class="row">

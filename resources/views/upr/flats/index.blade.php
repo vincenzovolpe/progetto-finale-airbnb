@@ -1,5 +1,16 @@
 @extends("layouts.upr")
 @section("content")
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    @if (session('status'))
+        <script>
+        Swal.fire(
+            'Cancellato!',
+            'Appartamento correttamente cancellato',
+            'success'
+        )
+        </script>
+    @endif
+
 <div id="dashboard-index" class="container">
     <h1>INDEX (LIST OF FLATS)</h1>
     {{-- <ul class="list-group"> --}}
@@ -55,7 +66,9 @@
                             @endif
                             <!-- Messaggi ricevuti -->
                             @if ($flat->messages()->count() > 0)
-                                    <p>Messaggi ricevuti: {{$flat->messages()->count()}}</p>
+                                    <p>Messaggi ricevuti:
+                                        <a href="{{ route('messages.index') }}">{{$flat->messages()->count()}}</a>
+                                    </p>
                             @else
                                 <p>Non sono presenti messaggi per questo appartamento.</p>
                             @endif
