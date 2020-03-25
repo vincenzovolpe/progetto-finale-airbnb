@@ -17,6 +17,9 @@ var moment = require('moment');
 
 require('./bootstrap');
 
+// CommonJS
+const Swal = require('sweetalert2');
+
 window.Vue = require('vue');
 
 /**
@@ -61,7 +64,6 @@ var searchBoxOptions = {
 const ttSearchBox = new SearchBox(services, searchBoxOptions);
 
 
-
 $(document).ready(function(){
 
     // Imposto l'input della searchbox a required
@@ -91,25 +93,10 @@ $(document).ready(function(){
     $(".fuzzy-find").find(".tt-search-box-input").val(address_search);
     $(".fuzzy-edit").find(".tt-search-box-input").val(address_edit);
 
-    // // Se digito all'interno delle searchbox in home o in find il bottone si abilita
-    // $(".tt-search-box-input").on('keyup', function (e) {
-    //     if (e.keyCode === 13 || $(this).val().length) {
-    //         $('#btn_home').attr('disabled', false);
-    //         $('#btn_find').attr('disabled', false);
-    //     } else {
-    //         //Disattivo i bottoni di ricerca nel caso in cui ho cancellato l'input anche dopo aver selezionato una voce dall'autocmpletamento
-    //         $('#btn_home').attr('disabled', 'disabled');
-    //         $('#btn_find').attr('disabled', 'disabled');
-    //     }
-    // });
 
     // Chiamata Ajax con i dati della Searchbar della HomePage
     if(href.indexOf('/flats/find') > -1)
     {
-        // if($('.tt-search-box-input').val().length){
-        //     console.log($('.tt-search-box-input').val().length);
-        //     $('#btn_find').attr('disabled', false);
-        // }
 
         var lat = $('#latNumberFind').val();
         var lon = $('#lonNumberFind').val();
@@ -152,6 +139,8 @@ $(document).ready(function(){
             }
         })
     }
+// Facciamo in modo che il bottone cerca nella pagina Find faccia uscire il popup di convalida
+//in questo form non c'è una submit, perciò adottiamo questo trucco
 (function($){
     var isValid = null;
     var form = $('#form_find');
@@ -190,6 +179,29 @@ $(document).ready(function(){
     //override submit button click event
     submitButton.click(submitClick);
 })(jQuery);
+
+// Popup di conferma per la cancellazione di un appartamento
+$(document).on('click', '#delete_flat', function (e) {
+    var id = $(this).data('id');
+    var form =  $(this).closest("form");
+    e.preventDefault();
+    console.log(id);
+    Swal.fire({
+            title: "Sei sicuro?",
+            text: "L'appartamento verrà cancellato definitivamente!",
+            icon: 'warning',
+            confirmButtonText: 'Si',
+            cancelButtonText: 'No',
+            showCancelButton: true,
+        })
+        .then((willDelete) => {
+        if (willDelete.value) {
+          form.submit();
+         }
+
+    });
+});
+
     // Chiamata Ajax nella pagina Find con eventuali filtri di Ricerca
     $('#btn_find').click(function(event){
 

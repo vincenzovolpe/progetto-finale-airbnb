@@ -11,12 +11,11 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-#sponsored {
-    // background-color:  #cccccc;
-}
+
 
 #map {
     height: 500px;
+    margin-bottom: 100px;
 }
 
 #homepicture {
@@ -36,16 +35,28 @@
 }
 
 #home-sponsored {
-    margin: 4em auto;
+    margin: 6em auto;
+    h2 {
+        margin-bottom: 2em;
+    }
 }
 
 #home-not-sponsored {
-    margin: 4em auto;
+    margin: 6em auto;
+    h2 {
+        margin-bottom: 2em;
+    }
 }
 
 .card-img {
     object-fit: cover;
     height: 180px;
+}
+
+#dashboard-index {
+    .card-img {
+        height: 220px;
+    }
 }
 
 .card-img-overlay {
@@ -70,6 +81,22 @@
 #flat-det h3 {
     margin-top: 30px;
 }
-.not_visible {
-    display: none;
+
+<<<<<<< HEAD
+
+=======
+>>>>>>> origin/master
+#flat_search {
+    margin-top: 100px;
+    background-color: $light-grey;
+}
+
+#find-results {
+    margin: 70px auto;
+}
+
+#dashboard-index {
+    .card {
+        background-color: $light-grey;
+    }
 }
