@@ -13,13 +13,14 @@ return [
     |
     */
 
-    'Register' => 'Sign in',
-    'Login' => 'Login',
-    'Name' => 'Name',
-    'Surname' => 'Surname',
-    'Date_of_birth' => 'Date of birth',
-    'E-mail' =>  'E-Mail Address',
-    'Confirm_Password' =>  'Confirm Password',
-    'btn_confirm' => 'Register',
+    'slogan' => 'Book a beautifull Flats',
+    'city' => 'Choose the a city',
+    'search_placeholdem' => 'Everywhere',
+    'btn_search' => 'Search',
+    'firts_flat' => 'Featured Bool-BnB Plus apartments',
+    'flat_in' => 'Apartments in',
+    'btn_details' => 'See details',
+    'flats' => 'Unique apartments from all over the world',
+    'no_flat' => 'There are no sponsored apartments',
 
 ];

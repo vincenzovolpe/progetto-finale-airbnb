@@ -17,11 +17,11 @@
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
                 {{-- Selettore della lingua --}}
-                <ul>
+                <ul class="nav">
                     @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                        <li>
-                            <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-                                {{ $properties['native'] }}
+                        <li class="nav-item">
+                            <a class="nav-link" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                {{ $properties['menu_laber'] }}
                             </a>
                         </li>
                     @endforeach
@@ -29,11 +29,11 @@
                 <!-- Authentication Links -->
                 @guest
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        <a class="nav-link" href="{{ route('login') }}">{{ __('registration.Login') }}</a>
                     </li>
                     @if (Route::has('register'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('registration.Register') }}</a>
                         </li>
                     @endif
                 @else

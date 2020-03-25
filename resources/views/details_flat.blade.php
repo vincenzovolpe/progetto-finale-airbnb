@@ -84,11 +84,11 @@
                                 <label for="email" class="mb-0">Email</label>
                                 <div class="row mb-1">
                                     <div class="col-lg-12">
-                                            <input type="text" name="msg_email" id="msg_email" class="form-control @error('msg_email') is-invalid @enderror"
+                                            <input type="text" name="msg_email" id="msg_email" required class="form-control @error('msg_email') is-invalid @enderror"
                                             @if (Auth::user() && Auth::user()->id != $flat->user->id)
-                                                value="{{Auth::user()->email}}" required="">
+                                                value="{{Auth::user()->email}}">
                                             @else
-                                                >
+                                                value="{{old('msg_email')}}">
                                             @endif
                                             <div class="msg_mail valid-feedback">
                                                 Inserimento corretto!
@@ -107,7 +107,7 @@
                                 <label for="message" class="mb-0">Messaggio</label>
                                 <div class="row mb-1">
                                     <div class="col-lg-12">
-                                        <textarea rows="6" name="text_msg" id="text_msg" class="form-control @error('text_msg') is-invalid @enderror" required="">{{ old('text_msg') }}</textarea>
+                                        <textarea rows="6" value="text_msg" name="text_msg" id="text_msg" class="form-control @error('text_msg') is-invalid @enderror" required="">{{ old('text_msg') }}</textarea>
                                             <div class="text_msg valid-feedback">
                                                 Inserimento corretto!
                                             </div>
@@ -127,7 +127,7 @@
                                 <input type="text" name="flat_title" value="{{$flat->title}}" hidden>
                                 <input id="latNumber" type="text" name="lon" value="{{$flat->lon}}" hidden>
                                 <input id="lonNumber" type="text" name="lat" value="{{$flat->lat}}" hidden>
-                                <button type="submit" class="btn btn-danger btn-lg float-left">Invia messaggio</button>
+                                <button type="submit" class="invio btn btn-danger btn-lg float-left" disabled>Invia messaggio</button>
                             </fieldset>
                         </form>
                     {{-- @endif --}}

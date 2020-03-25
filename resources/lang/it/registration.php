@@ -14,6 +14,7 @@ return [
     */
 
     'Register' => 'Registrati',
+    'Login' => 'Accedi',
     'Name' => 'Nome',
     'Surname' => 'Cognome',
     'Date_of_birth' => 'Data di nascita',
