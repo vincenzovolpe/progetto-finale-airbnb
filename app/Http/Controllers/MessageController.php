@@ -37,12 +37,14 @@ class MessageController extends Controller
 
     public function sendMail(Request $request)
     {
+
         // Validation per l'invio della mail al proprietario di app
-        $request->validate([
+        $validator = $request->validate([
             'msg_email' => 'required|string|email|max:100',
             'text_msg' => 'required|min:10|max:255',
-
         ]);
+
+        $request->session()->flash('status', 'ok');
 
         $data_form_message = $request->all();
 

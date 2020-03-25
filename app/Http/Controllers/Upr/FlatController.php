@@ -191,8 +191,9 @@ class FlatController extends Controller
         return redirect()->route('upr.flats.index');
     }
 
-    public function destroy(Flat $flat, Message $message)
+    public function destroy(Request $request, Flat $flat, Message $message)
     {
+        $request->session()->flash('status', 'ok');
         // Se l'appartamento ha dei messaggi, bisogna prima cancellarli:
         $messages_on_flat = Message::where("flat_id", $flat->id)->get();
         if ($messages_on_flat->count()) {

@@ -43,13 +43,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ $flat->title }}</h5>
                                 <a class="btn btn-success stretched-link" href="{{ route('flat.details', $flat->id)}}">Vedi Dettagli</a>
-                                {{-- <p class="card-text text-right"><small class="text-muted">sponsorizzato</small></p> --}}
                             </div>
-                            {{-- <div class="card-footer text-muted justify-content-start bg-transparent border-top-0"> --}}
-                                {{-- <div class="views">{{ $flat->updated_at }}</div> --}}
-                                    {{-- numero di visualizzazioni --}}
-                                    {{-- {{$flat->view}} --}}
-                            {{-- </div> --}}
                         </div>
                     @endforeach
                 @else
@@ -66,16 +60,8 @@
                         <img class="card-img" src="{{asset('storage/' .$flat->img_uri)}}" alt="flat picture">
                         <div class="card-body">
                             <h5 class="card-title">{{ $flat->title }}</h5>
-                            {{-- <p class="card-text">Propietario: {{$flat->user->name}}</p> --}}
                             <a class="btn btn-success stretched-link" href="{{ route('flat.details', $flat->id)}}">Vedi Dettagli</a>
                         </div>
-                        {{-- <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
-                            <div class="views">{{ $flat->updated_at }}
-                            </div>
-                            <div class="stats">
-                                {{$flat->view}}
-                            </div>
-                        </div> --}}
                     </div>
                 @empty
                     <p>Non ci sono appartamenti</p>

@@ -198,7 +198,6 @@ $(document).on('click', '#delete_flat', function (e) {
         if (willDelete.value) {
           form.submit();
          }
-
     });
 });
 

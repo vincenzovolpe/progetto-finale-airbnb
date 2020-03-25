@@ -1,5 +1,16 @@
 @extends("layouts.upr")
 @section("content")
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    @if (session('status'))
+        <script>
+        Swal.fire(
+            'Cancellato!',
+            'Appartamento correttamente cancellato',
+            'success'
+        )
+        </script>
+    @endif
+
 <div id="dashboard-index" class="container">
     <h1 class="mt-5">I tuoi alloggi</h1>
     {{-- <ul class="list-group"> --}}
@@ -27,12 +38,11 @@
                             </form>
                             <!-- Messaggi ricevuti -->
                             @if ($flat->messages()->count() > 0)
-                                    <p class="mt-3"><i class="far fa-envelope mr-2"></i> Messaggi ricevuti: {{$flat->messages()->count()}}</p>
+                                    <p class="mt-3"><i class="far fa-envelope mr-2"></i> Messaggi ricevuti: <a href="{{ route('messages.index') }}">{{$flat->messages()->count()}}</a></p>
                             @else
                                 <p class="mt-3"><i class="far fa-envelope mr-2"></i> Non sono presenti messaggi.</p>
                             @endif
                             <p><i class="fas fa-eye mr-2"></i> Visite ricevute: {{$flat->view}}</p>
-
                             <!-- Vado alla view per la sponsorizzazione: -->
                             {{-- Occorrono un insieme di condizioni: esiste? Oppure è scaduta? --}}
                             @if (array_key_exists($flat->id,$flat_sponsored))
