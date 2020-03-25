@@ -4,6 +4,7 @@
     <h1>INDEX (LIST OF FLATS)</h1>
     {{-- <ul class="list-group"> --}}
         @forelse($flats as $flat)
+<<<<<<< HEAD
 
         <li class="list-group-item list-group-item-dark">
             <div class="row">
@@ -119,7 +120,10 @@
                             @endif
                             <p>Visite ricevute: {{$flat->view}}</p>
                         </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
                     </div>
                 </div>
             </div>
