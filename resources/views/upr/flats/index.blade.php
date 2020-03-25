@@ -43,7 +43,6 @@
                                 <p class="mt-3"><i class="far fa-envelope mr-2"></i> Non sono presenti messaggi.</p>
                             @endif
                             <p><i class="fas fa-eye mr-2"></i> Visite ricevute: {{$flat->view}}</p>
-
                             <!-- Vado alla view per la sponsorizzazione: -->
                             {{-- Occorrono un insieme di condizioni: esiste? Oppure è scaduta? --}}
                             @if (array_key_exists($flat->id,$flat_sponsored))
@@ -73,15 +72,6 @@
                                     <a class="btn btn-success my-2" href="{{ route('upr.flats.sponsor', ['flat' => $flat->id])}}">Sponsorizza ora!</a>
                                 </p>
                             @endif
-                            <!-- Messaggi ricevuti -->
-                            @if ($flat->messages()->count() > 0)
-                                    <p>Messaggi ricevuti:
-                                        <a href="{{ route('messages.index') }}">{{$flat->messages()->count()}}</a>
-                                    </p>
-                            @else
-                                <p>Non sono presenti messaggi per questo appartamento.</p>
-                            @endif
-                            <p>Visite ricevute: {{$flat->view}}</p>
                         </div>
                     </div>
                 </div>
