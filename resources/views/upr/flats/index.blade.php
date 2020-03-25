@@ -61,13 +61,6 @@
                             @endif
                             <p>Visite ricevute: {{$flat->view}}</p>
                         </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/master
-=======
->>>>>>> origin/master
                     </div>
                 </div>
             </div>
