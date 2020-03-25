@@ -108,7 +108,12 @@
                                 <div class="row mb-1">
                                     <div class="col-lg-12">
                                         <textarea rows="6" name="text_msg" id="text_msg" class="form-control @error('text_msg') is-invalid @enderror" required="">{{ old('text_msg') }}</textarea>
-
+                                            <div class="text_msg valid-feedback">
+                                                Inserimento corretto!
+                                            </div>
+                                            <div class="text_msg invalid-feedback">
+                                                Inserisci un numero minimo di 10 caratteri
+                                            </div>
                                             @error('text_msg')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>

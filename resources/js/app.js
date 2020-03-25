@@ -450,6 +450,24 @@ $(document).on('click', '#delete_flat', function (e) {
             //validation nella pagina del Create.blade dei numeri dei Mq
             validationMq('#sq_meters','.sq_meters.valid-feedback','.sq_meters.invalid-feedback');
 
+        // Funzione di validazione della lunghezza  messaggio nei details
+        $('#text_msg').keyup(function(){
+            var value = ($('#text_msg').val());
+            // console.log(value);
+            if (value.length >= 10 && value.length <= 255) {
+                $(".text_msg.valid-feedback").show();
+                $(".text_msg.invalid-feedback").hide();
+                $('#text_msg').addClass('is-valid');
+                $('#text_msg').removeClass('is-invalid');
+            }else{
+                $(".text_msg.valid-feedback").hide();
+                $(".text_msg.invalid-feedback").show();
+                $('#text_msg').addClass('is-invalid');
+                $('#text_msg').removeClass('is-valid');
+            }
+        })
+
+
         // validazione grandezza immagine in create.blade
         $('#img_uri').bind('change', function() {
             var a=(this.files[0].size);
