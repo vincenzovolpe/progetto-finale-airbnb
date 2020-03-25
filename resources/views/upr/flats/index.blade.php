@@ -1,28 +1,38 @@
 @extends("layouts.upr")
 @section("content")
 <div id="dashboard-index" class="container">
-    <h1>INDEX (LIST OF FLATS)</h1>
+    <h1 class="mt-5">I tuoi alloggi</h1>
     {{-- <ul class="list-group"> --}}
         @forelse($flats as $flat)
-            <div class="card mb-3">
+            <div class="card my-5">
                 <div class="row no-gutters">
-                    <div class="col-md-4">
-                        <img class="card-img" src="{{asset('storage/' .$flat->img_uri)}}" alt="flat picture">
-                    </div>
-                    <div class="col-md-8">
+                    <div class="col-md-5">
                         <div class="card-body">
                             <h4 class="card-title">{{ $flat->title }}</h4>
-                            <p class="card-text"><i class="fas fa-map-marker-alt"></i> Indirizzo: {{ $flat->address }}</p>
+                            <img class="card-img" src="{{asset('storage/' .$flat->img_uri)}}" alt="flat picture">
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="card-body">
+                            <p class="card-text"><i class="fas fa-map-marker-alt mr-2"></i> Indirizzo: {{ $flat->address }}</p>
                             <!-- Vado alla view per vedere i dettagli: -->
-                            <a class="btn btn-success m-2" href="{{ route('upr.flats.show' , ['flat' => $flat->id]) }}">vedi dettagli</a>
+                            <a class="btn btn-info mr-2" href="{{ route('upr.flats.show' , ['flat' => $flat->id]) }}">vedi dettagli</a>
                             <!-- Vado alla view di modifica: -->
                             <a class="btn btn-warning m-2" href="{{ route('upr.flats.edit', ['flat' => $flat->id]) }}" >modifica dettagli</a>
                             <!--Form per la destroy: -->
                             <form class="form-inline" action="{{ route('upr.flats.destroy', ['flat' => $flat->id]) }}" method="post" style='display:inline-block'>
-                            <input type="submit" class="btn btn-danger m-2" value="ELIMINA appartamento!">
+                            <input type="submit" class="btn btn-danger m-2" value="ELIMINA!">
                                 @csrf
                                 @method('DELETE')
                             </form>
+                            <!-- Messaggi ricevuti -->
+                            @if ($flat->messages()->count() > 0)
+                                    <p class="mt-3"><i class="far fa-envelope mr-2"></i> Messaggi ricevuti: {{$flat->messages()->count()}}</p>
+                            @else
+                                <p class="mt-3"><i class="far fa-envelope mr-2"></i> Non sono presenti messaggi.</p>
+                            @endif
+                            <p><i class="fas fa-eye mr-2"></i> Visite ricevute: {{$flat->view}}</p>
+
                             <!-- Vado alla view per la sponsorizzazione: -->
                             {{-- Occorrono un insieme di condizioni: esiste? Oppure è scaduta? --}}
                             @if (array_key_exists($flat->id,$flat_sponsored))
@@ -41,24 +51,17 @@
                                 @else
                                     {{-- Qui esiste, ma è scaduta: consentiamo di rinnovare la sponsorizzazione. --}}
                                     <p>
-                                        Ultima sponsorizzazione terminata.
-                                        <a class="btn btn-success m-2" href="{{ route('upr.flats.sponsor', ['flat' => $flat->id])}}">Rinnova subito!</a>
+                                        {{-- Ultima sponsorizzazione terminata. --}}
+                                        <a class="btn btn-success my-2" href="{{ route('upr.flats.sponsor', ['flat' => $flat->id])}}">Sponsorizza ora!</a>
                                     </p>
                                 @endif
                             @else
                                 {{-- Qui non esiste, quindi si può sponsorizzare! --}}
                                 <p>
-                                    Nessuna sponsorizzazione attiva!
-                                    <a class="btn btn-success m-2" href="{{ route('upr.flats.sponsor', ['flat' => $flat->id])}}">Sponsorizza adesso!</a>
+                                    {{-- Nessuna sponsorizzazione attiva! --}}
+                                    <a class="btn btn-success my-2" href="{{ route('upr.flats.sponsor', ['flat' => $flat->id])}}">Sponsorizza ora!</a>
                                 </p>
                             @endif
-                            <!-- Messaggi ricevuti -->
-                            @if ($flat->messages()->count() > 0)
-                                    <p>Messaggi ricevuti: {{$flat->messages()->count()}}</p>
-                            @else
-                                <p>Non sono presenti messaggi per questo appartamento.</p>
-                            @endif
-                            <p>Visite ricevute: {{$flat->view}}</p>
                         </div>
                     </div>
                 </div>
