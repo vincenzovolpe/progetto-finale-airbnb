@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <p>
-                Stai per sponsorizzare l'appartamento <em>{{ $sponsor_title }}</em> per <strong>{{ $sponsor_hours }} ore</strong> alla modica cifra di: <strong>{{ $sponsor_price }}€</strong>. Inserisci i dati della tua carta per procedere:
+                {{__('sponsor_upr.Duration_sponsor')}} <em>{{ $sponsor_title }}</em> {{__('sponsor_upr.For')}} <strong>{{ $sponsor_hours }} {{__('sponsor_upr.Hours')}}</strong> {{__('sponsor_upr.Sum')}} <strong>{{ $sponsor_price }}€</strong>. <br> {{__('sponsor_upr.Pay_method')}}
             </p>
         </div>
     </div>
@@ -17,9 +17,9 @@
     <div class="row">
         <div class="col">
             <!-- Verifica il pagamento: -->
-            <button id="submit-button">Paga ora!</button>
+            <button id="submit-button">{{__('sponsor_upr.Pay_now')}}</button>
             <!-- Torna in index: -->
-            <a class="btn btn-info" href="{{ route('upr.flats.index') }}">Torna all'area personale!</a>
+            <a class="btn btn-info" href="{{ route('upr.flats.index') }}">{{__('sponsor_upr.Back_dashboard')}}</a>
         </div>
     </div>
 </div>
