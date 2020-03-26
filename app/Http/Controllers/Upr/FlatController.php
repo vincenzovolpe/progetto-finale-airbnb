@@ -193,6 +193,7 @@ class FlatController extends Controller
 
     public function destroy(Request $request, Flat $flat, Message $message)
     {
+        // Memorizzo una sessione per il messaggio di conferma cancellazione appartamento
         $request->session()->flash('status', 'ok');
         // Se l'appartamento ha dei messaggi, bisogna prima cancellarli:
         $messages_on_flat = Message::where("flat_id", $flat->id)->get();
@@ -206,7 +207,6 @@ class FlatController extends Controller
         }
         $flat->delete();
         return redirect()->route('upr.flats.index');
-                         //->with('success','Appartamento cancellato correttamente');
         //return back();
     }
 

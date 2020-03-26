@@ -107,7 +107,9 @@
                                 <label for="message" class="mb-0">Messaggio</label>
                                 <div class="row mb-1">
                                     <div class="col-lg-12">
+
                                         <textarea rows="6" value="text_msg" name="text_msg" id="text_msg" class="form-control @error('text_msg') is-invalid @enderror" required="">{{ old('text_msg') }}</textarea>
+
                                             <div class="text_msg valid-feedback">
                                                 Inserimento corretto!
                                             </div>

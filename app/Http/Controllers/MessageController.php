@@ -43,7 +43,7 @@ class MessageController extends Controller
             'msg_email' => 'required|string|email|max:100',
             'text_msg' => 'required|min:10|max:255',
         ]);
-
+        // Memorizzo una sessione per il messaggio di conferma invio email
         $request->session()->flash('status', 'ok');
 
         $data_form_message = $request->all();

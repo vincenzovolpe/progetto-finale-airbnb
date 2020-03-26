@@ -5,7 +5,7 @@
         <script>
         Swal.fire(
             'Cancellato!',
-            'Appartamento correttamente cancellato',
+            'Appartamento cancellato correttamente',
             'success'
         )
         </script>
