@@ -11920,3 +11920,17 @@ a.text-dark:focus {
   margin-top: 0;
 }
 
+footer a,
+footer a:hover {
+  color: #484848;
+}
+
+footer i:hover {
+  color: #484848;
+}
+
+footer img {
+  height: 40px;
+  width: 40px;
+}
+

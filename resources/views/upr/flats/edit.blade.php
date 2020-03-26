@@ -17,23 +17,18 @@
                     <label for="title" class="col-form-label col-sm-3">{{ __('Description') }}</label>
                     <div class="col-sm-9">
                         <input id="title" class="form-control @error('title') is-invalid @enderror" type="text" name="title" value="{{ $flat->title }}" required>
-                        <div class="title valid-feedback">
-                            Inserimento corretto!
-                        </div>
                         <div class="title invalid-tooltip">
                             Inserisci una descrizione valida - min 5 caratteri
                         </div>
                     </div>
                 </div>
+
                 <!-- Inserimento numero di stanze -->
                 <div class="form-group row">
                     <label for="room_qty" class="col-sm-3 col-form-label text-md-left">{{ __('Number of rooms') }}</label>
-                    <div class="col-sm-2">
+                    <div class="col-sm-3">
                         <input id="room_qty" class="form-control @error('room_qty') is-invalid @enderror" type="number" name="room_qty" value="{{ $flat->room_qty }}" required>
-                        <div class="room_qty valid-feedback">
-                            Inserimento corretto!
-                        </div>
-                        <div class="room_qty invalid-feedback">
+                        <div class="room_qty invalid-tooltip">
                             Inserisci un numero valido
                         </div>
                     </div>
@@ -41,12 +36,9 @@
                 <!-- Inserimento numero di letti -->
                 <div class="form-group row">
                     <label for="bed_qty" class="col-sm-3 col-form-label">{{ __('Number of beds') }}</label>
-                    <div class="col-sm-2">
+                    <div class="col-sm-3">
                         <input id="bed_qty" class="form-control @error('bed_qty') is-invalid @enderror" type="number" name="bed_qty" value="{{ $flat->bed_qty }}" required>
-                        <div class="bed_qnty valid-feedback">
-                            Inserimento corretto!
-                        </div>
-                        <div class="bed_qnty invalid-feedback">
+                        <div class="bed_qnty invalid-tooltip">
                             Inserisci un numero valido
                         </div>
                     </div>
@@ -54,12 +46,9 @@
                 <!-- Inserimento numero di bagni -->
                 <div class="form-group row">
                     <label for="bath_qty" class="col-sm-3 col-form-label text-md-left">{{ __('Number of baths') }}</label>
-                    <div class="col-sm-2">
+                    <div class="col-sm-3">
                         <input id="bath_qty" class="form-control @error('bath_qty') is-invalid @enderror" type="number" name="bath_qty" value="{{ $flat->bath_qty }}" required>
-                        <div class="bath_qty valid-feedback">
-                            Inserimento corretto!
-                        </div>
-                        <div class="bath_qty invalid-feedback">
+                        <div class="bath_qty invalid-tooltip">
                             Inserisci un numero valido
                         </div>
                     </div>
@@ -67,11 +56,8 @@
                 <!-- Inserimento metri quadri -->
                 <div class="form-group row">
                     <label for="sq_meters" class="col-sm-3 col-form-label text-md-left">{{ __('Square meters') }}</label>
-                    <div class="col-sm-2">
+                    <div class="col-sm-3">
                         <input id="sq_meters" class="form-control @error('sq_meters') is-invalid @enderror" type="number" name="sq_meters" value="{{ $flat->sq_meters }}" required>
-                        <div class="sq_meters valid-feedback">
-                            Inserimento corretto!
-                        </div>
                         <div class="sq_meters invalid-feedback">
                             Inserisci un valore valido compreso tra 10 e 500
                         </div>
@@ -131,7 +117,7 @@
                 </div>
 
                 <!-- PARTE DEI SERVIZI: -->
-                <h3 class="mt-4">Aggiungi servizi al tuo appartamento:</h3>
+                <h4 class="mt-4">Indica quali servizi aggiuntivi sono disponibili</h4>
                     <div class="col-form-group row">
                         <div class="col-sm-12">
                             @forelse ($servizi as $service)
