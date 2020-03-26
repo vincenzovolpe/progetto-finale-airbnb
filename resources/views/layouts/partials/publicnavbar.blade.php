@@ -15,7 +15,7 @@
                 {{-- Selettore della lingua --}}
                 <ul class="nav">
                     @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                        <li class="nav-item">
+                        <li class="nav-item ">
                             <a class="nav-link" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
                                 {{ $properties['menu_laber'] }}
                             </a>
