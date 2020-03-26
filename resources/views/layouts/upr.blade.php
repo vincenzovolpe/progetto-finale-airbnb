@@ -37,7 +37,7 @@
         <main class="py-4">
             @yield('content')
         </main>
-        <footer class="border-top page-footer font-small mdb-color pt-4">
+        <footer>
             @include('layouts.partials.footer')
         </footer>
     </div>
