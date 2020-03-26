@@ -27,17 +27,17 @@
                 </li>
                 <!-- Authentication Links -->
                 @guest
-                    <li class="nav-item">
+                    <li class="nav-item {{Route::currentRouteName() == 'login' ? 'active' : ""}}">
                         <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                     </li>
                     @if (Route::has('register'))
-                        <li class="nav-item">
+                        <li class="nav-item {{Route::currentRouteName() == 'register' ? 'active' : ""}}">
                             <a class="nav-link" href="{{ route('register') }}">{{ __('registration.Register') }}</a>
                         </li>
                     @endif
                 @endguest
                 @auth
-                    <li class="nav-item">
+                    <li class="nav-item {{Route::currentRouteName() == 'upr.flats.index' ? 'active' : ""}}">
                         <a class="nav-link" href="{{ route('upr.flats.index') }}">{{ __('Dashboard') }}</a>
                     </li>
                     <li class="nav-item dropdown">

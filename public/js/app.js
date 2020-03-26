@@ -70377,9 +70377,9 @@ $(document).ready(function () {
       title: "Sei sicuro?",
       text: "L'appartamento verrà cancellato definitivamente!",
       icon: 'warning',
+      showCancelButton: true,
       confirmButtonText: 'Si',
-      cancelButtonText: 'No',
-      showCancelButton: true
+      cancelButtonText: 'No'
     }).then(function (willDelete) {
       if (willDelete.value) {
         form.submit();
@@ -70888,8 +70888,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/umbertown/Desktop/Atom - Boolean/GIT/progetto-finale-airbnb/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/umbertown/Desktop/Atom - Boolean/GIT/progetto-finale-airbnb/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\MAMP\htdocs\progetto-finale-airbnb\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\progetto-finale-airbnb\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

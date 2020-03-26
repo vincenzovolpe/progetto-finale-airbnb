@@ -190,9 +190,9 @@ $(document).on('click', '#delete_flat', function (e) {
             title: "Sei sicuro?",
             text: "L'appartamento verrà cancellato definitivamente!",
             icon: 'warning',
+            showCancelButton: true,
             confirmButtonText: 'Si',
             cancelButtonText: 'No',
-            showCancelButton: true,
         })
         .then((willDelete) => {
         if (willDelete.value) {
