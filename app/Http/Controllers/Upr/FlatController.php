@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
-// use Illuminate\Support\Carbon;
 use Carbon\Carbon;
 
 class FlatController extends Controller
@@ -248,25 +247,5 @@ class FlatController extends Controller
             return redirect()->back();
         }
     }
-
-    // Funzione per il salvataggio a DB della sponsorizzazione:
-    public function submitSponsor(Request $request, Flat $flat)
-    {
-        $data = $request->all();
-        // Ho inserimento diretto nel DB, controllo di avere valori numerici:
-        if (is_numeric($data["flat_id"]) && is_numeric($data["sponsor_id"])) {
-            // Visto che posso rinnovare sponsorizzazioni, valutiamo se esiste già una colonna a DB: ne tengo solo una!
-            $is_flat_sponsored = DB::table('flat_sponsor')->select("sponsor_id")->where("flat_id", $data["flat_id"])->get();
-            // Questa è una collection, di cui posso valutare il count():
-            if ($is_flat_sponsored->count()) {
-                // Se avevo già degli sponsor, ripulisco il tutto.
-                DB::table('flat_sponsor')->where('flat_id', $data["flat_id"])->delete();
-            }
-            // Inserisco un nuovo sponsor:
-            DB::insert('insert into flat_sponsor (flat_id, sponsor_id, created_at, updated_at) values (?, ?, ?, ?)', [$data["flat_id"], $data["sponsor_id"], now()->toDateTimeString(), now()->toDateTimeString()]);
-            return redirect()->route('upr.flats.index');
-        } else {
-            return redirect()->back();
-        }
-    }
+    // Funzione legate al pagamento spostate nel PaymentsController.
 }
