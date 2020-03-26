@@ -11822,7 +11822,6 @@ a.text-dark:focus {
 
 #map {
   height: 500px;
-  margin-bottom: 100px;
 }
 
 #homepicture {
@@ -11903,7 +11902,8 @@ a.text-dark:focus {
   margin-top: 30px;
 }
 
-#flat_search {
+#flat_search,
+#flat_map {
   margin-top: 100px;
   background-color: #f3f3f3;
 }
@@ -11936,6 +11936,7 @@ footer a:hover {
 
 footer i:hover {
   color: #484848;
+  cursor: pointer;
 }
 
 footer img {

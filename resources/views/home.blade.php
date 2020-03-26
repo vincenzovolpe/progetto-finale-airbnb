@@ -29,13 +29,13 @@
 
 @section('content')
     <div class="container">
-        <div id="home-sponsored" class="row">
+        <div id="home-sponsored" class="row my-5">
             <h2 class="text-center">{{__('homepage.firts_flat')}}</h2>
                 <!-- Card package -->
             <div class="card-columns">
                 @if(isset($flat_sponsored) && $flat_sponsored->count())
                     @foreach ($flat_sponsored as $flat)
-                        <div class="card bg-light shadow">
+                        <div class="card bg-light shadow mb-5">
                             <img class="card-img" src="{{asset('storage/' .$flat->img_uri)}}" alt="flat picture">
                             <div class="card-img-overlay">
                                 <i class="fas fa-star"></i>
