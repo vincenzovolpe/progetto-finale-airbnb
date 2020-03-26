@@ -12,11 +12,11 @@
                 <form class="form" action="{{ route('flat.find') }}" method="POST" role="form" autocomplete="off">
                     @csrf
                     <div class="form-group fuzzy-home">
-                        <h2>Prenota alloggi fantastici.</h2>
-                        <h6>Dove</h6>
+                        <h2>{{__('homepage.slogan')}}</h2>
+                        <h6>{{__('homepage.city')}}</h6>
                     </div>
                     <div class="form-group">
-                        <button id="btn_home" type="submit" class="btn btn-success btn-lg float-right">Cerca</button>
+                        <button id="btn_home" type="submit" class="btn btn-success btn-lg float-right">{{__('homepage.btn_search')}}</button>
                     </div>
                     <input id="searchHome" type="text" name="address_home" hidden>
                     <input id="latNumberHome" type="text" name="lat" hidden>
@@ -30,7 +30,7 @@
 @section('content')
     <div class="container">
         <div id="home-sponsored" class="row">
-            <h2 class="text-center">Appartamenti Bool-BnB Plus in primo piano</h2>
+            <h2 class="text-center">{{__('homepage.firts_flat')}}</h2>
                 <!-- Card package -->
             <div class="card-columns">
                 @if(isset($flat_sponsored) && $flat_sponsored->count())
@@ -42,17 +42,17 @@
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">{{ $flat->title }}</h5>
-                                <a class="btn btn-success stretched-link" href="{{ route('flat.details', $flat->id)}}">Vedi Dettagli</a>
+                                <a class="btn btn-success stretched-link" href="{{ route('flat.details', $flat->id)}}">{{__('homepage.btn_details')}}</a>
                             </div>
                         </div>
                     @endforeach
                 @else
-                    <p>Non ci sono appartamenti sponsorizzati</p>
+                    <p>{{__('homepage.no_flat')}}</p>
                 @endif
             </div>
         </div>
         <div id="home-not-sponsored" class="row">
-            <h2 class="text-center">Appartamenti unici da tutto il mondo</h2>
+            <h2 class="text-center">{{__('homepage.flats')}}</h2>
             <!-- Card package -->
             <div class="card-columns">
                 @forelse ($flats as $flat)
@@ -60,7 +60,7 @@
                         <img class="card-img" src="{{asset('storage/' .$flat->img_uri)}}" alt="flat picture">
                         <div class="card-body">
                             <h5 class="card-title">{{ $flat->title }}</h5>
-                            <a class="btn btn-success stretched-link" href="{{ route('flat.details', $flat->id)}}">Vedi Dettagli</a>
+                            <a class="btn btn-success stretched-link" href="{{ route('flat.details', $flat->id)}}">{{__('homepage.btn_details')}}</a>
                         </div>
                     </div>
                 @empty

@@ -345,7 +345,7 @@ $(document).on('click', '#delete_flat', function (e) {
           }
       });
     // validazioni email
-        function validationEmail(mail,valido,invalido){
+        function validationEmail(mail,valido,invalido,submit){
             $(mail).keyup(function(){
                 var email = $(mail).val();
                 var chioccia = (email.indexOf('@')+ 1);
@@ -356,12 +356,14 @@ $(document).on('click', '#delete_flat', function (e) {
                 // console.log(point2);
                 if ( chioccia > point && point2 > chioccia) {
                     // console.log('ok');
+                    // $(submit).removeAttr("disabled");
                     $(valido).show();
                     $(invalido).hide();
                     $(mail).addClass('is-valid');
                     $(mail).removeClass('is-invalid');
                 }else if(chioccia >= 1 && chioccia < point){
                     // console.log('ok');
+                    // $(submit).removeAttr("disabled");
                     $(valido).show();
                     $(invalido).hide();
                     $(mail).addClass('is-valid');
@@ -379,7 +381,27 @@ $(document).on('click', '#delete_flat', function (e) {
         };
         // Validazione mail in fase di registrazione e invio messaggio
         validationEmail('#email','.mail.valid-feedback','.mail.invalid-feedback');
-        validationEmail('#msg_email','.msg_mail.valid-feedback','.msg_mail.invalid-feedback');
+        validationEmail('#msg_email','.msg_mail.valid-feedback','.msg_mail.invalid-feedback','.invio');
+
+        // Funzione di validazione della lunghezza  messaggio nei details e lunghezza della mail > 0
+        $('#text_msg').keyup(function(){
+            var value = ($('#text_msg').val());
+            var email = $('#msg_email').val();
+            // console.log(value);
+            if (value.length >=10 && value.length <=255 && email.length > 0) {
+                $('.invio').removeAttr("disabled");
+                $(".text_msg.valid-feedback").show();
+                $(".text_msg.invalid-feedback").hide();
+                $('#text_msg').addClass('is-valid');
+                $('#text_msg').removeClass('is-invalid');
+            }else{
+                $('.invio').add("disabled");
+                $(".text_msg.valid-feedback").hide();
+                $(".text_msg.invalid-feedback").show();
+                $('#text_msg').addClass('is-invalid');
+                $('#text_msg').removeClass('is-valid');
+            }
+        })
 
     //validation nella pagina del Create.blade della descrizione
         $('#title').keyup(function(){
@@ -449,6 +471,7 @@ $(document).on('click', '#delete_flat', function (e) {
         }
             //validation nella pagina del Create.blade dei numeri dei Mq
             validationMq('#sq_meters','.sq_meters.valid-feedback','.sq_meters.invalid-feedback');
+
 
         // validazione grandezza immagine in create.blade
         $('#img_uri').bind('change', function() {
