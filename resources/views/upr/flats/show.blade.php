@@ -1,65 +1,86 @@
 @extends("layouts.upr")
 @section("content")
-<div class="container">
-    <div class="row">
-        <h1>FLAT DETAILS</h1>
-        <a class="btn btn-info" href="{{ route('upr.flats.index') }}">Back to index!</a>
+<div id="show-details" class="container mb-5">
+    <div class="row my-5">
+        <div class="col-lg-12">
+            <h1 class="float-left">Dettagli dell'appartamento</h1>
+            <a class="btn btn-info float-right" href="{{ route('upr.flats.index') }}">torna indietro</a>
+        </div>
     </div>
     <div class="row">
-        <div class="col">
-            <ul class="list-group">
-                <li class="list-group-item list-group-item-dark">
-                    TITLE: {{ $flat->title }}
-                </li>
-                <li class="list-group-item list-group-item-dark">
-                    NUMBER OF ROOMS: {{ $flat->room_qty }}
-                </li>
-                <li class="list-group-item list-group-item-dark">
-                    NUMBER OF BEDS: {{ $flat->bed_qty }}
-                </li>
-                <li class="list-group-item list-group-item-dark">
-                    NUMBER OF BATHS: {{ $flat->bath_qty }}
-                </li>
-                <li class="list-group-item list-group-item-dark">
-                    SQUARE METERS: {{ $flat->sq_meters }}
-                </li>
-                <li class="list-group-item list-group-item-dark">
-                    ADDRESS: {{ $flat->address }}
-                </li>
-                <li class="list-group-item list-group-item-dark">
-                    LATITUDE: {{ $flat->lat }}
-                </li>
-                <li class="list-group-item list-group-item-dark">
-                    LONGITUDE: {{ $flat->lon }}
-                </li>
-                <li class="list-group-item list-group-item-dark">
-                    IS ACTIVE ON-SITE?: {{ $flat->active }}
-                </li>
-                <li class="list-group-item list-group-item-dark">
-                    CREATED: {{ $flat->created_at }}
-                </li>
-                <li class="list-group-item list-group-item-dark">
-                    UPDATED: {{ $flat->updated_at }}
-                </li>
-            </ul>
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <strong>SERVIZI ATTIVI:</strong>
-                </li>
-                @forelse($service as $single_service)
-                <li class="list-group-item">
-                    {{ $single_service }}
-                </li>
-                @empty
-                <li class="list-group-item">
-                    Nessun servizio attivo al momento! :(
-                </li>
-                @endforelse
-            </ul>
+        <div class="col-lg-6">
+            <h3>{{ $flat->title }}</h3>
+            <h5>{{ $flat->address }}</h5>
+            <img class="card-img" src="{{asset('storage/' .$flat->img_uri)}}" alt="flat picture">
         </div>
-        <div class="col">
-            <h4>TITLE = {{ $flat->title }}</h4>
-            <img class="card-img" src="{{asset('storage/' .$flat->img_uri)}}" alt="">
+        <div class="col-lg-6">
+            <h5>Caratteristiche</h5>
+            <table class="table table-striped table-bordered">
+                <tbody>
+                    <tr>
+                        <td><i class="fas fa-door-open"></i></td>
+                        <td>Stanze</td>
+                        <td>{{ $flat->room_qty }}</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-bed"></i></td>
+                        <td>Letti</td>
+                        <td>{{ $flat->bed_qty }}</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-bath"></i></td>
+                        <td>Bagni</td>
+                        <td>{{ $flat->bath_qty }}</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-ruler"></i></td>
+                        <td>Metri quadri</td>
+                        <td>{{ $flat->sq_meters }}</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-globe"></i></td>
+                        <td>Latitudine</td>
+                        <td>{{ $flat->lat }}</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-globe"></i></td>
+                        <td>Longitudine</td>
+                        <td>{{ $flat->lon }}</td>
+                    </tr>
+                    <tr>
+                        <td><i class="far fa-check-circle"></i></td>
+                        <td>Attivo?</td>
+                        <td>{{ $flat->active }}</td>
+                    </tr>
+                    <tr>
+                        <td><i class="far fa-plus-square"></i></td>
+                        <td>data inserimento</td>
+                        <td>{{ $flat->created_at }}</td>
+                    </tr>
+                    <tr>
+                        <td><i class="far fa-edit"></i></td>
+                        <td>ultima modifica</td>
+                        <td>{{ $flat->updated_at }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h5 class="mt-4">Servizi disponibili</h5>
+            <table class="table table-striped table-bordered">
+                <tbody>
+                    @forelse($flat->services as $service)
+                    <tr>
+                        <td><i class="{{ $service->fa_icon }}"></i></td>
+                        <td>{{ $service->name }}</td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td>
+                            Nessun servizio attivo al momento! :(
+                        </td>
+                    </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
