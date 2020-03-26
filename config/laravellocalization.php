@@ -13,7 +13,8 @@ return [
                                     'script' => 'Latn',
                                     'native' => 'English',
                                     'regional' => 'en_GB',
-                                    'menu_laber' => 'EN'
+                                    'menu_laber' => 'EN',
+                                    'flag' => 'https://s3.us-east-2.amazonaws.com/upload-icon/uploads/icons/png/15686566151579150916-20.png',
                             ],
                             'it' =>
                                 [
@@ -21,7 +22,8 @@ return [
                                     'script' => 'Latn',
                                     'native' => 'italiano',
                                     'regional' => 'it_IT',
-                                    'menu_laber' => 'IT'
+                                    'menu_laber' => 'IT',
+                                    'flag' => 'https://s3.us-east-2.amazonaws.com/upload-icon/uploads/icons/png/7290304101579150932-20.png',
                                 ],
 
     ],

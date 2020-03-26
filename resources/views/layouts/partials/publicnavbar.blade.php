@@ -17,7 +17,7 @@
                     @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                         <li class="nav-item">
                             <a class="nav-link" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-                                {{ $properties['menu_laber'] }}
+                            <img src=" {{ $properties['flag'] }}">   
                             </a>
                         </li>
                     @endforeach
@@ -41,7 +41,7 @@
                 @endguest
                 @auth
                     <li class="nav-item {{Route::currentRouteName() == 'upr.flats.index' ? 'active' : ""}}">
-                        <a class="nav-link" href="{{ route('upr.flats.index') }}">{{ __('Dashboard') }}</a>
+                        <a class="nav-link" href="{{ route('upr.flats.index') }}">{{ __('upr_nav.Dashboard') }}</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>{{ Auth::user()->name }} <span class="caret"></span></a>

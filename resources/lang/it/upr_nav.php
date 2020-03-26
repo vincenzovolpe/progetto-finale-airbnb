@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'Dashboard' => 'Pannello di controllo',
+    'Dashboard' => 'Bacheca',
     'Messages' =>  'Messaggi',
     'Offer_an_apartment' =>  'Offri un appartamento',
     'Logout' => 'Esci',
