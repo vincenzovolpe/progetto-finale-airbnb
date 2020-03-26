@@ -33,17 +33,15 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
 </head>
 <body>
-        <main>
-            <div id="short-head" class="container-fluid">
-                @include('layouts.partials.publicnavbar')
-                @yield('searchbox')
-                @yield('login-content')
+    <main>
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="text-center">
+                    <h1>OPS!</h1>
+                    <p>Sembra che questa pagina non esita ancora! Clicca <a href="{{ route('home') }}">qui</a> per tornare in home page!</p>
+                </div>
             </div>
-            @yield('content')
-        </main>
-        <footer page-footer font-small mdb-color pt-4>
-            @include('layouts.partials.footer')
-        </footer>
-    </div>
+        </div>
+    </main>
 </body>
 </html>

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use Braintree_Transaction;
 
 class PaymentsController extends Controller
@@ -23,10 +24,37 @@ class PaymentsController extends Controller
         $flat = Flat::find($id);
         // Effettuo valutazione:
         $flat_user = $flat->user->id;
+        // Oltre a vedere che l'utente sia effettivamente quello connesso, valuto anche se l'offerta per quell'appartamento è scaduta o meno.
         if($logged_user == $flat_user) {
             $id = $request["id"];
             $sponsor_id = $request["sponsor_id"];
-            return view('upr.payment', ["id" => $id, "sponsor_id" => $sponsor_id]);
+            // Aggiungo alcune informazioni alla pagina:
+            $sponsor_hours = Sponsor::find($sponsor_id)->hours;
+            $sponsor_price = Sponsor::find($sponsor_id)->price;
+            $sponsor_title = $flat->title;
+            // Questa è la data di sponsorizzazione (se esiste):
+            $start_date = DB::table('flat_sponsor')->select("created_at")->where("flat_id", $id)->first();
+            // Se non esiste data di sponsorizzazione, posso andare tranquillamente nella pagina di pagamento:
+            if (!$start_date) {
+                return view('upr.payment', ["id" => $id, "sponsor_id" => $sponsor_id, "sponsor_hours" => $sponsor_hours, "sponsor_title" => $sponsor_title, "sponsor_price" => $sponsor_price]);
+            } else {
+                // Se la sponsorizzazione dell'appartamento esiste ed è scaduta, posso andare al pagamento. Altrimenti torno alla index!
+                $start_date = $start_date->created_at;
+                // Differenza oraria:
+                $hour_diff = now()->diffInHours($start_date);
+                // Inizio della promozione attiva, seleziono prima l'id della sponsorizzazione attiva:
+                $active_hours = DB::table('flat_sponsor')->select("sponsor_id")->where("flat_id", $id)->first()->sponsor_id;
+                // Tramite l'id prendo il numero di ore di attività:
+                $active_hours = Sponsor::find($active_hours)->hours;
+                // Valuto se la differenza oraria tra now() e l'inizio della promozione:
+                if ($hour_diff > $sponsor_hours) {
+                    // Mando i dati alla view:
+                    return view('upr.payment', ["id" => $id, "sponsor_id" => $sponsor_id, "sponsor_hours" => $sponsor_hours, "sponsor_title" => $sponsor_title, "sponsor_price" => $sponsor_price]);
+                } else {
+                    // Ritorno all'index, non è ancora il momento di rinnovare!
+                    return redirect()->route('upr.flats.index');
+                }
+            }
         } else {
             return redirect()->route('upr.flats.index');
         }

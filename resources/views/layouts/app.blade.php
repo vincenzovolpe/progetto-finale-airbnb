@@ -38,6 +38,8 @@
                 @include('layouts.partials.publicnavbar')
                 @yield('searchbox')
                 @yield('login-content')
+                @yield('reset_box')
+                @yield('reset_confirm_box')
             </div>
             @yield('content')
         </main>

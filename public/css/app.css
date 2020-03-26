@@ -11812,6 +11812,14 @@ a.text-dark:focus {
   }
 }
 
+.nav-item a {
+  font-size: 1rem;
+}
+
+.nav-item.active {
+  border-bottom: 3px solid #38c172;
+}
+
 #map {
   height: 500px;
   margin-bottom: 100px;
@@ -11904,7 +11912,8 @@ a.text-dark:focus {
   margin: 70px auto;
 }
 
-#dashboard-index .card {
+#dashboard-index .card,
+#upr-msg .card {
   background-color: #f3f3f3;
 }
 
