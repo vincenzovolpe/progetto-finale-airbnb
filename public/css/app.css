@@ -11861,6 +11861,10 @@ a.text-dark:focus {
   height: 220px;
 }
 
+#show-details .card-img {
+  height: 280px;
+}
+
 .card-img-overlay .fa-star {
   font-size: 1.4em;
   color: #ffed4a;
@@ -11902,5 +11906,17 @@ a.text-dark:focus {
 
 #dashboard-index .card {
   background-color: #f3f3f3;
+}
+
+.tt-search-box-input-container {
+  border-radius: 5px;
+}
+
+.tt-address-label {
+  padding-top: 12px;
+}
+
+.tt-search-box {
+  margin-top: 0;
 }
 
