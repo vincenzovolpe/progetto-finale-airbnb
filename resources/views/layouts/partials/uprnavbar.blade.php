@@ -21,7 +21,7 @@
                     @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                         <li class="nav-item">
                             <a class="nav-link" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-                                {{ $properties['menu_laber'] }}
+                                <img src="{{ $properties['flag'] }}">
                             </a>
                         </li>
                     @endforeach
