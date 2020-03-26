@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('content')
+@section('reset_confirm_box')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
+    <div id="homeLeftBox" class="row">
+        <div class="col-lg-6 card">
+            {{-- <div class="card"> --}}
                 <div class="card-header">{{ __('Reset Password') }}</div>
 
                 <div class="card-body">
@@ -40,7 +40,7 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            {{-- </div> --}}
         </div>
     </div>
 </div>

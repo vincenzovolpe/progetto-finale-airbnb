@@ -471,9 +471,9 @@ $(document).on('click', '#delete_flat', function (e) {
 
     }
         //validation nella pagina del Create.blade dei numeri di bagni,letti e camere
-        validationNumber('#room_qty','.room_qty.valid-feedback','.room_qty.invalid-feedback');
-        validationNumber('#bed_qty','.bed_qnty.valid-feedback','.bed_qnty.invalid-feedback');
-        validationNumber('#bath_qty','.bath_qty.valid-feedback','.bath_qty.invalid-feedback');
+        validationNumber('#create #room_qty','#create .room_qty.valid-feedback','#create .room_qty.invalid-feedback');
+        validationNumber('#create #bed_qty','#create .bed_qnty.valid-feedback','#create .bed_qnty.invalid-feedback');
+        validationNumber('#create #bath_qty','#create .bath_qty.valid-feedback','#create .bath_qty.invalid-feedback');
 
         //Funzione di validation nella pagina del Create.blade dei mq
         function validationMq(parametro,valido,invalido,){

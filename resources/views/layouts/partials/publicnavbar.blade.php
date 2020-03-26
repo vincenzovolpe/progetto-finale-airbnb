@@ -16,37 +16,37 @@
                 <ul class="nav">
                     @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                         <li class="nav-item ">
-                            <a class="nav-link" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-                            <img src=" {{ $properties['flag'] }}">   
+                            <a class="nav-link text-dark" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                            <img src=" {{ $properties['flag'] }}">
                             </a>
                         </li>
                     @endforeach
                 </ul>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">{{ __('registration.About_us') }}</a>
+                    <a class="nav-link text-dark" href="#">{{ __('registration.About_us') }}</a>
                 </li>
                 <!-- Authentication Links -->
                 @guest
 
                     <li class="nav-item {{Route::currentRouteName() == 'login' ? 'active' : ""}}">
-                        <a class="nav-link" href="{{ route('login') }}">{{ __('registration.Login') }}</a>
+                        <a class="nav-link text-dark" href="{{ route('login') }}">{{ __('registration.Login') }}</a>
 
 
                     </li>
                     @if (Route::has('register'))
                         <li class="nav-item {{Route::currentRouteName() == 'register' ? 'active' : ""}}">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('registration.Register') }}</a>
+                            <a class="nav-link text-dark" href="{{ route('register') }}">{{ __('registration.Register') }}</a>
                         </li>
                     @endif
                 @endguest
                 @auth
                     <li class="nav-item {{Route::currentRouteName() == 'upr.flats.index' ? 'active' : ""}}">
-                        <a class="nav-link" href="{{ route('upr.flats.index') }}">{{ __('upr_nav.Dashboard') }}</a>
+                        <a class="nav-link text-dark" href="{{ route('upr.flats.index') }}">{{ __('upr_nav.Dashboard') }}</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>{{ Auth::user()->name }} <span class="caret"></span></a>
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle text-dark" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>{{ Auth::user()->name }} <span class="caret"></span></a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
+                            <a class="dropdown-item text-dark" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">{{ __('Logout') }}
                             </a>

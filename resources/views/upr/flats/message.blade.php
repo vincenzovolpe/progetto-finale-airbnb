@@ -1,22 +1,42 @@
 @extends("layouts.upr")
 @section("content")
-    <div class="container">
-        <h1>Pagina dei messaggi</h1>
+    <div id="upr-msg" class="container my-5">
+        <h1 class="my-5">Messaggi ricevuti</h1>
         <div class="row">
-            <div class="col-12">
+            <div class="col-lg-8">
                 @if ($messages->count() > 0)
                     @foreach ($messages as $message)
-                        <ul>
-                            <li>
-                                <p>Messaggio ricevuto da: {{$message->msg_email}}</p>
-                                <p>Appartamento: {{$message->flat->title}}</p>
-                                <p>Data Ricezione: {{$message->created_at}}</p>
-                                <p>Testo del messaggio: {{$message->text_msg}}</p>
-                            </li>
-                        </ul>
+                        <div class="shadow card my-5">
+                            <div class="card-body">
+                                <table class="table table-light table-bordered">
+                                    <tbody>
+                                        <tr class="d-flex">
+                                            <td class="col-3 text-right">Messaggio ricevuto da</td>
+                                            <td class="col-1 text-center"><i class="far fa-envelope-open"></i></td>
+                                            <td class="col-8"> <a href="mailto:{{$message->msg_email}}">{{$message->msg_email}}</a></td>
+                                        </tr>
+                                        <tr class="d-flex">
+                                            <td class="col-3 text-right">Appartamento</td>
+                                            <td class="col-1 text-center"><i class="fas fa-home"></i></td>
+                                            <td class="col-8">{{$message->flat->title}}</td>
+                                        </tr>
+                                        <tr class="d-flex">
+                                            <td class="col-3 text-right">Data Ricezione</td>
+                                            <td class="col-1 text-center"><i class="far fa-calendar-alt"></i></td>
+                                            <td class="col-8">{{$message->created_at}}</td>
+                                        </tr>
+                                        <tr class="d-flex">
+                                            <td class="col-3 text-right">Testo del messaggio</td>
+                                            <td class="col-1 text-center"><i class="far fa-file-alt"></i></td>
+                                            <td class="col-8 table-success">{{$message->text_msg}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     @endforeach
                 @else
-                    Non hai ricevuto alcun messaggio
+                    <p class="my-5">Non hai ricevuto alcun messaggio</p>
                 @endif
             </div>
         </div>

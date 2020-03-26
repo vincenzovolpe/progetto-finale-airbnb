@@ -70635,9 +70635,9 @@ $(document).ready(function () {
   } //validation nella pagina del Create.blade dei numeri di bagni,letti e camere
 
 
-  validationNumber('#room_qty', '.room_qty.valid-feedback', '.room_qty.invalid-feedback');
-  validationNumber('#bed_qty', '.bed_qnty.valid-feedback', '.bed_qnty.invalid-feedback');
-  validationNumber('#bath_qty', '.bath_qty.valid-feedback', '.bath_qty.invalid-feedback'); //Funzione di validation nella pagina del Create.blade dei mq
+  validationNumber('#create #room_qty', '#create .room_qty.valid-feedback', '#create .room_qty.invalid-feedback');
+  validationNumber('#create #bed_qty', '#create .bed_qnty.valid-feedback', '#create .bed_qnty.invalid-feedback');
+  validationNumber('#create #bath_qty', '#create .bath_qty.valid-feedback', '#create .bath_qty.invalid-feedback'); //Funzione di validation nella pagina del Create.blade dei mq
 
   function validationMq(parametro, valido, invalido) {
     $(parametro).keyup(function () {
@@ -70940,8 +70940,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\MAMP\htdocs\progetto-finale-airbnb\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\MAMP\htdocs\progetto-finale-airbnb\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/umbertown/Desktop/Atom - Boolean/GIT/progetto-finale-airbnb/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/umbertown/Desktop/Atom - Boolean/GIT/progetto-finale-airbnb/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
