@@ -12,6 +12,14 @@
 @import '~bootstrap/scss/bootstrap';
 
 
+.nav-item {
+    a {
+        font-size: 1.0rem;
+    }
+    &.active {
+        border-bottom: 3px solid $green;
+    }
+}
 
 #map {
     height: 500px;
@@ -98,7 +106,7 @@
     margin: 70px auto;
 }
 
-#dashboard-index {
+#dashboard-index, #upr-msg {
     .card {
         background-color: $light-grey;
     }

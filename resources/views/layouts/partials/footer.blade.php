@@ -1,5 +1,7 @@
+<div class="container-fluid bg-light border-top">
+
 <!-- Footer Links -->
-  <div class="container text-center text-md-left">
+  <div class="container text-center text-md-left mt-5">
 
     <!-- Footer links -->
     <div class="row text-center text-md-left mt-3 pb-3">
@@ -110,17 +112,17 @@
         <div class="text-center text-md-right">
           <ul class="list-unstyled list-inline">
             <li class="list-inline-item">
-              <a class="btn-floating btn-sm rgba-white-slight mx-1">
+              <a href="#" class="btn-floating btn-sm rgba-white-slight mx-1">
                 <i class="fab fa-facebook-f fa-lg"></i>
               </a>
             </li>
             <li class="list-inline-item">
-              <a class="btn-floating btn-sm rgba-white-slight mx-1">
+              <a href="#" class="btn-floating btn-sm rgba-white-slight mx-1">
                 <i class="fab fa-twitter fa-lg"></i>
               </a>
             </li>
             <li class="list-inline-item">
-              <a class="btn-floating btn-sm rgba-white-slight mx-1">
+              <a href="#" class="btn-floating btn-sm rgba-white-slight mx-1">
                 <i class="fab fa-instagram fa-lg"></i>
               </a>
             </li>
@@ -135,3 +137,4 @@
 
   </div>
   <!-- Footer Links -->
+</div>

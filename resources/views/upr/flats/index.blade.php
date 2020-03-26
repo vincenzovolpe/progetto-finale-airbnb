@@ -15,7 +15,7 @@
     <h1 class="mt-5">I tuoi alloggi</h1>
     {{-- <ul class="list-group"> --}}
         @forelse($flats as $flat)
-            <div class="card my-5">
+            <div class="card shadow my-5">
                 <div class="row no-gutters">
                     <div class="col-md-5">
                         <div class="card-body">

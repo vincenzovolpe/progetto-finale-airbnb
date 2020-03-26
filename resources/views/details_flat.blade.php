@@ -18,54 +18,66 @@
             </script>
         @endif
     <div id="flat-det" class="container">
-        <h2 id="title" class="text-center">{{$flat->title}}</h2>
+        <h2 id="title" class="my-5 text-center">{{$flat->title}}</h2>
         <div class="row">
             <div class="col-12">
-                <img class="d-block w-100" src="{{asset('storage/' .$flat->img_uri)}}" alt="flat picture">
+                <img class="rounded d-block w-100" src="{{asset('storage/' .$flat->img_uri)}}" alt="flat picture">
             </div>
         </div>
-        <div class="row">
-            <div class="col-6">
-                <h3>Dettagli dell'appartamento</h3>
-                <table class="table table-striped">
+        <div class="row my-5">
+            <div class="col-md-6">
+                <h3 class="mt-5">Dettagli dell'appartamento</h3>
+                <table class="table table-striped table-bordered">
                     <tbody>
                         <tr>
-                            <td><i class="fas fa-map-marker-alt"></i></td>
-                            <td>Indirizzo</td>
+                            <td class="text-right">Indirizzo</td>
+                            <td class="text-center"><i class="fas fa-map-marker-alt"></i></td>
                             <td id="address">{{$flat->address}}</td>
                         </tr>
                         <tr>
-                            <td><i class="fas fa-door-open"></i></td>
-                            <td>Numero di stanze</td>
+                            <td class="text-right">Numero di stanze</td>
+                            <td class="text-center"><i class="fas fa-door-open"></i></td>
                             <td>{{$flat->room_qty}}</td>
                         </tr>
                         <tr>
-                            <td><i class="fas fa-bed"></i></td>
-                            <td>Numero di letti</td>
+                            <td class="text-right">Numero di letti</td>
+                            <td class="text-center"><i class="fas fa-bed"></i></td>
                             <td>{{$flat->bed_qty}}</td>
                         </tr>
                         <tr>
-                            <td><i class="fas fa-bath"></i></td>
-                            <td>Numero di bagni</td>
+                            <td class="text-right">Numero di bagni</td>
+                            <td class="text-center"><i class="fas fa-bath"></i></td>
                             <td>{{$flat->bath_qty}}</td>
                         </tr>
                     </tbody>
-                  </table>
-                @if(($flat->services)->isNotEmpty())
-                    <h3>Elenco servizi</h3>
-                        @foreach ($flat->services as $service)
-                            <i class="{{ $service->fa_icon }}"></i>  {{$service->name}} </br>
-                        @endforeach
-                @endif
+                </table>
+
+                <h3>Elenco servizi</h3>
+                <table class="table table-striped table-bordered">
+                    <tbody>
+                        @if(($flat->services)->isNotEmpty())
+                            @foreach ($flat->services as $service)
+                            <tr>
+                                <td class="text-center">
+                                    <i class="{{ $service->fa_icon }}"></i>
+                                </td>
+                                <td>
+                                    {{$service->name}}
+                                </td>
+                            </tr>
+                            @endforeach
+                        @endif
+                    </tbody>
+                </table>
             </div>
-            <div class="col-6">
+            <div class="col-md-6">
             <!-- form user info -->
-                <div class="card card-outline-secondary">
+                <div class="card card-outline-secondary my-5">
                     <div class="card-header">
                     @if (Auth::user() && Auth::user()->id == $flat->user->id)
-                            <h3 class="mb-0">Sei il propietario di questo appartamento</h3>
+                            <h3 class="mt-1">Sei il propietario di questo appartamento</h3>
                     @else
-                            <h3 class="mb-0">Contatta il propietario</h3>
+                            <h3 class="mt-1">Contatta il propietario</h3>
                     @endif
                     </div>
                     @if (Auth::user() && Auth::user()->id == $flat->user->id)
@@ -81,22 +93,21 @@
                                 @else
                                     >
                                 @endif
-                                <label for="email" class="mb-0">Email</label>
-                                <div class="row mb-1">
-                                    <div class="col-lg-12">
-                                            <input type="text" name="msg_email" id="msg_email" required class="form-control @error('msg_email') is-invalid @enderror"
+                                <label for="email" class="col-form-label mb-0">Email</label>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <input type="text" name="msg_email" id="msg_email" required class="form-control @error('msg_email') is-invalid @enderror"
                                             @if (Auth::user() && Auth::user()->id != $flat->user->id)
                                                 value="{{Auth::user()->email}}">
                                             @else
                                                 value="{{old('msg_email')}}">
                                             @endif
-                                            <div class="msg_mail valid-feedback">
+                                            {{-- <div class="msg_mail valid-feedback">
                                                 Inserimento corretto!
-                                            </div>
-                                            <div class="msg_mail invalid-feedback">
+                                            </div> --}}
+                                            <div class="msg_mail invalid-tooltip">
                                                 Inserisci una mail corretta
                                             </div>
-
                                             @error('msg_email')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -104,16 +115,14 @@
                                             @enderror
                                     </div>
                                 </div>
-                                <label for="message" class="mb-0">Messaggio</label>
-                                <div class="row mb-1">
-                                    <div class="col-lg-12">
-
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <label for="message" class="col-form-label">Messaggio</label>
                                         <textarea rows="6" value="text_msg" name="text_msg" id="text_msg" class="form-control @error('text_msg') is-invalid @enderror" required="">{{ old('text_msg') }}</textarea>
-
-                                            <div class="text_msg valid-feedback">
+                                            {{-- <div class="text_msg valid-feedback">
                                                 Inserimento corretto!
-                                            </div>
-                                            <div class="text_msg invalid-feedback">
+                                            </div> --}}
+                                            <div class="text_msg invalid-tooltip">
                                                 Inserisci un numero minimo di 10 caratteri
                                             </div>
                                             @error('text_msg')
@@ -129,7 +138,7 @@
                                 <input type="text" name="flat_title" value="{{$flat->title}}" hidden>
                                 <input id="latNumber" type="text" name="lon" value="{{$flat->lon}}" hidden>
                                 <input id="lonNumber" type="text" name="lat" value="{{$flat->lat}}" hidden>
-                                <button type="submit" class="invio btn btn-danger btn-lg float-left" disabled>Invia messaggio</button>
+                                <button type="submit" class="invio btn btn-success mt-3" disabled>Invia messaggio</button>
                             </fieldset>
                         </form>
                     {{-- @endif --}}
