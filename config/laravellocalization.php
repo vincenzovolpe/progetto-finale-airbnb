@@ -14,7 +14,7 @@ return [
                                     'native' => 'English',
                                     'regional' => 'en_GB',
                                     'menu_laber' => 'EN',
-                                    'flag' => 'https://s3.us-east-2.amazonaws.com/upload-icon/uploads/icons/png/15686566151579150916-20.png',
+                                    'flag' => 'https://s3.us-east-2.amazonaws.com/upload-icon/uploads/icons/png/14477240421536065016-20.png',
                             ],
                             'it' =>
                                 [
