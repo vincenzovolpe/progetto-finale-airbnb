@@ -39,9 +39,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
         Route::get('flats/{flat}/sponsor', 'FlatController@sponsor')->name('flats.sponsor');
         // Rotta per gestire il form della sponsorizzazione:
         Route::post('/flats/submit/sponsor', 'FlatController@submitSponsor')->name('flats.submit');
-
+        // Rotta per gestire i pagamenti:
         Route::get('/payment', 'PaymentsController@index')->name('payment.index');
         Route::get('/payment/process/flat/{id}/sponsor/{sponsor_id}', 'PaymentsController@process')->name('payment.process');
-
     });
 });
