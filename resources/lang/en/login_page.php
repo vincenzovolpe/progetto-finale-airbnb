@@ -13,14 +13,8 @@ return [
     |
     */
 
-    'slogan' => 'Book a beautifull Flats',
-    'city' => 'Choose the city',
-    'search_placeholdem' => 'Everywhere',
-    'btn_search' => 'Search',
-    'firts_flat' => 'Featured Bool-BnB Plus apartments',
-    'flat_in' => 'Apartments in',
-    'btn_details' => 'See details',
-    'flats' => 'Unique apartments from all over the world',
-    'no_flat' => 'There are no sponsored apartments',
-
+    'Login' => 'Login',
+    'E-mail' =>  'E-Mail Address',
+    'Remember_me' =>  'Remember me',
+    'Forgot_pass' => 'Forgot your password?',
 ];

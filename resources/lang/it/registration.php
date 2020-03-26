@@ -13,6 +13,7 @@ return [
     |
     */
 
+    'About_us' => 'Chi Siamo',
     'Register' => 'Registrati',
     'Login' => 'Accedi',
     'Name' => 'Nome',
@@ -21,5 +22,11 @@ return [
     'E-mail' =>  'Indirizzo E-Mail',
     'Confirm_Password' =>  'Conferma Password',
     'btn_confirm' => 'Conferma',
-
+    // messaggio di errore e validazione
+    'Valid' => 'Inserimento corretto!',
+    'Invalid_name' => 'Inserisci un nome valido - min 3 caratteri',
+    'Invalid_surname' => 'Inserisci un cognome valido - min 3 caratteri',
+    'Invalid_age' => 'Devi avere almeno 18 anni',
+    'Invalid_mail' => 'Inserisci una mail corretta',
+    'Invalid_pass' => 'Inserisci una password valida - min 8 caratteri',
 ];

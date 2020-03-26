@@ -23,7 +23,7 @@
                     @endforeach
                 </ul>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Chi Siamo</a>
+                    <a class="nav-link" href="#">{{ __('registration.About_us') }}</a>
                 </li>
                 <!-- Authentication Links -->
                 @guest
