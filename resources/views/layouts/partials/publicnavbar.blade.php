@@ -17,7 +17,7 @@
                     @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                         <li class="nav-item">
                             <a class="nav-link" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-                                {{ $properties['native'] }}
+                                {{ $properties['menu_laber'] }}
                             </a>
                         </li>
                     @endforeach
@@ -27,8 +27,11 @@
                 </li>
                 <!-- Authentication Links -->
                 @guest
+
                     <li class="nav-item {{Route::currentRouteName() == 'login' ? 'active' : ""}}">
-                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        <a class="nav-link" href="{{ route('login') }}">{{ __('registration.Login') }}</a>
+
+
                     </li>
                     @if (Route::has('register'))
                         <li class="nav-item {{Route::currentRouteName() == 'register' ? 'active' : ""}}">
