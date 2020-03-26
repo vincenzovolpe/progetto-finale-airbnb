@@ -6,39 +6,39 @@
 
       <!-- Grid column -->
       <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-          <h6 class="text-uppercase mb-4 font-weight-bold">Informazioni</h6>
+          <h6 class="text-uppercase mb-4 font-weight-bold">{{__('footer.Info')}}</h6>
           <p>
-            <a href="#!">Diversità e appartenenza</a>
+            <a href="#!">{{__('footer.Diversity')}}</a>
           </p>
           <p>
-            <a href="#!">Accessibilità</a>
+            <a href="#!">{{__('footer.Accesibility')}}</a>
           </p>
           <p>
-            <a href="#!">Affidabilità e sicurezza</a>
+            <a href="#!">{{__('footer.Affidability')}}</a>
           </p>
           <p>
-            <a href="#!">Airbnb Citizen</a>
+            <a href="#!">{{__('footer.Citizen')}}</a>
           </p>
           <p>
-            <a href="#!">Newsroom</a>
+            <a href="#!">{{__('footer.Newsroom')}}</a>
           </p>
       </div>
       <!-- Grid column -->
 
       <!-- Grid column -->
       <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-        <h6 class="text-uppercase mb-4 font-weight-bold">Community</h6>
+        <h6 class="text-uppercase mb-4 font-weight-bold">{{__('footer.Community')}}</h6>
         <p>
-          <a href="#!">Airbnb Magazine</a>
+          <a href="#!">{{__('footer.Magazine')}}</a>
         </p>
         <p>
-          <a href="#!">Airbnb for Work</a>
+          <a href="#!">{{__('footer.For_work')}}</a>
         </p>
         <p>
-          <a href="#!">Invita degli amici</a>
+          <a href="#!">{{__('footer.Invite')}}</a>
         </p>
         <p>
-          <a href="#!">Opportunità di lavoro</a>
+          <a href="#!">{{__('footer.Opportunity')}}</a>
         </p>
       </div>
       <!-- Grid column -->
@@ -47,24 +47,24 @@
 
       <!-- Grid column -->
       <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-        <h6 class="text-uppercase mb-4 font-weight-bold">Ospita</h6>
+        <h6 class="text-uppercase mb-4 font-weight-bold">{{__('footer.Hosts')}}</h6>
         <p>
-          <a href="#!">Offri la tua casa</a>
+          <a href="#!">{{__('footer.Offer_your_house')}}</a>
         </p>
         <p>
-          <a href="#!">Proponi un'esperienza</a>
+          <a href="#!">{{__('footer.Experience')}}</a>
         </p>
         <p>
-          <a href="#!">Affittare responsabilmente</a>
+          <a href="#!">{{__('footer.Responsability')}}</a>
         </p>
         <p>
-          <a href="#!">Open Homes</a>
+          <a href="#!">{{__('footer.Open')}}</a>
         </p>
         <p>
-          <a href="#!">Olimpiadi</a>
+          <a href="#!">{{__('footer.Olympic_games')}}</a>
         </p>
         <p>
-          <a href="#!">Centro risorse</a>
+          <a href="#!">{{__('footer.Resources')}}</a>
         </p>
       </div>
 
@@ -73,12 +73,12 @@
 
       <!-- Grid column -->
       <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-        <h6 class="text-uppercase mb-4 font-weight-bold">Assistenza</h6>
+        <h6 class="text-uppercase mb-4 font-weight-bold">{{__('footer.Assistance')}}</h6>
         <p>
-          <a href="#!">Centro Assistenza</a>
+          <a href="#!">{{__('footer.Assistance_center')}}</a>
         </p>
         <p>
-          <a href="#!">Servizio di assistenza di quartiere</a>
+          <a href="#!">{{__('footer.Assistance_service')}}</a>
         </p>
       </div>
       <!-- Grid column -->
