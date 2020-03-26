@@ -70250,7 +70250,16 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 // const app = new Vue({
 //     el: '#app',
 // });
-// Options for the fuzzySearch service
+
+var href = window.location.href; // Variabile che memorizza il placeholder della  searchbox per le mappe
+
+var place = 'Ovunque';
+
+if (href.indexOf('/en') > -1) {
+  // Variabile che memorizza il placeholder in inglese della  searchbox per le mappe
+  place = 'Everywhere';
+} // Options for the fuzzySearch service
+
 
 var searchOptions = {
   key: 'Y2cMr97XoBZZKKVXgUS844gofkPiZFnA',
@@ -70260,11 +70269,17 @@ var searchOptions = {
 var searchBoxOptions = {
   minNumberOfCharacters: 0,
   searchOptions: searchOptions,
-  placeholder: 'Ovunque',
+  placeholder: place,
   noResultsMessage: 'Nessun risultato trovato'
 }; // creazione dell'oggetto searchBox generico
 
-var ttSearchBox = new _tomtom_international_web_sdk_plugin_searchbox__WEBPACK_IMPORTED_MODULE_2___default.a(_tomtom_international_web_sdk_services__WEBPACK_IMPORTED_MODULE_1__["services"], searchBoxOptions);
+var ttSearchBox = new _tomtom_international_web_sdk_plugin_searchbox__WEBPACK_IMPORTED_MODULE_2___default.a(_tomtom_international_web_sdk_services__WEBPACK_IMPORTED_MODULE_1__["services"], searchBoxOptions); // Dichiarazioni di alcune variabili globali (coordinate, titolo, indirizzo e risulta della success di Ajax per creare la mappa nella pagina di ricerca)
+
+var lon_marker;
+var lat_marker;
+var title_marker;
+var address_marker;
+var risultati_marker;
 $(document).ready(function () {
   // Imposto l'input della searchbox a required
   $('.tt-search-box-input').prop('required', true); // Variabili da passare a createMap
@@ -70276,8 +70291,6 @@ $(document).ready(function () {
 
   $("#address-edit").find(".tt-search-box-input").val(address);
   $(".tt-search-box-input").attr('name', 'address'); // Creo la mappa solo quando mi trovo  all'interno della pagina di dettaglio dell'appartamento
-
-  var href = window.location.href;
 
   if (href.indexOf('/flats/details') > -1) {
     // Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
@@ -70305,6 +70318,11 @@ $(document).ready(function () {
       },
       success: function success(data) {
         if (data.success) {
+          risultati_marker = data.result; //console.log(risultati_marker);
+          //Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
+
+          createMapSearch(risultati_marker); //console.log(data.result);
+
           $('#card_container').empty();
 
           for (var i = 0; i < data.result.length; i++) {
@@ -70428,6 +70446,10 @@ $(document).ready(function () {
       },
       success: function success(data) {
         if (data.success) {
+          risultati_marker = data.result; //console.log(risultati_marker);
+          //Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
+
+          createMapSearch(risultati_marker);
           $('#card_container').empty();
 
           for (var i = 0; i < data.result.length; i++) {
@@ -70712,11 +70734,9 @@ function handleResultsFound(event) {
 
 function handleResultSelection(event) {
   if (isFuzzySearchResult(event)) {
-    // //Rendo cliccabili i bottoni Cerca della Home e della Find solo se le searchbox sono valorizzate
-    // $('#btn_home').attr('disabled', false);
-    // $('#btn_find').attr('disabled', false);
     var result = event.data.result;
-    console.log(result);
+    console.log(result); // Memorizzo le coordinate lon e lat
+
     var longitudine = result.position.lng;
     var latitudine = result.position.lat; // coordinate per la pagina details
 
@@ -70737,7 +70757,8 @@ function isFuzzySearchResult(event) {
   return !('matches' in event.data.result);
 }
 
-function createMap(longitudine, latitudine, title, address) {
+function createMap(longitudine, latitudine, title, address, risultati_marker) {
+  //console.log(risultati_marker);
   //var roundLatLng = Formatters.roundLatLng;
   var center = [latitudine, longitudine];
   var popup = new _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_0___default.a.Popup({
@@ -70757,6 +70778,32 @@ function createMap(longitudine, latitudine, title, address) {
   var marker = new _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_0___default.a.Marker({}).setLngLat(center).addTo(map);
   popup.setHTML(title + "<br>" + address + "<br>" + latitudine + " " + longitudine);
   marker.setPopup(popup); //marker.togglePopup();
+}
+
+function createMapSearch(risultati_marker) {
+  console.log(risultati_marker);
+  console.log(risultati_marker[0].lon);
+  var center = [risultati_marker[0].lon, risultati_marker[0].lat];
+  var map = _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_0___default.a.map({
+    key: 'Y2cMr97XoBZZKKVXgUS844gofkPiZFnA',
+    container: 'map',
+    center: center,
+    zoom: 7,
+    style: 'tomtom://vector/1/basic-main',
+    dragPan: !isMobileOrTablet()
+  });
+  map.addControl(new _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_0___default.a.FullscreenControl());
+  map.addControl(new _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_0___default.a.NavigationControl());
+
+  for (var i = 0; i < risultati_marker.length; i++) {
+    var popup = new _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_0___default.a.Popup({
+      offset: 35
+    }); //Creazione del marker all'indirizzo dell'Appartamento
+
+    var marker = new _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_0___default.a.Marker({}).setLngLat([risultati_marker[i].lon, risultati_marker[i].lat]).addTo(map);
+    popup.setHTML(risultati_marker[i].title + "<br>" + risultati_marker[i].address + "<br>" + risultati_marker[i].lon + " " + risultati_marker[i].lat);
+    marker.setPopup(popup); //marker.togglePopup();
+  }
 }
 
 /***/ }),

@@ -41,7 +41,7 @@
             </div>
             @yield('content')
         </main>
-        <footer page-footer font-small mdb-color pt-4>
+        <footer class="border-top page-footer font-small mdb-color pt-4">
             @include('layouts.partials.footer')
         </footer>
     </div>

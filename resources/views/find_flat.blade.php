@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="container">
-        <div class="row col-md-6">
-            <div id="flat_search" class="card">
+        <div class="row">
+            <div id="flat_search" class="card col-md-6" >
                 <h2 class="card-body">Ricerca avanzata</h2>
                 <form id="form_find">
                     <div class="col">
@@ -50,6 +50,12 @@
                         </div>
                     </div>
                 </form>
+            </div>
+            <div id="flat_map" class="card col-md-6">
+                {{-- <h2 class="text-center">Mappa appartamenti filtrati</h2> --}}
+                <div id='map' class='full-map'>
+
+                </div>
             </div>
         </div>
         <div id="find-results" class="row">
