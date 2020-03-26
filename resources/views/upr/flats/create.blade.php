@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-10">
             <form method="POST" action="{{ route('upr.flats.store') }}" enctype="multipart/form-data">
                 @csrf
                 <!-- Inserimento titolo(descrizione) -->
@@ -24,7 +24,7 @@
                 </div>
                 <!-- Inserimento numero di stanze -->
                 <div class="form-group row">
-                    <label for="room_qty" class="col-sm-3 col-form-label text-md-left">{{ __('Number of rooms') }}</label>
+                    <label for="room_qty" class="col-sm-3 col-form-label text-md-left"><i class="fas fa-door-open mr-3"></i> {{ __('Number of rooms') }}</label>
                     <div class="col-sm-3">
                         <input id="room_qty" class="form-control @error('room_qty') is-invalid @enderror" type="number" name="room_qty" value="{{ old('room_qty')}}" required>
                         <div class="room_qty invalid-tooltip">
@@ -34,7 +34,7 @@
                 </div>
                 <!-- Inserimento numero di letti -->
                 <div class="form-group row">
-                    <label for="bed_qty" class="col-sm-3 col-form-label text-md-left">{{ __('Number of beds') }}</label>
+                    <label for="bed_qty" class="col-sm-3 col-form-label text-md-left"><i class="fas fa-bed mr-3"></i> {{ __('Number of beds') }}</label>
                     <div class="col-sm-3">
                         <input id="bed_qty" class="form-control @error('bed_qty') is-invalid @enderror" type="number" name="bed_qty" value="{{ old('bed_qty')}}" required>
                         <div class="bed_qnty invalid-tooltip">
@@ -44,7 +44,7 @@
                 </div>
                 <!-- Inserimento numero di bagni -->
                 <div class="form-group row">
-                    <label for="bath_qty" class="col-sm-3 col-form-label text-md-left">{{ __('Number of baths') }}</label>
+                    <label for="bath_qty" class="col-sm-3 col-form-label text-md-left"><i class="fas fa-bath mr-3"></i> {{ __('Number of baths') }}</label>
                     <div class="col-sm-3">
                         <input id="bath_qty" class="form-control @error('bath_qty') is-invalid @enderror" type="number" name="bath_qty" value="{{ old('bath_qty')}}" required>
                         <div class="bath_qty invalid-tooltip">
@@ -54,7 +54,7 @@
                 </div>
                 <!-- Inserimento metri quadri -->
                 <div class="form-group row">
-                    <label for="sq_meters" class="col-sm-3 col-form-label text-md-left">{{ __('Square meters') }}</label>
+                    <label for="sq_meters" class="col-sm-3 col-form-label text-md-right">{{ __('Square meters') }} <i class="fas fa-ruler ml-2"></i></label>
                     <div class="col-sm-3">
                         <input id="sq_meters" class="form-control @error('sq_meters') is-invalid @enderror" type="number" name="sq_meters" value="{{ old('sq_meters')}}" required>
                         <div class="sq_meters invalid-tooltip">
@@ -65,7 +65,7 @@
 
                 <!-- searchbox indirizzo collegato a tomtom -->
                 <div class="form-group row">
-                    <label class="col-sm-3 col-form-label text-md-left tt-address-label">indirizzo</label>
+                    <label class="col-sm-3 col-form-label text-md-left tt-address-label"> indirizzo</label>
                     <div class="col-sm-9">
                         {{-- <input id="address" type="text" name="address" value="{{ $flat->address }}" required hidden> --}}
                         <div id="address-edit" class="fuzzy-create">
