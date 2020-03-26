@@ -70377,9 +70377,9 @@ $(document).ready(function () {
       title: "Sei sicuro?",
       text: "L'appartamento verrà cancellato definitivamente!",
       icon: 'warning',
+      showCancelButton: true,
       confirmButtonText: 'Si',
-      cancelButtonText: 'No',
-      showCancelButton: true
+      cancelButtonText: 'No'
     }).then(function (willDelete) {
       if (willDelete.value) {
         form.submit();

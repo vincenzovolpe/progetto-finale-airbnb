@@ -12,15 +12,8 @@ return [
     | you want to customize your views to better match your application.
     |
     */
-
-    'slogan' => 'Book a beautifull Flats',
-    'city' => 'Choose the city',
-    'search_placeholdem' => 'Everywhere',
-    'btn_search' => 'Search',
-    'firts_flat' => 'Featured Bool-BnB Plus apartments',
-    'flat_in' => 'Apartments in',
-    'btn_details' => 'See details',
-    'flats' => 'Unique apartments from all over the world',
-    'no_flat' => 'There are no sponsored apartments',
-
+    'Login' => 'Accedi',
+    'E-mail' =>  'Indirizzo E-Mail',
+    'Remember_me' =>  'Ricordami',
+    'Forgot_pass' => 'Password dimenticata?',
 ];

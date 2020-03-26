@@ -5,7 +5,7 @@
     <div id="homeLeftBox" class="row">
         <div class="col-lg-6 card border-light shadow">
             <div>
-                <h3>{{ __('registration.register') }}</h3>
+                <h3>{{ __('registration.Register') }}</h3>
             </div>
             <div class="card-body">
                 <form class="needs-validation" novalidate method="POST" action="{{ route('register') }}">
@@ -16,10 +16,10 @@
                         <div class="col-md-6">
                             <input id="name" type="text" minlength="3" maxlength="20" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus style="text-transform:capitalize">
                             <div class="name valid-feedback">
-                                Inserimento corretto!
+                                {{ __('registration.Valid') }}
                             </div>
                             <div class="name invalid-feedback">
-                                Inserisci un nome valido - min 3 caratteri
+                                {{ __('registration.Invalid_name') }}
                             </div>
                         </div>
                     </div>
@@ -29,10 +29,10 @@
                         <div class="col-md-6">
                             <input id="surname" type="text" minlength="3" maxlength="20" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{ old('surname') }}" required autocomplete="surname" autofocus style="text-transform: capitalize">
                             <div class="surname valid-feedback">
-                                Inserimento corretto!
+                                {{ __('registration.Valid') }}
                             </div>
                             <div class="surname invalid-feedback">
-                                Inserisci un nome valido - min 3 caratteri
+                                {{ __('registration.Invalid_surname') }}
                             </div>
                         </div>
                     </div>
@@ -42,10 +42,10 @@
                         <div class="col-md-6">
                             <input id="date_of_birth" type="date" class="form-control @error('date_of_birth') is-invalid @enderror" name="date_of_birth" value="{{ old('date_of_birth') }}" required autocomplete="date_of_birth" autofocus>
                             <div class="date valid-feedback">
-                                Inserimento corretto!
+                                {{ __('registration.Valid') }}
                             </div>
                             <div class="date invalid-feedback">
-                                Devi avere almeno 18 anni
+                                {{ __('registration.Invalid_age') }}
                             </div>
                         </div>
                     </div>
@@ -54,10 +54,10 @@
                         <div class="col-md-6">
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email"  {{-- onclick="validateEmail('#email')"--}} >
                             <div class="mail valid-feedback">
-                                Inserimento corretto!
+                                {{ __('registration.Valid') }}
                             </div>
                             <div class="mail invalid-feedback">
-                                Inserisci una mail corretta
+                                {{ __('registration.Invalid_mail') }}
                             </div>
                         </div>
                     </div>
@@ -66,10 +66,10 @@
                         <div class="col-md-6">
                             <input id="password" type="password" minlength="8" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
                             <div class="valid-feedback">
-                                Inserimento corretto!
+                                {{ __('registration.Valid') }}
                             </div>
                             <div class="invalid-feedback">
-                                Inserisci una password valida
+                                {{ __('registration.Invalid_pass') }}
                             </div>
                         </div>
                     </div>

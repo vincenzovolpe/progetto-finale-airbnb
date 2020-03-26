@@ -28,20 +28,26 @@
                 </ul>
                 <!-- Authentication Links -->
                 @guest
-                    <li class="nav-item">
+                    <li class="nav-item {{Route::currentRouteName() == 'login' ? 'active' : ""}}">
                         <a class="nav-link" href="{{ route('login') }}">{{ __('registration.Login') }}</a>
                     </li>
                     @if (Route::has('register'))
-                        <li class="nav-item">
+                        <li class="nav-item {{Route::currentRouteName() == 'login' ? 'active' : ""}}">
                             <a class="nav-link" href="{{ route('register') }}">{{ __('registration.Register') }}</a>
                         </li>
                     @endif
                 @else
-                    <a class="nav-link" href="{{ route('upr.flats.index') }}">{{ __('Dashboard') }}</a>
+                    <li class="nav-item {{Route::currentRouteName() == 'upr.flats.index' ? 'active' : ""}}">
+                        <a class="nav-link" href="{{ route('upr.flats.index') }}">{{ __('upr_nav.Dashboard') }}</a>
+                    </li>
                     @if (Auth::user()->flats->count())
-                    <a class="nav-link" href="{{ route('messages.index') }}">{{ __('Messaggi') }}</a>
+                        <li class="nav-item {{Route::currentRouteName() == 'messages.index' ? 'active' : ""}}">
+                            <a class="nav-link" href="{{ route('messages.index') }}">{{ __('upr_nav.Messages') }}</a>
+                        </li>
                     @endif
-                    <a class="nav-link" href="{{ route('upr.flats.create') }}">{{ __('Offri un appartamento') }}</a>
+                    <li class="nav-item {{Route::currentRouteName() == 'upr.flats.create' ? 'active' : ""}}">
+                        <a class="nav-link" href="{{ route('upr.flats.create') }}">{{ __('upr_nav.Offer_an_apartment') }}</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }} <span class="caret"></span>
@@ -50,7 +56,7 @@
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
+                                {{ __('upr_nav.Logout') }}
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
