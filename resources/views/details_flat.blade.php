@@ -17,7 +17,7 @@
             )
             </script>
         @endif
-    <div id="flat-det" class="container">
+    <div id="flat-det" class="container my-5">
         <h2 id="title" class="my-5 text-center">{{$flat->title}}</h2>
         <div class="row">
             <div class="col-12">
