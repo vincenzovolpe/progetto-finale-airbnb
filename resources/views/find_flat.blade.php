@@ -16,12 +16,12 @@
                             <div class="form-group col-md-4">
                                 <!-- Inserimento numero di stanze -->
                                 <label for="room_qty" class="text-md-right">Numero stanze</label>
-                                <input id="room_qty" type="number" name="room_qty" class="form-control">
+                                <input id="room_qty" type="number" name="room_qty" class="form-control" max= 20>
                             </div>
                             <div class="form-group col-md-4">
                                 <!-- Inserimento numero di letti -->
                                 <label for="bed_qty" class="text-md-right">Numero Letti</label>
-                                <input id="bed_qty" type="number" name="bed_qty" class="form-control">
+                                <input id="bed_qty" type="number" name="bed_qty" class="form-control" max= 20 >
                             </div>
                             <div class="form-group col-md-4">
                                 <!-- Inserimento distanza in km -->

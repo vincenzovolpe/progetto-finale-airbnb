@@ -10,7 +10,7 @@
     </div>
     <div class="row">
         <div class="col-lg-6">
-            <form method="POST" action="{{ route('upr.flats.store') }}" enctype="multipart/form-data">
+            <form id="create" method="POST" action="{{ route('upr.flats.store') }}" enctype="multipart/form-data">
                 @csrf
                 <!-- Inserimento titolo(descrizione) -->
                 <div class="form-group row">
