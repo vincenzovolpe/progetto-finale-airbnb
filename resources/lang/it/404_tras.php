@@ -13,9 +13,8 @@ return [
     |
     */
 
-    'Click' => "Sembra che questa pagina non esista ancora! Clicca ",
-    'Here' => 'qui ',
-    'Home_page' => 'per tornare in homepage!',
+    'Alert' => 'Attenzione! - Pagina non trovata',
+    'Button' => 'TORNA IN HOME PAGE',
 
 
 
