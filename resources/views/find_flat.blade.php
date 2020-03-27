@@ -58,9 +58,9 @@
                 </div>
             </div>
         </div>
-        <div id="find-results" class="row">
+        <div id="find-results">
             <!-- Card package -->
-            <div id="card_container" class="card-columns">
+            <div id="card_container" class="row">
             <!-- Appendo il contenuto del template handlebars -->
             </div>
         </div>
@@ -68,15 +68,16 @@
 
     <!-- script handlebars -->
     <script id="card_template" type="text/x-handlebars-template">
-        <div class="card">
-            <img class="card-img" src="{{asset('storage/')}}/@{{ img_uri }}" alt="">
-            <div class="card-img-overlay">
-                <a href="#" class="btn btn-light btn-sm"></a>
-            </div>
-            <div class="card-body">
-                <h4 class="card-title">@{{ title }}</h4>
-                <a class="btn btn-success stretched-link" style="position: relative;" href="{{ url('flats/details/')}}/@{{ flat_details }}">{{__('search.Details')}}</a>
-
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+            <div class="card bg-light shadow mb-5">
+                <img class="card-img" src="{{asset('storage/')}}/@{{ img_uri }}" alt="">
+                <div class="card-img-overlay">
+                    <a href="#" class="btn btn-light btn-sm"></a>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">@{{ title }}</h4>
+                    <a class="btn btn-success stretched-link" style="position: relative;" href="{{ url('flats/details/')}}/@{{ flat_details }}">{{__('search.Details')}}</a>
+                </div>
             </div>
         </div>
     </script>

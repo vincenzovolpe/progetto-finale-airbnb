@@ -77,7 +77,8 @@ var lon_marker;
 var lat_marker;
 var title_marker;
 var address_marker;
-var risultati_marker;
+var risultati_marker_home;
+var risultati_marker_find;
 
 $(document).ready(function(){
 
@@ -94,10 +95,8 @@ $(document).ready(function(){
     $("#address-edit").find(".tt-search-box-input").val(address);
     $(".tt-search-box-input").attr('name', 'address');
 
-    // Creo la mappa solo quando mi trovo  all'interno della pagina di dettaglio dell'appartamento
-
-    if(href.indexOf('/flats/details') > -1)
-    {
+    // Creo la mappa solo quando mi trovo all'interno della pagina di dettaglio dell'appartamento
+    if(href.indexOf('/flats/details') > -1) {
         // Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
         createMap(lonNumber, latNumber, title, address);
     }
@@ -130,11 +129,11 @@ $(document).ready(function(){
             success: function(data) {
                     if (data.success) {
 
-                        risultati_marker = data.result;
+                        risultati_marker_home = data.result;
                         //console.log(risultati_marker);
 
                         //Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
-                        createMapSearch(risultati_marker);
+                        createMapSearch(risultati_marker_home);
 
                         //console.log(data.result);
                         $('#card_container').empty();
@@ -153,17 +152,18 @@ $(document).ready(function(){
 
                             var html = template_function(variables);
 
-                            $('.card-columns').append(html);
+                            $('#card_container').append(html);
                         }
                     } else {
-                        $('.card-columns').append('La ricerca non ha trovato nessun appartamento!');
+                        $('#card_container').append('La ricerca non ha trovato nessun appartamento!');
                     }
 
             }
         })
     }
-// Facciamo in modo che il bottone cerca nella pagina Find faccia uscire il popup di convalida
-//in questo form non c'è una submit, perciò adottiamo questo trucco
+
+//    Facciamo in modo che il bottone cerca nella pagina Find faccia uscire il popup di convalida
+//   in questo form non c'è una submit, perciò adottiamo questo trucco
 (function($){
     var isValid = null;
     var form = $('#form_find');
@@ -205,16 +205,29 @@ $(document).ready(function(){
 
 // Popup di conferma per la cancellazione di un appartamento
 $(document).on('click', '#delete_flat', function (e) {
+    // Traduzione del popup di conferma per la cancellazione Flat
+    var sure = 'Sei sicuro?';
+    var deleting = "L'appartamento verrà cancellato definitivamente!";
+    var confirm = "Si";
+
+    if(href.indexOf('/en/upr/flats') > -1) {
+        // Variabile che memorizza il placeholder in inglese della  searchbox per le mappe
+        sure = 'Are you sure?';
+        deleting = 'The apartment will be permanently deleted!';
+        confirm = 'Yes';
+    }
+
+
     var id = $(this).data('id');
     var form =  $(this).closest("form");
     e.preventDefault();
     console.log(id);
     Swal.fire({
-            title: "Sei sicuro?",
-            text: "L'appartamento verrà cancellato definitivamente!",
+            title: sure,
+            text: deleting,
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Si',
+            confirmButtonText: confirm,
             cancelButtonText: 'No',
         })
         .then((willDelete) => {
@@ -227,6 +240,7 @@ $(document).on('click', '#delete_flat', function (e) {
     // Chiamata Ajax nella pagina Find con eventuali filtri di Ricerca
     $('#btn_find').click(function(event){
 
+        if ($('.tt-search-box-input').val()) {
             var lat = $('#latNumberFind').val();
             var lon = $('#lonNumberFind').val();
             var distance = $('#km_radius').val();
@@ -252,7 +266,7 @@ $(document).on('click', '#delete_flat', function (e) {
             }
             console.log(checkbox_selected);
             console.log(checkbox_count);
-
+            console.log(lat);
             $.ajax({
                 url: 'http://localhost:8000/api/flats',
                 method: 'GET',
@@ -268,11 +282,13 @@ $(document).on('click', '#delete_flat', function (e) {
 
                 success: function(data) {
                         if (data.success) {
-                            risultati_marker = data.result;
+
+                            risultati_marker_find = data.result;
+                            console.log($('.tt-search-box-input').val());
                             //console.log(risultati_marker);
 
-                            //Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
-                            createMapSearch(risultati_marker);
+                                //Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
+                                createMapSearch(risultati_marker_find);
 
                             $('#card_container').empty();
 
@@ -290,16 +306,17 @@ $(document).on('click', '#delete_flat', function (e) {
 
                                 var html = template_function(variables);
 
-                                $('.card-columns').append(html);
+                                $('#card_container').append(html);
                             }
                         } else {
 
                             $('#card_container').empty();
 
-                            $('.card-columns').append('<p>La ricerca non ha trovato nessun appartamento!<p>');
+                            $('#card_container').append('<p>La ricerca non ha trovato nessun appartamento!<p>');
                         }
                 }
             })
+        }
 
         });
 
@@ -384,20 +401,21 @@ $(document).on('click', '#delete_flat', function (e) {
                 // console.log(point2);
                 if ( chioccia > point && point2 > chioccia) {
                     // console.log('ok');
-                    // $(submit).removeAttr("disabled");
+                    $(submit).removeAttr("disabled");
                     $(valido).show();
                     $(invalido).hide();
                     $(mail).addClass('is-valid');
                     $(mail).removeClass('is-invalid');
                 }else if(chioccia >= 1 && chioccia < point){
                     // console.log('ok');
-                    // $(submit).removeAttr("disabled");
+                    $(submit).removeAttr("disabled");
                     $(valido).show();
                     $(invalido).hide();
                     $(mail).addClass('is-valid');
                     $(mail).removeClass('is-invalid');
                 }else{
                     // console.log('no');
+                    $(submit).attr("disabled",true);
                     $(invalido).show();
                     $(valido).hide();
                     $(mail).addClass('is-invalid');
@@ -408,7 +426,7 @@ $(document).on('click', '#delete_flat', function (e) {
             })
         };
         // Validazione mail in fase di registrazione e invio messaggio
-        validationEmail('#email','.mail.valid-feedback','.mail.invalid-feedback');
+        validationEmail('#email','.mail.valid-feedback','.mail.invalid-feedback','.invio');
         validationEmail('#msg_email','.msg_mail.valid-feedback','.msg_mail.invalid-feedback','.invio');
 
         // Funzione di validazione della lunghezza  messaggio nei details e lunghezza della mail > 0
@@ -423,7 +441,7 @@ $(document).on('click', '#delete_flat', function (e) {
                 $('#text_msg').addClass('is-valid');
                 $('#text_msg').removeClass('is-invalid');
             }else{
-                $('.invio').attr("disabled",true);
+                $('.invio').add("disabled");
                 $(".text_msg.valid-feedback").hide();
                 $(".text_msg.invalid-feedback").show();
                 $('#text_msg').addClass('is-invalid');
@@ -506,14 +524,14 @@ $(document).on('click', '#delete_flat', function (e) {
             var a=(this.files[0].size);
             if(a < 5000000) {
                 // alert("L'immagine selezionata supera i 5MB!!!");
-                $('#crea').removeClass('disabled');
-                $('.img_uri.invalid-feedback').hide();
-                $('.img_uri.valid-feedback').show();
+                $('#crea').removeAttr("disabled");
+                $('.img_uri.invalid-tooltip').hide();
+                $('.img_uri.valid-tooltip').show();
                 $('#crea').show();
             }else{
-                $('#crea').hide();
-                $('.img_uri.valid-feedback').hide();
-                $('.img_uri.invalid-feedback').show();
+                $('#crea').attr("disabled",true);
+                $('.img_uri.valid-tooltip').hide();
+                $('.img_uri.invalid-tooltip').show();
             };
         });
     //});
@@ -614,7 +632,7 @@ function isFuzzySearchResult(event) {
 }
 
 
-function createMap(longitudine, latitudine, title, address, risultati_marker) {
+function createMap(longitudine, latitudine, title, address) {
     //console.log(risultati_marker);
 
     //var roundLatLng = Formatters.roundLatLng;
@@ -644,16 +662,16 @@ function createMap(longitudine, latitudine, title, address, risultati_marker) {
     //marker.togglePopup();
 }
 
-function createMapSearch(risultati_marker) {
-    console.log(risultati_marker);
-    console.log(risultati_marker[0].lon);
-    var center = [risultati_marker[0].lon, risultati_marker[0].lat];
+function createMapSearch(risultati) {
+    console.log(risultati);
+    console.log(risultati[0].lon);
+    var center = [risultati[0].lon, risultati[0].lat];
 
     var map = tt.map({
         key: 'Y2cMr97XoBZZKKVXgUS844gofkPiZFnA',
         container: 'map',
         center: center,
-        zoom: 7,
+        zoom: 8,
         style: 'tomtom://vector/1/basic-main',
         dragPan: !isMobileOrTablet()
     });
@@ -661,15 +679,15 @@ function createMapSearch(risultati_marker) {
     map.addControl(new tt.FullscreenControl());
     map.addControl(new tt.NavigationControl());
 
-    for (var i = 0; i < risultati_marker.length; i++) {
+    for (var i = 0; i < risultati.length; i++) {
         var popup = new tt.Popup({
                  offset: 35
         });
         //Creazione del marker all'indirizzo dell'Appartamento
         var marker = new tt.Marker({
-        }).setLngLat([risultati_marker[i].lon, risultati_marker[i].lat]).addTo(map);
+        }).setLngLat([risultati[i].lon, risultati[i].lat]).addTo(map);
 
-        popup.setHTML(risultati_marker[i].title + "<br>" + risultati_marker[i].address + "<br>" + risultati_marker[i].lon + " " + risultati_marker[i].lat);
+        popup.setHTML(risultati[i].title + "<br>" + risultati[i].address + "<br>" + risultati[i].lon + " " + risultati[i].lat);
         marker.setPopup(popup);
         //marker.togglePopup();
     }

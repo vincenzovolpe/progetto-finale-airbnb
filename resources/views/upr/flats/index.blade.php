@@ -42,7 +42,7 @@
                             @else
                                 <p class="mt-3"><i class="far fa-envelope mr-2"></i> {{__('index_upr.No_messages')}}</p>
                             @endif
-                            <p><i class="fas fa-eye mr-2"></i> {{__('index_upr.Visits')}}: {{$flat->view}}</p>
+                            <p><i class="fas fa-eye mr-2"></i> {{__('index_upr.Visits')}} {{$flat->view}}</p>
                             <!-- Vado alla view per la sponsorizzazione: -->
                             {{-- Occorrono un insieme di condizioni: esiste? Oppure è scaduta? --}}
                             @if (array_key_exists($flat->id,$flat_sponsored))
@@ -56,7 +56,7 @@
                                 @if( $hour_diff < $sponsor_hours )
                                     {{-- Qui esiste ed è ancora valida: vediamo quanto dura ancora! --}}
                                     <p>
-                                        {{__('index_upr.Sponsor_date')}}: {{ $start_date }},  {{__('index_upr.Sponsor_use')}}: {{ $hour_diff }} {{__('index_upr.Sponsor_hours')}} {{ $sponsor_hours }}.
+                                        {{__('index_upr.Sponsor_date')}} {{ $start_date }},  {{__('index_upr.Sponsor_use')}} {{ $hour_diff }} {{__('index_upr.Sponsor_hours')}} {{ $sponsor_hours }}.
                                     </p>
                                 @else
                                     {{-- Qui esiste, ma è scaduta: consentiamo di rinnovare la sponsorizzazione. --}}

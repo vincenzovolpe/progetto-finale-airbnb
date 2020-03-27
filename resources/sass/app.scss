@@ -12,6 +12,7 @@
 @import '~bootstrap/scss/bootstrap';
 
 
+
 .nav-item {
     a {
         font-size: 1.0rem;
@@ -23,7 +24,6 @@
 
 #map {
     height: 500px;
-    //margin-bottom: 100px;
 }
 
 #homepicture {
@@ -42,23 +42,20 @@
     }
 }
 
-#home-sponsored {
-    margin: 6em auto;
-    h2 {
-        margin-bottom: 2em;
+#home-not-sponsored, #home-sponsored, #find-results {
+    .card {
+        transition: transform .5s;
+        &:hover {
+            transform: scale(1.03);
+        }
     }
-}
-
-#home-not-sponsored {
-    margin: 6em auto;
-    h2 {
-        margin-bottom: 2em;
+        .card-img {
+        object-fit: cover;
+        height: 180px;
     }
-}
-
-.card-img {
-    object-fit: cover;
-    height: 180px;
+    .card-title {
+        height: 45px;
+    }
 }
 
 #dashboard-index {
@@ -73,23 +70,10 @@
     }
 }
 
-
 .card-img-overlay {
     .fa-star {
         font-size: 1.4em;
         color: $yellow;
-    }
-}
-
-.card-columns {
-    @include media-breakpoint-only(sm) {
-        column-count: 2;
-    }
-    @include media-breakpoint-only(md) {
-        column-count: 2;
-    }
-    @include media-breakpoint-only(lg) {
-        column-count: 3;
     }
 }
 
@@ -112,7 +96,7 @@
     }
 }
 
-//  fix per posizionare la address input di tomtom
+//  serie di fix per posizionare la address input di tomtom
 .tt-search-box-input-container {
     border-radius: 5px;
 }
@@ -126,7 +110,7 @@
 }
 
 footer {
-    a, a:hover, {
+    a, a:hover {
         color: rgb(72, 72, 72);
     }
     i:hover {

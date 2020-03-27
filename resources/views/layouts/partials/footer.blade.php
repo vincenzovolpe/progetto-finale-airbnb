@@ -7,7 +7,7 @@
     <div class="row text-center text-md-left mt-3 pb-3">
 
       <!-- Grid column -->
-      <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+      <div class="col-md-6 col-lg-3 col-xl-3 mx-auto mt-3">
           <h6 class="text-uppercase mb-4 font-weight-bold">{{__('footer.Info')}}</h6>
           <p>
             <a href="#!">{{__('footer.Diversity')}}</a>
@@ -26,9 +26,9 @@
           </p>
       </div>
       <!-- Grid column -->
-
+      <hr class="w-100 clearfix d-md-none">
       <!-- Grid column -->
-      <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+      <div class="col-md-6 col-lg-3 col-xl-3 mx-auto mt-3">
         <h6 class="text-uppercase mb-4 font-weight-bold">{{__('footer.Community')}}</h6>
         <p>
           <a href="#!">{{__('footer.Magazine')}}</a>
@@ -48,7 +48,7 @@
       <hr class="w-100 clearfix d-md-none">
 
       <!-- Grid column -->
-      <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+      <div class="col-md-6 col-lg-3 col-xl-3 mx-auto mt-3">
         <h6 class="text-uppercase mb-4 font-weight-bold">{{__('footer.Hosts')}}</h6>
         <p>
           <a href="#!">{{__('footer.Offer_your_house')}}</a>
@@ -74,7 +74,7 @@
       <hr class="w-100 clearfix d-md-none">
 
       <!-- Grid column -->
-      <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+      <div class="col-md-6 col-lg-3 col-xl-3 mx-auto mt-3">
         <h6 class="text-uppercase mb-4 font-weight-bold">{{__('footer.Assistance')}}</h6>
         <p>
           <a href="#!">{{__('footer.Assistance_center')}}</a>
