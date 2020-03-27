@@ -17,7 +17,4 @@ return [
     'Button' => 'BACK TO HOME PAGE',
 
 
-
-
-
 ];

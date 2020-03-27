@@ -15,6 +15,6 @@ return [
 
     'Dashboard' => 'Dashboard',
     'Messages' =>  'Messages',
-    'Offer_an_apartment' =>  'Offer a Flat',
+    'Offer_an_apartment' =>  'Offer a flat',
     'Logout' => 'Logout',
 ];
