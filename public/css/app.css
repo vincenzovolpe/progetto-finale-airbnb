@@ -11858,7 +11858,8 @@ a.text-dark:focus {
   margin-bottom: 2em;
 }
 
-.card-img {
+#home-not-sponsored .card-img,
+#home-sponsored .card-img {
   -o-object-fit: cover;
      object-fit: cover;
   height: 180px;
