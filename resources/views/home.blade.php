@@ -8,7 +8,7 @@
 @section('searchbox')
     <div class="container">
         <div id="homeLeftBox" class="row">
-            <div class="col-lg-6 card border-light shadow my-5">
+            <div class="col-lg-6 card border-light bg-light shadow my-5">
                 <form class="form" action="{{ route('flat.find') }}" method="POST" role="form" autocomplete="off">
                     @csrf
                     <div class="form-group fuzzy-home">

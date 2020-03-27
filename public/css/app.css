@@ -11842,15 +11842,29 @@ a.text-dark:focus {
   margin-top: 20px;
 }
 
+#home-not-sponsored .card,
+#home-sponsored .card,
+#find-results .card {
+  transition: transform 0.5s;
+}
+
+#home-not-sponsored .card:hover,
+#home-sponsored .card:hover,
+#find-results .card:hover {
+  transform: scale(1.03);
+}
+
 #home-not-sponsored .card-img,
-#home-sponsored .card-img {
+#home-sponsored .card-img,
+#find-results .card-img {
   -o-object-fit: cover;
      object-fit: cover;
   height: 180px;
 }
 
 #home-not-sponsored .card-title,
-#home-sponsored .card-title {
+#home-sponsored .card-title,
+#find-results .card-title {
   height: 45px;
 }
 

@@ -70335,10 +70335,10 @@ $(document).ready(function () {
               'flat_details': data.result[i].id
             };
             var html = template_function(variables);
-            $('.card-columns').append(html);
+            $('#card_container').append(html);
           }
         } else {
-          $('.card-columns').append('La ricerca non ha trovato nessun appartamento!');
+          $('#card_container').append('La ricerca non ha trovato nessun appartamento!');
         }
       }
     });
@@ -70419,70 +70419,73 @@ $(document).ready(function () {
   }); // Chiamata Ajax nella pagina Find con eventuali filtri di Ricerca
 
   $('#btn_find').click(function (event) {
-    var lat = $('#latNumberFind').val();
-    var lon = $('#lonNumberFind').val();
-    var distance = $('#km_radius').val();
-    var rooms = $('#room_qty').val();
-    var beds = $('#bed_qty').val(); // Prendo tutte le checkbox dei Servizi
+    if ($('.tt-search-box-input').val()) {
+      alert('input pieno');
+      var lat = $('#latNumberFind').val();
+      var lon = $('#lonNumberFind').val();
+      var distance = $('#km_radius').val();
+      var rooms = $('#room_qty').val();
+      var beds = $('#bed_qty').val(); // Prendo tutte le checkbox dei Servizi
 
-    var checkbox_value = "";
-    var checkbox_count = 0;
-    $("input[name=check_services]").each(function () {
-      var ischecked = $(this).is(":checked");
+      var checkbox_value = "";
+      var checkbox_count = 0;
+      $("input[name=check_services]").each(function () {
+        var ischecked = $(this).is(":checked");
 
-      if (ischecked) {
-        checkbox_count++;
-        checkbox_value += $(this).val() + ",";
-      }
-    }); // Tolgo l'ultima virgola nell' array delle checkbox
-
-    var index = checkbox_value.lastIndexOf(",");
-    var checkbox_selected = checkbox_value.substring(0, index) + checkbox_value.substring(index + 1);
-
-    if (!checkbox_selected) {
-      checkbox_selected = 'empty';
-    }
-
-    console.log(checkbox_selected);
-    console.log(checkbox_count);
-    console.log(lat);
-    $.ajax({
-      url: 'http://localhost:8000/api/flats',
-      method: 'GET',
-      data: {
-        'lat': lat,
-        'lon': lon,
-        'distance': distance,
-        'rooms': rooms,
-        'beds': beds,
-        'services': checkbox_selected,
-        'checkbox_count': checkbox_count
-      },
-      success: function success(data) {
-        if (data.success) {
-          risultati_marker_find = data.result; //console.log(risultati_marker);
-          //Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
-
-          createMapSearch(risultati_marker_find);
-          $('#card_container').empty();
-
-          for (var i = 0; i < data.result.length; i++) {
-            var template_html = $('#card_template').html();
-            var template_function = Handlebars.compile(template_html);
-            var variables = {
-              'img_uri': data.result[i].img_uri,
-              'title': data.result[i].title,
-              'flat_details': data.result[i].id
-            };
-            var html = template_function(variables);
-            $('.card-columns').append(html);
-          }
-        } else {
-          $('#card_container').empty();
-          $('.card-columns').append('<p>La ricerca non ha trovato nessun appartamento!<p>');
+        if (ischecked) {
+          checkbox_count++;
+          checkbox_value += $(this).val() + ",";
         }
+      }); // Tolgo l'ultima virgola nell' array delle checkbox
+
+      var index = checkbox_value.lastIndexOf(",");
+      var checkbox_selected = checkbox_value.substring(0, index) + checkbox_value.substring(index + 1);
+
+      if (!checkbox_selected) {
+        checkbox_selected = 'empty';
       }
-    });
+
+      console.log(checkbox_selected);
+      console.log(checkbox_count);
+      console.log(lat);
+      $.ajax({
+        url: 'http://localhost:8000/api/flats',
+        method: 'GET',
+        data: {
+          'lat': lat,
+          'lon': lon,
+          'distance': distance,
+          'rooms': rooms,
+          'beds': beds,
+          'services': checkbox_selected,
+          'checkbox_count': checkbox_count
+        },
+        success: function success(data) {
+          if (data.success) {
+            risultati_marker_find = data.result; //console.log(risultati_marker);
+            //Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
+
+            createMapSearch(risultati_marker_find);
+            $('#card_container').empty();
+
+            for (var i = 0; i < data.result.length; i++) {
+              var template_html = $('#card_template').html();
+              var template_function = Handlebars.compile(template_html);
+              var variables = {
+                'img_uri': data.result[i].img_uri,
+                'title': data.result[i].title,
+                'flat_details': data.result[i].id
+              };
+              var html = template_function(variables);
+              $('#card_container').append(html);
+            }
+          } else {
+            $('#card_container').empty();
+            $('#card_container').append('<p>La ricerca non ha trovato nessun appartamento!<p>');
+          }
+        }
+      });
+    }
   }); //-----FORM VALIDATION BOOTSTRAP-----------//
   // Example starter JavaScript for disabling form submissions if there are invalid fields
 
@@ -70954,13 +70957,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
-__webpack_require__(/*! /Users/umbertown/Desktop/Atom - Boolean/GIT/progetto-finale-airbnb/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/umbertown/Desktop/Atom - Boolean/GIT/progetto-finale-airbnb/resources/sass/app.scss */"./resources/sass/app.scss");
-=======
-__webpack_require__(/*! C:\MAMP\htdocs\progetto-finale-airbnb\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\MAMP\htdocs\progetto-finale-airbnb\resources\sass\app.scss */"./resources/sass/app.scss");
->>>>>>> origin/master
+__webpack_require__(/*! /Applications/MAMP/htdocs/boolean-code/progetto-finale-airbnb/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/boolean-code/progetto-finale-airbnb/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

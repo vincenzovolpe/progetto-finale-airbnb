@@ -154,10 +154,10 @@ $(document).ready(function(){
 
                             var html = template_function(variables);
 
-                            $('.card-columns').append(html);
+                            $('#card_container').append(html);
                         }
                     } else {
-                        $('.card-columns').append('La ricerca non ha trovato nessun appartamento!');
+                        $('#card_container').append('La ricerca non ha trovato nessun appartamento!');
                     }
 
             }
@@ -241,6 +241,9 @@ $(document).on('click', '#delete_flat', function (e) {
     // Chiamata Ajax nella pagina Find con eventuali filtri di Ricerca
     $('#btn_find').click(function(event){
 
+        if ($('.tt-search-box-input').val()) {
+            alert('input pieno');
+
             var lat = $('#latNumberFind').val();
             var lon = $('#lonNumberFind').val();
             var distance = $('#km_radius').val();
@@ -306,16 +309,17 @@ $(document).on('click', '#delete_flat', function (e) {
 
                                 var html = template_function(variables);
 
-                                $('.card-columns').append(html);
+                                $('#card_container').append(html);
                             }
                         } else {
 
                             $('#card_container').empty();
 
-                            $('.card-columns').append('<p>La ricerca non ha trovato nessun appartamento!<p>');
+                            $('#card_container').append('<p>La ricerca non ha trovato nessun appartamento!<p>');
                         }
                 }
             })
+        }
 
         });
 
