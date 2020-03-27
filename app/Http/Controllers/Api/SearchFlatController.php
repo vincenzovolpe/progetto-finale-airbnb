@@ -30,7 +30,7 @@ class SearchFlatController extends Controller
 
                 $flats = DB::table('flats')
                 ->join('flat_service', 'flat_service.flat_id', '=', 'flats.id')
-                ->selectRaw('id, title, address, img_uri, ( 6371 * acos( cos( radians(?) ) * cos( radians( lat ) ) *
+                ->selectRaw('id, title, address, lat, lon, img_uri, ( 6371 * acos( cos( radians(?) ) * cos( radians( lat ) ) *
                                cos( radians( lon ) - radians(?) ) + sin( radians(?) ) *
                         sin( radians( lat ) ) ) ) AS distance, COUNT(flats.id) AS number_services', [$lat, $lon, $lat])
                 ->whereIn('service_id', $services_array)
