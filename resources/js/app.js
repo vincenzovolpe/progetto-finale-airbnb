@@ -206,16 +206,29 @@ $(document).ready(function(){
 
 // Popup di conferma per la cancellazione di un appartamento
 $(document).on('click', '#delete_flat', function (e) {
+    // Traduzione del popup di conferma per la cancellazione Flat
+    var sure = 'Sei sicuro?';
+    var deleting = "L'appartamento verrà cancellato definitivamente!";
+    var confirm = "Si";
+
+    if(href.indexOf('/en/upr/flats') > -1) {
+        // Variabile che memorizza il placeholder in inglese della  searchbox per le mappe
+        sure = 'Are you sure?';
+        deleting = 'The apartment will be permanently deleted!';
+        confirm = 'Yes';
+    }
+
+
     var id = $(this).data('id');
     var form =  $(this).closest("form");
     e.preventDefault();
     console.log(id);
     Swal.fire({
-            title: "Sei sicuro?",
-            text: "L'appartamento verrà cancellato definitivamente!",
+            title: sure,
+            text: deleting,
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Si',
+            confirmButtonText: confirm,
             cancelButtonText: 'No',
         })
         .then((willDelete) => {

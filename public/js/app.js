@@ -70388,16 +70388,28 @@ $(document).ready(function () {
 
 
   $(document).on('click', '#delete_flat', function (e) {
+    // Traduzione del popup di conferma per la cancellazione Flat
+    var sure = 'Sei sicuro?';
+    var deleting = "L'appartamento verrà cancellato definitivamente!";
+    var confirm = "Si";
+
+    if (href.indexOf('/en/upr/flats') > -1) {
+      // Variabile che memorizza il placeholder in inglese della  searchbox per le mappe
+      sure = 'Are you sure?';
+      deleting = 'The apartment will be permanently deleted!';
+      confirm = 'Yes';
+    }
+
     var id = $(this).data('id');
     var form = $(this).closest("form");
     e.preventDefault();
     console.log(id);
     Swal.fire({
-      title: "Sei sicuro?",
-      text: "L'appartamento verrà cancellato definitivamente!",
+      title: sure,
+      text: deleting,
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Si',
+      confirmButtonText: confirm,
       cancelButtonText: 'No'
     }).then(function (willDelete) {
       if (willDelete.value) {
@@ -70942,8 +70954,13 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
+__webpack_require__(/*! /Users/umbertown/Desktop/Atom - Boolean/GIT/progetto-finale-airbnb/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/umbertown/Desktop/Atom - Boolean/GIT/progetto-finale-airbnb/resources/sass/app.scss */"./resources/sass/app.scss");
+=======
 __webpack_require__(/*! C:\MAMP\htdocs\progetto-finale-airbnb\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\MAMP\htdocs\progetto-finale-airbnb\resources\sass\app.scss */"./resources/sass/app.scss");
+>>>>>>> origin/master
 
 
 /***/ })
