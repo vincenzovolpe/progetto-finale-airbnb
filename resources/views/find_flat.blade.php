@@ -2,11 +2,10 @@
 
 @section('content')
     <div class="container">
-        <div class="row col-md-6">
-            <div id="flat_search" class="card">
+        <div class="row">
+            <div id="flat_search" class="card col-md-6" >
                 <h2 class="card-body">{{__('search.Advanced_search')}}</h2>
-                <form id="form_find" method="POST">
-                    @csrf
+                <form id="form_find">
                     <div class="col">
                         <div class="form-group">
                             <div class="fuzzy-find form-group">
@@ -51,6 +50,12 @@
                         </div>
                     </div>
                 </form>
+            </div>
+            <div id="flat_map" class="card col-md-6">
+                {{-- <h2 class="text-center">Mappa appartamenti filtrati</h2> --}}
+                <div id='map' class='full-map'>
+
+                </div>
             </div>
         </div>
         <div id="find-results" class="row">
