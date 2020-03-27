@@ -38,8 +38,6 @@ class FlatController extends Controller
 
     public function create()
     {
-
-        dd(now());
         // Consento la creazione di un nuovo flat:
         // Passo anche tutti i servizi:
         $servizi = Service::all();
