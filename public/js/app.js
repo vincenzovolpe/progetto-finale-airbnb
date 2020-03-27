@@ -70566,20 +70566,21 @@ $(document).ready(function () {
 
       if (chioccia > point && point2 > chioccia) {
         // console.log('ok');
-        // $(submit).removeAttr("disabled");
+        $(submit).removeAttr("disabled");
         $(valido).show();
         $(invalido).hide();
         $(mail).addClass('is-valid');
         $(mail).removeClass('is-invalid');
       } else if (chioccia >= 1 && chioccia < point) {
         // console.log('ok');
-        // $(submit).removeAttr("disabled");
+        $(submit).removeAttr("disabled");
         $(valido).show();
         $(invalido).hide();
         $(mail).addClass('is-valid');
         $(mail).removeClass('is-invalid');
       } else {
         // console.log('no');
+        $(submit).attr("disabled", true);
         $(invalido).show();
         $(valido).hide();
         $(mail).addClass('is-invalid');
@@ -70592,7 +70593,7 @@ $(document).ready(function () {
 
   ; // Validazione mail in fase di registrazione e invio messaggio
 
-  validationEmail('#email', '.mail.valid-feedback', '.mail.invalid-feedback');
+  validationEmail('#email', '.mail.valid-feedback', '.mail.invalid-feedback', '.invio');
   validationEmail('#msg_email', '.msg_mail.valid-feedback', '.msg_mail.invalid-feedback', '.invio'); // Funzione di validazione della lunghezza  messaggio nei details e lunghezza della mail > 0
 
   $('#text_msg').keyup(function () {
@@ -70684,14 +70685,14 @@ $(document).ready(function () {
 
     if (a < 5000000) {
       // alert("L'immagine selezionata supera i 5MB!!!");
-      $('#crea').removeClass('disabled');
-      $('.img_uri.invalid-feedback').hide();
-      $('.img_uri.valid-feedback').show();
+      $('#crea').removeAttr("disabled");
+      $('.img_uri.invalid-tooltip').hide();
+      $('.img_uri.valid-tooltip').show();
       $('#crea').show();
     } else {
-      $('#crea').hide();
-      $('.img_uri.valid-feedback').hide();
-      $('.img_uri.invalid-feedback').show();
+      $('#crea').attr("disabled", true);
+      $('.img_uri.valid-tooltip').hide();
+      $('.img_uri.invalid-tooltip').show();
     }
 
     ;
@@ -70957,8 +70958,13 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 __webpack_require__(/*! /Applications/MAMP/htdocs/boolean-code/progetto-finale-airbnb/resources/js/app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/boolean-code/progetto-finale-airbnb/resources/sass/app.scss */"./resources/sass/app.scss");
+=======
+__webpack_require__(/*! /Users/umbertown/Desktop/Atom - Boolean/GIT/progetto-finale-airbnb/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/umbertown/Desktop/Atom - Boolean/GIT/progetto-finale-airbnb/resources/sass/app.scss */"./resources/sass/app.scss");
+>>>>>>> origin/master
 
 
 /***/ })

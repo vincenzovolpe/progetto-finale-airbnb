@@ -404,20 +404,21 @@ $(document).on('click', '#delete_flat', function (e) {
                 // console.log(point2);
                 if ( chioccia > point && point2 > chioccia) {
                     // console.log('ok');
-                    // $(submit).removeAttr("disabled");
+                    $(submit).removeAttr("disabled");
                     $(valido).show();
                     $(invalido).hide();
                     $(mail).addClass('is-valid');
                     $(mail).removeClass('is-invalid');
                 }else if(chioccia >= 1 && chioccia < point){
                     // console.log('ok');
-                    // $(submit).removeAttr("disabled");
+                    $(submit).removeAttr("disabled");
                     $(valido).show();
                     $(invalido).hide();
                     $(mail).addClass('is-valid');
                     $(mail).removeClass('is-invalid');
                 }else{
                     // console.log('no');
+                    $(submit).attr("disabled",true);
                     $(invalido).show();
                     $(valido).hide();
                     $(mail).addClass('is-invalid');
@@ -428,7 +429,7 @@ $(document).on('click', '#delete_flat', function (e) {
             })
         };
         // Validazione mail in fase di registrazione e invio messaggio
-        validationEmail('#email','.mail.valid-feedback','.mail.invalid-feedback');
+        validationEmail('#email','.mail.valid-feedback','.mail.invalid-feedback','.invio');
         validationEmail('#msg_email','.msg_mail.valid-feedback','.msg_mail.invalid-feedback','.invio');
 
         // Funzione di validazione della lunghezza  messaggio nei details e lunghezza della mail > 0
@@ -526,14 +527,14 @@ $(document).on('click', '#delete_flat', function (e) {
             var a=(this.files[0].size);
             if(a < 5000000) {
                 // alert("L'immagine selezionata supera i 5MB!!!");
-                $('#crea').removeClass('disabled');
-                $('.img_uri.invalid-feedback').hide();
-                $('.img_uri.valid-feedback').show();
+                $('#crea').removeAttr("disabled");
+                $('.img_uri.invalid-tooltip').hide();
+                $('.img_uri.valid-tooltip').show();
                 $('#crea').show();
             }else{
-                $('#crea').hide();
-                $('.img_uri.valid-feedback').hide();
-                $('.img_uri.invalid-feedback').show();
+                $('#crea').attr("disabled",true);
+                $('.img_uri.valid-tooltip').hide();
+                $('.img_uri.invalid-tooltip').show();
             };
         });
     //});
