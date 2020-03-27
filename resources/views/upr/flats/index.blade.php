@@ -12,7 +12,7 @@
     @endif
 
 <div id="dashboard-index" class="container">
-    <h1 class="mt-5">I tuoi alloggi</h1>
+    <h1 class="mt-5">{{__('index_upr.Your_flats')}}</h1>
     {{-- <ul class="list-group"> --}}
         @forelse($flats as $flat)
             <div class="card shadow my-5">
@@ -25,24 +25,24 @@
                     </div>
                     <div class="col-md-7">
                         <div class="card-body">
-                            <p class="card-text"><i class="fas fa-map-marker-alt mr-2"></i> Indirizzo: {{ $flat->address }}</p>
+                            <p class="card-text"><i class="fas fa-map-marker-alt mr-2"></i> {{__('index_upr.Address')}}: {{ $flat->address }}</p>
                             <!-- Vado alla view per vedere i dettagli: -->
-                            <a class="btn btn-info mr-2" href="{{ route('upr.flats.show' , ['flat' => $flat->id]) }}">vedi dettagli</a>
+                            <a class="btn btn-info mr-2" href="{{ route('upr.flats.show' , ['flat' => $flat->id]) }}">{{__('index_upr.Details')}}</a>
                             <!-- Vado alla view di modifica: -->
-                            <a class="btn btn-warning m-2" href="{{ route('upr.flats.edit', ['flat' => $flat->id]) }}" >modifica dettagli</a>
+                            <a class="btn btn-warning m-2" href="{{ route('upr.flats.edit', ['flat' => $flat->id]) }}" >{{__('index_upr.Edit_details')}}</a>
                             <!--Form per la destroy: -->
                             <form class="form-inline" action="{{ route('upr.flats.destroy', ['flat' => $flat->id]) }}" method="post" style='display:inline-block'>
-                            <input id="delete_flat" type="submit" class="btn btn-danger m-2" data-id="{{$flat->id}}" value="ELIMINA!">
+                            <input id="delete_flat" type="submit" class="btn btn-danger m-2" data-id="{{$flat->id}}" value="{{__('index_upr.Delete')}}">
                                 @csrf
                                 @method('DELETE')
                             </form>
                             <!-- Messaggi ricevuti -->
                             @if ($flat->messages()->count() > 0)
-                                    <p class="mt-3"><i class="far fa-envelope mr-2"></i> Messaggi ricevuti: <a href="{{ route('messages.index') }}">{{$flat->messages()->count()}}</a></p>
+                                    <p class="mt-3"><i class="far fa-envelope mr-2"></i> {{__('index_upr.Messages')}}: <a href="{{ route('messages.index') }}">{{$flat->messages()->count()}}</a></p>
                             @else
-                                <p class="mt-3"><i class="far fa-envelope mr-2"></i> Non sono presenti messaggi.</p>
+                                <p class="mt-3"><i class="far fa-envelope mr-2"></i> {{__('index_upr.No_messages')}}</p>
                             @endif
-                            <p><i class="fas fa-eye mr-2"></i> Visite ricevute: {{$flat->view}}</p>
+                            <p><i class="fas fa-eye mr-2"></i> {{__('index_upr.Visits')}}: {{$flat->view}}</p>
                             <!-- Vado alla view per la sponsorizzazione: -->
                             {{-- Occorrono un insieme di condizioni: esiste? Oppure è scaduta? --}}
                             @if (array_key_exists($flat->id,$flat_sponsored))
@@ -56,20 +56,20 @@
                                 @if( $hour_diff <= $sponsor_hours )
                                     {{-- Qui esiste ed è ancora valida: vediamo quanto dura ancora! --}}
                                     <p>
-                                        Data sponsorizzazione: {{ $start_date }},  già utilizzato: {{ $hour_diff }} ore su {{ $sponsor_hours }}.
+                                        {{__('index_upr.Sponsor_date')}}: {{ $start_date }},  {{__('index_upr.Sponsor_use')}}: {{ $hour_diff }} {{__('index_upr.Sponsor_hours')}} {{ $sponsor_hours }}.
                                     </p>
                                 @else
                                     {{-- Qui esiste, ma è scaduta: consentiamo di rinnovare la sponsorizzazione. --}}
                                     <p>
                                         {{-- Ultima sponsorizzazione terminata. --}}
-                                        <a class="btn btn-success my-2" href="{{ route('upr.flats.sponsor', ['flat' => $flat->id])}}">Sponsorizza ora!</a>
+                                        <a class="btn btn-success my-2" href="{{ route('upr.flats.sponsor', ['flat' => $flat->id])}}">{{__('index_upr.Sponsor')}}</a>
                                     </p>
                                 @endif
                             @else
                                 {{-- Qui non esiste, quindi si può sponsorizzare! --}}
                                 <p>
                                     {{-- Nessuna sponsorizzazione attiva! --}}
-                                    <a class="btn btn-success my-2" href="{{ route('upr.flats.sponsor', ['flat' => $flat->id])}}">Sponsorizza ora!</a>
+                                    <a class="btn btn-success my-2" href="{{ route('upr.flats.sponsor', ['flat' => $flat->id])}}">{{__('index_upr.Sponsor')}}</a>
                                 </p>
                             @endif
                         </div>
@@ -81,7 +81,7 @@
             {{-- <li class="list-group-item list-group-item-dark">
         </li> --}}
         @empty
-            <li class="list-group-item list-group-item-warning"> Nessun appartamento! </li>
+            <li class="list-group-item list-group-item-warning"> {{__('index_upr.No_flat')}}</li>
         @endforelse
     {{-- </ul> --}}
 </div>

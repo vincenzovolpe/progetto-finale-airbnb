@@ -26,33 +26,33 @@
         </div>
         <div class="row my-5">
             <div class="col-md-6">
-                <h3 class="mt-5">Dettagli dell'appartamento</h3>
+                <h3 class="mt-5">{{__('dett_app.Flat_det')}}</h3>
                 <table class="table table-striped table-bordered">
                     <tbody>
                         <tr>
-                            <td class="text-right">Indirizzo</td>
+                            <td class="text-right">{{__('dett_app.Address')}}</td>
                             <td class="text-center"><i class="fas fa-map-marker-alt"></i></td>
                             <td id="address">{{$flat->address}}</td>
                         </tr>
                         <tr>
-                            <td class="text-right">Numero di stanze</td>
+                            <td class="text-right">{{__('dett_app.Num_rooms')}}</td>
                             <td class="text-center"><i class="fas fa-door-open"></i></td>
                             <td>{{$flat->room_qty}}</td>
                         </tr>
                         <tr>
-                            <td class="text-right">Numero di letti</td>
+                            <td class="text-right">{{__('dett_app.Num_beds')}}</td>
                             <td class="text-center"><i class="fas fa-bed"></i></td>
                             <td>{{$flat->bed_qty}}</td>
                         </tr>
                         <tr>
-                            <td class="text-right">Numero di bagni</td>
+                            <td class="text-right">{{__('dett_app.Num_baths')}}</td>
                             <td class="text-center"><i class="fas fa-bath"></i></td>
                             <td>{{$flat->bath_qty}}</td>
                         </tr>
                     </tbody>
                 </table>
 
-                <h3>Elenco servizi</h3>
+                <h3>{{__('dett_app.Service')}}</h3>
                 <table class="table table-striped table-bordered">
                     <tbody>
                         @if(($flat->services)->isNotEmpty())
@@ -75,9 +75,9 @@
                 <div class="card card-outline-secondary my-5">
                     <div class="card-header">
                     @if (Auth::user() && Auth::user()->id == $flat->user->id)
-                            <h3 class="mt-1">Sei il propietario di questo appartamento</h3>
+                            <h3 class="mt-1">{{__('dett_app.Owner')}}</h3>
                     @else
-                            <h3 class="mt-1">Contatta il propietario</h3>
+                            <h3 class="mt-1">{{__('dett_app.Contact')}}</h3>
                     @endif
                     </div>
                     @if (Auth::user() && Auth::user()->id == $flat->user->id)
@@ -106,7 +106,7 @@
                                                 Inserimento corretto!
                                             </div> --}}
                                             <div class="msg_mail invalid-tooltip">
-                                                Inserisci una mail corretta
+                                                {{__('dett_app.Invalid_mail')}}
                                             </div>
                                             @error('msg_email')
                                                 <span class="invalid-feedback" role="alert">
@@ -117,13 +117,13 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <label for="message" class="col-form-label">Messaggio</label>
+                                        <label for="message" class="col-form-label">{{__('dett_app.Message')}}</label>
                                         <textarea rows="6" value="text_msg" name="text_msg" id="text_msg" class="form-control @error('text_msg') is-invalid @enderror" required="">{{ old('text_msg') }}</textarea>
                                             {{-- <div class="text_msg valid-feedback">
                                                 Inserimento corretto!
                                             </div> --}}
                                             <div class="text_msg invalid-tooltip">
-                                                Inserisci un numero minimo di 10 caratteri
+                                                {{__('dett_app.Invalid_num')}}
                                             </div>
                                             @error('text_msg')
                                                 <span class="invalid-feedback" role="alert">
@@ -138,7 +138,7 @@
                                 <input type="text" name="flat_title" value="{{$flat->title}}" hidden>
                                 <input id="latNumber" type="text" name="lon" value="{{$flat->lon}}" hidden>
                                 <input id="lonNumber" type="text" name="lat" value="{{$flat->lat}}" hidden>
-                                <button type="submit" class="invio btn btn-success mt-3" disabled>Invia messaggio</button>
+                                <button type="submit" class="invio btn btn-success mt-3" disabled>{{__('dett_app.Send')}}</button>
                             </fieldset>
                         </form>
                     {{-- @endif --}}
@@ -148,7 +148,7 @@
             </div>
         </div>
         <br>
-        <h3>Mappa dislocazione appartamento</h3>
+        <h3>{{__('dett_app.Map')}}</h3>
         <div id='map' class='full-map'>
 
         </div>

@@ -426,7 +426,7 @@ $(document).on('click', '#delete_flat', function (e) {
                 $('#text_msg').addClass('is-valid');
                 $('#text_msg').removeClass('is-invalid');
             }else{
-                $('.invio').add("disabled");
+                $('.invio').attr("disabled",true);
                 $(".text_msg.valid-feedback").hide();
                 $(".text_msg.invalid-feedback").show();
                 $('#text_msg').addClass('is-invalid');
