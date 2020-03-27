@@ -24,9 +24,9 @@ return [
     'Longitude' => 'Longitude',
     'Active' => 'Active?',
     'Insert_date' => 'Insert date',
-    'Last_edit' => 'Last date',
+    'Last_edit' => 'Last edit',
     'Service' => 'List of services',
-    
+
     'No_service' => 'No active service at the moment!',
 
 
