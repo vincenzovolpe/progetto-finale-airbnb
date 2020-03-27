@@ -95,14 +95,6 @@ $(document).ready(function(){
     $("#address-edit").find(".tt-search-box-input").val(address);
     $(".tt-search-box-input").attr('name', 'address');
 
-    // Creo la mappa solo quando mi trovo  all'interno della pagina di dettaglio dell'appartamento
-
-    if(href.indexOf('/flats/details') > -1)
-    {
-        // Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
-        createMap(lonNumber, latNumber, title, address);
-    }
-
     // Istruzioni per caricare risultati di ricerca dalla home nella pagina di ricerca
     var address_search = $('#searchFind').val();
     var address_edit = $('#address').val();
@@ -271,11 +263,11 @@ $(document).on('click', '#delete_flat', function (e) {
                         if (data.success) {
 
                             risultati_marker_find = data.result;
-
+                            console.log($('.tt-search-box-input').val());
                             //console.log(risultati_marker);
 
-                            //Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
-                            createMapSearch(risultati_marker_find);
+                                //Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
+                                createMapSearch(risultati_marker_find);
 
                             $('#card_container').empty();
 
@@ -426,7 +418,7 @@ $(document).on('click', '#delete_flat', function (e) {
                 $('#text_msg').addClass('is-valid');
                 $('#text_msg').removeClass('is-invalid');
             }else{
-                $('.invio').attr("disabled",true);
+                $('.invio').add("disabled");
                 $(".text_msg.valid-feedback").hide();
                 $(".text_msg.invalid-feedback").show();
                 $('#text_msg').addClass('is-invalid');
