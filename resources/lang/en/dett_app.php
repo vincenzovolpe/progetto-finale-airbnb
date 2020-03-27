@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'Flat_det' => 'Details of the apartment',
+    'Flat_det' => "Apartment's details",
     'Address' => 'Address',
     'Num_rooms' => 'Number of rooms',
     'Num_beds' => 'Number of beds',
