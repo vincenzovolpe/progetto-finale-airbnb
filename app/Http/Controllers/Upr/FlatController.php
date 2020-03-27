@@ -142,7 +142,6 @@ class FlatController extends Controller
 
     public function update(Request $request, Flat $flat)
     {
-
         $request->validate([
             'title' => 'required|min:10|max:255',
             'room_qty' => 'required|numeric|min:1|max:200',
@@ -235,7 +234,7 @@ class FlatController extends Controller
                 // Prendo la differenza oraria:
                 $hour_diff = now()->diffInHours($start_date);
                 // ora valuto: se la differenza è maggiore delle ore di sponsorizzazione, significa che è scaduta. Quindi faccio entrare nella schermata di sponsorizzazione:
-                if ( $hour_diff > $sponsor_hours ) {
+                if ( $hour_diff >= $sponsor_hours ) {
                     // SCADUTA:
                     return view('upr.flats.sponsor', ["flat" => $flat, "sponsor" => $sponsor]);
                 } else {

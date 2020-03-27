@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'Advanced_search' => 'Advanced Search',
+    'Advanced_search' => 'Advanced search',
     'Filter_results' => 'Filter results',
     'Number_of_rooms' => 'Number of rooms',
     'Number_of_beds' => 'Number of beds',

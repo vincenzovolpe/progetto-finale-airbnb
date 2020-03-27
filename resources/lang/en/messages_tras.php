@@ -15,9 +15,9 @@ return [
 
     'All_messages' => 'Received messages',
     'Received_messages' => 'Message received from ',
-    'Appartament' => 'Appartament',
+    'Appartament' => 'Apartment',
     'Reception_date' => 'Reception date',
-    'Text_message' => 'Text of the message',
+    'Text_message' => 'Message text',
     'No_mess' => 'You have not received any messages',
 
 ];

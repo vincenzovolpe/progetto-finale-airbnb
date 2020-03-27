@@ -26,7 +26,7 @@ return [
     'Valid' => 'Correct entry!',
     'Invalid_name' => 'Please enter a valid name - min 3 characters',
     'Invalid_surname' => 'Please enter a valid surname - min 3 characters',
-    'Invalid_age' => 'You must have 18 years old',
+    'Invalid_age' => 'You must be 18 years old',
     'Invalid_mail' => 'Enter a correct email',
     'Invalid_pass' => 'Enter a correct password - min 8 characters',
 ];
