@@ -70279,7 +70279,8 @@ var lon_marker;
 var lat_marker;
 var title_marker;
 var address_marker;
-var risultati_marker;
+var risultati_marker_home;
+var risultati_marker_find;
 $(document).ready(function () {
   // Imposto l'input della searchbox a required
   $('.tt-search-box-input').prop('required', true); // Variabili da passare a createMap
@@ -70318,10 +70319,10 @@ $(document).ready(function () {
       },
       success: function success(data) {
         if (data.success) {
-          risultati_marker = data.result; //console.log(risultati_marker);
+          risultati_marker_home = data.result; //console.log(risultati_marker);
           //Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
 
-          createMapSearch(risultati_marker); //console.log(data.result);
+          createMapSearch(risultati_marker_home); //console.log(data.result);
 
           $('#card_container').empty();
 
@@ -70342,7 +70343,7 @@ $(document).ready(function () {
       }
     });
   } // Facciamo in modo che il bottone cerca nella pagina Find faccia uscire il popup di convalida
-  //in questo form non c'è una submit, perciò adottiamo questo trucco
+  // in questo form non c'è una submit, perciò adottiamo questo trucco
 
 
   (function ($) {
@@ -70432,6 +70433,7 @@ $(document).ready(function () {
 
     console.log(checkbox_selected);
     console.log(checkbox_count);
+    console.log(lat);
     $.ajax({
       url: 'http://localhost:8000/api/flats',
       method: 'GET',
@@ -70446,10 +70448,10 @@ $(document).ready(function () {
       },
       success: function success(data) {
         if (data.success) {
-          risultati_marker = data.result; //console.log(risultati_marker);
+          risultati_marker_find = data.result; //console.log(risultati_marker);
           //Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
 
-          createMapSearch(risultati_marker);
+          createMapSearch(risultati_marker_find);
           $('#card_container').empty();
 
           for (var i = 0; i < data.result.length; i++) {
@@ -70780,28 +70782,28 @@ function createMap(longitudine, latitudine, title, address, risultati_marker) {
   marker.setPopup(popup); //marker.togglePopup();
 }
 
-function createMapSearch(risultati_marker) {
-  console.log(risultati_marker);
-  console.log(risultati_marker[0].lon);
-  var center = [risultati_marker[0].lon, risultati_marker[0].lat];
+function createMapSearch(risultati) {
+  console.log(risultati);
+  console.log(risultati[0].lon);
+  var center = [risultati[0].lon, risultati[0].lat];
   var map = _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_0___default.a.map({
     key: 'Y2cMr97XoBZZKKVXgUS844gofkPiZFnA',
     container: 'map',
     center: center,
-    zoom: 7,
+    zoom: 8,
     style: 'tomtom://vector/1/basic-main',
     dragPan: !isMobileOrTablet()
   });
   map.addControl(new _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_0___default.a.FullscreenControl());
   map.addControl(new _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_0___default.a.NavigationControl());
 
-  for (var i = 0; i < risultati_marker.length; i++) {
+  for (var i = 0; i < risultati.length; i++) {
     var popup = new _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_0___default.a.Popup({
       offset: 35
     }); //Creazione del marker all'indirizzo dell'Appartamento
 
-    var marker = new _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_0___default.a.Marker({}).setLngLat([risultati_marker[i].lon, risultati_marker[i].lat]).addTo(map);
-    popup.setHTML(risultati_marker[i].title + "<br>" + risultati_marker[i].address + "<br>" + risultati_marker[i].lon + " " + risultati_marker[i].lat);
+    var marker = new _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_0___default.a.Marker({}).setLngLat([risultati[i].lon, risultati[i].lat]).addTo(map);
+    popup.setHTML(risultati[i].title + "<br>" + risultati[i].address + "<br>" + risultati[i].lon + " " + risultati[i].lat);
     marker.setPopup(popup); //marker.togglePopup();
   }
 }
@@ -70940,8 +70942,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/boolean-code/progetto-finale-airbnb/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/boolean-code/progetto-finale-airbnb/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/umbertown/Desktop/Atom - Boolean/GIT/progetto-finale-airbnb/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/umbertown/Desktop/Atom - Boolean/GIT/progetto-finale-airbnb/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
