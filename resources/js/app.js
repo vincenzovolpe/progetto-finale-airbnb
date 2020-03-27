@@ -95,6 +95,12 @@ $(document).ready(function(){
     $("#address-edit").find(".tt-search-box-input").val(address);
     $(".tt-search-box-input").attr('name', 'address');
 
+    // Creo la mappa solo quando mi trovo all'interno della pagina di dettaglio dell'appartamento
+    if(href.indexOf('/flats/details') > -1) {
+        // Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
+        createMap(lonNumber, latNumber, title, address);
+    }
+
     // Istruzioni per caricare risultati di ricerca dalla home nella pagina di ricerca
     var address_search = $('#searchFind').val();
     var address_edit = $('#address').val();
@@ -235,7 +241,6 @@ $(document).on('click', '#delete_flat', function (e) {
     $('#btn_find').click(function(event){
 
         if ($('.tt-search-box-input').val()) {
-
             var lat = $('#latNumberFind').val();
             var lon = $('#lonNumberFind').val();
             var distance = $('#km_radius').val();
@@ -627,7 +632,7 @@ function isFuzzySearchResult(event) {
 }
 
 
-function createMap(longitudine, latitudine, title, address, risultati_marker) {
+function createMap(longitudine, latitudine, title, address) {
     //console.log(risultati_marker);
 
     //var roundLatLng = Formatters.roundLatLng;
