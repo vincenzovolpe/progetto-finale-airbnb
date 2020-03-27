@@ -70291,7 +70291,7 @@ $(document).ready(function () {
   var address = $('#address').text(); // nella searchbox della edit valorizzo il campo col valore precedente
 
   $("#address-edit").find(".tt-search-box-input").val(address);
-  $(".tt-search-box-input").attr('name', 'address'); // Creo la mappa solo quando mi trovo  all'interno della pagina di dettaglio dell'appartamento
+  $(".tt-search-box-input").attr('name', 'address'); // Creo la mappa solo quando mi trovo all'interno della pagina di dettaglio dell'appartamento
 
   if (href.indexOf('/flats/details') > -1) {
     // Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
@@ -70342,8 +70342,8 @@ $(document).ready(function () {
         }
       }
     });
-  } // Facciamo in modo che il bottone cerca nella pagina Find faccia uscire il popup di convalida
-  // in questo form non c'è una submit, perciò adottiamo questo trucco
+  } //    Facciamo in modo che il bottone cerca nella pagina Find faccia uscire il popup di convalida
+  //   in questo form non c'è una submit, perciò adottiamo questo trucco
 
 
   (function ($) {
@@ -70420,7 +70420,6 @@ $(document).ready(function () {
 
   $('#btn_find').click(function (event) {
     if ($('.tt-search-box-input').val()) {
-      alert('input pieno');
       var lat = $('#latNumberFind').val();
       var lon = $('#lonNumberFind').val();
       var distance = $('#km_radius').val();
@@ -70462,7 +70461,8 @@ $(document).ready(function () {
         },
         success: function success(data) {
           if (data.success) {
-            risultati_marker_find = data.result; //console.log(risultati_marker);
+            risultati_marker_find = data.result;
+            console.log($('.tt-search-box-input').val()); //console.log(risultati_marker);
             //Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
 
             createMapSearch(risultati_marker_find);
@@ -70607,7 +70607,7 @@ $(document).ready(function () {
       $('#text_msg').addClass('is-valid');
       $('#text_msg').removeClass('is-invalid');
     } else {
-      $('.invio').attr("disabled", true);
+      $('.invio').add("disabled");
       $(".text_msg.valid-feedback").hide();
       $(".text_msg.invalid-feedback").show();
       $('#text_msg').addClass('is-invalid');
@@ -70775,7 +70775,7 @@ function isFuzzySearchResult(event) {
   return !('matches' in event.data.result);
 }
 
-function createMap(longitudine, latitudine, title, address, risultati_marker) {
+function createMap(longitudine, latitudine, title, address) {
   //console.log(risultati_marker);
   //var roundLatLng = Formatters.roundLatLng;
   var center = [latitudine, longitudine];
