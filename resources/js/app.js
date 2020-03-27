@@ -163,8 +163,9 @@ $(document).ready(function(){
             }
         })
     }
-// Facciamo in modo che il bottone cerca nella pagina Find faccia uscire il popup di convalida
-// in questo form non c'è una submit, perciò adottiamo questo trucco
+
+//    Facciamo in modo che il bottone cerca nella pagina Find faccia uscire il popup di convalida
+//   in questo form non c'è una submit, perciò adottiamo questo trucco
 (function($){
     var isValid = null;
     var form = $('#form_find');
@@ -242,7 +243,6 @@ $(document).on('click', '#delete_flat', function (e) {
     $('#btn_find').click(function(event){
 
         if ($('.tt-search-box-input').val()) {
-            alert('input pieno');
 
             var lat = $('#latNumberFind').val();
             var lon = $('#lonNumberFind').val();

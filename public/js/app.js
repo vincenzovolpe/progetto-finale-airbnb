@@ -70342,8 +70342,8 @@ $(document).ready(function () {
         }
       }
     });
-  } // Facciamo in modo che il bottone cerca nella pagina Find faccia uscire il popup di convalida
-  // in questo form non c'è una submit, perciò adottiamo questo trucco
+  } //    Facciamo in modo che il bottone cerca nella pagina Find faccia uscire il popup di convalida
+  //   in questo form non c'è una submit, perciò adottiamo questo trucco
 
 
   (function ($) {
@@ -70420,7 +70420,6 @@ $(document).ready(function () {
 
   $('#btn_find').click(function (event) {
     if ($('.tt-search-box-input').val()) {
-      alert('input pieno');
       var lat = $('#latNumberFind').val();
       var lon = $('#lonNumberFind').val();
       var distance = $('#km_radius').val();
@@ -70958,13 +70957,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 __webpack_require__(/*! /Applications/MAMP/htdocs/boolean-code/progetto-finale-airbnb/resources/js/app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/boolean-code/progetto-finale-airbnb/resources/sass/app.scss */"./resources/sass/app.scss");
-=======
-__webpack_require__(/*! /Users/umbertown/Desktop/Atom - Boolean/GIT/progetto-finale-airbnb/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/umbertown/Desktop/Atom - Boolean/GIT/progetto-finale-airbnb/resources/sass/app.scss */"./resources/sass/app.scss");
->>>>>>> origin/master
 
 
 /***/ })
