@@ -48,9 +48,6 @@
         object-fit: cover;
         height: 180px;
     }
-}
-
-#home-not-sponsored, #home-sponsored {
     .card-title {
         height: 45px;
     }
@@ -110,7 +107,7 @@
 }
 
 footer {
-    a, a:hover, {
+    a, a:hover {
         color: rgb(72, 72, 72);
     }
     i:hover {
