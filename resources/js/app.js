@@ -523,14 +523,14 @@ $(document).on('click', '#delete_flat', function (e) {
             var a=(this.files[0].size);
             if(a < 5000000) {
                 // alert("L'immagine selezionata supera i 5MB!!!");
-                $('#crea').removeClass('disabled');
-                $('.img_uri.invalid-feedback').hide();
-                $('.img_uri.valid-feedback').show();
+                $('#crea').removeAttr("disabled");
+                $('.img_uri.invalid-tooltip').hide();
+                $('.img_uri.valid-tooltip').show();
                 $('#crea').show();
             }else{
-                $('#crea').hide();
-                $('.img_uri.valid-feedback').hide();
-                $('.img_uri.invalid-feedback').show();
+                $('#crea').attr("disabled",true);
+                $('.img_uri.valid-tooltip').hide();
+                $('.img_uri.invalid-tooltip').show();
             };
         });
     //});
