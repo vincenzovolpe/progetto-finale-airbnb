@@ -34,8 +34,8 @@
                 $.get('{{ route('upr.payment.process', ['id' => $id, 'sponsor_id' => $sponsor_id]) }}', {payload}, function (response) {
                     if (response.success) {
                         Swal.fire(
-                            'Complimenti!',
-                            'Pagamento effettuato correttamente',
+                            '{{__('payment_popup.Congratulations')}}',
+                            '{{__('payment_popup.Payment_correct')}}',
                             'success'
                         ).then((result) => {
                             if (result.value) {
@@ -44,8 +44,8 @@
                         })
                     } else {
                         Swal.fire(
-                            'Attenzione!',
-                            'Pagamento fallito',
+                            '{{__('payment_popup.Warning')}}',
+                            '{{__('payment_popup.Payment_failed')}}',
                             'error'
                         )
                     }

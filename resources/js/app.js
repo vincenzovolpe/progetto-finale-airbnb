@@ -146,17 +146,18 @@ $(document).ready(function(){
 
                             var html = template_function(variables);
 
-                            $('.card-columns').append(html);
+                            $('#card_container').append(html);
                         }
                     } else {
-                        $('.card-columns').append('La ricerca non ha trovato nessun appartamento!');
+                        $('#card_container').append('La ricerca non ha trovato nessun appartamento!');
                     }
 
             }
         })
     }
-// Facciamo in modo che il bottone cerca nella pagina Find faccia uscire il popup di convalida
-// in questo form non c'è una submit, perciò adottiamo questo trucco
+
+//    Facciamo in modo che il bottone cerca nella pagina Find faccia uscire il popup di convalida
+//   in questo form non c'è una submit, perciò adottiamo questo trucco
 (function($){
     var isValid = null;
     var form = $('#form_find');
@@ -198,16 +199,29 @@ $(document).ready(function(){
 
 // Popup di conferma per la cancellazione di un appartamento
 $(document).on('click', '#delete_flat', function (e) {
+    // Traduzione del popup di conferma per la cancellazione Flat
+    var sure = 'Sei sicuro?';
+    var deleting = "L'appartamento verrà cancellato definitivamente!";
+    var confirm = "Si";
+
+    if(href.indexOf('/en/upr/flats') > -1) {
+        // Variabile che memorizza il placeholder in inglese della  searchbox per le mappe
+        sure = 'Are you sure?';
+        deleting = 'The apartment will be permanently deleted!';
+        confirm = 'Yes';
+    }
+
+
     var id = $(this).data('id');
     var form =  $(this).closest("form");
     e.preventDefault();
     console.log(id);
     Swal.fire({
-            title: "Sei sicuro?",
-            text: "L'appartamento verrà cancellato definitivamente!",
+            title: sure,
+            text: deleting,
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Si',
+            confirmButtonText: confirm,
             cancelButtonText: 'No',
         })
         .then((willDelete) => {
@@ -219,6 +233,8 @@ $(document).on('click', '#delete_flat', function (e) {
 
     // Chiamata Ajax nella pagina Find con eventuali filtri di Ricerca
     $('#btn_find').click(function(event){
+
+        if ($('.tt-search-box-input').val()) {
 
             var lat = $('#latNumberFind').val();
             var lon = $('#lonNumberFind').val();
@@ -285,16 +301,17 @@ $(document).on('click', '#delete_flat', function (e) {
 
                                 var html = template_function(variables);
 
-                                $('.card-columns').append(html);
+                                $('#card_container').append(html);
                             }
                         } else {
 
                             $('#card_container').empty();
 
-                            $('.card-columns').append('<p>La ricerca non ha trovato nessun appartamento!<p>');
+                            $('#card_container').append('<p>La ricerca non ha trovato nessun appartamento!<p>');
                         }
                 }
             })
+        }
 
         });
 
@@ -379,20 +396,21 @@ $(document).on('click', '#delete_flat', function (e) {
                 // console.log(point2);
                 if ( chioccia > point && point2 > chioccia) {
                     // console.log('ok');
-                    // $(submit).removeAttr("disabled");
+                    $(submit).removeAttr("disabled");
                     $(valido).show();
                     $(invalido).hide();
                     $(mail).addClass('is-valid');
                     $(mail).removeClass('is-invalid');
                 }else if(chioccia >= 1 && chioccia < point){
                     // console.log('ok');
-                    // $(submit).removeAttr("disabled");
+                    $(submit).removeAttr("disabled");
                     $(valido).show();
                     $(invalido).hide();
                     $(mail).addClass('is-valid');
                     $(mail).removeClass('is-invalid');
                 }else{
                     // console.log('no');
+                    $(submit).attr("disabled",true);
                     $(invalido).show();
                     $(valido).hide();
                     $(mail).addClass('is-invalid');
@@ -403,7 +421,7 @@ $(document).on('click', '#delete_flat', function (e) {
             })
         };
         // Validazione mail in fase di registrazione e invio messaggio
-        validationEmail('#email','.mail.valid-feedback','.mail.invalid-feedback');
+        validationEmail('#email','.mail.valid-feedback','.mail.invalid-feedback','.invio');
         validationEmail('#msg_email','.msg_mail.valid-feedback','.msg_mail.invalid-feedback','.invio');
 
         // Funzione di validazione della lunghezza  messaggio nei details e lunghezza della mail > 0
@@ -501,14 +519,14 @@ $(document).on('click', '#delete_flat', function (e) {
             var a=(this.files[0].size);
             if(a < 5000000) {
                 // alert("L'immagine selezionata supera i 5MB!!!");
-                $('#crea').removeClass('disabled');
-                $('.img_uri.invalid-feedback').hide();
-                $('.img_uri.valid-feedback').show();
+                $('#crea').removeAttr("disabled");
+                $('.img_uri.invalid-tooltip').hide();
+                $('.img_uri.valid-tooltip').show();
                 $('#crea').show();
             }else{
-                $('#crea').hide();
-                $('.img_uri.valid-feedback').hide();
-                $('.img_uri.invalid-feedback').show();
+                $('#crea').attr("disabled",true);
+                $('.img_uri.valid-tooltip').hide();
+                $('.img_uri.invalid-tooltip').show();
             };
         });
     //});

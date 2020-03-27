@@ -38,7 +38,7 @@
             <div class="row justify-content-center">
                 <div class="text-center">
                     <h1>OPS!</h1>
-                    <p>Sembra che questa pagina non esita ancora! Clicca <a href="{{ route('home') }}">qui</a> per tornare in home page!</p>
+                    <p>{{__('404_tras.Click')}} <a href="{{ route('home') }}">{{__('404_tras.Here')}}</a> {{__('404_tras.Home_page')}}</p>
                 </div>
             </div>
         </div>

@@ -122,7 +122,7 @@
                             </div>
                             <!-- pulsante Invio modulo -->
                             <div class="form-group">
-                                <input id="crea" type="submit" class="crea btn btn-primary my-3" value="{{__('create.Btn_create')}}">
+                                <input id="crea" type="submit" disabled class="crea btn btn-primary my-3" value="{{__('create.Btn_create')}}">
                             </div>
                         </div>
                     </form>
