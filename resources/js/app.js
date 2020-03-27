@@ -77,7 +77,8 @@ var lon_marker;
 var lat_marker;
 var title_marker;
 var address_marker;
-var risultati_marker;
+var risultati_marker_home;
+var risultati_marker_find;
 
 $(document).ready(function(){
 
@@ -130,11 +131,11 @@ $(document).ready(function(){
             success: function(data) {
                     if (data.success) {
 
-                        risultati_marker = data.result;
+                        risultati_marker_home = data.result;
                         //console.log(risultati_marker);
 
                         //Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
-                        createMapSearch(risultati_marker);
+                        createMapSearch(risultati_marker_home);
 
                         //console.log(data.result);
                         $('#card_container').empty();
@@ -163,7 +164,7 @@ $(document).ready(function(){
         })
     }
 // Facciamo in modo che il bottone cerca nella pagina Find faccia uscire il popup di convalida
-//in questo form non c'è una submit, perciò adottiamo questo trucco
+// in questo form non c'è una submit, perciò adottiamo questo trucco
 (function($){
     var isValid = null;
     var form = $('#form_find');
@@ -252,7 +253,7 @@ $(document).on('click', '#delete_flat', function (e) {
             }
             console.log(checkbox_selected);
             console.log(checkbox_count);
-
+            console.log(lat);
             $.ajax({
                 url: 'http://localhost:8000/api/flats',
                 method: 'GET',
@@ -268,11 +269,13 @@ $(document).on('click', '#delete_flat', function (e) {
 
                 success: function(data) {
                         if (data.success) {
-                            risultati_marker = data.result;
+
+                            risultati_marker_find = data.result;
+
                             //console.log(risultati_marker);
 
                             //Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
-                            createMapSearch(risultati_marker);
+                            createMapSearch(risultati_marker_find);
 
                             $('#card_container').empty();
 
@@ -644,16 +647,16 @@ function createMap(longitudine, latitudine, title, address, risultati_marker) {
     //marker.togglePopup();
 }
 
-function createMapSearch(risultati_marker) {
-    console.log(risultati_marker);
-    console.log(risultati_marker[0].lon);
-    var center = [risultati_marker[0].lon, risultati_marker[0].lat];
+function createMapSearch(risultati) {
+    console.log(risultati);
+    console.log(risultati[0].lon);
+    var center = [risultati[0].lon, risultati[0].lat];
 
     var map = tt.map({
         key: 'Y2cMr97XoBZZKKVXgUS844gofkPiZFnA',
         container: 'map',
         center: center,
-        zoom: 7,
+        zoom: 8,
         style: 'tomtom://vector/1/basic-main',
         dragPan: !isMobileOrTablet()
     });
@@ -661,15 +664,15 @@ function createMapSearch(risultati_marker) {
     map.addControl(new tt.FullscreenControl());
     map.addControl(new tt.NavigationControl());
 
-    for (var i = 0; i < risultati_marker.length; i++) {
+    for (var i = 0; i < risultati.length; i++) {
         var popup = new tt.Popup({
                  offset: 35
         });
         //Creazione del marker all'indirizzo dell'Appartamento
         var marker = new tt.Marker({
-        }).setLngLat([risultati_marker[i].lon, risultati_marker[i].lat]).addTo(map);
+        }).setLngLat([risultati[i].lon, risultati[i].lat]).addTo(map);
 
-        popup.setHTML(risultati_marker[i].title + "<br>" + risultati_marker[i].address + "<br>" + risultati_marker[i].lon + " " + risultati_marker[i].lat);
+        popup.setHTML(risultati[i].title + "<br>" + risultati[i].address + "<br>" + risultati[i].lon + " " + risultati[i].lat);
         marker.setPopup(popup);
         //marker.togglePopup();
     }

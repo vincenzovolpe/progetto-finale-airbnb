@@ -42,24 +42,17 @@
     }
 }
 
-#home-sponsored {
-    margin: 6em auto;
-    h2 {
-        margin-bottom: 2em;
-    }
-}
-
-#home-not-sponsored {
-    margin: 6em auto;
-    h2 {
-        margin-bottom: 2em;
-    }
-}
 
 #home-not-sponsored, #home-sponsored {
     .card-img {
         object-fit: cover;
         height: 180px;
+    }
+}
+
+#home-not-sponsored, #home-sponsored {
+    .card-title {
+        height: 45px;
     }
 }
 
@@ -83,17 +76,6 @@
     }
 }
 
-.card-columns {
-    @include media-breakpoint-only(sm) {
-        column-count: 2;
-    }
-    @include media-breakpoint-only(md) {
-        column-count: 2;
-    }
-    @include media-breakpoint-only(lg) {
-        column-count: 3;
-    }
-}
 
 #flat-det h3 {
     margin-top: 30px;
