@@ -400,20 +400,21 @@ $(document).on('click', '#delete_flat', function (e) {
                 // console.log(point2);
                 if ( chioccia > point && point2 > chioccia) {
                     // console.log('ok');
-                    // $(submit).removeAttr("disabled");
+                    $(submit).removeAttr("disabled");
                     $(valido).show();
                     $(invalido).hide();
                     $(mail).addClass('is-valid');
                     $(mail).removeClass('is-invalid');
                 }else if(chioccia >= 1 && chioccia < point){
                     // console.log('ok');
-                    // $(submit).removeAttr("disabled");
+                    $(submit).removeAttr("disabled");
                     $(valido).show();
                     $(invalido).hide();
                     $(mail).addClass('is-valid');
                     $(mail).removeClass('is-invalid');
                 }else{
                     // console.log('no');
+                    $(submit).attr("disabled",true);
                     $(invalido).show();
                     $(valido).hide();
                     $(mail).addClass('is-invalid');
@@ -424,7 +425,7 @@ $(document).on('click', '#delete_flat', function (e) {
             })
         };
         // Validazione mail in fase di registrazione e invio messaggio
-        validationEmail('#email','.mail.valid-feedback','.mail.invalid-feedback');
+        validationEmail('#email','.mail.valid-feedback','.mail.invalid-feedback','.invio');
         validationEmail('#msg_email','.msg_mail.valid-feedback','.msg_mail.invalid-feedback','.invio');
 
         // Funzione di validazione della lunghezza  messaggio nei details e lunghezza della mail > 0

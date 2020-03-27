@@ -70563,20 +70563,21 @@ $(document).ready(function () {
 
       if (chioccia > point && point2 > chioccia) {
         // console.log('ok');
-        // $(submit).removeAttr("disabled");
+        $(submit).removeAttr("disabled");
         $(valido).show();
         $(invalido).hide();
         $(mail).addClass('is-valid');
         $(mail).removeClass('is-invalid');
       } else if (chioccia >= 1 && chioccia < point) {
         // console.log('ok');
-        // $(submit).removeAttr("disabled");
+        $(submit).removeAttr("disabled");
         $(valido).show();
         $(invalido).hide();
         $(mail).addClass('is-valid');
         $(mail).removeClass('is-invalid');
       } else {
         // console.log('no');
+        $(submit).attr("disabled", true);
         $(invalido).show();
         $(valido).hide();
         $(mail).addClass('is-invalid');
@@ -70589,7 +70590,7 @@ $(document).ready(function () {
 
   ; // Validazione mail in fase di registrazione e invio messaggio
 
-  validationEmail('#email', '.mail.valid-feedback', '.mail.invalid-feedback');
+  validationEmail('#email', '.mail.valid-feedback', '.mail.invalid-feedback', '.invio');
   validationEmail('#msg_email', '.msg_mail.valid-feedback', '.msg_mail.invalid-feedback', '.invio'); // Funzione di validazione della lunghezza  messaggio nei details e lunghezza della mail > 0
 
   $('#text_msg').keyup(function () {
@@ -70954,13 +70955,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 __webpack_require__(/*! /Users/umbertown/Desktop/Atom - Boolean/GIT/progetto-finale-airbnb/resources/js/app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! /Users/umbertown/Desktop/Atom - Boolean/GIT/progetto-finale-airbnb/resources/sass/app.scss */"./resources/sass/app.scss");
-=======
-__webpack_require__(/*! C:\MAMP\htdocs\progetto-finale-airbnb\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\MAMP\htdocs\progetto-finale-airbnb\resources\sass\app.scss */"./resources/sass/app.scss");
->>>>>>> origin/master
 
 
 /***/ })
