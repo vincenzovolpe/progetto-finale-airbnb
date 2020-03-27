@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-md-8">
             <form method="POST" action="{{ route('upr.flats.update', ['flat' => $flat->id]) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
@@ -22,7 +22,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- Inserimento numero di stanze -->
                 <div class="form-group row">
                     <label for="room_qty" class="col-sm-3 col-form-label text-md-left">{{ __('edit_flat.Number_of_rooms') }}</label>
@@ -136,7 +135,7 @@
                 <button type="submit" class="btn btn-primary my-3">{{ __('edit_flat.Btn_submit') }}</button>
             </form>
         </div>
-        <div class="col">
+        <div class="col-md-4">
             <h4>{{ $flat->title }}</h4>
             <img class="card-img" src="{{asset('storage/' .$flat->img_uri)}}" alt="">
         </div>
