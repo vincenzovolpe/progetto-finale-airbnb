@@ -54862,7 +54862,7 @@ process.umask = function() { return 0; };
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
-* sweetalert2 v9.10.6
+* sweetalert2 v9.10.7
 * Released under the MIT License.
 */
 (function (global, factory) {
@@ -55279,6 +55279,18 @@ process.umask = function() { return 0; };
   var states = {
     previousBodyPadding: null
   };
+  var setInnerHtml = function setInnerHtml(elem, html) {
+    // #1926
+    elem.textContent = '';
+
+    if (html) {
+      var parser = new DOMParser();
+      var parsed = parser.parseFromString(html, "text/html");
+      toArray(parsed.querySelector('body').childNodes).forEach(function (child) {
+        elem.appendChild(child);
+      });
+    }
+  };
   var hasClass = function hasClass(elem, className) {
     if (!className) {
       return false;
@@ -55543,7 +55555,7 @@ process.umask = function() { return 0; };
       addClass(container, swalClasses['no-transition']);
     }
 
-    container.innerHTML = sweetHTML;
+    setInnerHtml(container, sweetHTML);
     var targetElement = getTarget(params.target);
     targetElement.appendChild(container);
     setupAccessibility(params);
@@ -55558,7 +55570,7 @@ process.umask = function() { return 0; };
     } else if (_typeof(param) === 'object') {
       handleObject(param, target); // Plain string
     } else if (param) {
-      target.innerHTML = param;
+      setInnerHtml(target, param);
     }
   };
 
@@ -55567,12 +55579,12 @@ process.umask = function() { return 0; };
     if (param.jquery) {
       handleJqueryElem(target, param); // For other objects use their string representation
     } else {
-      target.innerHTML = param.toString();
+      setInnerHtml(target, param.toString());
     }
   };
 
   var handleJqueryElem = function handleJqueryElem(target, elem) {
-    target.innerHTML = '';
+    target.textContent = '';
 
     if (0 in elem) {
       for (var i = 0; i in elem; i++) {
@@ -55666,7 +55678,7 @@ process.umask = function() { return 0; };
 
   function renderButton(button, buttonType, params) {
     toggle(button, params["show".concat(capitalizeFirstLetter(buttonType), "Button")], 'inline-block');
-    button.innerHTML = params["".concat(buttonType, "ButtonText")]; // Set caption text
+    setInnerHtml(button, params["".concat(buttonType, "ButtonText")]); // Set caption text
 
     button.setAttribute('aria-label', params["".concat(buttonType, "ButtonAriaLabel")]); // ARIA label
     // Add buttons custom classes
@@ -55864,11 +55876,11 @@ process.umask = function() { return 0; };
   };
 
   renderInputType.select = function (select, params) {
-    select.innerHTML = '';
+    select.textContent = '';
 
     if (params.inputPlaceholder) {
       var placeholder = document.createElement('option');
-      placeholder.innerHTML = params.inputPlaceholder;
+      setInnerHtml(placeholder, params.inputPlaceholder);
       placeholder.value = '';
       placeholder.disabled = true;
       placeholder.selected = true;
@@ -55879,7 +55891,7 @@ process.umask = function() { return 0; };
   };
 
   renderInputType.radio = function (radio) {
-    radio.innerHTML = '';
+    radio.textContent = '';
     return radio;
   };
 
@@ -55889,7 +55901,7 @@ process.umask = function() { return 0; };
     checkbox.id = swalClasses.checkbox;
     checkbox.checked = Boolean(params.inputValue);
     var label = checkboxContainer.querySelector('span');
-    label.innerHTML = params.inputPlaceholder;
+    setInnerHtml(label, params.inputPlaceholder);
     return checkboxContainer;
   };
 
@@ -55953,7 +55965,7 @@ process.umask = function() { return 0; };
 
   var renderCloseButton = function renderCloseButton(instance, params) {
     var closeButton = getCloseButton();
-    closeButton.innerHTML = params.closeButtonHtml; // Custom class
+    setInnerHtml(closeButton, params.closeButtonHtml); // Custom class
 
     applyCustomClass(closeButton, params, 'closeButton');
     toggle(closeButton, params.showCloseButton);
@@ -56009,21 +56021,21 @@ process.umask = function() { return 0; };
   };
 
   var setContent = function setContent(icon, params) {
-    icon.innerHTML = '';
+    icon.textContent = '';
 
     if (params.iconHtml) {
-      icon.innerHTML = iconContent(params.iconHtml);
+      setInnerHtml(icon, iconContent(params.iconHtml));
     } else if (params.icon === 'success') {
-      icon.innerHTML = "\n      <div class=\"swal2-success-circular-line-left\"></div>\n      <span class=\"swal2-success-line-tip\"></span> <span class=\"swal2-success-line-long\"></span>\n      <div class=\"swal2-success-ring\"></div> <div class=\"swal2-success-fix\"></div>\n      <div class=\"swal2-success-circular-line-right\"></div>\n    ";
+      setInnerHtml(icon, "\n      <div class=\"swal2-success-circular-line-left\"></div>\n      <span class=\"swal2-success-line-tip\"></span> <span class=\"swal2-success-line-long\"></span>\n      <div class=\"swal2-success-ring\"></div> <div class=\"swal2-success-fix\"></div>\n      <div class=\"swal2-success-circular-line-right\"></div>\n    ");
     } else if (params.icon === 'error') {
-      icon.innerHTML = "\n      <span class=\"swal2-x-mark\">\n        <span class=\"swal2-x-mark-line-left\"></span>\n        <span class=\"swal2-x-mark-line-right\"></span>\n      </span>\n    ";
+      setInnerHtml(icon, "\n      <span class=\"swal2-x-mark\">\n        <span class=\"swal2-x-mark-line-left\"></span>\n        <span class=\"swal2-x-mark-line-right\"></span>\n      </span>\n    ");
     } else {
       var defaultIconHtml = {
         question: '?',
         warning: '!',
         info: 'i'
       };
-      icon.innerHTML = iconContent(defaultIconHtml[params.icon]);
+      setInnerHtml(icon, iconContent(defaultIconHtml[params.icon]));
     }
   };
 
@@ -56118,7 +56130,7 @@ process.umask = function() { return 0; };
   var createStepElement = function createStepElement(step) {
     var stepEl = document.createElement('li');
     addClass(stepEl, swalClasses['progress-step']);
-    stepEl.innerHTML = step;
+    setInnerHtml(stepEl, step);
     return stepEl;
   };
 
@@ -56141,7 +56153,7 @@ process.umask = function() { return 0; };
     }
 
     show(progressStepsContainer);
-    progressStepsContainer.innerHTML = '';
+    progressStepsContainer.textContent = '';
     var currentProgressStep = parseInt(params.currentProgressStep === undefined ? getQueueStep() : params.currentProgressStep);
 
     if (currentProgressStep >= params.progressSteps.length) {
@@ -56932,7 +56944,7 @@ process.umask = function() { return 0; };
 
   function showValidationMessage(error) {
     var domCache = privateProps.domCache.get(this);
-    domCache.validationMessage.innerHTML = error;
+    setInnerHtml(domCache.validationMessage, error);
     var popupComputedStyle = window.getComputedStyle(domCache.popup);
     domCache.validationMessage.style.marginLeft = "-".concat(popupComputedStyle.getPropertyValue('padding-left'));
     domCache.validationMessage.style.marginRight = "-".concat(popupComputedStyle.getPropertyValue('padding-right'));
@@ -57263,7 +57275,7 @@ process.umask = function() { return 0; };
         var optionLabel = inputOption[1];
         var option = document.createElement('option');
         option.value = optionValue;
-        option.innerHTML = optionLabel;
+        setInnerHtml(option, optionLabel);
 
         if (params.inputValue.toString() === optionValue.toString()) {
           option.selected = true;
@@ -57289,7 +57301,7 @@ process.umask = function() { return 0; };
         }
 
         var label = document.createElement('span');
-        label.innerHTML = radioLabel;
+        setInnerHtml(label, radioLabel);
         label.className = swalClasses.label;
         radioLabelElement.appendChild(radioInput);
         radioLabelElement.appendChild(label);
@@ -57901,7 +57913,7 @@ process.umask = function() { return 0; };
     };
   });
   SweetAlert.DismissReason = DismissReason;
-  SweetAlert.version = '9.10.6';
+  SweetAlert.version = '9.10.7';
 
   var Swal = SweetAlert;
   Swal["default"] = Swal;
@@ -70464,6 +70476,7 @@ $(document).ready(function () {
             risultati_marker_find = data.result;
             console.log($('.tt-search-box-input').val()); //console.log(risultati_marker);
             //Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
+            //$('#map').empty();
 
             createMapSearch(risultati_marker_find);
             $('#card_container').empty();
@@ -70481,6 +70494,7 @@ $(document).ready(function () {
             }
           } else {
             $('#card_container').empty();
+            $('#map').empty();
             $('#card_container').append('<p>La ricerca non ha trovato nessun appartamento!<p>');
           }
         }
@@ -70566,21 +70580,21 @@ $(document).ready(function () {
 
       if (chioccia > point && point2 > chioccia) {
         // console.log('ok');
-        $(submit).removeAttr("disabled");
+        // $(submit).removeAttr("disabled");
         $(valido).show();
         $(invalido).hide();
         $(mail).addClass('is-valid');
         $(mail).removeClass('is-invalid');
       } else if (chioccia >= 1 && chioccia < point) {
         // console.log('ok');
-        $(submit).removeAttr("disabled");
+        // $(submit).removeAttr("disabled");
         $(valido).show();
         $(invalido).hide();
         $(mail).addClass('is-valid');
         $(mail).removeClass('is-invalid');
       } else {
         // console.log('no');
-        $(submit).attr("disabled", true);
+        // $(submit).attr("disabled",true);
         $(invalido).show();
         $(valido).hide();
         $(mail).addClass('is-invalid');
@@ -70600,18 +70614,26 @@ $(document).ready(function () {
     var value = $('#text_msg').val();
     var email = $('#msg_email').val(); // console.log(value);
 
-    if (value.length >= 10 && value.length <= 255 && email.length > 0) {
-      $('.invio').removeAttr("disabled");
+    if (value.length >= 10 && value.length <= 255) {
+      // $('.invio').removeAttr("disabled");
       $(".text_msg.valid-feedback").show();
       $(".text_msg.invalid-feedback").hide();
       $('#text_msg').addClass('is-valid');
       $('#text_msg').removeClass('is-invalid');
     } else {
-      $('.invio').add("disabled");
+      // $('.invio').add("disabled");
       $(".text_msg.valid-feedback").hide();
       $(".text_msg.invalid-feedback").show();
       $('#text_msg').addClass('is-invalid');
       $('#text_msg').removeClass('is-valid');
+    }
+  }); // Attivo il tasto invio se la mail e il campo di testo del messaggio hanno classe valid
+
+  $('.card-body').keyup(function () {
+    if ($('#msg_email').hasClass('is-valid') && $('#text_msg').hasClass('is-valid')) {
+      $('.invio').removeAttr("disabled");
+    } else {
+      $('.invio').attr("disabled", true);
     }
   }); //validation nella pagina del Create.blade della descrizione
 
@@ -70655,7 +70677,10 @@ $(document).ready(function () {
 
   validationNumber('#create #room_qty', '#create .room_qty.valid-feedback', '#create .room_qty.invalid-feedback');
   validationNumber('#create #bed_qty', '#create .bed_qnty.valid-feedback', '#create .bed_qnty.invalid-feedback');
-  validationNumber('#create #bath_qty', '#create .bath_qty.valid-feedback', '#create .bath_qty.invalid-feedback'); //Funzione di validation nella pagina del Create.blade dei mq
+  validationNumber('#create #bath_qty', '#create .bath_qty.valid-feedback', '#create .bath_qty.invalid-feedback');
+  validationNumber('#edit #room_qty', '#edit .room_qty.valid-feedback', '#edit .room_qty.invalid-feedback');
+  validationNumber('#edit #bed_qty', '#edit .bed_qnty.valid-feedback', '#edit .bed_qnty.invalid-feedback');
+  validationNumber('#edit #bath_qty', '#edit .bath_qty.valid-feedback', '#edit .bath_qty.invalid-feedback'); //Funzione di validation nella pagina del Create.blade dei mq
 
   function validationMq(parametro, valido, invalido) {
     $(parametro).keyup(function () {
@@ -70794,7 +70819,7 @@ function createMap(longitudine, latitudine, title, address) {
   map.addControl(new _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_0___default.a.NavigationControl()); //Creazione del marker all'indirizzo dell'Appartamento
 
   var marker = new _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_0___default.a.Marker({}).setLngLat(center).addTo(map);
-  popup.setHTML(title + "<br>" + address + "<br>" + latitudine + " " + longitudine);
+  popup.setHTML(title + "<br>" + address + "<br>");
   marker.setPopup(popup); //marker.togglePopup();
 }
 
@@ -70802,6 +70827,8 @@ function createMapSearch(risultati) {
   console.log(risultati);
   console.log(risultati[0].lon);
   var center = [risultati[0].lon, risultati[0].lat];
+  console.log($('#searchFind').val());
+  console.log($('.tt-search-box-input').val());
   var map = _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_0___default.a.map({
     key: 'Y2cMr97XoBZZKKVXgUS844gofkPiZFnA',
     container: 'map',
@@ -70819,7 +70846,7 @@ function createMapSearch(risultati) {
     }); //Creazione del marker all'indirizzo dell'Appartamento
 
     var marker = new _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_0___default.a.Marker({}).setLngLat([risultati[i].lon, risultati[i].lat]).addTo(map);
-    popup.setHTML(risultati[i].title + "<br>" + risultati[i].address + "<br>" + risultati[i].lon + " " + risultati[i].lat);
+    popup.setHTML(risultati[i].title + "<br>" + risultati[i].address);
     marker.setPopup(popup); //marker.togglePopup();
   }
 }
@@ -70958,8 +70985,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\MAMP\htdocs\progetto-finale-airbnb.git\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\MAMP\htdocs\progetto-finale-airbnb.git\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/umbertown/Desktop/Atom - Boolean/GIT/progetto-finale-airbnb/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/umbertown/Desktop/Atom - Boolean/GIT/progetto-finale-airbnb/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

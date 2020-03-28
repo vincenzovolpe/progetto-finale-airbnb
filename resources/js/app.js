@@ -402,21 +402,21 @@ $(document).on('click', '#delete_flat', function (e) {
                 // console.log(point2);
                 if ( chioccia > point && point2 > chioccia) {
                     // console.log('ok');
-                    $(submit).removeAttr("disabled");
+                    // $(submit).removeAttr("disabled");
                     $(valido).show();
                     $(invalido).hide();
                     $(mail).addClass('is-valid');
                     $(mail).removeClass('is-invalid');
                 }else if(chioccia >= 1 && chioccia < point){
                     // console.log('ok');
-                    $(submit).removeAttr("disabled");
+                    // $(submit).removeAttr("disabled");
                     $(valido).show();
                     $(invalido).hide();
                     $(mail).addClass('is-valid');
                     $(mail).removeClass('is-invalid');
                 }else{
                     // console.log('no');
-                    $(submit).attr("disabled",true);
+                    // $(submit).attr("disabled",true);
                     $(invalido).show();
                     $(valido).hide();
                     $(mail).addClass('is-invalid');
@@ -432,23 +432,33 @@ $(document).on('click', '#delete_flat', function (e) {
 
         // Funzione di validazione della lunghezza  messaggio nei details e lunghezza della mail > 0
         $('#text_msg').keyup(function(){
-            var value = ($('#text_msg').val());
+            var value = $('#text_msg').val();
             var email = $('#msg_email').val();
             // console.log(value);
-            if (value.length >=10 && value.length <=255 && email.length > 0) {
-                $('.invio').removeAttr("disabled");
+            if (value.length >=10 && value.length <=255) {
+                // $('.invio').removeAttr("disabled");
                 $(".text_msg.valid-feedback").show();
                 $(".text_msg.invalid-feedback").hide();
                 $('#text_msg').addClass('is-valid');
                 $('#text_msg').removeClass('is-invalid');
             }else{
-                $('.invio').add("disabled");
+                // $('.invio').add("disabled");
                 $(".text_msg.valid-feedback").hide();
                 $(".text_msg.invalid-feedback").show();
                 $('#text_msg').addClass('is-invalid');
                 $('#text_msg').removeClass('is-valid');
             }
         })
+        // Attivo il tasto invio se la mail e il campo di testo del messaggio hanno classe valid
+        $('.card-body').keyup(function(){
+            if ($('#msg_email').hasClass('is-valid') && $('#text_msg').hasClass('is-valid')) {
+                $('.invio').removeAttr("disabled");
+
+            }else{
+                $('.invio').attr("disabled",true);
+            }
+        });
+
 
     //validation nella pagina del Create.blade della descrizione
         $('#title').keyup(function(){
