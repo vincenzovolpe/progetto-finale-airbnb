@@ -14,7 +14,7 @@
             <div id="dropin-container"></div>
         </div>
     </div>
-    <div id="payment_button" class="row">
+    <div id="payment_button" class="row d-none">
         <div class="col">
             <!-- Verifica il pagamento: -->
             <button id="submit-button">{{__('sponsor_upr.Pay_now')}}</button>
@@ -29,6 +29,10 @@
         authorization: "{{ Braintree_ClientToken::generate() }}",
         container: '#dropin-container'
     }, function (createErr, instance) {
+        // Faccio uscire il bottone subito dopo aver creato il form di pagamento
+        var element = document.getElementById("payment_button");
+        element.classList.remove("d-none");
+        element.classList.add("d-block");
         button.addEventListener('click', function () {
             instance.requestPaymentMethod(function (err, payload) {
                 $.get('{{ route('upr.payment.process', ['id' => $id, 'sponsor_id' => $sponsor_id]) }}', {payload}, function (response) {
@@ -53,9 +57,9 @@
             });
         });
     });
-    $(document).ready(function(){
-        $("#payment_button").addClass("d-block");
-    });
+    // $(document).ready(function(){
+    //     $("#payment_button").addClass("d-block");
+    // });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 

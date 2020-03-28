@@ -41,6 +41,7 @@
                             @endforeach
                         </div>
                         <!-- campi nascosti necessari -->
+                        <input id="searchFindMap" type="text" name="address_search" value="andratuttobene" hidden>
                         <input id="searchFind" type="text" name="address_search" value="{{ $address }}" hidden>
                         <input id="latNumberFind" type="text" name="lat" value="{{ $lat }}" hidden>
                         <input id="lonNumberFind" type="text" name="lon" value="{{ $lon }}" hidden>
