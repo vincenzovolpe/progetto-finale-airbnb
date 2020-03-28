@@ -53,7 +53,7 @@
                                     $hour_diff = now()->diffInHours($start_date);
                                 @endphp
                                 {{-- Qui esiste, vediamo se è ancora valida: --}}
-                                @if( $hour_diff <= $sponsor_hours )
+                                @if( $hour_diff < $sponsor_hours )
                                     {{-- Qui esiste ed è ancora valida: vediamo quanto dura ancora! --}}
                                     <p>
                                         {{__('index_upr.Sponsor_date')}} {{ $start_date }},  {{__('index_upr.Sponsor_use')}} {{ $hour_diff }} {{__('index_upr.Sponsor_hours')}} {{ $sponsor_hours }}.

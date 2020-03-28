@@ -14,7 +14,7 @@
             <img class="card-img" src="{{asset('storage/' .$flat->img_uri)}}" alt="flat picture">
         </div>
         <div class="col-lg-6">
-            <h5>{{__('dett_upr.Features')}}</h5>
+            <h5 class="my-3">{{__('dett_upr.Features')}}</h5>
             <table class="table table-striped table-bordered">
                 <tbody>
                     <tr>

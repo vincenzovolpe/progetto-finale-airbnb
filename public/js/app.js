@@ -70291,7 +70291,7 @@ $(document).ready(function () {
   var address = $('#address').text(); // nella searchbox della edit valorizzo il campo col valore precedente
 
   $("#address-edit").find(".tt-search-box-input").val(address);
-  $(".tt-search-box-input").attr('name', 'address'); // Creo la mappa solo quando mi trovo  all'interno della pagina di dettaglio dell'appartamento
+  $(".tt-search-box-input").attr('name', 'address'); // Creo la mappa solo quando mi trovo all'interno della pagina di dettaglio dell'appartamento
 
   if (href.indexOf('/flats/details') > -1) {
     // Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
@@ -70461,7 +70461,8 @@ $(document).ready(function () {
         },
         success: function success(data) {
           if (data.success) {
-            risultati_marker_find = data.result; //console.log(risultati_marker);
+            risultati_marker_find = data.result;
+            console.log($('.tt-search-box-input').val()); //console.log(risultati_marker);
             //Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
 
             createMapSearch(risultati_marker_find);
@@ -70606,7 +70607,7 @@ $(document).ready(function () {
       $('#text_msg').addClass('is-valid');
       $('#text_msg').removeClass('is-invalid');
     } else {
-      $('.invio').attr("disabled", true);
+      $('.invio').add("disabled");
       $(".text_msg.valid-feedback").hide();
       $(".text_msg.invalid-feedback").show();
       $('#text_msg').addClass('is-invalid');
@@ -70774,7 +70775,7 @@ function isFuzzySearchResult(event) {
   return !('matches' in event.data.result);
 }
 
-function createMap(longitudine, latitudine, title, address, risultati_marker) {
+function createMap(longitudine, latitudine, title, address) {
   //console.log(risultati_marker);
   //var roundLatLng = Formatters.roundLatLng;
   var center = [latitudine, longitudine];
@@ -70946,7 +70947,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+throw new Error("Module build failed (from ./node_modules/css-loader/index.js):\nModuleBuildError: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):\nSassError: expected \"{\".\n    ╷\n215 │ >>>>>>> origin/master\r\n    │                      ^\n    ╵\n  C:\\MAMP\\htdocs\\progetto-finale-airbnb\\resources\\sass\\app.scss 215:22  root stylesheet\n    at C:\\MAMP\\htdocs\\progetto-finale-airbnb\\node_modules\\webpack\\lib\\NormalModule.js:316:20\n    at C:\\MAMP\\htdocs\\progetto-finale-airbnb\\node_modules\\loader-runner\\lib\\LoaderRunner.js:367:11\n    at C:\\MAMP\\htdocs\\progetto-finale-airbnb\\node_modules\\loader-runner\\lib\\LoaderRunner.js:233:18\n    at context.callback (C:\\MAMP\\htdocs\\progetto-finale-airbnb\\node_modules\\loader-runner\\lib\\LoaderRunner.js:111:13)\n    at C:\\MAMP\\htdocs\\progetto-finale-airbnb\\node_modules\\sass-loader\\dist\\index.js:73:7\n    at Function.call$2 (C:\\MAMP\\htdocs\\progetto-finale-airbnb\\node_modules\\sass\\sass.dart.js:87203:16)\n    at _render_closure1.call$2 (C:\\MAMP\\htdocs\\progetto-finale-airbnb\\node_modules\\sass\\sass.dart.js:76994:12)\n    at _RootZone.runBinary$3$3 (C:\\MAMP\\htdocs\\progetto-finale-airbnb\\node_modules\\sass\\sass.dart.js:25521:18)\n    at _RootZone.runBinary$3 (C:\\MAMP\\htdocs\\progetto-finale-airbnb\\node_modules\\sass\\sass.dart.js:25525:19)\n    at _FutureListener.handleError$1 (C:\\MAMP\\htdocs\\progetto-finale-airbnb\\node_modules\\sass\\sass.dart.js:23975:19)\n    at _Future__propagateToListeners_handleError.call$0 (C:\\MAMP\\htdocs\\progetto-finale-airbnb\\node_modules\\sass\\sass.dart.js:24271:40)\n    at Object._Future__propagateToListeners (C:\\MAMP\\htdocs\\progetto-finale-airbnb\\node_modules\\sass\\sass.dart.js:3500:88)\n    at _Future._completeError$2 (C:\\MAMP\\htdocs\\progetto-finale-airbnb\\node_modules\\sass\\sass.dart.js:24099:9)\n    at _AsyncAwaitCompleter.completeError$2 (C:\\MAMP\\htdocs\\progetto-finale-airbnb\\node_modules\\sass\\sass.dart.js:23491:12)\n    at Object._asyncRethrow (C:\\MAMP\\htdocs\\progetto-finale-airbnb\\node_modules\\sass\\sass.dart.js:3256:17)\n    at C:\\MAMP\\htdocs\\progetto-finale-airbnb\\node_modules\\sass\\sass.dart.js:13326:20\n    at _wrapJsFunctionForAsync_closure.$protected (C:\\MAMP\\htdocs\\progetto-finale-airbnb\\node_modules\\sass\\sass.dart.js:3279:15)\n    at _wrapJsFunctionForAsync_closure.call$2 (C:\\MAMP\\htdocs\\progetto-finale-airbnb\\node_modules\\sass\\sass.dart.js:23512:12)\n    at _awaitOnObject_closure0.call$2 (C:\\MAMP\\htdocs\\progetto-finale-airbnb\\node_modules\\sass\\sass.dart.js:23504:25)\n    at _RootZone.runBinary$3$3 (C:\\MAMP\\htdocs\\progetto-finale-airbnb\\node_modules\\sass\\sass.dart.js:25521:18)\n    at _RootZone.runBinary$3 (C:\\MAMP\\htdocs\\progetto-finale-airbnb\\node_modules\\sass\\sass.dart.js:25525:19)\n    at _FutureListener.handleError$1 (C:\\MAMP\\htdocs\\progetto-finale-airbnb\\node_modules\\sass\\sass.dart.js:23975:19)\n    at _Future__propagateToListeners_handleError.call$0 (C:\\MAMP\\htdocs\\progetto-finale-airbnb\\node_modules\\sass\\sass.dart.js:24271:40)\n    at Object._Future__propagateToListeners (C:\\MAMP\\htdocs\\progetto-finale-airbnb\\node_modules\\sass\\sass.dart.js:3500:88)\n    at _Future._completeError$2 (C:\\MAMP\\htdocs\\progetto-finale-airbnb\\node_modules\\sass\\sass.dart.js:24099:9)\n    at _Future__asyncCompleteError_closure.call$0 (C:\\MAMP\\htdocs\\progetto-finale-airbnb\\node_modules\\sass\\sass.dart.js:24194:18)\n    at Object._microtaskLoop (C:\\MAMP\\htdocs\\progetto-finale-airbnb\\node_modules\\sass\\sass.dart.js:3550:21)\n    at StaticClosure._startMicrotaskLoop (C:\\MAMP\\htdocs\\progetto-finale-airbnb\\node_modules\\sass\\sass.dart.js:3556:11)\n    at _AsyncRun__scheduleImmediateJsOverride_internalCallback.call$0 (C:\\MAMP\\htdocs\\progetto-finale-airbnb\\node_modules\\sass\\sass.dart.js:23409:21)\n    at invokeClosure (C:\\MAMP\\htdocs\\progetto-finale-airbnb\\node_modules\\sass\\sass.dart.js:1360:26)\n    at Immediate.<anonymous> (C:\\MAMP\\htdocs\\progetto-finale-airbnb\\node_modules\\sass\\sass.dart.js:1381:18)\n    at processImmediate (internal/timers.js:439:21)");
 
 /***/ }),
 
@@ -70957,8 +70958,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/boolean-code/progetto-finale-airbnb/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/boolean-code/progetto-finale-airbnb/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\MAMP\htdocs\progetto-finale-airbnb\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\progetto-finale-airbnb\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

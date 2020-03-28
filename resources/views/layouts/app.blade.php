@@ -40,6 +40,7 @@
                 @yield('login-content')
                 @yield('reset_box')
                 @yield('reset_confirm_box')
+                @yield('page_404')
             </div>
             @yield('content')
         </main>

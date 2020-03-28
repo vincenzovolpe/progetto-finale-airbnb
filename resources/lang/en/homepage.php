@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'slogan' => 'Book a beautifull Flats',
+    'slogan' => 'Book beautiful flats',
     'city' => 'Choose the city',
     'search_placeholdem' => 'Everywhere',
     'btn_search' => 'Search',

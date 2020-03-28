@@ -14,7 +14,7 @@ return [
     */
 
     'Edit_details' => "Edit details",
-    'Back' => "Come Back",
+    'Back' => "Come back",
     'Description' => "Description",
     'Number_of_rooms' => "Number of rooms",
     'Number_of_beds' => "Number of beds",
@@ -22,8 +22,8 @@ return [
     'Square_meters' => 'Square meters',
     'Address' => 'Address',
     'Coordinates' => 'Coordinates',
-    'Show_on_site' => 'Show on the site',
-    'Hide_on_site' => 'Hide on the site',
+    'Show_on_site' => 'Show on site',
+    'Hide_on_site' => 'Hide on site',
     'New_upload' => "Upload a new picture of the appartment",
     'File' => 'Choose a file',
     'No_file_select' => 'No files selected',

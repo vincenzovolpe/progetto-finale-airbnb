@@ -47,7 +47,7 @@ class PaymentsController extends Controller
                 // Tramite l'id prendo il numero di ore di attività:
                 $active_hours = Sponsor::find($active_hours)->hours;
                 // Valuto se la differenza oraria tra now() e l'inizio della promozione:
-                if ($hour_diff > $sponsor_hours) {
+                if ($hour_diff >= $sponsor_hours) {
                     // Mando i dati alla view:
                     return view('upr.payment', ["id" => $id, "sponsor_id" => $sponsor_id, "sponsor_hours" => $sponsor_hours, "sponsor_title" => $sponsor_title, "sponsor_price" => $sponsor_price]);
                 } else {
