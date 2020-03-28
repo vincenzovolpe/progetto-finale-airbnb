@@ -661,7 +661,7 @@ function createMap(longitudine, latitudine, title, address) {
     var marker = new tt.Marker({
     }).setLngLat(center).addTo(map);
 
-    popup.setHTML(title + "<br>" + address + "<br>" + latitudine + " " + longitudine);
+    popup.setHTML(title + "<br>" + address + "<br>");
     marker.setPopup(popup);
     //marker.togglePopup();
 }
