@@ -14,7 +14,7 @@
             <div id="dropin-container"></div>
         </div>
     </div>
-    <div class="row">
+    <div id="payment_button" class="row">
         <div class="col">
             <!-- Verifica il pagamento: -->
             <button id="submit-button">{{__('sponsor_upr.Pay_now')}}</button>
@@ -52,6 +52,9 @@
                 }, 'json');
             });
         });
+    });
+    $(document).ready(function(){
+        $("#payment_button").addClass("d-block");
     });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>

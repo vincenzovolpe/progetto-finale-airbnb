@@ -288,6 +288,7 @@ $(document).on('click', '#delete_flat', function (e) {
                             //console.log(risultati_marker);
 
                                 //Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
+                                //$('#map').empty();
                                 createMapSearch(risultati_marker_find);
 
                             $('#card_container').empty();
@@ -311,7 +312,7 @@ $(document).on('click', '#delete_flat', function (e) {
                         } else {
 
                             $('#card_container').empty();
-
+                            $('#map').empty();
                             $('#card_container').append('<p>La ricerca non ha trovato nessun appartamento!<p>');
                         }
                 }
@@ -670,29 +671,32 @@ function createMapSearch(risultati) {
     console.log(risultati[0].lon);
     var center = [risultati[0].lon, risultati[0].lat];
 
-    var map = tt.map({
-        key: 'Y2cMr97XoBZZKKVXgUS844gofkPiZFnA',
-        container: 'map',
-        center: center,
-        zoom: 8,
-        style: 'tomtom://vector/1/basic-main',
-        dragPan: !isMobileOrTablet()
-    });
+    console.log($('#searchFind').val());
+    console.log($('.tt-search-box-input').val());
 
-    map.addControl(new tt.FullscreenControl());
-    map.addControl(new tt.NavigationControl());
-
-    for (var i = 0; i < risultati.length; i++) {
-        var popup = new tt.Popup({
-                 offset: 35
+        var map = tt.map({
+            key: 'Y2cMr97XoBZZKKVXgUS844gofkPiZFnA',
+            container: 'map',
+            center: center,
+            zoom: 8,
+            style: 'tomtom://vector/1/basic-main',
+            dragPan: !isMobileOrTablet()
         });
-        //Creazione del marker all'indirizzo dell'Appartamento
-        var marker = new tt.Marker({
-        }).setLngLat([risultati[i].lon, risultati[i].lat]).addTo(map);
 
-        popup.setHTML(risultati[i].title + "<br>" + risultati[i].address + "<br>" + risultati[i].lon + " " + risultati[i].lat);
-        marker.setPopup(popup);
-        //marker.togglePopup();
-    }
+        map.addControl(new tt.FullscreenControl());
+        map.addControl(new tt.NavigationControl());
+
+        for (var i = 0; i < risultati.length; i++) {
+            var popup = new tt.Popup({
+                     offset: 35
+            });
+            //Creazione del marker all'indirizzo dell'Appartamento
+            var marker = new tt.Marker({
+            }).setLngLat([risultati[i].lon, risultati[i].lat]).addTo(map);
+
+            popup.setHTML(risultati[i].title + "<br>" + risultati[i].address + "<br>" + risultati[i].lon + " " + risultati[i].lat);
+            marker.setPopup(popup);
+            //marker.togglePopup();
+        }
 
 }

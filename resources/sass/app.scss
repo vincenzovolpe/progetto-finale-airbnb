@@ -27,7 +27,7 @@
 }
 
 #homepicture {
-    height: 100vh;
+    min-height: 100vh;
     background-image: url('/assets/images/boolbnb-home-hd.jpg');
     background-size: cover;
 }
@@ -178,7 +178,7 @@ footer {
             padding-top: 100px;
         }
     }
-
+}
     // Stile per la about_us:
 
     .about_us {
