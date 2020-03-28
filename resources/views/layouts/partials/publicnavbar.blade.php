@@ -13,7 +13,7 @@
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
                 {{-- Selettore della lingua --}}
-                <ul class="nav">
+                {{-- <ul class="nav"> --}}
                     @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                         <li class="nav-item ">
                             <a class="nav-link text-dark" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
@@ -21,8 +21,8 @@
                             </a>
                         </li>
                     @endforeach
-                </ul>
-                <li class="nav-item">
+                {{-- </ul> --}}
+                <li class="nav-item {{Route::currentRouteName() == 'about_us' ? 'active' : ""}}">
                     <a class="nav-link text-dark" href="{{ route('about_us') }}">{{ __('registration.About_us') }}</a>
                 </li>
                 <!-- Authentication Links -->
