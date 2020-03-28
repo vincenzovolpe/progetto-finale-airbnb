@@ -70481,9 +70481,13 @@ $(document).ready(function () {
               $('#card_container').append(html);
             }
           } else {
-            $('#card_container').empty();
-            $('#map').empty();
-            $('#card_container').append('<p>La ricerca non ha trovato nessun appartamento!<p>');
+            $('#card_container').empty(); //$('#map').empty();
+
+            $('#card_container').append('<h3>La ricerca non ha trovato nessun appartamento!<h3>');
+            $(".mapboxgl-canvas-container").each(function () {
+              $(this).find('.mapboxgl-marker').remove();
+            }); //Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
+            //createMapSearch(risultati_marker_home);
           }
         }
       });
@@ -70804,8 +70808,6 @@ function createMap(longitudine, latitudine, title, address) {
 }
 
 function createMapSearch(risultati) {
-  console.log(risultati);
-  console.log(risultati[0].lon);
   var center = [risultati[0].lon, risultati[0].lat];
 
   if ($('.tt-search-box-input').val() != $('#searchFindMap').val()) {
@@ -70833,7 +70835,6 @@ function createMapSearch(risultati) {
       marker.setPopup(popup); //marker.togglePopup();
     }
   } else {
-    //alert("L'indirizzo non è cambiato");
     $(".mapboxgl-canvas-container").each(function () {
       $(this).find('.mapboxgl-marker').remove();
     });
