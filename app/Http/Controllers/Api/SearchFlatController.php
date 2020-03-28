@@ -43,13 +43,6 @@ class SearchFlatController extends Controller
                 ->havingRaw('number_services = ? AND distance <= ?', [$checkbox_count, $distance])
                 ->orderBy('distance')
                 ->get();
-
-                // return response()->json(
-                //     [
-                //         'success' => true,
-                //         'result' => $flats_services
-                //     ]
-                // );
             } else {
 
                 $flats = DB::select( DB::raw("

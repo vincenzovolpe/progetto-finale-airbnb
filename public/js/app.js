@@ -70464,6 +70464,7 @@ $(document).ready(function () {
             risultati_marker_find = data.result;
             console.log($('.tt-search-box-input').val()); //console.log(risultati_marker);
             //Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
+            //$('#map').empty();
 
             createMapSearch(risultati_marker_find);
             $('#card_container').empty();
@@ -70481,6 +70482,7 @@ $(document).ready(function () {
             }
           } else {
             $('#card_container').empty();
+            $('#map').empty();
             $('#card_container').append('<p>La ricerca non ha trovato nessun appartamento!<p>');
           }
         }
@@ -70802,6 +70804,8 @@ function createMapSearch(risultati) {
   console.log(risultati);
   console.log(risultati[0].lon);
   var center = [risultati[0].lon, risultati[0].lat];
+  console.log($('#searchFind').val());
+  console.log($('.tt-search-box-input').val());
   var map = _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_0___default.a.map({
     key: 'Y2cMr97XoBZZKKVXgUS844gofkPiZFnA',
     container: 'map',

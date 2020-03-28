@@ -4,7 +4,7 @@
 
         <div class="container-fluid">
             <div class="row justify-content-center">
-                <section id="error">
+                <section id="errore">
                 	<div class="content text-center">
                 		<i class="fas fa-exclamation-triangle fa-9x mb-3"></i>
                 		<h1>404</h1>
