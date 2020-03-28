@@ -13,12 +13,8 @@ return [
     |
     */
 
-    'Click' => "It seems that this page does not exist yet! Click ",
-    'Here' => 'here ',
-    'Home_page' => 'to return to the home page!',
-
-
-
+    'Alert' => 'Warning! - Page not found',
+    'Button' => 'BACK TO HOME PAGE',
 
 
 ];

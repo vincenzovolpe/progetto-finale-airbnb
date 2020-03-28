@@ -15,16 +15,49 @@ class HomeController extends Controller
 
     public function index()
     {
-        $flats = Flat::where('active', 1)->orderBy('created_at', 'desc')->get();
-        foreach ($flats as $flat) {
+
+        // Seleziono tutti gli appartamenti attivi
+        $all_flats = Flat::where('active', 1)->orderBy('created_at', 'desc')->get();
+
+        // Selezione tutti gli appartamenti che non sono mai stati sponsorizzati
+        $flats_no_sponsor = DB::table('flats')
+        ->leftJoin('flat_sponsor', 'flats.id', '=', 'flat_sponsor.flat_id')
+        ->whereNull('flat_sponsor.flat_id')
+        ->where('active', 1)
+        ->orderBy('flats.created_at', 'desc')
+        ->get();
+
+        // Selezione tutti gli appartamenti con sponsorizzazione scaduta
+        foreach ($all_flats as $flat) {
             $flat_sponsor = $flat->sponsors->toArray();
-            //dd($flat_sponsor);
+
             foreach ($flat_sponsor as $sponsor) {
+
+                $flat_sponsored_expired = DB::table('flats')
+                ->join('flat_sponsor', 'flats.id', '=', 'flat_sponsor.flat_id')
+                ->where([
+                    ['flat_sponsor.created_at', '<', DB::raw('DATE_SUB(NOW(), INTERVAL '.$sponsor['hours'].' HOUR)')],
+                    ['active', 1]])
+                ->orderBy('flat_sponsor.created_at', 'desc')
+                ->get();
+
+            }
+        }
+
+        // Creiamo una collection che è l'unione delle due query fatte in precedenza che sarebbero tutti gli appartamenti mai sponsorizzati o con sponsorizzazione scaduta
+        $flats_not_sponsor = $flats_no_sponsor->merge($flat_sponsored_expired);
+
+
+        // Seleziono tutti gli appartamenti sponsorizzati attualmente
+        foreach ($all_flats as $flat_due) {
+            $flat_sponsor_due = $flat_due->sponsors->toArray();
+            //dd($flat_sponsor);
+            foreach ($flat_sponsor_due as $sponsor_due) {
 
                 $flat_sponsored = DB::table('flats')
                 ->join('flat_sponsor', 'flats.id', '=', 'flat_sponsor.flat_id')
                 ->where([
-                    ['flat_sponsor.created_at', '>=', DB::raw('DATE_SUB(NOW(), INTERVAL '.$sponsor['hours'].' HOUR)')],
+                    ['flat_sponsor.created_at', '>=', DB::raw('DATE_SUB(NOW(), INTERVAL '.$sponsor_due['hours'].' HOUR)')],
                     ['active', 1]])
                 ->orderBy('flat_sponsor.created_at', 'desc')
                 ->get();
@@ -33,10 +66,11 @@ class HomeController extends Controller
         }
 
         if(!empty($flat_sponsored)){
-            return view('home', ['flats' => $flats, 'flat_sponsored' => $flat_sponsored]);
+            return view('home', ['flats' => $flats_not_sponsor, 'flat_sponsored' => $flat_sponsored]);
         } else  {
-            return view('home', ['flats' => $flats]);
+            return view('home', ['flats' => $flats_not_sponsor]);
         }
+
     }
 
     public function detailsFlat(Request $request, $id)

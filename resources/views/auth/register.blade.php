@@ -2,8 +2,8 @@
 
 @section('login-content')
 <div class="container">
-    <div id="registerLeftBox" class="row">
-        <div class="col-lg-6 card border-light shadow">
+    <div id="registerLeftBox" class="row py-5">
+        <div class="col-lg-6 card border-light bg-light shadow">
             <div class="card-body">
                 <div>
                     <h3>{{ __('registration.Register') }}</h3>

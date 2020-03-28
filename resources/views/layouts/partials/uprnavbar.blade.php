@@ -9,15 +9,9 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Left Side Of Navbar -->
-            <ul class="navbar-nav mr-auto">
-
-            </ul>
-
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
                 {{-- Selettore della lingua --}}
-                <ul class="nav">
                     @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                         <li class="nav-item">
                             <a class="nav-link text-dark" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
@@ -25,7 +19,6 @@
                             </a>
                         </li>
                     @endforeach
-                </ul>
                 <!-- Authentication Links -->
                 @guest
                     <li class="nav-item {{Route::currentRouteName() == 'login' ? 'active' : ""}}">

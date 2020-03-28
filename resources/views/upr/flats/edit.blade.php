@@ -17,7 +17,7 @@
         <div class="col-lg-8">
             <div class="card bg-light">
                 <div class="card-body">
-                    <form method="POST" action="{{ route('upr.flats.update', ['flat' => $flat->id]) }}" enctype="multipart/form-data">
+                    <form id="edit" method="POST" action="{{ route('upr.flats.update', ['flat' => $flat->id]) }}" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <!-- Inserimento titolo(descrizione) -->
