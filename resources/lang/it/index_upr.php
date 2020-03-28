@@ -27,6 +27,8 @@ return [
     'Sponsor' => 'Sponsorizza ora!',
     'No_Flat' => 'Nessun appartamento!',
 
+    'Deleted' => 'Cancellato',
+    'Confirmation' => 'Appartamento cancellato correttamente',
 
 
 

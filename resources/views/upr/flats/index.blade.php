@@ -4,8 +4,8 @@
     @if (session('status'))
         <script>
         Swal.fire(
-            'Cancellato!',
-            'Appartamento cancellato correttamente',
+            '{{__('index_upr.Deleted')}}',
+            '{{__('index_upr.Confirmation')}}',
             'success'
         )
         </script>

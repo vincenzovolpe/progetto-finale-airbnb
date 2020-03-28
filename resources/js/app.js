@@ -493,6 +493,9 @@ $(document).on('click', '#delete_flat', function (e) {
         validationNumber('#create #room_qty','#create .room_qty.valid-feedback','#create .room_qty.invalid-feedback');
         validationNumber('#create #bed_qty','#create .bed_qnty.valid-feedback','#create .bed_qnty.invalid-feedback');
         validationNumber('#create #bath_qty','#create .bath_qty.valid-feedback','#create .bath_qty.invalid-feedback');
+        validationNumber('#edit #room_qty','#edit .room_qty.valid-feedback','#edit .room_qty.invalid-feedback');
+        validationNumber('#edit #bed_qty','#edit .bed_qnty.valid-feedback','#edit .bed_qnty.invalid-feedback');
+        validationNumber('#edit #bath_qty','#edit .bath_qty.valid-feedback','#edit .bath_qty.invalid-feedback');
 
         //Funzione di validation nella pagina del Create.blade dei mq
         function validationMq(parametro,valido,invalido,){
