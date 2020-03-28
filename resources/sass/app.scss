@@ -129,15 +129,15 @@ footer {
 
     // Animo il colore dell'header:
     @keyframes baf-color {
-        0% {background-color: rgb(13,30,44)}
-        25% {background-color: rgb(10,22,33)}
-        50% {background-color: rgb(6,15,22)}
-        75% {background-color: rgb(10,22,33)}
-        100% {background-color: rgb(13,30,44)}
+        0% {background-color: rgb(56,193,114)}
+        25% {background-color: rgb(51,188,109)}
+        50% {background-color: rgb(46,183,104)}
+        75% {background-color: rgb(51,188,109)}
+        100% {background-color: rgb(56,193,114)}
     }
 
     header {
-        background-color: rgb(13,30,44);
+        background-color: rgb(56,193,114);
         animation-name: baf-color;
         animation-duration: 10s;
         animation-iteration-count: infinite;
