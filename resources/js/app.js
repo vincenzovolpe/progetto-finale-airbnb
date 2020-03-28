@@ -694,7 +694,7 @@ function createMapSearch(risultati) {
             var marker = new tt.Marker({
             }).setLngLat([risultati[i].lon, risultati[i].lat]).addTo(map);
 
-            popup.setHTML(risultati[i].title + "<br>" + risultati[i].address + "<br>" + risultati[i].lon + " " + risultati[i].lat);
+            popup.setHTML(risultati[i].title + "<br>" + risultati[i].address);
             marker.setPopup(popup);
             //marker.togglePopup();
         }

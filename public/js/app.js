@@ -70826,7 +70826,7 @@ function createMapSearch(risultati) {
     }); //Creazione del marker all'indirizzo dell'Appartamento
 
     var marker = new _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_0___default.a.Marker({}).setLngLat([risultati[i].lon, risultati[i].lat]).addTo(map);
-    popup.setHTML(risultati[i].title + "<br>" + risultati[i].address + "<br>" + risultati[i].lon + " " + risultati[i].lat);
+    popup.setHTML(risultati[i].title + "<br>" + risultati[i].address);
     marker.setPopup(popup); //marker.togglePopup();
   }
 }
