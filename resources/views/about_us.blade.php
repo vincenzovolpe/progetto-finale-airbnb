@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('login-content')
 <div class="about_us my-5">
-    <header class="bg-primary text-center py-5 mb-4">
+    <header class="text-center py-5 mb-4">
         <div class="container">
             <h1 class="font-weight-light text-white">TEAM #1</h1>
         </div>
@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row">
             <!-- Membro del team: -->
-            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12mb-4">
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
                 <div class="card border-0 shadow">
                     <img class="card-img" src="/assets/images/aldo.jpg" alt="bool-bnb-logo">
                     <div class="card-body text-center">
