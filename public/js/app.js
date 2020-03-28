@@ -70464,6 +70464,7 @@ $(document).ready(function () {
             risultati_marker_find = data.result;
             console.log($('.tt-search-box-input').val()); //console.log(risultati_marker);
             //Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
+            //$('#map').empty();
 
             createMapSearch(risultati_marker_find);
             $('#card_container').empty();
@@ -70481,6 +70482,7 @@ $(document).ready(function () {
             }
           } else {
             $('#card_container').empty();
+            $('#map').empty();
             $('#card_container').append('<p>La ricerca non ha trovato nessun appartamento!<p>');
           }
         }
@@ -70655,7 +70657,10 @@ $(document).ready(function () {
 
   validationNumber('#create #room_qty', '#create .room_qty.valid-feedback', '#create .room_qty.invalid-feedback');
   validationNumber('#create #bed_qty', '#create .bed_qnty.valid-feedback', '#create .bed_qnty.invalid-feedback');
-  validationNumber('#create #bath_qty', '#create .bath_qty.valid-feedback', '#create .bath_qty.invalid-feedback'); //Funzione di validation nella pagina del Create.blade dei mq
+  validationNumber('#create #bath_qty', '#create .bath_qty.valid-feedback', '#create .bath_qty.invalid-feedback');
+  validationNumber('#edit #room_qty', '#edit .room_qty.valid-feedback', '#edit .room_qty.invalid-feedback');
+  validationNumber('#edit #bed_qty', '#edit .bed_qnty.valid-feedback', '#edit .bed_qnty.invalid-feedback');
+  validationNumber('#edit #bath_qty', '#edit .bath_qty.valid-feedback', '#edit .bath_qty.invalid-feedback'); //Funzione di validation nella pagina del Create.blade dei mq
 
   function validationMq(parametro, valido, invalido) {
     $(parametro).keyup(function () {
@@ -70802,6 +70807,8 @@ function createMapSearch(risultati) {
   console.log(risultati);
   console.log(risultati[0].lon);
   var center = [risultati[0].lon, risultati[0].lat];
+  console.log($('#searchFind').val());
+  console.log($('.tt-search-box-input').val());
   var map = _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_0___default.a.map({
     key: 'Y2cMr97XoBZZKKVXgUS844gofkPiZFnA',
     container: 'map',
@@ -70819,7 +70826,7 @@ function createMapSearch(risultati) {
     }); //Creazione del marker all'indirizzo dell'Appartamento
 
     var marker = new _tomtom_international_web_sdk_maps__WEBPACK_IMPORTED_MODULE_0___default.a.Marker({}).setLngLat([risultati[i].lon, risultati[i].lat]).addTo(map);
-    popup.setHTML(risultati[i].title + "<br>" + risultati[i].address + "<br>" + risultati[i].lon + " " + risultati[i].lat);
+    popup.setHTML(risultati[i].title + "<br>" + risultati[i].address);
     marker.setPopup(popup); //marker.togglePopup();
   }
 }
