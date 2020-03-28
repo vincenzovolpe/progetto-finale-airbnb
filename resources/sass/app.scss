@@ -110,23 +110,21 @@
 }
 
 footer {
-    a, a:hover {
-        color: rgb(219, 104, 104);
-    }
-    i:hover {
-        color: rgb(209, 108, 108);
-        cursor: pointer;
+    a {
+        color: $dark-grey;
+        &:hover {
+            color: $green;
+            text-decoration: none;
+        }
     }
     img {
-        height: 40px;
         width: 40px;
     }
 }
 
 // Page 404
 
-#error {
-@import url('https://fonts.googleapis.com/css?family=Sniglet:400,800');
+#errore {
 
     h1{
         text-align: center;
@@ -179,34 +177,35 @@ footer {
         }
     }
 }
-    // Stile per la about_us:
 
-    .about_us {
 
-        // Animo il colore dell'header:
-        @keyframes baf-color {
-            0% {background-color: rgb(13,30,44)}
-            25% {background-color: rgb(10,22,33)}
-            50% {background-color: rgb(6,15,22)}
-            75% {background-color: rgb(10,22,33)}
-            100% {background-color: rgb(13,30,44)}
+// Stile per la about_us:
+
+.about_us {
+
+    // Animo il colore dell'header:
+    @keyframes baf-color {
+        0% {background-color: rgb(13,30,44)}
+        25% {background-color: rgb(10,22,33)}
+        50% {background-color: rgb(6,15,22)}
+        75% {background-color: rgb(10,22,33)}
+        100% {background-color: rgb(13,30,44)}
+    }
+
+    header {
+        background-color: rgb(13,30,44);
+        animation-name: baf-color;
+        animation-duration: 10s;
+        animation-iteration-count: infinite;
+    }
+
+    .container .row > div {
+
+        &:hover {
+            transform: rotate(1deg) scale(1.02);
+            box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.75);
+            cursor: pointer;
         }
 
-        header {
-            background-color: rgb(13,30,44);
-            animation-name: baf-color;
-            animation-duration: 10s;
-            animation-iteration-count: infinite;
-        }
-
-        .container .row > div {
-
-            &:hover {
-                transform: rotate(1deg) scale(1.02);
-                box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.75);
-                cursor: pointer;
-            }
-
-        }
     }
 }
