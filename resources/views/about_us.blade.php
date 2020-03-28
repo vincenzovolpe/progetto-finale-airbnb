@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row">
             <!-- Membro del team: -->
-            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12mb-4">
                 <div class="card border-0 shadow">
                     <img class="card-img" src="/assets/images/aldo.jpg" alt="bool-bnb-logo">
                     <div class="card-body text-center">
