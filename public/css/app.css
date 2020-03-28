@@ -11984,50 +11984,50 @@ footer img {
 
 @-webkit-keyframes baf-color {
   0% {
-    background-color: #0d1e2c;
+    background-color: #38c172;
   }
 
   25% {
-    background-color: #0a1621;
+    background-color: #33bc6d;
   }
 
   50% {
-    background-color: #060f16;
+    background-color: #2eb768;
   }
 
   75% {
-    background-color: #0a1621;
+    background-color: #33bc6d;
   }
 
   100% {
-    background-color: #0d1e2c;
+    background-color: #38c172;
   }
 }
 
 @keyframes baf-color {
   0% {
-    background-color: #0d1e2c;
+    background-color: #38c172;
   }
 
   25% {
-    background-color: #0a1621;
+    background-color: #33bc6d;
   }
 
   50% {
-    background-color: #060f16;
+    background-color: #2eb768;
   }
 
   75% {
-    background-color: #0a1621;
+    background-color: #33bc6d;
   }
 
   100% {
-    background-color: #0d1e2c;
+    background-color: #38c172;
   }
 }
 
 .about_us header {
-  background-color: #0d1e2c;
+  background-color: #38c172;
   -webkit-animation-name: baf-color;
           animation-name: baf-color;
   -webkit-animation-duration: 10s;

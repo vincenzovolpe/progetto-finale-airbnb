@@ -1,4 +1,4 @@
-@extends('layouts.short')
+@extends('layouts.app')
 @section('content')
 <div class="about_us my-5">
     <header class="bg-primary text-center py-5 mb-4">
@@ -11,7 +11,7 @@
             <!-- Membro del team: -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-0 shadow">
-                    <img src="https://source.unsplash.com/TMgQMXoglsM/500x350" class="card-img-top" alt="...">
+                    <img src="https://avatars0.githubusercontent.com/u/56113258?s=460&u=99dd8d78db12317d1421f96af5ee65d48f978aa3&v=4" class="card-img-top" alt="...">
                     <div class="card-body text-center">
                         <h5 class="card-title mb-0">Aldo Cavenago</h5>
                         <div class="card-text text-black-50">Full Stack Web Developer</div>
