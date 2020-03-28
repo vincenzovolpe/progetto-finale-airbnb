@@ -45,6 +45,8 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 //     el: '#app',
 // });
 
+var map_find;
+
 var href = window.location.href;
 // Variabile che memorizza il placeholder della  searchbox per le mappe
 var place = 'Ovunque';
@@ -241,6 +243,7 @@ $(document).on('click', '#delete_flat', function (e) {
     $('#btn_find').click(function(event){
 
         if ($('.tt-search-box-input').val()) {
+
             var lat = $('#latNumberFind').val();
             var lon = $('#lonNumberFind').val();
             var distance = $('#km_radius').val();
@@ -284,11 +287,10 @@ $(document).on('click', '#delete_flat', function (e) {
                         if (data.success) {
 
                             risultati_marker_find = data.result;
-                            console.log($('.tt-search-box-input').val());
+                            //console.log($('.tt-search-box-input').val());
                             //console.log(risultati_marker);
 
                                 //Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
-                                //$('#map').empty();
                                 createMapSearch(risultati_marker_find);
 
                             $('#card_container').empty();
@@ -681,10 +683,14 @@ function createMapSearch(risultati) {
     console.log(risultati[0].lon);
     var center = [risultati[0].lon, risultati[0].lat];
 
-    console.log($('#searchFind').val());
-    console.log($('.tt-search-box-input').val());
 
-        var map = tt.map({
+    if($('.tt-search-box-input').val() != $('#searchFindMap').val()) {
+
+        // Memorizzo l'indirizzo attuale nel campo nascosto
+        console.log($('#searchFindMap').val());
+        $('#searchFindMap').val($('.tt-search-box-input').val());
+
+        map_find = tt.map({
             key: 'Y2cMr97XoBZZKKVXgUS844gofkPiZFnA',
             container: 'map',
             center: center,
@@ -693,8 +699,8 @@ function createMapSearch(risultati) {
             dragPan: !isMobileOrTablet()
         });
 
-        map.addControl(new tt.FullscreenControl());
-        map.addControl(new tt.NavigationControl());
+        map_find.addControl(new tt.FullscreenControl());
+        map_find.addControl(new tt.NavigationControl());
 
         for (var i = 0; i < risultati.length; i++) {
             var popup = new tt.Popup({
@@ -702,11 +708,31 @@ function createMapSearch(risultati) {
             });
             //Creazione del marker all'indirizzo dell'Appartamento
             var marker = new tt.Marker({
-            }).setLngLat([risultati[i].lon, risultati[i].lat]).addTo(map);
+            }).setLngLat([risultati[i].lon, risultati[i].lat]).addTo(map_find);
 
             popup.setHTML(risultati[i].title + "<br>" + risultati[i].address);
             marker.setPopup(popup);
             //marker.togglePopup();
         }
+    } else {
 
+        //alert("L'indirizzo non è cambiato");
+
+        $(".mapboxgl-canvas-container").each(function(){
+            $(this).find('.mapboxgl-marker').remove();
+        });
+
+        for (var i = 0; i < risultati.length; i++) {
+            var popup = new tt.Popup({
+                     offset: 35
+            });
+            //Creazione del marker all'indirizzo dell'Appartamento
+            var marker = new tt.Marker({
+            }).setLngLat([risultati[i].lon, risultati[i].lat]).addTo(map_find);
+
+            popup.setHTML(risultati[i].title + "<br>" + risultati[i].address);
+            marker.setPopup(popup);
+            //marker.togglePopup();
+        }
+    }
 }
