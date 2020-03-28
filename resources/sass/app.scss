@@ -86,13 +86,8 @@
     }
 }
 
-#flat-det h3 {
-    margin-top: 30px;
-}
-
-#flat_search, #flat_map {
-    margin-top: 100px;
-    background-color: $light-grey;
+#map {
+    min-height: 100%;
 }
 
 #find-results {
@@ -132,10 +127,8 @@ footer {
 }
 
 // Page 404
-
 #errore {
     h1 {
-        // color: $dark-grey;
         font-size: 110px;
     }
     i.fas {

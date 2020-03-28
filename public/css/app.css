@@ -11889,14 +11889,8 @@ a.text-dark:focus {
   color: #ffed4a;
 }
 
-#flat-det h3 {
-  margin-top: 30px;
-}
-
-#flat_search,
-#flat_map {
-  margin-top: 100px;
-  background-color: #f3f3f3;
+#map {
+  min-height: 100%;
 }
 
 #find-results {
