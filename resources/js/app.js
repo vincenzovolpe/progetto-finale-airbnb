@@ -603,7 +603,6 @@ $(document).on('click', '#delete_flat', function (e) {
                 $('#crea').removeAttr("disabled");
                 $('.img_uri.invalid-tooltip').hide();
                 $('.img_uri.valid-tooltip').show();
-                $('#crea').show();
             }else{
                 $('#crea').attr("disabled",true);
                 $('.img_uri.valid-tooltip').hide();

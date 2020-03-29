@@ -33,7 +33,7 @@ return [
     'Invalid_title' => 'Inserisci una descrizione valida - min 5 caratteri',
     'Invalid_element' => 'Inserisci un numero valido',
     'Invalid_mq' => 'Inserisci un numero valido compreso tra 10 e 500',
-    'Invalid_img' => "Inserisci un'immagine non superiore ai 5MB",
+    'Invalid_img' => "Inserisci un'immagine non superiore ai 2MB",
     'Invalid_service' => "Non abbiamo nessun servizio attivo al momento!",
 
 
