@@ -11876,6 +11876,13 @@ a.text-dark:focus {
   height: 45px;
 }
 
+img.sponsortag {
+  position: absolute;
+  width: 85px;
+  bottom: 0;
+  right: 0;
+}
+
 #dashboard-index .card-img {
   height: 220px;
 }
@@ -11891,10 +11898,6 @@ a.text-dark:focus {
 
 #map {
   min-height: 100%;
-}
-
-#find-results {
-  margin: 70px auto;
 }
 
 #dashboard-index .card,

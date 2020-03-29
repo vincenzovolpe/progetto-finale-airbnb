@@ -60,7 +60,7 @@
                 </div>
             </div>
         </div>
-        <div id="find-results">
+        <div id="find-results" class="my-5">
             <!-- Card package -->
             <div id="card_container" class="row">
             <!-- Appendo il contenuto del template handlebars -->

@@ -18,47 +18,47 @@
             <table class="table table-striped table-bordered">
                 <tbody>
                     <tr>
-                        <td><i class="fas fa-door-open"></i></td>
+                        <td class="text-center"><i class="fas fa-door-open"></i></td>
                         <td>{{__('dett_upr.Rooms')}}</td>
                         <td>{{ $flat->room_qty }}</td>
                     </tr>
                     <tr>
-                        <td><i class="fas fa-bed"></i></td>
+                        <td class="text-center"><i class="fas fa-bed"></i></td>
                         <td>{{__('dett_upr.Beds')}}</td>
                         <td>{{ $flat->bed_qty }}</td>
                     </tr>
                     <tr>
-                        <td><i class="fas fa-bath"></i></td>
+                        <td class="text-center"><i class="fas fa-bath"></i></td>
                         <td>{{__('dett_upr.Baths')}}</td>
                         <td>{{ $flat->bath_qty }}</td>
                     </tr>
                     <tr>
-                        <td><i class="fas fa-ruler"></i></td>
+                        <td class="text-center"><i class="fas fa-ruler"></i></td>
                         <td>{{__('dett_upr.Square_meters')}}</td>
                         <td>{{ $flat->sq_meters }}</td>
                     </tr>
                     <tr>
-                        <td><i class="fas fa-globe"></i></td>
+                        <td class="text-center"><i class="fas fa-globe"></i></td>
                         <td>{{__('dett_upr.Latitude')}}</td>
                         <td>{{ $flat->lat }}</td>
                     </tr>
                     <tr>
-                        <td><i class="fas fa-globe"></i></td>
+                        <td class="text-center"><i class="fas fa-globe"></i></td>
                         <td>{{__('dett_upr.Longitude')}}</td>
                         <td>{{ $flat->lon }}</td>
                     </tr>
                     <tr>
-                        <td><i class="far fa-check-circle"></i></td>
+                        <td class="text-center"><i class="far fa-check-circle"></i></td>
                         <td>{{__('dett_upr.Active')}}</td>
                         <td>{{ $flat->active }}</td>
                     </tr>
                     <tr>
-                        <td><i class="far fa-plus-square"></i></td>
+                        <td class="text-center"><i class="far fa-plus-square"></i></td>
                         <td>{{__('dett_upr.Insert_date')}}</td>
                         <td>{{ $flat->created_at }}</td>
                     </tr>
                     <tr>
-                        <td><i class="far fa-edit"></i></td>
+                        <td class="text-center"><i class="far fa-edit"></i></td>
                         <td>{{__('dett_upr.Last_edit')}}</td>
                         <td>{{ $flat->updated_at }}</td>
                     </tr>
@@ -69,7 +69,7 @@
                 <tbody>
                     @forelse($flat->services as $service)
                     <tr>
-                        <td><i class="{{ $service->fa_icon }}"></i></td>
+                        <td class="text-center"><i class="{{ $service->fa_icon }}"></i></td>
                         <td>{{ $service->name }}</td>
                     </tr>
                     @empty
