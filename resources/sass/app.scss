@@ -67,6 +67,13 @@
     }
 }
 
+img.sponsortag {
+    position: absolute;
+    width: 85px;
+    bottom: 0;
+    right: 0;
+}
+
 #dashboard-index {
     .card-img {
         height: 220px;
@@ -91,8 +98,9 @@
 }
 
 #find-results {
-    margin: 70px auto;
+    // margin: 70px auto;
 }
+
 
 #dashboard-index, #upr-msg {
     .card {

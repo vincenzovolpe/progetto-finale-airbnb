@@ -32,18 +32,19 @@
         <h2 class="text-center mt-5 pt-5">{{__('homepage.firts_flat')}}</h2>
         <div id="home-sponsored" class="row my-5">
                 <!-- Card package -->
-            {{-- <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12"> --}}
-                @if(isset($flat_sponsored) && $flat_sponsored->count())
+                {{-- <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12"> --}}
+                    @if(isset($flat_sponsored) && $flat_sponsored->count())
                     @foreach ($flat_sponsored as $flat)
-                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
-                            <div class="card bg-light shadow mb-5">
-                                <img class="card-img" src="{{asset('storage/' .$flat->img_uri)}}" alt="flat picture">
-                                <div class="card-img-overlay">
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ $flat->title }}</h5>
-                                    <a class="btn btn-success stretched-link" href="{{ route('flat.details', $flat->id)}}">{{__('homepage.btn_details')}}</a>
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                        <div class="card bg-light shadow mb-5">
+                            <img class="card-img" src="{{asset('storage/' .$flat->img_uri)}}" alt="flat picture">
+                            {{-- <div class="card-img-overlay">
+                                <i class="fas fa-star"></i>
+                            </div> --}}
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $flat->title }}</h5>
+                                <a class="btn btn-success stretched-link" href="{{ route('flat.details', $flat->id)}}">{{__('homepage.btn_details')}}</a>
+                                <img class="position-absolute sponsortag" src="/assets/images/sponsor.png" alt="sponsor">
                                 </div>
                             </div>
                         </div>

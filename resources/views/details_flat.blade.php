@@ -72,7 +72,7 @@
             </div>
             <div class="col-md-6">
             <!-- form user info -->
-                <div class="card card-outline-secondary my-5">
+                <div class="card bg-light card-outline-secondary my-5">
                     <div class="card-header">
                     @if (Auth::user() && Auth::user()->id == $flat->user->id)
                             <h3 class="mt-1">{{__('dett_app.Owner')}}</h3>
