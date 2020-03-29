@@ -70350,7 +70350,12 @@ $(document).ready(function () {
           var address = $('searchFind').text();
           var check = false;
           createMap(lat, lon, title, address, check);
-          $('#card_container').append('<h3>La ricerca non ha trovato nessun appartamento!</h3>');
+
+          if (href.indexOf('/en/flats/find') > -1) {
+            $('#card_container').append('<h3>The search did not find any apartment!<h3>');
+          } else {
+            $('#card_container').append('<h3>La ricerca non ha trovato nessun appartamento!<h3>');
+          }
         }
       }
     });
@@ -70431,6 +70436,9 @@ $(document).ready(function () {
   }); // Chiamata Ajax nella pagina Find con eventuali filtri di Ricerca
 
   $('#btn_find').click(function (event) {
+    $('#searchFind').val($('.tt-search-box-input').val());
+    console.log($('#searchFind').val());
+
     if ($('.tt-search-box-input').val()) {
       var lat = $('#latNumberFind').val();
       var lon = $('#lonNumberFind').val();
@@ -70523,11 +70531,16 @@ $(document).ready(function () {
               $(this).find('.mapboxgl-marker').remove();
             }); //}
 
-            $('#card_container').append('<h3 class="text-center">La ricerca non ha trovato nessun appartamento!<h3>'); // $(".mapboxgl-canvas-container").each(function(){
+            if (href.indexOf('/en/flats/find') > -1) {
+              $('#card_container').append('<h3 class="text-center">The search did not find any apartment!<h3>');
+            } else {
+              $('#card_container').append('<h3 class="text-center">La ricerca non ha trovato nessun appartamento!<h3>');
+            } // $(".mapboxgl-canvas-container").each(function(){
             //     $(this).find('.mapboxgl-marker').remove();
             // });
             //Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
             //createMapSearch(risultati_marker_home);
+
           }
         }
       });
@@ -70832,7 +70845,7 @@ function createMap(longitudine, latitudine, title, address, check) {
     key: 'oclyz52wVpi1LORZUp0OoIykHNa1tfMP',
     container: 'map',
     center: center,
-    zoom: 8,
+    zoom: 15,
     style: 'tomtom://vector/1/basic-main',
     dragPan: !isMobileOrTablet()
   });
@@ -70862,7 +70875,7 @@ function createMapSearch(risultati) {
       key: 'oclyz52wVpi1LORZUp0OoIykHNa1tfMP',
       container: 'map',
       center: center,
-      zoom: 8,
+      zoom: 15,
       style: 'tomtom://vector/1/basic-main',
       dragPan: !isMobileOrTablet()
     });
