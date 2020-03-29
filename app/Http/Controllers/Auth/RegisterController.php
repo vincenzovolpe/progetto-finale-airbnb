@@ -43,6 +43,10 @@ class RegisterController extends Controller
         // App::setLocale('it');
     }
 
+    public function redirectTo()
+    {
+        return app()->getLocale() . '/';
+    }
     /**
      * Get a validator for an incoming registration request.
      *
