@@ -92,7 +92,7 @@ class FlatController extends Controller
         $logged_user = Auth::user()->id;
 
         // Visualizzo la pagina di dettaglio del singolo appartamento:
-        $flat = Flat::find($id);
+        $flat = Flat::findOrFail($id);
 
         // Ritrovo l'utente propietario dell'appartamento
         $flat_user = $flat->user->id;

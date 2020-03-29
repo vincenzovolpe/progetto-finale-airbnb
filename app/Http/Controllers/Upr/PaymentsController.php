@@ -21,7 +21,7 @@ class PaymentsController extends Controller
         $logged_user = Auth::user()->id;
         // Trovo gli appartamenti:
         $id = $request["id"];
-        $flat = Flat::find($id);
+        $flat = Flat::findOrFail($id);
         // Effettuo valutazione:
         $flat_user = $flat->user->id;
         // Oltre a vedere che l'utente sia effettivamente quello connesso, valuto anche se l'offerta per quell'appartamento è scaduta o meno.

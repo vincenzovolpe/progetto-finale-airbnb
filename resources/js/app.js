@@ -45,7 +45,10 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 //     el: '#app',
 // });
 
+// Variabile mappe per la Find
 var map_find;
+// Variabile check per le mappe senza risultati
+var check =  true;
 
 var href = window.location.href;
 // Variabile che memorizza il placeholder della  searchbox per le mappe
@@ -58,7 +61,7 @@ if(href.indexOf('/en') > -1) {
 
 // Options for the fuzzySearch service
 var searchOptions = {
-    key: 'Y2cMr97XoBZZKKVXgUS844gofkPiZFnA',
+    key: 'oclyz52wVpi1LORZUp0OoIykHNa1tfMP',
     language: 'it-IT',
     limit: 5,
 };
@@ -100,7 +103,7 @@ $(document).ready(function(){
     // Creo la mappa solo quando mi trovo all'interno della pagina di dettaglio dell'appartamento
     if(href.indexOf('/flats/details') > -1) {
         // Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
-        createMap(lonNumber, latNumber, title, address);
+        createMap(lonNumber, latNumber, title, address, check);
     }
 
     // Istruzioni per caricare risultati di ricerca dalla home nella pagina di ricerca
@@ -157,7 +160,15 @@ $(document).ready(function(){
                             $('#card_container').append(html);
                         }
                     } else {
-                        $('#card_container').append('La ricerca non ha trovato nessun appartamento!');
+                        var lat = $('#latNumberFind').val();
+                        console.log(lat);
+                        var lon = $('#lonNumberFind').val();
+                        console.log(lon);
+                        var title = $('#title').text();
+                        var address = $('searchFind').text();
+                        var check = false;
+                        createMap(lat, lon, title, address, check);
+                        $('#card_container').append('<h3>La ricerca non ha trovato nessun appartamento!</h3>');
                     }
 
             }
@@ -288,11 +299,12 @@ $(document).on('click', '#delete_flat', function (e) {
 
                             risultati_marker_find = data.result;
                             //console.log($('.tt-search-box-input').val());
-                            //console.log(risultati_marker);
-
+                            console.log(risultati_marker_find);
+                                //check = true;
                                 //Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
                                 createMapSearch(risultati_marker_find);
-
+                                console.log('Mappa creata con la seconda funzione');
+                                console.log(map_find);
                             $('#card_container').empty();
 
                             for (var i = 0; i < data.result.length; i++) {
@@ -314,8 +326,45 @@ $(document).on('click', '#delete_flat', function (e) {
                         } else {
 
                             $('#card_container').empty();
-                            $('#map').empty();
-                            $('#card_container').append('<p>La ricerca non ha trovato nessun appartamento!<p>');
+
+                            var lat = $('#latNumberFind').val();
+                            console.log(lat);
+                            var lon = $('#lonNumberFind').val();
+                            console.log(lon);
+                            var title = $('#title').text();
+                            var address = $('searchFind').text();
+                            var check = false;
+                            //createMap(lat, lon, title, address, check);
+
+                            if($('.tt-search-box-input').val() != $('#searchFindMap').val()) {
+                                var dati = [
+                                      {
+                                        lon: lon,
+                                        lat: lat,
+                                        title: title,
+                                        address: address
+                                      }
+                                    ];
+                                console.log(dati);
+                                createMapSearch(dati);
+                                console.log('Mappa creata con la prima funzione');
+                                $('#searchFindMap').val($('.tt-search-box-input').val());
+                                console.log($('#searchFindMap').val());
+                            }
+
+                            //if($('.tt-search-box-input').val() == $('#searchFindMap').val()) {
+                                $(".mapboxgl-canvas-container").each(function(){
+                                    $(this).find('.mapboxgl-marker').remove();
+                                });
+                            //}
+
+                            $('#card_container').append('<h3 class="text-center">La ricerca non ha trovato nessun appartamento!<h3>');
+                            // $(".mapboxgl-canvas-container").each(function(){
+                            //     $(this).find('.mapboxgl-marker').remove();
+                            // });
+
+                            //Chiamo la funzione che mi crea la mappa nella pagina di dettaglio
+                            //createMapSearch(risultati_marker_home);
                         }
                 }
             })
@@ -648,41 +697,43 @@ function isFuzzySearchResult(event) {
 }
 
 
-function createMap(longitudine, latitudine, title, address) {
+function createMap(longitudine, latitudine, title, address, check) {
     //console.log(risultati_marker);
 
     //var roundLatLng = Formatters.roundLatLng;
     var center = [latitudine, longitudine];
-    var popup = new tt.Popup({
-             offset: 35
-    });
 
-    var map = tt.map({
-        key: 'Y2cMr97XoBZZKKVXgUS844gofkPiZFnA',
+    map_find = tt.map({
+        key: 'oclyz52wVpi1LORZUp0OoIykHNa1tfMP',
         container: 'map',
         center: center,
-        zoom: 15,
+        zoom: 8,
         style: 'tomtom://vector/1/basic-main',
         dragPan: !isMobileOrTablet()
     });
 
-    map.addControl(new tt.FullscreenControl());
-    map.addControl(new tt.NavigationControl());
+    map_find.addControl(new tt.FullscreenControl());
+    map_find.addControl(new tt.NavigationControl());
 
-    //Creazione del marker all'indirizzo dell'Appartamento
-    var marker = new tt.Marker({
-    }).setLngLat(center).addTo(map);
+    // Se la mappa  è costruita con appartamenti crea il marker e il popup
+    if(check) {
+        //Creazione del marker all'indirizzo dell'Appartamento e del popup sovrastante
+        var popup = new tt.Popup({
+                 offset: 35
+        });
+        var marker = new tt.Marker({
+        }).setLngLat(center).addTo(map_find);
 
-    popup.setHTML(title + "<br>" + address + "<br>");
-    marker.setPopup(popup);
-    //marker.togglePopup();
+        popup.setHTML("<strong>" + title + "</strong>" + "<br>" + address + "<br>");
+        marker.setPopup(popup);
+        //marker.togglePopup();
+    }
 }
 
 function createMapSearch(risultati) {
-    console.log(risultati);
-    console.log(risultati[0].lon);
-    var center = [risultati[0].lon, risultati[0].lat];
 
+    var center = [risultati[0].lon, risultati[0].lat];
+    console.log(center);
 
     if($('.tt-search-box-input').val() != $('#searchFindMap').val()) {
 
@@ -691,7 +742,7 @@ function createMapSearch(risultati) {
         $('#searchFindMap').val($('.tt-search-box-input').val());
 
         map_find = tt.map({
-            key: 'Y2cMr97XoBZZKKVXgUS844gofkPiZFnA',
+            key: 'oclyz52wVpi1LORZUp0OoIykHNa1tfMP',
             container: 'map',
             center: center,
             zoom: 8,
@@ -710,27 +761,26 @@ function createMapSearch(risultati) {
             var marker = new tt.Marker({
             }).setLngLat([risultati[i].lon, risultati[i].lat]).addTo(map_find);
 
-            popup.setHTML(risultati[i].title + "<br>" + risultati[i].address);
+            popup.setHTML("<strong>" + risultati[i].title + "</strong>" + "<br>" + risultati[i].address);
             marker.setPopup(popup);
             //marker.togglePopup();
         }
     } else {
 
-        //alert("L'indirizzo non è cambiato");
-
         $(".mapboxgl-canvas-container").each(function(){
             $(this).find('.mapboxgl-marker').remove();
         });
-
+        console.log('Sto creando i popup nella seconda create');
         for (var i = 0; i < risultati.length; i++) {
             var popup = new tt.Popup({
                      offset: 35
             });
+            console.log('SOno qui!');
             //Creazione del marker all'indirizzo dell'Appartamento
             var marker = new tt.Marker({
             }).setLngLat([risultati[i].lon, risultati[i].lat]).addTo(map_find);
-
-            popup.setHTML(risultati[i].title + "<br>" + risultati[i].address);
+            console.log(marker);
+            popup.setHTML("<strong>" + risultati[i].title + "</strong>" + "<br>" + risultati[i].address);
             marker.setPopup(popup);
             //marker.togglePopup();
         }

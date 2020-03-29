@@ -99,7 +99,7 @@
         <!--Copyright-->
 
         <p class="text-center text-md-left">
-            <img class="img-fluid" src="/assets/images/apple-touch-icon.png" width="160" height="49" alt="bool-bnb-logo"> 2020 Boolbnb, Inc. All rights reserved
+            <img class="img-fluid" src="/assets/images/apple-touch-icon.png" width="160" height="49" alt="bool-bnb-logo"> 2020 Boolbnb
         </p>
 
       </div>
