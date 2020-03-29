@@ -134,12 +134,15 @@ footer {
 }
 
 // Stile per la about_us:
-.card {
-    transition: transform .5s;
-    &:hover {
-        transform: rotate(-2deg) scale(1.05);
-        box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.75);
-        cursor: pointer;
+
+.about_us, #homeLeftBox {
+    .card {
+        transition: transform .5s;
+        &:hover {
+            transform: rotate(-2deg) scale(1.05);
+            box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.75);
+            cursor: pointer;
+        }
     }
 }
 
