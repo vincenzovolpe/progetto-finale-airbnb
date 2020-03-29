@@ -598,7 +598,7 @@ $(document).on('click', '#delete_flat', function (e) {
         // validazione grandezza immagine in create.blade
         $('#img_uri').bind('change', function() {
             var a=(this.files[0].size);
-            if(a < 5000000) {
+            if(a < 2000000) {
                 // alert("L'immagine selezionata supera i 5MB!!!");
                 $('#crea').removeAttr("disabled");
                 $('.img_uri.invalid-tooltip').hide();
