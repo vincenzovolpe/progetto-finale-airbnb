@@ -11995,3 +11995,12 @@ footer img {
   cursor: pointer;
 }
 
+.mapboxgl-popup-content {
+  border-radius: 5px;
+}
+
+.mapboxgl-popup-content strong {
+  text-transform: uppercase;
+  color: #38c172;
+}
+

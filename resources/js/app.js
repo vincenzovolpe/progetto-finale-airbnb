@@ -697,7 +697,7 @@ function createMap(longitudine, latitudine, title, address, check) {
         key: 'oclyz52wVpi1LORZUp0OoIykHNa1tfMP',
         container: 'map',
         center: center,
-        zoom: 15,
+        zoom: 8,
         style: 'tomtom://vector/1/basic-main',
         dragPan: !isMobileOrTablet()
     });
@@ -714,7 +714,7 @@ function createMap(longitudine, latitudine, title, address, check) {
         var marker = new tt.Marker({
         }).setLngLat(center).addTo(map_find);
 
-        popup.setHTML(title + "<br>" + address + "<br>");
+        popup.setHTML("<strong>" + title + "</strong>" + "<br>" + address + "<br>");
         marker.setPopup(popup);
         //marker.togglePopup();
     }
@@ -751,7 +751,7 @@ function createMapSearch(risultati) {
             var marker = new tt.Marker({
             }).setLngLat([risultati[i].lon, risultati[i].lat]).addTo(map_find);
 
-            popup.setHTML(risultati[i].title + "<br>" + risultati[i].address);
+            popup.setHTML("<strong>" + risultati[i].title + "</strong>" + "<br>" + risultati[i].address);
             marker.setPopup(popup);
             //marker.togglePopup();
         }
@@ -770,7 +770,7 @@ function createMapSearch(risultati) {
             var marker = new tt.Marker({
             }).setLngLat([risultati[i].lon, risultati[i].lat]).addTo(map_find);
             console.log(marker);
-            popup.setHTML(risultati[i].title + "<br>" + risultati[i].address);
+            popup.setHTML("<strong>" + risultati[i].title + "</strong>" + "<br>" + risultati[i].address);
             marker.setPopup(popup);
             //marker.togglePopup();
         }

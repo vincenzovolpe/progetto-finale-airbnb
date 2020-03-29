@@ -168,3 +168,12 @@ footer {
     }
 
 }
+
+// Popup mappe
+.mapboxgl-popup-content {
+    border-radius: 5px;
+    strong {
+        text-transform: uppercase;
+        color: rgb(56,193,114);
+    }
+}
