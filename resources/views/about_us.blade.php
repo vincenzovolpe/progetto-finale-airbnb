@@ -3,7 +3,7 @@
 <div class="about_us my-5">
     <header class="text-center py-5 mb-4">
         <div class="container">
-            <h1 class="font-weight-light text-white">TEAM #1</h1>
+            <h1>TEAM #1</h1>
         </div>
     </header>
     <div class="container">
@@ -19,7 +19,6 @@
                 </div>
             </div>
             <!-- Membro del team: -->
-
             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
                 <div class="card border-0 shadow">
                     <img class="card-img" src="/assets/images/bafio.jpg" alt="bool-bnb-logo">

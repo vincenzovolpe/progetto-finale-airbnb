@@ -11891,11 +11891,6 @@ img.sponsortag {
   height: 280px;
 }
 
-.card-img-overlay .fa-star {
-  font-size: 1.4em;
-  color: #ffed4a;
-}
-
 #map {
   min-height: 100%;
 }
@@ -11938,62 +11933,12 @@ footer img {
   color: #e3342f;
 }
 
-@-webkit-keyframes baf-color {
-  0% {
-    background-color: #38c172;
-  }
-
-  25% {
-    background-color: #33bc6d;
-  }
-
-  50% {
-    background-color: #2eb768;
-  }
-
-  75% {
-    background-color: #33bc6d;
-  }
-
-  100% {
-    background-color: #38c172;
-  }
+.card {
+  transition: transform 0.5s;
 }
 
-@keyframes baf-color {
-  0% {
-    background-color: #38c172;
-  }
-
-  25% {
-    background-color: #33bc6d;
-  }
-
-  50% {
-    background-color: #2eb768;
-  }
-
-  75% {
-    background-color: #33bc6d;
-  }
-
-  100% {
-    background-color: #38c172;
-  }
-}
-
-.about_us header {
-  background-color: #38c172;
-  -webkit-animation-name: baf-color;
-          animation-name: baf-color;
-  -webkit-animation-duration: 10s;
-          animation-duration: 10s;
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
-}
-
-.about_us .container .row > div .card:hover {
-  transform: rotate(1deg) scale(1.05);
+.card:hover {
+  transform: rotate(-2deg) scale(1.05);
   box-shadow: 0px 0px 15px 2px rgba(0, 0, 0, 0.75);
   cursor: pointer;
 }
