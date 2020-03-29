@@ -83,7 +83,7 @@
                     @if (Auth::user() && Auth::user()->id == $flat->user->id)
                             <div class="card-body invisible">
                     @else
-                    <div class="card-body">
+                    <div class="card-body mess_box">
                     @endif
                         <form class="form" action="{{route('send.mail')}}" method="post" role="form" autocomplete="on">
                         @csrf
