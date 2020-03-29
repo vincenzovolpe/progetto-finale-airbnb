@@ -54,7 +54,7 @@ class FlatController extends Controller
             'sq_meters' => 'required|numeric|min:10|max:500',
             'address' => 'required',
             'active' => 'required|boolean',
-            'img_uri' => 'required|image|max:5000',
+            'img_uri' => 'required|image|max:2000',
         ]);
 
         $data = $request->all();
@@ -152,7 +152,7 @@ class FlatController extends Controller
             'lat' => '',
             'lon' => '',
             'active' => 'required|boolean',
-            'img_uri' => 'image|max:5000',
+            'img_uri' => 'image|max:2000',
         ]);
         // recupero i dati dal form
 

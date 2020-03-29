@@ -168,12 +168,17 @@ $(document).ready(function(){
                         var address = $('searchFind').text();
                         var check = false;
                         createMap(lat, lon, title, address, check);
-                        $('#card_container').append('<h3>La ricerca non ha trovato nessun appartamento!</h3>');
+                        if(href.indexOf('/en/flats/find') > -1) {
+                            $('#card_container').append('<h3>The search did not find any apartment!<h3>');
+                        } else {
+                            $('#card_container').append('<h3>La ricerca non ha trovato nessun appartamento!<h3>');
+                        }
                     }
 
             }
         })
     }
+
 
 //    Facciamo in modo che il bottone cerca nella pagina Find faccia uscire il popup di convalida
 //   in questo form non c'è una submit, perciò adottiamo questo trucco
@@ -252,6 +257,9 @@ $(document).on('click', '#delete_flat', function (e) {
 
     // Chiamata Ajax nella pagina Find con eventuali filtri di Ricerca
     $('#btn_find').click(function(event){
+
+        $('#searchFind').val($('.tt-search-box-input').val());
+        console.log($('#searchFind').val());
 
         if ($('.tt-search-box-input').val()) {
 
@@ -357,8 +365,11 @@ $(document).on('click', '#delete_flat', function (e) {
                                     $(this).find('.mapboxgl-marker').remove();
                                 });
                             //}
-
-                            $('#card_container').append('<h3 class="text-center">La ricerca non ha trovato nessun appartamento!<h3>');
+                            if(href.indexOf('/en/flats/find') > -1) {
+                                $('#card_container').append('<h3 class="text-center">The search did not find any apartment!<h3>');
+                            } else {
+                                $('#card_container').append('<h3 class="text-center">La ricerca non ha trovato nessun appartamento!<h3>');
+                            }
                             // $(".mapboxgl-canvas-container").each(function(){
                             //     $(this).find('.mapboxgl-marker').remove();
                             // });
@@ -592,7 +603,6 @@ $(document).on('click', '#delete_flat', function (e) {
                 $('#crea').removeAttr("disabled");
                 $('.img_uri.invalid-tooltip').hide();
                 $('.img_uri.valid-tooltip').show();
-                $('#crea').show();
             }else{
                 $('#crea').attr("disabled",true);
                 $('.img_uri.valid-tooltip').hide();
@@ -707,7 +717,7 @@ function createMap(longitudine, latitudine, title, address, check) {
         key: 'oclyz52wVpi1LORZUp0OoIykHNa1tfMP',
         container: 'map',
         center: center,
-        zoom: 8,
+        zoom: 15,
         style: 'tomtom://vector/1/basic-main',
         dragPan: !isMobileOrTablet()
     });
@@ -745,7 +755,7 @@ function createMapSearch(risultati) {
             key: 'oclyz52wVpi1LORZUp0OoIykHNa1tfMP',
             container: 'map',
             center: center,
-            zoom: 8,
+            zoom: 15,
             style: 'tomtom://vector/1/basic-main',
             dragPan: !isMobileOrTablet()
         });

@@ -28,7 +28,7 @@ return [
     'No_flat' => 'No apartment!',
 
     'Deleted' => 'Deleted',
-    'Confirmation' => 'Apartment successfully deletedted',
+    'Confirmation' => 'Apartment successfully deleted',
 
 
 

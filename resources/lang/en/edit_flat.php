@@ -33,7 +33,7 @@ return [
     'Invalid_title' => 'Please enter a valid description - min 5 characters',
     'Invalid_element' => 'Please enter a valid number',
     'Invalid_mq' => 'Please enter a valid number between 10 and 500',
-    'Invalid_img' => "Insert an image not exceeding 5MB",
+    'Invalid_img' => "Insert an image not exceeding 2MB",
     'Invalid_service' => "We have no active service at the moment!",
 
 
