@@ -717,7 +717,7 @@ function createMap(longitudine, latitudine, title, address, check) {
         key: 'oclyz52wVpi1LORZUp0OoIykHNa1tfMP',
         container: 'map',
         center: center,
-        zoom: 15,
+        zoom: 8,
         style: 'tomtom://vector/1/basic-main',
         dragPan: !isMobileOrTablet()
     });
@@ -755,7 +755,7 @@ function createMapSearch(risultati) {
             key: 'oclyz52wVpi1LORZUp0OoIykHNa1tfMP',
             container: 'map',
             center: center,
-            zoom: 15,
+            zoom: 8,
             style: 'tomtom://vector/1/basic-main',
             dragPan: !isMobileOrTablet()
         });
