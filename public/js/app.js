@@ -54862,7 +54862,7 @@ process.umask = function() { return 0; };
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
-* sweetalert2 v9.10.7
+* sweetalert2 v9.10.6
 * Released under the MIT License.
 */
 (function (global, factory) {
@@ -55279,18 +55279,6 @@ process.umask = function() { return 0; };
   var states = {
     previousBodyPadding: null
   };
-  var setInnerHtml = function setInnerHtml(elem, html) {
-    // #1926
-    elem.textContent = '';
-
-    if (html) {
-      var parser = new DOMParser();
-      var parsed = parser.parseFromString(html, "text/html");
-      toArray(parsed.querySelector('body').childNodes).forEach(function (child) {
-        elem.appendChild(child);
-      });
-    }
-  };
   var hasClass = function hasClass(elem, className) {
     if (!className) {
       return false;
@@ -55555,7 +55543,7 @@ process.umask = function() { return 0; };
       addClass(container, swalClasses['no-transition']);
     }
 
-    setInnerHtml(container, sweetHTML);
+    container.innerHTML = sweetHTML;
     var targetElement = getTarget(params.target);
     targetElement.appendChild(container);
     setupAccessibility(params);
@@ -55570,7 +55558,7 @@ process.umask = function() { return 0; };
     } else if (_typeof(param) === 'object') {
       handleObject(param, target); // Plain string
     } else if (param) {
-      setInnerHtml(target, param);
+      target.innerHTML = param;
     }
   };
 
@@ -55579,12 +55567,12 @@ process.umask = function() { return 0; };
     if (param.jquery) {
       handleJqueryElem(target, param); // For other objects use their string representation
     } else {
-      setInnerHtml(target, param.toString());
+      target.innerHTML = param.toString();
     }
   };
 
   var handleJqueryElem = function handleJqueryElem(target, elem) {
-    target.textContent = '';
+    target.innerHTML = '';
 
     if (0 in elem) {
       for (var i = 0; i in elem; i++) {
@@ -55678,7 +55666,7 @@ process.umask = function() { return 0; };
 
   function renderButton(button, buttonType, params) {
     toggle(button, params["show".concat(capitalizeFirstLetter(buttonType), "Button")], 'inline-block');
-    setInnerHtml(button, params["".concat(buttonType, "ButtonText")]); // Set caption text
+    button.innerHTML = params["".concat(buttonType, "ButtonText")]; // Set caption text
 
     button.setAttribute('aria-label', params["".concat(buttonType, "ButtonAriaLabel")]); // ARIA label
     // Add buttons custom classes
@@ -55876,11 +55864,11 @@ process.umask = function() { return 0; };
   };
 
   renderInputType.select = function (select, params) {
-    select.textContent = '';
+    select.innerHTML = '';
 
     if (params.inputPlaceholder) {
       var placeholder = document.createElement('option');
-      setInnerHtml(placeholder, params.inputPlaceholder);
+      placeholder.innerHTML = params.inputPlaceholder;
       placeholder.value = '';
       placeholder.disabled = true;
       placeholder.selected = true;
@@ -55891,7 +55879,7 @@ process.umask = function() { return 0; };
   };
 
   renderInputType.radio = function (radio) {
-    radio.textContent = '';
+    radio.innerHTML = '';
     return radio;
   };
 
@@ -55901,7 +55889,7 @@ process.umask = function() { return 0; };
     checkbox.id = swalClasses.checkbox;
     checkbox.checked = Boolean(params.inputValue);
     var label = checkboxContainer.querySelector('span');
-    setInnerHtml(label, params.inputPlaceholder);
+    label.innerHTML = params.inputPlaceholder;
     return checkboxContainer;
   };
 
@@ -55965,7 +55953,7 @@ process.umask = function() { return 0; };
 
   var renderCloseButton = function renderCloseButton(instance, params) {
     var closeButton = getCloseButton();
-    setInnerHtml(closeButton, params.closeButtonHtml); // Custom class
+    closeButton.innerHTML = params.closeButtonHtml; // Custom class
 
     applyCustomClass(closeButton, params, 'closeButton');
     toggle(closeButton, params.showCloseButton);
@@ -56021,21 +56009,21 @@ process.umask = function() { return 0; };
   };
 
   var setContent = function setContent(icon, params) {
-    icon.textContent = '';
+    icon.innerHTML = '';
 
     if (params.iconHtml) {
-      setInnerHtml(icon, iconContent(params.iconHtml));
+      icon.innerHTML = iconContent(params.iconHtml);
     } else if (params.icon === 'success') {
-      setInnerHtml(icon, "\n      <div class=\"swal2-success-circular-line-left\"></div>\n      <span class=\"swal2-success-line-tip\"></span> <span class=\"swal2-success-line-long\"></span>\n      <div class=\"swal2-success-ring\"></div> <div class=\"swal2-success-fix\"></div>\n      <div class=\"swal2-success-circular-line-right\"></div>\n    ");
+      icon.innerHTML = "\n      <div class=\"swal2-success-circular-line-left\"></div>\n      <span class=\"swal2-success-line-tip\"></span> <span class=\"swal2-success-line-long\"></span>\n      <div class=\"swal2-success-ring\"></div> <div class=\"swal2-success-fix\"></div>\n      <div class=\"swal2-success-circular-line-right\"></div>\n    ";
     } else if (params.icon === 'error') {
-      setInnerHtml(icon, "\n      <span class=\"swal2-x-mark\">\n        <span class=\"swal2-x-mark-line-left\"></span>\n        <span class=\"swal2-x-mark-line-right\"></span>\n      </span>\n    ");
+      icon.innerHTML = "\n      <span class=\"swal2-x-mark\">\n        <span class=\"swal2-x-mark-line-left\"></span>\n        <span class=\"swal2-x-mark-line-right\"></span>\n      </span>\n    ";
     } else {
       var defaultIconHtml = {
         question: '?',
         warning: '!',
         info: 'i'
       };
-      setInnerHtml(icon, iconContent(defaultIconHtml[params.icon]));
+      icon.innerHTML = iconContent(defaultIconHtml[params.icon]);
     }
   };
 
@@ -56130,7 +56118,7 @@ process.umask = function() { return 0; };
   var createStepElement = function createStepElement(step) {
     var stepEl = document.createElement('li');
     addClass(stepEl, swalClasses['progress-step']);
-    setInnerHtml(stepEl, step);
+    stepEl.innerHTML = step;
     return stepEl;
   };
 
@@ -56153,7 +56141,7 @@ process.umask = function() { return 0; };
     }
 
     show(progressStepsContainer);
-    progressStepsContainer.textContent = '';
+    progressStepsContainer.innerHTML = '';
     var currentProgressStep = parseInt(params.currentProgressStep === undefined ? getQueueStep() : params.currentProgressStep);
 
     if (currentProgressStep >= params.progressSteps.length) {
@@ -56944,7 +56932,7 @@ process.umask = function() { return 0; };
 
   function showValidationMessage(error) {
     var domCache = privateProps.domCache.get(this);
-    setInnerHtml(domCache.validationMessage, error);
+    domCache.validationMessage.innerHTML = error;
     var popupComputedStyle = window.getComputedStyle(domCache.popup);
     domCache.validationMessage.style.marginLeft = "-".concat(popupComputedStyle.getPropertyValue('padding-left'));
     domCache.validationMessage.style.marginRight = "-".concat(popupComputedStyle.getPropertyValue('padding-right'));
@@ -57275,7 +57263,7 @@ process.umask = function() { return 0; };
         var optionLabel = inputOption[1];
         var option = document.createElement('option');
         option.value = optionValue;
-        setInnerHtml(option, optionLabel);
+        option.innerHTML = optionLabel;
 
         if (params.inputValue.toString() === optionValue.toString()) {
           option.selected = true;
@@ -57301,7 +57289,7 @@ process.umask = function() { return 0; };
         }
 
         var label = document.createElement('span');
-        setInnerHtml(label, radioLabel);
+        label.innerHTML = radioLabel;
         label.className = swalClasses.label;
         radioLabelElement.appendChild(radioInput);
         radioLabelElement.appendChild(label);
@@ -57913,7 +57901,7 @@ process.umask = function() { return 0; };
     };
   });
   SweetAlert.DismissReason = DismissReason;
-  SweetAlert.version = '9.10.7';
+  SweetAlert.version = '9.10.6';
 
   var Swal = SweetAlert;
   Swal["default"] = Swal;
@@ -71064,8 +71052,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/umbertown/Desktop/Atom - Boolean/GIT/progetto-finale-airbnb/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/umbertown/Desktop/Atom - Boolean/GIT/progetto-finale-airbnb/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Applications/MAMP/htdocs/boolean-code/progetto-finale-airbnb/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/boolean-code/progetto-finale-airbnb/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
