@@ -1,9 +1,4 @@
-<h1 align="center">Benvenuti su BoolBnnb 👋</h1>
-<p>
-  <a href="https://www.npmjs.com/package/k BoolBnnb" target="_blank">
-    <img alt="Version" src="https://img.shields.io/npm/v/k BoolBnnb.svg">
-  </a>
-</p>
+<h1 align="center">Benvenuti su BoolBnb <img src="/assets/images/boolbnb-logo-text.png" width="160" height="49" alt="bool-bnb-logo"></h1>
 
 >   BoolBnB è una applicazione per trovare e gestire l’affitto di appartamenti.
     Attraverso BoolBnB i proprietari di appartamento possono inserire le informazioni degli
@@ -20,6 +15,7 @@
     in evidenza rispetto a quelli non sponsorizzati.
 
     Tipi di Utenti
+
     Definiamo i seguenti tipi di utente che possono utilizzare BoolBnB:
     ● Utente proprietario registrato (UPR): un utente proprietario che ha effettuato la
     registrazione
@@ -28,12 +24,14 @@
     ● Utente interessato (UI): un qualsiasi utente del sito, non registrato
 
     Requisiti Visivi
+
     Look and Feel
     L’aspetto estetico di BoolBnB deve essere ispirato al sito www.airbnb.com
     Non deve essere una copia ma una fonte di ispirazione da cui prendere spunto per quanto
     riguarda colori, font, elementi di interazione etc
 
     Lista delle pagine minime
+
     La seguente lista è una lista non completa delle pagine necessarie al funzionamento
     dell’applicazione
 
@@ -53,6 +51,7 @@
     dettagli della carta di credito.
 
     Requisiti Tecnici
+
     ● (RT1) Client-side Validation: tutti gli input inseriti dell’utente devono essere
     controllati client-side (oltre che server-side) per un controllo di veridicità (es. un
     numero di stanze deve essere positivo)
@@ -67,6 +66,7 @@
     desktop e da smartphone
 
         Requisiti Funzionali
+
     Nel dettaglio, la piattaforma deve soddisfare i seguenti requisiti funzionali (RF) che vengono
     dettagliati nelle pagine successive:
     ● (RF1) Permettere ai proprietari di appartamento di registrarti alla piattaforma
@@ -89,23 +89,27 @@
     Descrizione: L’applicazione deve permettere ai proprietari di appartamento di registrarsi alla
     piattaforma e creare un loro profilo.
     Le informazioni che l’utente può inserire sono:
+
     ● Email *
     ● Password *
     ● Nome
     ● Cognome
     ● Data di Nascita
+
     Sono contrassegnati con * i dati obbligatori.
     Email e password sono utilizzati dall’utente per fare login alla piattaforma.
     Non è previsto un pannello per modificare le informazioni inserite una volta registrato.
     I form devono rispettare RT1
     Risultato: Un nuovo utente viene creato nel sistema
     Eccezioni: Esiste già nel sistema un utente con l’email inserita
+
     (RF2) Permettere ai proprietari di appartamento registrati di aggiungere
     una appartamento alla piattaforma
     Visibilità: UPR / UPRA
     Descrizione: Un proprietario registrato ha la possibilità di inserire uno o più appartamenti
     all’interno del sistema.
     Per inserire un nuovo appartamento il proprietario deve inserire le seguenti informazioni:
+
     ● Titolo riepilogativo che descriva l’appartamento
     ● Numero di stanze
     ● Numero di posti letto
@@ -130,14 +134,17 @@
     Inserendo latitudine e longitudine, il sistema ricerca all’interno del database gli appartamenti
     nel raggio di 20 km dalla latitudine e longitudine indicata.
     Inoltre è possibile raffinare ulteriormente la ricerca impostando uno o più dei seguenti filtri:
+
     ● Numero minimo di stanze
     ● Numero minimo di posti letto
     ● Modificare il raggio di default di 20km
     ● La presenza obbligatoria di uno o più dei servizi aggiuntivi indicati in RF2
+
     I risultati vengono ordinati per distanza dalla latitudine/longitudine inserita.
     Risultato: Viene generata una lista di appartamenti che corrispondono alla ricerca che
     mostra alcuni dettagli della stanza
     Eccezioni: /
+
     (RF4) Permettere ai visitatori di vedere i dettagli di un appartamento
     Visibilità: UI / UPR / UPRA
     Descrizione: Selezionando un appartamento dall’apposito pannello devono apparire tutti i
@@ -146,6 +153,7 @@
     dell’appartamento.
     Risultato: Viene visualizzata la pagina di dettaglio di un appartamento
     Eccezioni: /
+
     (RF5) Permettere ai visitatori di scrivere al proprietario di un
     appartamento per chiedere informazioni
     Visibilità: UI / UPR / UPRA
@@ -156,6 +164,7 @@
     con quella inserita durante la registrazione
     Risultato: Il messaggio viene salvato nel database
     Eccezioni: /
+
     (RF6) Permettere ai proprietari di appartamento registrati di vedere le
     richieste ricevute
     Visibilità: UPRA
@@ -167,6 +176,7 @@
     direttamente via email fuori dalla piattaforma)
     Risultato:
     Eccezioni: /
+
     (RF7) Permettere ai proprietari di appartamento registrati di vedere
     statistiche riguardo gli annunci dei propri appartamenti
     Visibilità: UPRA
@@ -176,6 +186,7 @@
     statistiche associate come illustrato in Mockup4
     Risultato: L'utente visualizza le statistiche dell'appartamento selezionato
     Eccezioni: /
+
     (RF8) Permettere ai proprietari di appartamento registrati di
     sponsorizzare il propria appartamento
     Visibilità: UPRA
@@ -183,9 +194,11 @@
     di pagare per mettere in risalto un loro annuncio.
     Entrando in un pannello apposito della sua sezione personale, l’utente UPRA selezionerà
     uno dei suoi appartamenti e dovrà scegliere uno dei seguenti pacchetti promozionali:
+
     ● 2,99 € per 24 ore di sponsorizzazione
     ● 5.99 € per 72 ore di sponsorizzazione
     ● 9.99 € per 144 ore di sponsorizzazione
+
     Il pagamento deve avvenire tramite carta di credito seguendo RT3
     Un appartamento sponsorizzato ha le seguenti particolarità:
     ● Appare in Homepage nella sezione “Appartamenti in Evidenza”
