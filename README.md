@@ -1,7 +1,10 @@
-<h1 align="center">Benvenuti su BoolBnb <img width="160" alt="boolbnb-logo-text" src="https://user-images.githubusercontent.com/56308170/77965724-ed242b00-72e1-11ea-982a-2f385e3b033e.png">
-</h1>
-
->   BoolBnB è una applicazione per trovare e gestire l’affitto di appartamenti.
+<p align="center">
+<img width="160" alt="boolbnb-logo-text" src="https://user-images.githubusercontent.com/56308170/77965724-ed242b00-72e1-11ea-982a-2f385e3b033e.png">
+</p>
+<h1 align="center">Benvenuti su BoolBnb</h1>
+    
+    
+>   <p align="justify">BoolBnB è una applicazione per trovare e gestire l’affitto di appartamenti.
     Attraverso BoolBnB i proprietari di appartamento possono inserire le informazioni degli
     appartamenti che vogliono affittare per cercare utenti interessati.
     Gli utenti che vogliono mettere in affitto un appartamento devono registrarsi alla piattaforma;
@@ -13,7 +16,7 @@
     proprietario per fare domande.
     Inoltre, i proprietari di un appartamento possono decidere di pagare per sponsorizzare
     l’annuncio del proprio appartamento per fare in modo che il loro annuncio sia maggiormente
-    in evidenza rispetto a quelli non sponsorizzati.
+    in evidenza rispetto a quelli non sponsorizzati.</p>
 
     Tipi di Utenti
 
