@@ -1,7 +1,6 @@
 <p align="center">
 <img width="160" alt="boolbnb-logo-text" src="https://user-images.githubusercontent.com/56308170/77965724-ed242b00-72e1-11ea-982a-2f385e3b033e.png">
 </p>
-<h1 align="center">Benvenuti su BoolBnb</h1>
 
 ![BoolBnB](https://user-images.githubusercontent.com/56308170/77966854-383f3d80-72e4-11ea-9396-914b1d4acab2.PNG)
 ![BoolBnB3](https://user-images.githubusercontent.com/56308170/77966867-3e351e80-72e4-11ea-9ae0-dec4cb7f45a1.PNG)
