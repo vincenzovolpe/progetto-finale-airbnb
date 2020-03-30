@@ -2,7 +2,13 @@
 <img width="160" alt="boolbnb-logo-text" src="https://user-images.githubusercontent.com/56308170/77965724-ed242b00-72e1-11ea-982a-2f385e3b033e.png">
 </p>
 <h1 align="center">Benvenuti su BoolBnb</h1>
-    
+
+![BoolBnB](https://user-images.githubusercontent.com/56308170/77966854-383f3d80-72e4-11ea-9396-914b1d4acab2.PNG)
+![BoolBnB3](https://user-images.githubusercontent.com/56308170/77966867-3e351e80-72e4-11ea-9ae0-dec4cb7f45a1.PNG)
+![BoolBnB5](https://user-images.githubusercontent.com/56308170/77966879-44c39600-72e4-11ea-8d49-ff3dac736091.PNG)
+![BoolBnB4](https://user-images.githubusercontent.com/56308170/77966882-4725f000-72e4-11ea-9968-31c4e7974b75.PNG)
+![BoolBnB6](https://user-images.githubusercontent.com/56308170/77966887-4ab97700-72e4-11ea-927e-aa77ab3cd91b.PNG)
+
     
 >   BoolBnB è una applicazione per trovare e gestire l’affitto di appartamenti.
     Attraverso BoolBnB i proprietari di appartamento possono inserire le informazioni degli
