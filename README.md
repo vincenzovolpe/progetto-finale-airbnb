@@ -1,78 +1,238 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
-
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
-
-## About Laravel
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+BoolBnB
+BoolBnB 1
+Introduzione 2
+Tipi di Utenti 2
+Requisiti Visivi 2
+Look and Feel 2
+Lista delle pagine minime 2
+Requisiti Tecnici 3
+Requisiti Funzionali 3
+(RF1) Permettere ai proprietari di appartamento di registrarsi alla piattaforma 4
+(RF2) Permettere ai proprietari di appartamento registrati di aggiungere una
+appartamento alla piattaforma 4
+(RF3) Permette ai visitatori di ricercare un appartamento 5
+(RF4) Permettere ai visitatori di vedere i dettagli di un appartamento 5
+(RF5) Permettere ai visitatori di scrivere al proprietario di un appartamento per
+chiedere informazioni 5
+(RF6) Permettere ai proprietari di appartamento registrati di vedere le richieste
+ricevute 6
+(RF7) Permettere ai proprietari di appartamento registrati di vedere statistiche
+riguardo gli annunci dei propri appartamenti 6
+(RF8) Permettere ai proprietari di appartamento registrati di sponsorizzare il propria
+appartamento 6
+Consigli del CTO 7
+Introduzione
+BoolBnB è una applicazione per trovare e gestire l’affitto di appartamenti.
+Attraverso BoolBnB i proprietari di appartamento possono inserire le informazioni degli
+appartamenti che vogliono affittare per cercare utenti interessati.
+Gli utenti che vogliono mettere in affitto un appartamento devono registrarsi alla piattaforma;
+una volta registrati hanno la possibilità di inserire uno o più appartamenti.
+Gli utenti interessati ad un appartamento, utilizzando i filtri di una apposita pagina di ricerca,
+vedono una lista di possibili appartamenti e cliccando su ognuno possono vedere una pagina
+di dettaglio.
+Una volta trovata l’appartamento desiderato, l’utente interessato può contattare l’utente
+proprietario per fare domande.
+Inoltre, i proprietari di un appartamento possono decidere di pagare per sponsorizzare
+l’annuncio del proprio appartamento per fare in modo che il loro annuncio sia maggiormente
+in evidenza rispetto a quelli non sponsorizzati.
+Tipi di Utenti
+Definiamo i seguenti tipi di utente che possono utilizzare BoolBnB:
+● Utente proprietario registrato (UPR): un utente proprietario che ha effettuato la
+registrazione
+● Utente proprietario registrato con appartamento (UPRA): un utente che ha effettuato
+la registrazione e ha inserito nel sistema almeno una appartamento
+● Utente interessato (UI): un qualsiasi utente del sito, non registrato
+Requisiti Visivi
+Look and Feel
+L’aspetto estetico di BoolBnB deve essere ispirato al sito www.airbnb.com
+Non deve essere una copia ma una fonte di ispirazione da cui prendere spunto per quanto
+riguarda colori, font, elementi di interazione etc
+Lista delle pagine minime
+La seguente lista è una lista non completa delle pagine necessarie al funzionamento
+dell’applicazione con i relativi mockup.
+I mockup rappresentano una possibile presentazione dei dati e non sono l’unico modo con
+cui possono essere rappresentati.
+Qui il link:
+https://docs.google.com/presentation/d/19ox-mnz_KIZS9P1K7MPbEoVrnjH6FnLH0-oH0NRg
+zN0/edit#slide=id.g27fb29ff30898801_127
+● Homepage(Mockup1): offre la possibilità di ricercare appartamenti nel database.
+Inoltre permette un accesso veloce alle pagine dettaglio degli appartamenti in
+evidenza
+● Pagina di Ricerca(Mockup2): permette di visualizzare i risultati di ricerca, ogni
+risultato permetterà l’accesso alla pagina di dettaglio di dell’appartamento. Inoltre è
+possibile raffinare la ricerca modificando tutti i parametri di ricerca
+● Pagine Dettaglio Appartamento(Mockup3): permette di visualizzare tutti i dettagli
+disponibili per un appartamento. Inoltre è possibile scrivere un messaggio al
+proprietario dell’appartamento
+● Pagina Statistiche Appartamento(Mockup4): permette di visualizzare le statistiche
+sugli appartamenti messi in affitto, una pagina per appartamento.
+● Pagine Sponsorizzazione(Mockup5): tramite questo pannello è possibile
+sponsorizzare un singolo appartamento, selezionando la promozione e inserendo i
+dettagli della carta di credito.
+Requisiti Tecnici
+● (RT1) Client-side Validation: tutti gli input inseriti dell’utente devono essere
+controllati client-side (oltre che server-side) per un controllo di veridicità (es. un
+numero di stanze deve essere positivo)
+● (RT2) Salvataggio informazioni di geografiche: i dati riguardanti l’ubicazione degli
+appartamenti devono essere salvati sul database con latitudine e longitudine. Per
+ottenere latitudine e longitudine a partire da un indirizzo e allo stesso modo
+visualizzare il punto sulla mappa, utilizzare tomtom: https://developer.tomtom.com/
+● (RT3) Sistema di Pagamento: il sistema di pagamento da utilizzare è braintree
+( https://www.braintreepayments.com/ ). Il sistema permette di simulare pagamenti
+senza essere approvati formalmente e senza utilizzare vere carte di credito.
+● (RT4) Il sito deve essere responsive: il sito deve essere correttamente visibile da
+desktop e da smartphone
+Requisiti Funzionali
+Nel dettaglio, la piattaforma deve soddisfare i seguenti requisiti funzionali (RF) che vengono
+dettagliati nelle pagine successive:
+● (RF1) Permettere ai proprietari di appartamento di registrarti alla piattaforma
+● (RF2) Permettere ai proprietari di appartamento registrati di aggiungere un
+appartamento alla piattaforma
+● (RF3) Permette ai visitatori di ricercare una appartamento
+● (RF4) Permettere ai visitatori di vedere i dettagli di un appartamento
+● (RF5) Permettere ai visitatori di scrivere al proprietario di un appartamento per
+chiedere informazioni
+● (RF6) Permettere ai proprietari di appartamento registrati di vedere le richieste
+ricevute
+● (RF7) Permettere ai proprietari di appartamento registrati di vedere statistiche
+riguardo gli annunci dei propri appartamenti
+● (RF8) Permettere ai proprietari di appartamento registrati di sponsorizzare il propria
+appartamento
+(RF1) Permettere ai proprietari di appartamento di registrarsi alla
+piattaforma
+Visibilità: UI
+Descrizione: L’applicazione deve permettere ai proprietari di appartamento di registrarsi alla
+piattaforma e creare un loro profilo.
+Le informazioni che l’utente può inserire sono:
+● Email *
+● Password *
+● Nome
+● Cognome
+● Data di Nascita
+Sono contrassegnati con * i dati obbligatori.
+Email e password sono utilizzati dall’utente per fare login alla piattaforma.
+Non è previsto un pannello per modificare le informazioni inserite una volta registrato.
+I form devono rispettare RT1
+Risultato: Un nuovo utente viene creato nel sistema
+Eccezioni: Esiste già nel sistema un utente con l’email inserita
+(RF2) Permettere ai proprietari di appartamento registrati di aggiungere
+una appartamento alla piattaforma
+Visibilità: UPR / UPRA
+Descrizione: Un proprietario registrato ha la possibilità di inserire uno o più appartamenti
+all’interno del sistema.
+Per inserire un nuovo appartamento il proprietario deve inserire le seguenti informazioni:
+● Titolo riepilogativo che descriva l’appartamento
+● Numero di stanze
+● Numero di posti letto
+● Numero di bagni
+● Metri quadrati
+● Indirizzo
+● Immagine rappresentativa dell’appartamento
+e la presenza di uno o più dei seguenti servizi aggiuntivi (WiFi, Posto Macchina, Piscina,
+Portineria, Sauna, Vista Mare).
+Deve essere possibile modificare le informazioni inserite e disattivare temporaneamente un
+annuncio, rendendolo non visibile nei risultati di ricerca
+I form devono rispettare RT1.
+L’inserimento dell’indirizzo deve portare al salvataggio sul database di latitudine e longitudine
+come descritto in RT2.
+Risultato: Una stanza è inserita nel sistema e le sue informazioni sono aggiornate
+Eccezioni: /
+(RF3) Permette ai visitatori di ricercare un appartamento
+Visibilità: UI / UPR / UPRA
+Descrizione: Un qualsiasi utente deve essere in grado di ricercare un appartamento
+all’interno del database.
+Inserendo latitudine e longitudine, il sistema ricerca all’interno del database gli appartamenti
+nel raggio di 20 km dalla latitudine e longitudine indicata.
+Inoltre è possibile raffinare ulteriormente la ricerca impostando uno o più dei seguenti filtri:
+● Numero minimo di stanze
+● Numero minimo di posti letto
+● Modificare il raggio di default di 20km
+● La presenza obbligatoria di uno o più dei servizi aggiuntivi indicati in RF2
+I risultati vengono ordinati per distanza dalla latitudine/longitudine inserita.
+Risultato: Viene generata una lista di appartamenti che corrispondono alla ricerca che
+mostra alcuni dettagli della stanza
+Eccezioni: /
+(RF4) Permettere ai visitatori di vedere i dettagli di un appartamento
+Visibilità: UI / UPR / UPRA
+Descrizione: Selezionando un appartamento dall’apposito pannello devono apparire tutti i
+dettagli disponibili riguardanti la stanza, come specificato in RF2.
+In particolare, deve essere essere presenta una mappa che indica la posizione
+dell’appartamento.
+Risultato: Viene visualizzata la pagina di dettaglio di un appartamento
+Eccezioni: /
+(RF5) Permettere ai visitatori di scrivere al proprietario di un
+appartamento per chiedere informazioni
+Visibilità: UI / UPR / UPRA
+Descrizione: Nella pagina di dettaglio dell’appartamento deve essere possibile inviare un
+messaggio al proprietario dell’appartamento.
+L’utente deve inserire la propria email e un messaggio.
+Nel caso in cui l’utente sia un UPR o UPRA registrato, l’email deve essere autocompletato
+con quella inserita durante la registrazione
+Risultato: Il messaggio viene salvato nel database
+Eccezioni: /
+(RF6) Permettere ai proprietari di appartamento registrati di vedere le
+richieste ricevute
+Visibilità: UPRA
+Descrizione: Un proprietario che ha inserito uno o più appartamenti deve avere la possibilità
+di vedere i messaggi di richiesta ricevuti dagli utenti per gli appartamenti.
+In questa schermata dovrà vedere email e messaggio inserito dall’utente per ogni messaggio
+ricevuto.
+Non è prevista la possibilità di risposta da parte dell’utente UPRA (che risponderà
+direttamente via email fuori dalla piattaforma)
+Risultato:
+Eccezioni: /
+(RF7) Permettere ai proprietari di appartamento registrati di vedere
+statistiche riguardo gli annunci dei propri appartamenti
+Visibilità: UPRA
+Descrizione: Un proprietario che ha inserito uno o più appartamenti deve avere la possibilità
+di vedere le statistiche di visualizzazione per ogni appartamento inserito. L'utente UPRA
+dovrà vedere la lista dei suoi appartamenti e, selezionandone uno, dovrà vedere le
+statistiche associate come illustrato in Mockup4
+Risultato: L'utente visualizza le statistiche dell'appartamento selezionato
+Eccezioni: /
+(RF8) Permettere ai proprietari di appartamento registrati di
+sponsorizzare il propria appartamento
+Visibilità: UPRA
+Descrizione: Un proprietario che ha inserito uno o più appartamenti deve avere la possibilità
+di pagare per mettere in risalto un loro annuncio.
+Entrando in un pannello apposito della sua sezione personale, l’utente UPRA selezionerà
+uno dei suoi appartamenti e dovrà scegliere uno dei seguenti pacchetti promozionali:
+● 2,99 € per 24 ore di sponsorizzazione
+● 5.99 € per 72 ore di sponsorizzazione
+● 9.99 € per 144 ore di sponsorizzazione
+Il pagamento deve avvenire tramite carta di credito seguendo RT3
+Un appartamento sponsorizzato ha le seguenti particolarità:
+● Appare in Homepage nella sezione “Appartamenti in Evidenza”
+● Viene posizionato sempre in alto nella pagina di ricerca, con uno sfondo diverso, a
+prescindere dalla distanza dalla latitudine e longitudine inserita
+Terminato il periodo di sponsorizzazione, l’appartamento tornerà ad essere visualizzato
+normalmente, senza alcuna particolarità.
+Risultato: L’appartamento viene sponsorizzato
+Eccezioni: Il sistema di pagamento non ha processato correttamente il pagamento / i dati
+della carta di credito non sono valida
+Consigli del CTO
+1. Tecnologie da utilizzare: non c’è alcun limite nelle tecnologie utilizzabili, purchè
+rispettino i requisiti. Chiaramente la scelte più ovvia (e consigliata) è quella di fare
+tutto con Laravel.
+2. Non iniziare a scrivere subito codice; è importante leggere e rileggere bene il
+documento per avere un’idea chiara del progetto
+3. I RF sono in ordine di complessità, seguendo l’ordine si costruisce un’applicazione
+funzionante con funzionalità crescenti. E’ importante però avere bene in mente la
+strada da seguire per non fare scelte iniziali che andranno totalmente cambiate
+successivamente
+4. E’ possibile dividersi i compiti per procedere speditamente, soprattutto all’inizio. Ad
+esempio, qualcuno potrebbe occuparsi solo della parte estetica, ignorando tutto il
+resto. Un alto potrebbe pensare solamente al database, sistemando Model e
+Migrations. Un altro potrebbe occuparsi di capire come funziona il sistema di
+pagamento, etc..
+5. La parte più nuova è appunto quella che riguarda il processo di pagamento: non
+richiede alcuna nuova tecnologia ma è un processo fatto da diversi concetti da
+comprendere quindi richiede la lettura approfondita della documentazione. E presente
+una funzionalità Laravel che gestisce i pagamenti e si integra anche con Braintree
+( https://laravel.com/docs/6.x/billing ). Laravel però suggerisce però che, in caso di
+pagamenti singoli, è meglio integrarsi direttamente con l’SDK di Braintree
+6. Per soddisfare il fatto che non si deve avere un refresh della pagina nel RF2 bisogna
+fare chiamate ajax. Il metodo più utilizzato in questi casi è fare in modo che ogni
+cambiamento di agli input vada a modificare i campi utili alla ricerca nell’url es
+(/ricerca?lat=45.34&lng=9.30&stanze=2&radius=20). Dopo ogni cambiamento viene
+fatta una chiamata ajax con i parametri presenti nella URL.
