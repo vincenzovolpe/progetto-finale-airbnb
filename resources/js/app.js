@@ -117,6 +117,11 @@ $(document).ready(function(){
     if(href.indexOf('/flats/find') > -1)
     {
 
+        // if(!$('#latNumberFind').val() && $('#lonNumberFind').val()) {
+        //     $('#latNumberFind').val('12.4829321');
+        //     $('#lonNumberFind').val('41.8933203');
+        // }
+
         var lat = $('#latNumberFind').val();
         var lon = $('#lonNumberFind').val();
         var distance = 20;
@@ -382,7 +387,6 @@ $(document).on('click', '#delete_flat', function (e) {
         }
 
         });
-
 
             //-----FORM VALIDATION BOOTSTRAP-----------//
             // Example starter JavaScript for disabling form submissions if there are invalid fields

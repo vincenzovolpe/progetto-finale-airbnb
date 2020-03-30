@@ -70309,6 +70309,10 @@ $(document).ready(function () {
   $(".fuzzy-edit").find(".tt-search-box-input").val(address_edit); // Chiamata Ajax con i dati della Searchbar della HomePage
 
   if (href.indexOf('/flats/find') > -1) {
+    // if(!$('#latNumberFind').val() && $('#lonNumberFind').val()) {
+    //     $('#latNumberFind').val('12.4829321');
+    //     $('#lonNumberFind').val('41.8933203');
+    // }
     var lat = $('#latNumberFind').val();
     var lon = $('#lonNumberFind').val();
     var distance = 20;
@@ -71052,8 +71056,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/boolean-code/progetto-finale-airbnb/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/boolean-code/progetto-finale-airbnb/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\MAMP\htdocs\progetto-finale-airbnb\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\progetto-finale-airbnb\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
