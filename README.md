@@ -1,4 +1,5 @@
-<h1 align="center">Benvenuti su BoolBnb ![GitHub Logo](/assets/images/boolbnb-logo-text.png)</h1>
+<h1 align="center">Benvenuti su BoolBnb <img width="160" alt="boolbnb-logo-text" src="https://user-images.githubusercontent.com/56308170/77965724-ed242b00-72e1-11ea-982a-2f385e3b033e.png">
+</h1>
 
 >   BoolBnB è una applicazione per trovare e gestire l’affitto di appartamenti.
     Attraverso BoolBnB i proprietari di appartamento possono inserire le informazioni degli
