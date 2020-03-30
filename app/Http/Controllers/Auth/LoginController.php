@@ -38,8 +38,14 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    protected function authenticated()
+    {
+        return redirect('/upr/flats');
+    }
+
     public function redirectTo()
     {
+
         return app()->getLocale() . '/';
     }
 }
