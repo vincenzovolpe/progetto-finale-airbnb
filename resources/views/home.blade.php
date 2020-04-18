@@ -62,6 +62,7 @@
                                 <h5 class="card-title">{{ $flat->title }}</h5>
                                 <a class="btn btn-success stretched-link" href="{{ route('flat.details', $flat->id)}}">{{__('homepage.btn_details')}}</a>
                             </div>
+                            <!-- ottimo -->
                         </div>
                     </div>
                 @empty

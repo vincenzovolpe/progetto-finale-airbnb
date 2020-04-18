@@ -18,7 +18,7 @@ class HomeController extends Controller
 
         // Seleziono tutti gli appartamenti attivi
         $all_flats = Flat::where('active', 1)->orderBy('created_at', 'desc')->get();
-
+        //dd($all_flats);
         // Selezione tutti gli appartamenti che non sono mai stati sponsorizzati
         $flats_no_sponsor = DB::table('flats')
         ->leftJoin('flat_sponsor', 'flats.id', '=', 'flat_sponsor.flat_id')
@@ -26,7 +26,7 @@ class HomeController extends Controller
         ->where('active', 1)
         ->orderBy('flats.created_at', 'desc')
         ->get();
-
+        //dd($all_flats);
         // Selezione tutti gli appartamenti con sponsorizzazione scaduta
         foreach ($all_flats as $flat) {
             $flat_sponsor = $flat->sponsors->toArray();
@@ -44,9 +44,9 @@ class HomeController extends Controller
             }
         }
 
-        // Creiamo una collection che è l'unione delle due query fatte in precedenza che sarebbero tutti gli appartamenti mai sponsorizzati o con sponsorizzazione scaduta
+        // Creamo una collection che è l'unione delle due query fatte in precedenza che sarebbero tutti gli appartamenti mai sponsorizzati o con sponsorizzazione scaduta
         $flats_not_sponsor = $flats_no_sponsor->merge($flat_sponsored_expired);
-
+    
 
         // Seleziono tutti gli appartamenti sponsorizzati attualmente
         foreach ($all_flats as $flat_due) {
